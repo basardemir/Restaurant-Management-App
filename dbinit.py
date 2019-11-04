@@ -69,7 +69,76 @@ INIT_STATEMENTS = [
 			TIMEZONE_ID SERIAL PRIMARY KEY,
 			TIMEZONE VARCHAR(10)
 		);
-	"""
+	""",
+	"""CREATE TABLE IF NOT EXISTS _comment(
+		id serial primary key,
+		description varchar(150),
+		score numeric(3,1),
+		up_vote int default 0,
+		down_vote int default 0,
+		created_at TIMESTAMP default CURRENT_TIMESTAMP,
+
+		user_id int,
+		order_id int,
+
+		check ((score >= 1.0) and (score <= 10.0))
+	);""",
+
+	"""CREATE TABLE IF NOT EXISTS _card(
+		id serial primary key,
+
+		points int,
+		card_number char(16) unique,
+		is_active smallint,
+		color varchar(20),
+		activation_date TIMESTAMP default CURRENT_TIMESTAMP,
+		expire_date TIMESTAMP default (CURRENT_TIMESTAMP+interval'1 year'),
+
+		user_id int,
+		company_id int
+	);""",
+
+	"""CREATE TABLE IF NOT EXISTS _company(
+		id serial primary key,
+		name varchar(50),
+		information varchar(1000),
+		mission varchar(1000),
+		vision varchar(1000),
+		abbrevation varchar(10),
+		foundation_date TIMESTAMP,
+
+		type varchar(10), -- LTD, 
+		user_id int, -- Founder info
+		contact_id int -- company contact_info
+	);""",
+
+	"""CREATE TABLE IF NOT EXISTS _order(
+		id serial primary key,
+		price float,
+		note varchar(500),
+		type varchar(11), -- cash or credit card
+		created_at TIMESTAMP default CURRENT_TIMESTAMP, -- order date
+		end_at TIMESTAMP, -- ending order date.
+
+		restaurant_id int,
+		customer_id int,
+		employee_id int,
+	  	card_id int -- for speacial card of company.
+	);""",
+
+	"""CREATE TABLE IF NOT EXISTS _orderfoods(
+		order_id int,
+		food_id int,
+	  	amount int not null,
+	  	primary key(order_id, food_id)
+	);""",
+
+	"""CREATE TABLE IF NOT EXISTS _employee(
+		id serial primary key,
+
+		restaurant_id int,
+		user_id int -- it covers that Employee and Manager via MembershipType
+	);""",
 ]
 
 
