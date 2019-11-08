@@ -1,0 +1,6 @@
+from datetime import datetime
+
+def home_page():
+  today = datetime.today()
+  day_name = today.strftime("%A")
+  return render_template("home.html", day = day_name)
