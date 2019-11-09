@@ -2,9 +2,9 @@ from flask import Flask
 
 import views
 
+app = Flask(__name__)
+
 def create_app():
-    app = Flask(__name__)
-    
     ## Urls for application
     app.add_url_rule("/", view_func = views.home_page)
     
