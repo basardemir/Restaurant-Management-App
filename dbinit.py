@@ -70,81 +70,110 @@ INIT_STATEMENTS = [
 			FOREIGN KEY (COORDINATES) REFERENCES COORDINATES(COORD_ID)
 	);
 	""",
-	"""CREATE TABLE IF NOT EXISTS _comment(
-		id serial primary key,
-		description varchar(150),
-		score numeric(3,1),
-		up_vote int default 0,
-		down_vote int default 0,
-		created_at TIMESTAMP default CURRENT_TIMESTAMP,
+	"""CREATE TABLE IF NOT EXISTS COMPANY(
+	COMPANY_ID SERIAL PRIMARY KEY,
+	NAME VARCHAR(50),
+	INFORMATION VARCHAR(1000),
+	MISSION VARCHAR(1000),
+	VISION VARCHAR(1000),
+	ABBREVATION VARCHAR(10),
+	FOUNDATION_DATE TIMESTAMP,
+	TYPE VARCHAR(10), -- LTD, 
+	USER_ID INT, -- FOUNDER INFO
+	CONTACT_ID INT, -- COMPANY CONTACT_INFO
 
-		user_id int,
-		order_id int,
+	FOREIGN KEY (USER_ID) REFERENCES USERACCOUNT(id),
+	FOREIGN KEY (CONTACT_ID) REFERENCES CONTACTINFO(id)
+	);
+	""",
+	"""
+	CREATE TABLE IF NOT EXISTS CARD(
+		CARD_ID SERIAL PRIMARY KEY,
 
-		check ((score >= 1.0) and (score <= 10.0))
+		POINTS INT,
+		CARD_NUMBER CHAR(16) UNIQUE,
+		IS_ACTIVE SMALLINT,
+		COLOR VARCHAR(20),
+		ACTIVATION_DATE TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+		EXPIRE_DATE TIMESTAMP DEFAULT (CURRENT_TIMESTAMP+INTERVAL'1 YEAR'),
+
+		USER_ID INT,
+		COMPANY_ID INT,
+		
+		FOREIGN KEY (USER_ID) REFERENCES USERACCOUNT(id),
+		FOREIGN KEY (COMPANY_ID) REFERENCES COMPANY(COMPANY_ID)
+	);
+	""",
+	
+	"""CREATE TABLE IF NOT EXISTS restaurant(
+		restaurant_id serial primary key,
+		company_belongs INTEGER,
+		contact_id INTEGER,
+		score INTEGER,
+		capacity INTEGER NOT NULL,
+		opening_date DATE,
+		manager VARCHAR(100),
+		total_earning INTEGER,
+		FOREIGN KEY (company_belongs) REFERENCES COMPANY(COMPANY_ID),
+		FOREIGN KEY (contact_id) REFERENCES CONTACTINFO(id),
+		CHECK ((score >= 1) AND (score <= 5))
 	);""",
 
-	"""CREATE TABLE IF NOT EXISTS _card(
-		id serial primary key,
+	"""
+	CREATE TABLE IF NOT EXISTS EMPLOYEE(
+		EMPLOYEE_ID SERIAL PRIMARY KEY,
+		
+		RESTAURANT_ID INT,
+		USER_ID INT, -- IT COVERS THAT EMPLOYEE AND MANAGER VIA MEMBERSHIPTYPE
+		FOREIGN KEY (USER_ID) REFERENCES USERACCOUNT(id),
+		FOREIGN KEY (RESTAURANT_ID) REFERENCES RESTAURANT(RESTAURANT_ID)
+	);
+	""",
 
-		points int,
-		card_number char(16) unique,
-		is_active smallint,
-		color varchar(20),
-		activation_date TIMESTAMP default CURRENT_TIMESTAMP,
-		expire_date TIMESTAMP default (CURRENT_TIMESTAMP+interval'1 year'),
+	"""
+	CREATE TABLE IF NOT EXISTS ORDER(
+		ORDER_ID SERIAL PRIMARY KEY,
+		PRICE FLOAT,
+		NOTE VARCHAR(500),
+		TYPE VARCHAR(11), -- CASH OR CREDIT CARD
+		CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- ORDER DATE
+		END_AT TIMESTAMP, -- ENDING ORDER DATE.
+		
+		RESTAURANT_ID INT,
+		CUSTOMER_ID INT,
+		EMPLOYEE_ID INT,
+		CARD_ID INT, -- FOR SPEACIAL CARD OF COMPANY.
 
-		user_id int,
-		company_id int
-	);""",
+		FOREIGN KEY (RESTAURANT_ID) REFERENCES RESTAURANT(RESTAURANT_ID),
+		FOREIGN KEY (CUSTOMER_ID) REFERENCES USERACCOUNT(id),
+		FOREIGN KEY (EMPLOYEE_ID) REFERENCES EMPLOYEE(EMPLOYEE_ID),
+		FOREIGN KEY (CARD_ID) REFERENCES CARD(CARD_ID)
+	);
+	""",
+	"""
+	CREATE TABLE IF NOT EXISTS COMMENT(
+		COMMENT_ID SERIAL PRIMARY KEY,
+		DESCRIPTION VARCHAR(300),
+		SCORE NUMERIC(3,1),
+		UP_VOTE INT DEFAULT 0,
+		DOWN_VOTE INT DEFAULT 0,
+		CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+		
+		USER_ID INT,
+		ORDER_ID INT,
+		FOREIGN KEY (USER_ID) REFERENCES USERACCOUNT(id),
+		FOREIGN KEY (ORDER_ID) REFERENCES ORDER(ORDER_ID),
+		CHECK ((SCORE >= 1.0) AND (SCORE <= 10.0))
+	);
+	""",
 
-	"""CREATE TABLE IF NOT EXISTS _company(
-		id serial primary key,
-		name varchar(50),
-		information varchar(1000),
-		mission varchar(1000),
-		vision varchar(1000),
-		abbrevation varchar(10),
-		foundation_date TIMESTAMP,
-
-		type varchar(10), -- LTD, 
-		user_id int, -- Founder info
-		contact_id int -- company contact_info
-	);""",
-
-	"""CREATE TABLE IF NOT EXISTS _order(
-		id serial primary key,
-		price float,
-		note varchar(500),
-		type varchar(11), -- cash or credit card
-		created_at TIMESTAMP default CURRENT_TIMESTAMP, -- order date
-		end_at TIMESTAMP, -- ending order date.
-
-		restaurant_id int,
-		customer_id int,
-		employee_id int,
-	  	card_id int -- for speacial card of company.
-	);""",
-
-	"""CREATE TABLE IF NOT EXISTS _orderfoods(
-		order_id int,
-		food_id int,
-	  	amount int not null,
-	  	primary key(order_id, food_id)
-	);""",
-
-	"""CREATE TABLE IF NOT EXISTS _employee(
-		id serial primary key,
-
-		restaurant_id int,
-		user_id int -- it covers that Employee and Manager via MembershipType
-	);""",
-	"""CREATE TABLE IF NOT EXISTS STOCK(
-		ingredient_id INTEGER,
-		restaurant_id INTEGER,
-		expire_date DATE,
-		stock_left INTEGER,
-		primary key(ingredient_id, restaurant_id)
+	"""CREATE TABLE IF NOT EXISTS nutritional_value(
+		nutritional_value_id serial primary key,
+		protein FLOAT,
+		fat FLOAT,
+		carbohydrates FLOAT,
+		cholesterol FLOAT,
+		calories FLOAT
 	);""",
 
 	"""CREATE TABLE IF NOT EXISTS FOOD(
@@ -159,19 +188,17 @@ INIT_STATEMENTS = [
 		FOREIGN KEY (nutrition_id) REFERENCES nutritional_value(nutritional_value_id)
 	);""",
 
-	"""CREATE TABLE IF NOT EXISTS restaurant(
-		restaurant_id serial primary key,
-		company_belongs INTEGER,
-		contact_id INTEGER,
-		score INTEGER,
-		capacity INTEGER NOT NULL,
-		opening_date DATE,
-		manager VARCHAR(100),
-		total_earning INTEGER,
-		FOREIGN KEY (company_belongs) REFERENCES _company(id),
-		FOREIGN KEY (contact_id) REFERENCES CONTACTINFO(id),
-		CHECK ((score >= 1) AND (score <= 5))
-	);""",
+	"""
+	CREATE TABLE IF NOT EXISTS ORDER_FOOD(
+		ORDER_ID INT,
+		FOOD_ID INT,
+		AMOUNT INT NOT NULL,
+		PRIMARY KEY(ORDER_ID, FOOD_ID),
+		
+		FOREIGN KEY (ORDER_ID) REFERENCES ORDER(ORDER_ID),
+		FOREIGN KEY (FOOD_ID) REFERENCES FOOD(FOOD_ID)
+	);
+	""",
 
 	"""CREATE TABLE IF NOT EXISTS ingredient(
 		ingredient_id serial primary key,
@@ -187,13 +214,15 @@ INIT_STATEMENTS = [
 		CHECK ((temperature_for_stowing >= 0))
 	);""",
 
-	"""CREATE TABLE IF NOT EXISTS nutritional_value(
-		nutritional_value_id serial primary key,
-		protein FLOAT,
-		fat FLOAT,
-		carbohydrates FLOAT,
-		cholesterol FLOAT,
-		calories FLOAT
+	"""CREATE TABLE IF NOT EXISTS STOCK(
+		ingredient_id INTEGER,
+		restaurant_id INTEGER,
+		expire_date DATE,
+		stock_left INTEGER,
+		primary key(ingredient_id, restaurant_id),
+		FOREIGN KEY (ingredient_id) REFERENCES ingredient(ingredient_id),
+		FOREIGN KEY (restaurant_id) REFERENCES restaurant(restaurant_id)
+
 	);""",
 
 	"""CREATE TABLE IF NOT EXISTS ingredients_for_food(
