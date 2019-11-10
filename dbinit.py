@@ -139,6 +139,72 @@ INIT_STATEMENTS = [
 		restaurant_id int,
 		user_id int -- it covers that Employee and Manager via MembershipType
 	);""",
+	"""CREATE TABLE IF NOT EXISTS STOCK(
+		ingredient_id INTEGER,
+		restaurant_id INTEGER,
+		expire_date DATE,
+		stock_left INTEGER,
+		primary key(ingredient_id, restaurant_id)
+	);""",
+
+	"""CREATE TABLE IF NOT EXISTS FOOD(
+		food_id serial primary key,
+		photo_id INTEGER,
+		nutrition_id INTEGER,
+		food_name VARCHAR(100) UNIQUE NOT NULL,
+		brand_name VARCHAR(100) NOT NULL,
+		price INTEGER,
+		isVegan INTEGER not null,
+		FOREIGN KEY (photo_id) REFERENCES PHOTO(id),
+		FOREIGN KEY (nutrition_id) REFERENCES nutritional_value(nutritional_value_id)
+	);""",
+
+	"""CREATE TABLE IF NOT EXISTS restaurant(
+		restaurant_id serial primary key,
+		company_belongs INTEGER,
+		contact_id INTEGER,
+		score INTEGER,
+		capacity INTEGER NOT NULL,
+		opening_date DATE,
+		manager VARCHAR(100),
+		total_earning INTEGER,
+		FOREIGN KEY (company_belongs) REFERENCES _company(id),
+		FOREIGN KEY (contact_id) REFERENCES CONTACTINFO(id),
+		CHECK ((score >= 1) AND (score <= 5))
+	);""",
+
+	"""CREATE TABLE IF NOT EXISTS ingredient(
+		ingredient_id serial primary key,
+		nutrition_id INTEGER,
+		photo_id INTEGER,
+		ingredient_name VARCHAR(100) UNIQUE NOT NULL,
+		ingredient_type INTEGER NOT NULL,
+		unit_weight INTEGER,
+		ingredient_volume INTEGER,
+		temperature_for_stowing INTEGER,
+		FOREIGN KEY (nutrition_id) REFERENCES nutritional_value(nutritional_value_id),
+		FOREIGN KEY (photo_id) REFERENCES PHOTO(id),
+		CHECK ((temperature_for_stowing >= 0))
+	);""",
+
+	"""CREATE TABLE IF NOT EXISTS nutritional_value(
+		nutritional_value_id serial primary key,
+		protein FLOAT,
+		fat FLOAT,
+		carbohydrates FLOAT,
+		cholesterol FLOAT,
+		calories FLOAT
+	);""",
+
+	"""CREATE TABLE IF NOT EXISTS ingredients_for_food(
+		food_id INTEGER,
+		ingredient_id INTEGER,
+		amount FLOAT not null,
+		primary key (food_id, ingredient_id),
+		FOREIGN KEY (food_id) REFERENCES FOOD(food_id),
+		FOREIGN KEY (ingredient_id) REFERENCES ingredient(ingredient_id)
+	);"""
+
 ]
 
 
