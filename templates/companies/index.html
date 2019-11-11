@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% block title %}Companies{% endblock %}
+{% block content%}
+  
+
+<div class="container">
+  <h1 class="display-4">Index <small class="text-muted font-italic">companies</small></h1>
+  <hr>
+</div>
+<div class="container mt-2">
+  <form action="" method="POST" name="company_list">
+    <div class="row">
+      <div class="column mr-4">
+        <a href="{{ url_for('company_add_page') }}" class="btn btn-primary" target="_self" title="Add Company">Add Company</a>
+      </div>
+    </div>
+    {% if companies %}
+    <table class="table table-light table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Title</th>
+          <th>Operations</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for company_key, company in movies %}
+        <tr>
+          <td>
+            <div class="form-check">
+              <input id="movie-keys" name="movie_keys" class="form-check-input" type="checkbox" value="{{ movie_key }}">
+            </div>
+          </td>
+          <td>
+            {{ movie.title }}
+            {% if movie.year %}
+              ({{ movie.year }})
+            {% endif %}
+          </td>
+          <td>
+            <a href="{{ url_for('company_details_page', company_key = company_key) }}" class="btn btn-info" target="_blank">More Details</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="row">
+      <div class="column mr-4">
+        <a href="{{ url_for('company_add_page') }}" class="btn btn-primary" target="_self" title="Add Company">Add Company</a>
+      </div>
+    </div>
+  </form>
+</div>
+  {% endif %}
+{% endblock %}
