@@ -15,7 +15,7 @@ INIT_STATEMENTS = [
         joinedDate DATE, 
         securityAnswer VARCHAR(30),
         FOREIGN KEY (person) REFERENCES PERSON(id),
-        FOREIGN KEY (membershiptype) REFERENCES MEMBERSHIP(id),
+        FOREIGN KEY (membershiptype) REFERENCES MEMBERSHIP(id)
     )""",
     """CREATE TABLE IF NOT EXISTS PERSON (
         id SERIAL PRIMARY KEY, 
@@ -27,7 +27,7 @@ INIT_STATEMENTS = [
         educationLevel VARCHAR(50), 
         gender VARCHAR(20),
         FOREIGN KEY (contactinfo) REFERENCES CONTACTINFO(id),
-        FOREIGN KEY (photo) REFERENCES PHOTO(id),
+        FOREIGN KEY (photo) REFERENCES PHOTO(id)
     )""",
     """CREATE TABLE IF NOT EXISTS CONTACTINFO (
         id SERIAL PRIMARY KEY, 
@@ -48,7 +48,7 @@ INIT_STATEMENTS = [
         instagram VARCHAR(60),
         discord VARCHAR(60),
         youtube VARCHAR(60),
-        googleplus VARCHAR(60),
+        googleplus VARCHAR(60)
     )""",
     """CREATE TABLE IF NOT EXISTS MEMBERSHIP (
         id SERIAL PRIMARY KEY, 
