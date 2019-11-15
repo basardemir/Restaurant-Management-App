@@ -37,9 +37,9 @@ INIT_STATEMENTS = [
         email VARCHAR(30), 
         fax VARCHAR(30), 
         homePhone VARCHAR(50), 
+        contactType VARCHAR(50),
         FOREIGN KEY (socialmedia) REFERENCES SOCIALMEDIA(id),
-        FOREIGN KEY (location) REFERENCES LOCATION(LOCATION_ID),
-        contactType VARCHAR(50)
+        FOREIGN KEY (location) REFERENCES LOCATION(LOCATION_ID)
     )""",
     """CREATE TABLE IF NOT EXISTS SOCIALMEDIA(
         id SERIAL PRIMARY KEY,
