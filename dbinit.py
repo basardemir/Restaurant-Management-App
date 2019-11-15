@@ -5,11 +5,59 @@ import psycopg2 as dbapi2
 
 
 INIT_STATEMENTS = [
-    "CREATE TABLE IF NOT EXISTS USERACCOUNT (id INTEGER PRIMARY KEY, lastEntry DATE, username VARCHAR(25), password VARCHAR(25), joinedDate DATE, securityAnswer VARCHAR(30))",
-    "CREATE TABLE IF NOT EXISTS PERSON (id INTEGER PRIMARY KEY, name VARCHAR(50), surname VARCHAR(50), birthDay DATE, educationLevel VARCHAR(50), gender VARCHAR(20))",
-    "CREATE TABLE IF NOT EXISTS CONTACTINFO (id INTEGER PRIMARY KEY, phoneNumber VARCHAR(20), email VARCHAR(30), fax VARCHAR(30), homePhone VARCHAR(50), contactType VARCHAR(50))",
-    "CREATE TABLE IF NOT EXISTS MEMBERSHIP (id INTEGER PRIMARY KEY, membershipType VARCHAR (50))",
-    "CREATE TABLE IF NOT EXISTS PHOTO (id INTEGER PRIMARY KEY, path VARCHAR (150))",
+    """CREATE TABLE IF NOT EXISTS USERACCOUNT (
+        id SERIAL PRIMARY KEY, 
+        person INTEGER,
+        membershiptype INTEGER,
+        lastEntry DATE, 
+        username VARCHAR(25), 
+        password VARCHAR(25), 
+        joinedDate DATE, 
+        securityAnswer VARCHAR(30),
+        FOREIGN KEY (person) REFERENCES PERSON(id),
+        FOREIGN KEY (membershiptype) REFERENCES MEMBERSHIP(id),
+    )""",
+    """CREATE TABLE IF NOT EXISTS PERSON (
+        id SERIAL PRIMARY KEY, 
+        contactinfo INTEGER,
+        photo INTEGER,
+        name VARCHAR(50), 
+        surname VARCHAR(50), 
+        birthDay DATE, 
+        educationLevel VARCHAR(50), 
+        gender VARCHAR(20),
+        FOREIGN KEY (contactinfo) REFERENCES CONTACTINFO(id),
+        FOREIGN KEY (photo) REFERENCES PHOTO(id),
+    )""",
+    """CREATE TABLE IF NOT EXISTS CONTACTINFO (
+        id SERIAL PRIMARY KEY, 
+        socialmedia INTEGER,
+        location INTEGER,
+        phoneNumber VARCHAR(20), 
+        email VARCHAR(30), 
+        fax VARCHAR(30), 
+        homePhone VARCHAR(50), 
+        FOREIGN KEY (socialmedia) REFERENCES SOCIALMEDIA(id),
+        FOREIGN KEY (location) REFERENCES LOCATION(LOCATION_ID),
+        contactType VARCHAR(50)
+    )""",
+    """CREATE TABLE IF NOT EXISTS SOCIALMEDIA(
+        id SERIAL PRIMARY KEY,
+        facebook VARCHAR(60),
+        twitter VARCHAR(60),
+        instagram VARCHAR(60),
+        discord VARCHAR(60),
+        youtube VARCHAR(60),
+        googleplus VARCHAR(60),
+    )""",
+    """CREATE TABLE IF NOT EXISTS MEMBERSHIP (
+        id SERIAL PRIMARY KEY, 
+        membershipType VARCHAR(50)
+    )""",
+    """"CREATE TABLE IF NOT EXISTS PHOTO (
+        id SERIAL PRIMARY KEY, 
+        path VARCHAR (150)
+    )""",
 	"""CREATE TABLE IF NOT EXISTS TIMEZONE(
 			TIMEZONE_ID SERIAL PRIMARY KEY,
 			TIMEZONE VARCHAR(10)
