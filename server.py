@@ -17,5 +17,9 @@ app.add_url_rule("/countries/create", view_func=views.country_add_page, methods=
 app.add_url_rule("/countries/<int:country_key>", view_func=views.country_read_page)
 app.add_url_rule("/countries/<int:country_key>/edit", view_func=views.country_update_page)
 
+#Users
+app.add_url_rule("/users", view_func=views.users_page)
+app.add_url_rule("/users/create", view_func=views.add_user_page, methods=["GET", "POST"])
+
 if __name__ == "__main__":
     app.run()

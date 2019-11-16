@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% block title %}Users{% endblock %}
+
+{% block content %}
+<p1>Display Users</p1>
+<a href="/users/create" >Create a user</a>
+<table class="table is-striped is-fullwidth">
+    {% for item in users %}
+    <tr>
+        <td>
+            <p>{{item.name}} {{item.date}}</p>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

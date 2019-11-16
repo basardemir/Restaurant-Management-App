@@ -3,6 +3,7 @@ from datetime import datetime
 
 from pages.company import *
 from pages.country import *
+from pages.users import *
 def home_page():
   today = datetime.today()
   day_name = today.strftime("%A")
