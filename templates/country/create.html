@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+{% block title %}Add Country{% endblock %}
+
+{% block content %}
+<h1 class="title">Add Country</h1>
+    <form action="" method="post" name="country_add">
+        <div class="field">
+            <label for="title" class="label">Name</label>
+            <div class="control">
+                <input type="text" name="title" class="input" required="required"/>
+            </div>
+        </div>
+
+        <div class="field is-grouped">
+            <div class="control">
+              <button class="button is-primary is-small">Save</button>
+            </div>
+          </div>
+    </form>
+{% endblock %}
