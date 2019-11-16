@@ -5,7 +5,7 @@ import psycopg2 as dbapi2
 
 
 INIT_STATEMENTS = [
-    """"CREATE TABLE IF NOT EXISTS PHOTO (
+    """CREATE TABLE IF NOT EXISTS PHOTO (
         id SERIAL PRIMARY KEY, 
         path VARCHAR(150)
     );""",
