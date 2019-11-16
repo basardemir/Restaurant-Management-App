@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block title %}Nutritional Value{%endblock%}
+{%block content%}
+
+
+<h1>
+    Nutritional Information for "%food" per 100g
+</h1>
+<div class="container-fluid">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Protein</th>
+                <th>Fat</th>
+                <th>Carbohydrates</th>
+                <th>Salt(mg)</th>
+                <th>Calories(kcal)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>2.5g</td>
+                <td>0.1g</td>
+                <td>89g</td>
+                <td>0.08g</td>
+                <td>364kcal</td>  
+            </tr>
+        </tbody>
+    </table>  
+    <a href="/meals" class="btn btn-secondary btn-lg active" role="button">Back</a>    
+</div>
+
+{%endblock%}

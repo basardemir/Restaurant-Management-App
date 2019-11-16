@@ -1,0 +1,133 @@
+{% extends "layout.html" %}
+{% block title %}Meals{%endblock%}
+{%block content%}
+<h1>
+    Meals 
+</h1>
+<div class="container-fluid">
+    
+    <div class="col">
+        <h2>Search</h2>
+        <form>
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Meal Name">
+                </div>
+                <div class="col">
+                    <a class="btn btn-primary btn-md active" href="#" role='button'>Search for a Meal</a>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                {% for meal in mealss %}
+                <div class="col">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                        <label class="form-check-label" for="inlineCheckbox1">{{ meal }}</label>
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="col">
+                    <a class="btn btn-primary btn-md active" href="#" role='button'>Search for a Meal</a>
+                </div>
+            </div>
+            <hr>
+            <div class="row"">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect2">Select maximum price of a meal</label>
+                        <select multiple class="form-control" id="exampleFormControlSelect2">
+                            {% for i in range(5, 100, 5)%}
+                            <option>{{i}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col" style="margin-top: 27px;">
+                    <a class="btn btn-primary btn-md active" href="#" role='button'>Search for a Meal</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <hr>
+    <div class="col">
+        <h2>Results</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Picture</th>
+                    <th>Name</th>
+                    <th>Brand</th>
+                    <th>Price</th>
+                    <th>Type</th>
+                    <th>Vegan / Not Vegan</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><img src="../static/3746.png" cla../static/3746.pngss="rounded float-left" alt="Meal"></td>
+                    <td>Whopper Burger</td>
+                    <td>Burger King</td>
+                    <td>10tl</td>
+                    <td>Burger</td>
+                    <td>Not Vegan</td>  
+                    <td>                            
+                        <nav class="nav">
+                            <a class="nav-link" href="/meals/food_values">Food Values</a>
+                            <a class="nav-link text-secondary" href="#">Add to Cart</a>
+                            {% if userType %}
+                            <a class="nav-link text-success " href="#" >Update</a>
+                            <a class="nav-link text-danger " href="#" >Delete</a>
+                            {% endif %}
+                        </nav>                          
+                    </td>
+                </tr>
+                <tr>
+                    <td><img src="../static/3746.png" cla../static/3746.pngss="rounded float-left" alt="Meal"></td>
+                    <td>Daba Daba Burger</td>
+                    <td>McDonalds</td>
+                    <td>15tl</td>
+                    <td>Burger</td>
+                    <td>Not Vegan</td>
+                    <td>                            
+                        <nav class="nav">
+                            <a class="nav-link" href="#">Food Values</a>
+                            <a class="nav-link text-secondary" href="#">Add to Cart</a>
+                            {% if userType %}
+                            <a class="nav-link text-success " href="#" >Update</a>
+                            <a class="nav-link text-danger " href="#" >Delete</a>
+                            {% endif %}
+                        </nav>                          
+                    </td>
+                </tr>
+                <tr>
+                    <td><img src="../static/3746.png" cla../static/3746.pngss="rounded float-left" alt="Meal"></td>
+                    <td>Ceaser Salad</td>
+                    <td>McDonalds</td>
+                    <td>10tl</td>
+                    <td>Salad</td>
+                    <td>Vegan</td>
+                    <td>                            
+                        <nav class="nav">
+                            <a class="nav-link" href="#">Food Values</a>
+                            <a class="nav-link text-secondary" href="#">Add to Cart</a>
+                            {% if userType %}
+                            <a class="nav-link text-success " href="#">Update</a>
+                            <a class="nav-link text-danger " href="#">Delete</a>
+                            {% endif %}
+                        </nav>                          
+                    </td>
+                </tr>
+            </tbody>
+        </table>  
+    </div>  
+    {% if userType %}
+    <nav class="nav justify-content-center">
+        <a class="btn btn-primary btn-lg active" href="/meals/add_meal" role='button'>Add a meal</a>
+    </nav>  
+    {% endif %}
+</div>
+    
+
+{%endblock%}
