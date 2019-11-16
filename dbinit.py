@@ -5,41 +5,9 @@ import psycopg2 as dbapi2
 
 
 INIT_STATEMENTS = [
-    """CREATE TABLE IF NOT EXISTS USERACCOUNT (
+    """"CREATE TABLE IF NOT EXISTS PHOTO (
         id SERIAL PRIMARY KEY, 
-        person INTEGER,
-        membershiptype INTEGER,
-        lastEntry DATE, 
-        username VARCHAR(25), 
-        password VARCHAR(25), 
-        joinedDate DATE, 
-        securityAnswer VARCHAR(30),
-        FOREIGN KEY (person) REFERENCES PERSON(id),
-        FOREIGN KEY (membershiptype) REFERENCES MEMBERSHIP(id)
-    );""",
-    """CREATE TABLE IF NOT EXISTS PERSON (
-        id SERIAL PRIMARY KEY, 
-        contactinfo INTEGER,
-        photo INTEGER,
-        name VARCHAR(50), 
-        surname VARCHAR(50), 
-        birthDay DATE, 
-        educationLevel VARCHAR(50), 
-        gender VARCHAR(20),
-        FOREIGN KEY (contactinfo) REFERENCES CONTACTINFO(id),
-        FOREIGN KEY (photo) REFERENCES PHOTO(id)
-    );""",
-    """CREATE TABLE IF NOT EXISTS CONTACTINFO (
-        id SERIAL PRIMARY KEY, 
-        socialmedia INTEGER,
-        location INTEGER,
-        phoneNumber VARCHAR(20), 
-        email VARCHAR(30), 
-        fax VARCHAR(30), 
-        homePhone VARCHAR(50), 
-        contactType VARCHAR(50),
-        FOREIGN KEY (socialmedia) REFERENCES SOCIALMEDIA(id),
-        FOREIGN KEY (location) REFERENCES LOCATION(LOCATION_ID)
+        path VARCHAR(150)
     );""",
     """CREATE TABLE IF NOT EXISTS SOCIALMEDIA(
         id SERIAL PRIMARY KEY,
@@ -54,10 +22,56 @@ INIT_STATEMENTS = [
         id SERIAL PRIMARY KEY, 
         membershipType VARCHAR(50)
     );""",
-    """"CREATE TABLE IF NOT EXISTS PHOTO (
+		"""CREATE TABLE IF NOT EXISTS LOCATION(
+			LOCATION_ID SERIAL PRIMARY KEY,
+			PROVINCE INTEGER,
+			COORDINATES INTEGER,
+			COUNTY VARCHAR(40),
+			NEIGHBORHOOD VARCHAR(40),
+			STREET VARCHAR(40),
+			ZIPCODE VARCHAR(5),
+			DESCRIPTION VARCHAR(100),
+			FOREIGN KEY (PROVINCE) REFERENCES PROVINCE(PROVINCE_ID),
+			FOREIGN KEY (COORDINATES) REFERENCES COORDINATES(COORD_ID)
+	);
+	""",
+    """CREATE TABLE IF NOT EXISTS CONTACTINFO (
         id SERIAL PRIMARY KEY, 
-        path VARCHAR(150)
+        socialmedia INTEGER,
+        location INTEGER,
+        phoneNumber VARCHAR(20), 
+        email VARCHAR(30), 
+        fax VARCHAR(30), 
+        homePhone VARCHAR(50), 
+        contactType VARCHAR(50),
+        FOREIGN KEY (socialmedia) REFERENCES SOCIALMEDIA(id),
+        FOREIGN KEY (location) REFERENCES LOCATION(LOCATION_ID)
     );""",
+    """CREATE TABLE IF NOT EXISTS PERSON (
+        id SERIAL PRIMARY KEY, 
+        contactinfo INTEGER,
+        photo INTEGER,
+        name VARCHAR(50), 
+        surname VARCHAR(50), 
+        birthDay DATE, 
+        educationLevel VARCHAR(50), 
+        gender VARCHAR(20),
+        FOREIGN KEY (contactinfo) REFERENCES CONTACTINFO(id),
+        FOREIGN KEY (photo) REFERENCES PHOTO(id)
+    );""",
+		"""CREATE TABLE IF NOT EXISTS USERACCOUNT (
+        id SERIAL PRIMARY KEY, 
+        person INTEGER,
+        membershiptype INTEGER,
+        lastEntry DATE, 
+        username VARCHAR(25), 
+        password VARCHAR(25), 
+        joinedDate DATE, 
+        securityAnswer VARCHAR(30),
+        FOREIGN KEY (person) REFERENCES PERSON(id),
+        FOREIGN KEY (membershiptype) REFERENCES MEMBERSHIP(id)
+    );""",
+    
 	"""CREATE TABLE IF NOT EXISTS TIMEZONE(
 			TIMEZONE_ID SERIAL PRIMARY KEY,
 			TIMEZONE VARCHAR(10)
@@ -105,19 +119,7 @@ INIT_STATEMENTS = [
 			FOREIGN KEY (TIMEZONE) REFERENCES TIMEZONE(TIMEZONE_ID)
 		);
 	""",
-	"""CREATE TABLE IF NOT EXISTS LOCATION(
-			LOCATION_ID SERIAL PRIMARY KEY,
-			PROVINCE INTEGER,
-			COORDINATES INTEGER,
-			COUNTY VARCHAR(40),
-			NEIGHBORHOOD VARCHAR(40),
-			STREET VARCHAR(40),
-			ZIPCODE VARCHAR(5),
-			DESCRIPTION VARCHAR(100),
-			FOREIGN KEY (PROVINCE) REFERENCES PROVINCE(PROVINCE_ID),
-			FOREIGN KEY (COORDINATES) REFERENCES COORDINATES(COORD_ID)
-	);
-	""",
+	
 	"""CREATE TABLE IF NOT EXISTS COMPANY(
 	COMPANY_ID SERIAL PRIMARY KEY,
 	NAME VARCHAR(50),
