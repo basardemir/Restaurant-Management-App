@@ -11,6 +11,16 @@ def add_user_page():
         return render_template("/users/create.html")
     else:
         print("POSTED:")
-        data = request.form['title']
+        data = {"username": request.form['username'], "password": request.form["password"]}
+        print(data)
+        return redirect(url_for("users_page"))
+
+def signin_page():
+    if request.method == "GET":
+        print("Add a user")
+        return render_template("/users/login.html")
+    else:
+        print("POSTED:")
+        data = {"username": request.form['username'], "password": request.form["password"]}
         print(data)
         return redirect(url_for("users_page"))
