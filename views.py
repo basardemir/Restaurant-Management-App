@@ -3,6 +3,8 @@ from datetime import datetime
 
 from pages.company import *
 from pages.country import *
+from pages.users import *
+from pages.meal import *
 
 def home_page():
   today = datetime.today()

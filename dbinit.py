@@ -5,41 +5,9 @@ import psycopg2 as dbapi2
 
 
 INIT_STATEMENTS = [
-    """CREATE TABLE IF NOT EXISTS USERACCOUNT (
+    """CREATE TABLE IF NOT EXISTS PHOTO (
         id SERIAL PRIMARY KEY, 
-        person INTEGER,
-        membershiptype INTEGER,
-        lastEntry DATE, 
-        username VARCHAR(25), 
-        password VARCHAR(25), 
-        joinedDate DATE, 
-        securityAnswer VARCHAR(30),
-        FOREIGN KEY (person) REFERENCES PERSON(id),
-        FOREIGN KEY (membershiptype) REFERENCES MEMBERSHIP(id)
-    );""",
-    """CREATE TABLE IF NOT EXISTS PERSON (
-        id SERIAL PRIMARY KEY, 
-        contactinfo INTEGER,
-        photo INTEGER,
-        name VARCHAR(50), 
-        surname VARCHAR(50), 
-        birthDay DATE, 
-        educationLevel VARCHAR(50), 
-        gender VARCHAR(20),
-        FOREIGN KEY (contactinfo) REFERENCES CONTACTINFO(id),
-        FOREIGN KEY (photo) REFERENCES PHOTO(id)
-    );""",
-    """CREATE TABLE IF NOT EXISTS CONTACTINFO (
-        id SERIAL PRIMARY KEY, 
-        socialmedia INTEGER,
-        location INTEGER,
-        phoneNumber VARCHAR(20), 
-        email VARCHAR(30), 
-        fax VARCHAR(30), 
-        homePhone VARCHAR(50), 
-        contactType VARCHAR(50),
-        FOREIGN KEY (socialmedia) REFERENCES SOCIALMEDIA(id),
-        FOREIGN KEY (location) REFERENCES LOCATION(LOCATION_ID)
+        path VARCHAR(150)
     );""",
     """CREATE TABLE IF NOT EXISTS SOCIALMEDIA(
         id SERIAL PRIMARY KEY,
@@ -50,15 +18,7 @@ INIT_STATEMENTS = [
         youtube VARCHAR(60),
         googleplus VARCHAR(60)
     );""",
-    """CREATE TABLE IF NOT EXISTS MEMBERSHIP (
-        id SERIAL PRIMARY KEY, 
-        membershipType VARCHAR(50)
-    );""",
-    """"CREATE TABLE IF NOT EXISTS PHOTO (
-        id SERIAL PRIMARY KEY, 
-        path VARCHAR(150)
-    );""",
-	"""CREATE TABLE IF NOT EXISTS TIMEZONE(
+		"""CREATE TABLE IF NOT EXISTS TIMEZONE(
 			TIMEZONE_ID SERIAL PRIMARY KEY,
 			TIMEZONE VARCHAR(10)
 		);
@@ -76,6 +36,12 @@ INIT_STATEMENTS = [
 			GDP NUMERIC
 		); 
 	""",
+    """CREATE TABLE IF NOT EXISTS MEMBERSHIP (
+        id SERIAL PRIMARY KEY, 
+        membershipType VARCHAR(50)
+    );""",
+		
+
 	"""CREATE TABLE IF NOT EXISTS COUNTRY(
 			COUNTRY_ID SERIAL PRIMARY KEY,
 			TIMEZONE INTEGER,
@@ -118,6 +84,45 @@ INIT_STATEMENTS = [
 			FOREIGN KEY (COORDINATES) REFERENCES COORDINATES(COORD_ID)
 	);
 	""",
+    """CREATE TABLE IF NOT EXISTS CONTACTINFO (
+        id SERIAL PRIMARY KEY, 
+        socialmedia INTEGER,
+        location INTEGER,
+        phoneNumber VARCHAR(20), 
+        email VARCHAR(30), 
+        fax VARCHAR(30), 
+        homePhone VARCHAR(50), 
+        contactType VARCHAR(50),
+        FOREIGN KEY (socialmedia) REFERENCES SOCIALMEDIA(id),
+        FOREIGN KEY (location) REFERENCES LOCATION(LOCATION_ID)
+    );""",
+    """CREATE TABLE IF NOT EXISTS PERSON (
+        id SERIAL PRIMARY KEY, 
+        contactinfo INTEGER,
+        photo INTEGER,
+        name VARCHAR(50), 
+        surname VARCHAR(50), 
+        birthDay DATE, 
+        educationLevel VARCHAR(50), 
+        gender VARCHAR(20),
+        FOREIGN KEY (contactinfo) REFERENCES CONTACTINFO(id),
+        FOREIGN KEY (photo) REFERENCES PHOTO(id)
+    );""",
+		"""CREATE TABLE IF NOT EXISTS USERACCOUNT (
+        id SERIAL PRIMARY KEY, 
+        person INTEGER,
+        membershiptype INTEGER,
+        lastEntry DATE, 
+        username VARCHAR(25), 
+        password VARCHAR(25), 
+        joinedDate DATE, 
+        securityAnswer VARCHAR(30),
+        FOREIGN KEY (person) REFERENCES PERSON(id),
+        FOREIGN KEY (membershiptype) REFERENCES MEMBERSHIP(id)
+    );""",
+    
+	
+	
 	"""CREATE TABLE IF NOT EXISTS COMPANY(
 	COMPANY_ID SERIAL PRIMARY KEY,
 	NAME VARCHAR(50),
