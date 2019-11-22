@@ -17,5 +17,8 @@ app.add_url_rule("/countries/create", view_func=views.country_add_page, methods=
 app.add_url_rule("/countries/<int:country_key>", view_func=views.country_read_page)
 app.add_url_rule("/countries/<int:country_key>/edit", view_func=views.country_update_page)
 
+##TIMEZONE TABLE
+app.add_url_rule("/tz", view_func=views.tz_page,) 
+
 if __name__ == "__main__":
     app.run()

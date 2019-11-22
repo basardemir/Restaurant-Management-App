@@ -1,5 +1,20 @@
 from flask import Flask, render_template, request, redirect, url_for
 
+import psycopg2 as dbapi2  ##temp for test purposes
+
+url="postgres://ivpallnyfezioy:075baf8e129b0d52dbd6d87dd3c774363b0b10b499921f821378ed7084bfc744@ec2-46-137-187-23.eu-west-1.compute.amazonaws.com:5432/dagmb1jla3rmdp"
+
+def makeConnection():
+	connection=dbapi2.connect(url)
+	cursor=connection.cursor()
+	return cursor
+
+def tz_page():
+	cursor = makeConnection()
+	cursor.execute("select * from timezone")
+	timezone = cursor.fetchall()
+	cursor.close()
+	return render_template("/timezone/index.html", list = timezone)
 
 def country_page():
 	if request.method == 'GET':
@@ -17,14 +32,18 @@ def country_page():
 
 def country_add_page():
 	if request.method =='GET':
-		#input restriction parameters will be set here and send with render template
-		return render_template("/country/create.html")
+		cursor = makeConnection()
+		cursor.execute("select * from timezone")
+		timezone = cursor.fetchall()
+		cursor.close()
+		return render_template("/country/create.html", tz=timezone)
 	else:
-		print("add page post")
-		form_name = request.form["name"] #country name
-		#generate a valid table entry using the parameters send from the form
-		#add entry to db table
-		key = 0 #lastest entry key will be assigned here
+		newCountry={}
+		#Form structure name,country code, diving lane, capital city, langugage long, langugage short, area, gdp, population, Longitude, latitude, timezone
+		for i in request.form:
+			print(i + ": " + request.form[i])
+			newCountry[i]=request.form[i]
+		key = 0 
 		return redirect(url_for("country_page")) #redirect to country_read_page for the latest entry
 
 

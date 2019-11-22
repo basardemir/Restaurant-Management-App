@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block title %}Time Zone List{% endblock %}
+{% block content %}
+<h1 class="title">Time Zones</h1>
+{% if list %}
+		<table class="table is-striped is-fullwidth">
+			
+			<tr>
+				<th>Timezone ID</th>
+				<th>Timezone</th>
+			</tr>
+			{% for tz_id, tz_name in list %}
+			<tr>
+				<td>{{ tz_id }}</td>
+				<td>{{ tz_name }}</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</form>
+{% endif %}
+{% endblock %}

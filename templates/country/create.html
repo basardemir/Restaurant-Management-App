@@ -3,11 +3,30 @@
 
 {% block content %}
 <h1 class="title">Add Country</h1>
+<br>
     <form action="" method="post" name="country_add">
         <div class="field">
-            <label for="title" class="label">Name</label>
             <div class="control">
-                <input type="text" name="name" class="input" required="required"/>
+                
+                Country Name:<input type="text" name="name" class="input" required="required"/> <br>
+                Country Code:<input type="text" name="code" class="input" required="required"> <br>
+                <input type="radio" name="lane" value="left" class="input" checked> Left 
+                <input type="radio" name="lane" value="right" class="input" > Right <br>
+                Capital City:<input type="text" name="capital" class="input"><br>
+                Language(long)<input type="text" name="Llong" class="input"><br>
+                Language(short)<input type="text" name="Lshort" class="input"><br>
+                Area<input type="text" name="area" min=0 class="input"><br>
+                GDP<input type="number" name="gpd"  min=0 class="input"><br>
+                Population<input type="number" name="population" min=0 class="input"><br>
+                Capital Coordinates: Longitude <input type="number" name="lon"> Latitude <input type="number" name="lat"><br>
+                {% if tz %}
+                <label for="sel1">Timezone</label>
+                <select name="tz" class="form-control" id="sel1"> 
+                    {% for time_id, time in tz %}
+                    <option value ="{{ time_id }}">{{ time }}</option>
+                    {% endfor %}
+                </select>
+                {% endif %}    
             </div>
         </div>
 

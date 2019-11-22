@@ -1,21 +1,13 @@
 {% extends "layout.html" %}
-{% block title %}Add Country{% endblock %}
+{% block title %}Display Country{% endblock %}
 {% block content %}
 
-	<h1 class = "title">Add Country</h1>
-	<form action="" method="post" name="country_add">
-		<div class="field">
-			<label for="name" class="label">Title</label>
-			<div class="control">
-                <input type="text" name="name" class="input" required="required"/>
-            </div>
-		</div>
-
-		<div class="field is-grouped">
-            <div class="control">
-              <button class="button is-primary is-small">Save</button>
-            </div>
-          </div>
-	</form>
+<h1 class = "title">Country with key: {{ key }} is being displayed</h1>
+{% if country %}
+<table>
+{% for country in country %}
+{% endfor %}
+</table>
+{% endif %}
 
 {% endblock %}
