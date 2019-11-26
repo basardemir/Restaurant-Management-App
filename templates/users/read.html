@@ -2,6 +2,11 @@
 {% block title %}Users{% endblock %}
 
 {% block content %}
+{% if current_user.is_authenticated %}
+  <p>Hi {{ current_user.name }}!</p>
+{% else  %}
+    <p>No user found!</p>
+{% endif %}
 <p1>Display Users</p1>
 <a href="/users/create" >Create a user</a>
 <table class="table is-striped is-fullwidth">
