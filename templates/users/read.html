@@ -2,8 +2,8 @@
 {% block title %}Users{% endblock %}
 
 {% block content %}
-{% if current_user.is_authenticated %}
-  <p>Hi {{ current_user.name }}!</p>
+{% if session["logged_in"] == True %}
+    <p>Hi {{ session["username"] }}!</p>
 {% else  %}
     <p>No user found!</p>
 {% endif %}
@@ -13,7 +13,7 @@
     {% for item in users %}
     <tr>
         <td>
-            <p>{{item.name}} {{item.date}}</p>
+            <p>ID: {{item[0]}} Joined Date: {{item[3]}} Username: {{item[4]}} Password: {{item[5]}} Last Entry: {{item[6]}} Security Answer: {{item[7]}}</p>
         </td>
     </tr>
     {% endfor %}
