@@ -27,6 +27,7 @@ app.add_url_rule("/tz", view_func=views.tz_page,)
 app.add_url_rule("/users", view_func=views.users_page)
 app.add_url_rule("/users/signin", view_func=views.signin_page, methods=["GET", "POST"])
 app.add_url_rule("/users/create", view_func=views.add_user_page, methods=["GET", "POST"])
+app.add_url_rule("/users/logout", view_func=views.logout_page, methods=["GET", "POST"])
 
 #Meals
 app.add_url_rule("/meals", view_func=views.meal_page, methods=["GET", "POST"])

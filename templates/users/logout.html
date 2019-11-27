@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+{% block title %}Create A User{% endblock %}
+
+{% block content %}
+<h1 class="title">Logout</h1>
+<form action="" method="post" name="{{url_for('logout_page')}}">
+    <div class="field is-grouped">
+        <div class="control">
+            <button class="button is-primary is-small">Logout</button>
+        </div>
+    </div>
+</form>
+{% endblock %}
