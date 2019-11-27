@@ -61,3 +61,16 @@ def signin_page():
                 session['password'] = data["password"]
                 session['logged_in'] = True
         return redirect(url_for("users_page"))
+
+
+def logout_page():
+    if request.method == "GET":
+        print("Logout")
+        return render_template("/users/logout.html")
+    else:
+        print("POSTED: logout")
+        session['username'] = ""
+        session['password'] = ''
+        session['logged_in'] = False
+        print(session)
+        return redirect(url_for("users_page"))

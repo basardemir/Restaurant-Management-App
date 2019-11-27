@@ -2,7 +2,12 @@
 {% block title %}{% endblock %}
 {% block content %}
 <div class="container">
-  <p>Delete Approval Page</p>
+  
+  <form action="{{ request.path }}" method="POST">
+    <h3>Gerçekten silmek istiyor musunuz?</h3>
+    <button type="submit" class="btn btn-primary">sil</button>
+    <a href="/">Cancel</a>
+  </form>
 </div>
 
 {% endblock %}

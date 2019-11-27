@@ -1,7 +1,20 @@
 {% extends "layout.html" %}
-{% block title %}{% endblock %}
+{% block title %}Company Details{% endblock %}
 {% block content %}
+{% if company %}
 <div class="container">
-  <p>Company Details will be listed( User and Contact Info Details )</p>
+  <div class="row">
+    <ul  class="list-unstyled">
+      <li>{{ company["name"] }}</li>
+      <li>{{ company["information"] }}</li>
+      <li>{{ company["mission"] }}</li>
+      <li>{{ company["vision"] }}</li>
+      <li>{{ company["abbrevation"] }}</li>
+      <li>{{ company["foundation_date"] }}</li>
+      <li>{{ company["type"] }}</li>
+      <li>{{ company["contact_id"] }}</li>
+    </ul>
+  </div>
 </div>
+{% endif %}
 {% endblock %}
