@@ -4,6 +4,7 @@ import datetime
 from flask import current_app
 
 import psycopg2 as dbapi2
+import psycopg2.extras
 
 url = "postgres://ivpallnyfezioy:075baf8e129b0d52dbd6d87dd3c774363b0b10b499921f821378ed7084bfc744@ec2-46-137-187-23.eu-west-1.compute.amazonaws.com:5432/dagmb1jla3rmdp"
 
@@ -12,8 +13,11 @@ url = "postgres://ivpallnyfezioy:075baf8e129b0d52dbd6d87dd3c774363b0b10b499921f8
 def users_page():
     #testusers = [{"name": "Ali", "date": datetime.datetime.now()}]]
     connection=dbapi2.connect(url)
-    cursor = connection.cursor()
-    statement = "SELECT * FROM PERSON JOIN (SELECT * FROM USERACCOUNT JOIN MEMBERSHIP ON USERACCOUNT.membershiptype = MEMBERSHIP.id) AS T2 ON PERSON.id = T2.person;"
+    cursor = connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    statement = "SELECT * FROM SOCIALMEDIA FULL OUTER JOIN (SELECT * FROM CONTACTINFO FULL OUTER JOIN (SELECT * FROM PERSON FULL OUTER JOIN (SELECT * FROM USERACCOUNT JOIN MEMBERSHIP ON USERACCOUNT.membershiptype = MEMBERSHIP.id) AS T2 ON PERSON.id = T2.person) AS T3 ON CONTACTINFO.id = T3.contactinfo) AS T4 ON T4.socialmedia = SOCIALMEDIA.id;"
+#    statement = "SELECT * FROM USERACCOUNT"
+#    cursor.execute(statement)
+#    statement = "SELECT * FROM USERACCOUNT RIGHT OUTER JOIN PERSON ON USERACCOUNT.person = PERSON.id"
     cursor.execute(statement)
     userlist = cursor.fetchall()
     cursor.close()
@@ -27,7 +31,7 @@ def add_user_page():
     else:
         print("POSTED:")
         print(request.form)
-        data = {"username": request.form['username'], "password": request.form["password"], "lastEntry": datetime.datetime.now(), "joinedDate": datetime.datetime.now(), "securityAnswer": request.form["securityQuestion"], "Membership": 0, "name": request.form["name"], "surname": request.form["surname"], "gender": request.form["Gender"], "birthday": request.form["Birthday"], "education": request.form["Education"]}
+        data = {"username": request.form['username'], "password": request.form["password"], "phoneNumber": request.form["phoneNumber"], "email": request.form["email"], "fax": request.form["fax"], "homePhone": request.form["homePhone"], "workmail": request.form["workmail"], "lastEntry": datetime.datetime.now(), "joinedDate": datetime.datetime.now(), "securityAnswer": request.form["securityQuestion"], "Membership": 0, "name": request.form["name"], "surname": request.form["surname"], "gender": request.form["Gender"], "birthday": request.form["Birthday"], "education": request.form["Education"], "facebook": request.form["facebook"], "twitter": request.form["twitter"], "instagram": request.form["instagram"], "discord": request.form["discord"], "youtube": request.form["youtube"], "googleplus": request.form["googleplus"]}
         if request.form["Membership"] == "Boss":
             data["Membership"] = 1
         else:
@@ -35,8 +39,12 @@ def add_user_page():
         print(data)
         connection=dbapi2.connect(url)
         cursor = connection.cursor()
-        statement = "INSERT INTO PERSON (name, surname, birthDay, educationLevel, gender) VALUES (%s, %s, %s, %s, %s);"
-        cursor.execute(statement, (data["name"], data['surname'], data["birthday"], data["education"], data["gender"]))
+        statement = "INSERT INTO SOCIALMEDIA (facebook, twitter, instagram, discord, youtube, googleplus) VALUES (%s, %s, %s, %s, %s, %s);"
+        cursor.execute(statement, (data["facebook"], data['twitter'], data["instagram"], data["discord"], data["youtube"], data["googleplus"]))
+        statement = "INSERT INTO CONTACTINFO (socialmedia, phoneNumber, email, fax, homePhone, workmail) VALUES ((SELECT SOCIALMEDIA.id FROM SOCIALMEDIA WHERE (facebook=%s and twitter=%s and instagram=%s and discord=%s and youtube=%s and googleplus=%s)), %s, %s, %s, %s, %s);"
+        cursor.execute(statement, (data["facebook"], data['twitter'], data["instagram"], data["discord"], data["youtube"], data["googleplus"], data['phoneNumber'], data["email"], data["fax"], data["homePhone"], data["workmail"]))
+        statement = "INSERT INTO PERSON (contactinfo, name, surname, birthDay, educationLevel, gender) VALUES ((SELECT CONTACTINFO.id FROM CONTACTINFO WHERE (phoneNumber=%s and email=%s and fax=%s and homePhone=%s and workmail=%s)), %s, %s, %s, %s, %s);"
+        cursor.execute(statement, (data['phoneNumber'], data["email"], data["fax"], data["homePhone"], data["workmail"], data["name"], data['surname'], data["birthday"], data["education"], data["gender"]))
         statement = "INSERT INTO USERACCOUNT (person, lastEntry, username, password, joinedDate, securityAnswer, membershiptype) VALUES ((SELECT PERSON.id FROM PERSON WHERE (name=%s and surname=%s and birthDay=%s and educationLevel=%s and gender=%s)), %s, %s, %s, %s, %s, %s);"
         cursor.execute(statement, (data["name"], data['surname'], data["birthday"], data["education"], data["gender"], data["lastEntry"], data['username'], data["password"], data["joinedDate"], data["securityAnswer"], data["Membership"]))
         connection.commit()
