@@ -4,10 +4,56 @@
 
 <h1 class = "title">Country with key: {{ key }} is being displayed</h1>
 {% if country %}
-<table>
-{% for country in country %}
-{% endfor %}
-</table>
+<form action="" method="post" name="country_list">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+                        <th></th>
+                        <th>Country Name</th>
+                        <th>Country Code</th>
+                        <th>Driving Lane</th>
+                        <th>Language(Long)</th>
+                        <th>Language(Short)</th>
+                        <th>Capital City</th>
+                        <th>Area</th>
+                        <th>Population</th>
+                        <th>GDP</th>
+                        <th>Timezone</th>
+                        <th>Lon</th>
+                        <th>Lat</th>
+                        <th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for key,name,pop,area,gdp,tz,ls,ll,cc,dl,cc2,lat,lon in country %}
+				<tr>
+					<td><label class="checkbox">
+						<input type="checkbox" name="country_keys" value=" {{ key }}">
+					</label>
+					</td>
+					<td>{{ name }}</td>
+					<td>{{ cc }}</td>
+                    <td>{{ area }}</td>
+					<td>{{ pop }}</td>
+					<td>{{ gdp }}</td>
+					<td>{{ cc2 }}</td>
+					<td>{{ ll }}</td>
+					<td>{{ ls }}</td>
+					<td>{{ dl }}</td>
+					<td>{{ tz }}</td>
+					<td>{{ lon }}</td>
+					<td>{{ lat }}</td>
+					<td>
+					<nav class="nav">
+						<a class="nav-link text-success " href="{{ url_for('country_update_page', country_key=key) }}" >Update</a>
+						<a class="nav-link text-danger " href="#" >Delete</a>
+					</nav>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</form>
 {% endif %}
 
 {% endblock %}

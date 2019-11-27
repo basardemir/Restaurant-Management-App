@@ -3,31 +3,50 @@
 {% block content %}
 <h1 class="title">Countries</h1>
 
+<div class="container-fluid">
 <div class="column mr-4">
 	<a href="{{ url_for('country_add_page') }}" class="btn btn-primary" target="_self" title="Add">Add Entry</a>
 </div>
 
 {% if countries %}
 	<form action="" method="post" name="country_list">
-		<div class="column mr-4">
-			<button class="button is-danger is-small">Delete</button> 
-		</div>
-		<table class="table is-striped is-fullwidth">
-			{% for country_key, country_name in countries %}
-			<tr>
-				<td>
-					<label class="checkbox">
-						<input type="checkbox" name="country_keys" value=" {{ country_key }}">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Country Name</th>
+					<th>Population</th>
+					<th>Area</th>
+					<th>GDP</th>
+					<th>Timezone</th>
+					<th>Language(Short)</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for key,name,pop,area,gdp,tz,ll in countries %}
+				<tr>
+					<td><label class="checkbox">
+						<input type="checkbox" name="country_keys" value=" {{ key }}">
 					</label>
-						<a href="{{ url_for('country_read_page', country_key=country_key) }}">
-							{{ country_name }}
-						</a>
-						<a href="{{ url_for('country_update_page', country_key=country_key) }}">Update</a>
-					
-				</td>
-			</tr>
-			{% endfor %}
+					</td>
+					<td><a href="{{ url_for('country_read_page', country_key=key) }}">{{ name }}</a></td>
+					<td>{{ pop }}</td>
+					<td>{{ area }}</td>
+					<td>{{ gdp }}</td>
+					<td>{{ tz }}</td>
+					<td>{{ ll }}</td>
+					<td>
+					<nav class="nav">
+						<a class="nav-link text-success " href="{{ url_for('country_update_page', country_key=key) }}" >Update</a>
+						<a class="nav-link text-danger " href="#" >Delete</a>
+					</nav>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
 		</table>
 	</form>
 {% endif %}
+</div>
 {% endblock %}
