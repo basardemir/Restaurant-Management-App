@@ -31,7 +31,7 @@ app.add_url_rule("/users/logout", view_func=views.logout_page, methods=["GET", "
 
 #Meals
 app.add_url_rule("/meals", view_func=views.meal_page, methods=["GET", "POST"])
-app.add_url_rule("/meals/food_values", view_func=views.food_value_page)
+app.add_url_rule("/meals/<int:food_id>/food_value", view_func=views.food_value_page)
 app.add_url_rule("/meals/add_meal", view_func=views.add_meal_page, methods=["GET", "POST"])
 
 

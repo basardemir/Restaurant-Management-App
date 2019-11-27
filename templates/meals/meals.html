@@ -46,7 +46,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for food_name, brand_name, price, isVegan, type in f_table %}
+                {% for food_id, food_name, brand_name, price, isVegan, type in f_table %}
                 <tr>
                     <td><img src="../static/3746.png" cla../static/3746.pngss="rounded float-left" alt="Meal"></td>
                     <td>{{food_name}}</td>
@@ -60,7 +60,7 @@
                     {%endif%}   
                     <td>                            
                         <nav class="nav">
-                            <a class="nav-link" href="/meals/food_values">Food Values</a>
+                            <a class="nav-link" href="{{url_for('food_value_page', food_id = food_id)}}">Food Values</a>
                             <a class="nav-link text-secondary" href="#">Add to Cart</a>
                             {% if userType %}
                             <a class="nav-link text-success " href="#" >Update</a>

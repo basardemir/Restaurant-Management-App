@@ -17,7 +17,7 @@ def meal_page():
     if request.method == "GET":
         connection=dbapi2.connect(url)
         cursor = connection.cursor()
-        statement = "select food_name, brand_name, price, isVegan, type from food"
+        statement = "select food_id, food_name, brand_name, price, isVegan, type from food"
         cursor.execute(statement)
         food_table = cursor.fetchall()
         cursor.close()
@@ -39,7 +39,7 @@ def meal_page():
 
         connection=dbapi2.connect(url)
         cursor = connection.cursor()
-        statement = "select food_name, brand_name, price, isVegan, type from food where food_name like %(meal_name)s"
+        statement = "select food_id, food_name, brand_name, price, isVegan, type from food where food_name like %(meal_name)s"
         for s_m in searched_meals:
             statement += " or type='"+s_m+"'"
         statement += ";"
@@ -53,8 +53,15 @@ def meal_page():
     
     
 
-def food_value_page():
-    return render_template("/meals/food_value.html")
+def food_value_page(food_id):
+    connection=dbapi2.connect(url)
+    cursor = connection.cursor()
+    statement = "select food_name, calories, carbohydrates, fat, protein, cholesterol from (nutritional_value join food on nutrition_id = nutritional_value_id) where food_id = %(food_id)s;"
+    cursor.execute(statement, {'food_id': food_id})
+    nutrition_table = cursor.fetchall()
+    connection.commit()
+    print(len(nutrition_table))
+    return render_template("/meals/food_value.html", nutritions = nutrition_table, key=food_id)
 
 def add_meal_page():
     

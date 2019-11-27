@@ -4,7 +4,7 @@
 
 
 <h1>
-    Nutritional Information for "%food" per 100g
+    Nutritional Information for {{nutritions[0][0]}}
 </h1>
 <div class="container-fluid">
     <table class="table table-bordered table-striped">
@@ -13,18 +13,20 @@
                 <th>Protein</th>
                 <th>Fat</th>
                 <th>Carbohydrates</th>
-                <th>Salt(mg)</th>
+                <th>Cholesterol</th>
                 <th>Calories(kcal)</th>
             </tr>
         </thead>
         <tbody>
+            {%for food_name, calorie, carbo, fat, protein, chol in nutritions%}
             <tr>
-                <td>2.5g</td>
-                <td>0.1g</td>
-                <td>89g</td>
-                <td>0.08g</td>
-                <td>364kcal</td>  
+                <td>{{protein}}g</td>
+                <td>{{fat}}g</td>
+                <td>{{carbo}}g</td>
+                <td>{{chol}}g</td>
+                <td>{{calorie}}kcal</td>  
             </tr>
+            {%endfor%}
         </tbody>
     </table>  
     <a href="/meals" class="btn btn-secondary btn-lg active" role="button">Back</a>    
