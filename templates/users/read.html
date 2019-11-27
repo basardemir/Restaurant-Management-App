@@ -9,13 +9,9 @@
 {% endif %}
 <p1>Display Users</p1>
 <a href="/users/create" >Create a user</a>
-<table class="table is-striped is-fullwidth">
+<ul class="list-group">
     {% for item in users %}
-    <tr>
-        <td>
-            <p>ID: {{item[0]}} Joined Date: {{item[3]}} Username: {{item[4]}} Password: {{item[5]}} Last Entry: {{item[6]}} Security Answer: {{item[7]}}</p>
-        </td>
-    </tr>
+    <li class="list-group-item">Name: {{item[3]}} - Surname: {{item[4]}} - Birthday: {{item[5]}} - Education: {{item[6]}} - Gender: {{item[7]}}<br/> Joined Date: {{item[11]}} - Username: {{item[12]}} - Password: {{item[13]}} - Last Entry: {{item[14]}} - Security Answer: {{item[15]}} - Membership: {{item[17]}}</li>
     {% endfor %}
-</table>
+</ul>
 {% endblock %}

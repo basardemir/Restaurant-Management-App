@@ -13,7 +13,7 @@ def users_page():
     #testusers = [{"name": "Ali", "date": datetime.datetime.now()}]]
     connection=dbapi2.connect(url)
     cursor = connection.cursor()
-    statement = "SELECT * FROM USERACCOUNT;"
+    statement = "SELECT * FROM PERSON JOIN (SELECT * FROM USERACCOUNT JOIN MEMBERSHIP ON USERACCOUNT.membershiptype = MEMBERSHIP.id) AS T2 ON PERSON.id = T2.person;"
     cursor.execute(statement)
     userlist = cursor.fetchall()
     cursor.close()
@@ -27,12 +27,18 @@ def add_user_page():
     else:
         print("POSTED:")
         print(request.form)
-        data = {"username": request.form['username'], "password": request.form["password"], "lastEntry": datetime.datetime.now(), "joinedDate": datetime.datetime.now(), "securityAnswer": request.form["securityQuestion"]}
+        data = {"username": request.form['username'], "password": request.form["password"], "lastEntry": datetime.datetime.now(), "joinedDate": datetime.datetime.now(), "securityAnswer": request.form["securityQuestion"], "Membership": 0, "name": request.form["name"], "surname": request.form["surname"], "gender": request.form["Gender"], "birthday": request.form["Birthday"], "education": request.form["Education"]}
+        if request.form["Membership"] == "Boss":
+            data["Membership"] = 1
+        else:
+            data["Membership"] = 2
         print(data)
         connection=dbapi2.connect(url)
         cursor = connection.cursor()
-        statement = "INSERT INTO USERACCOUNT (lastEntry, username, password, joinedDate, securityAnswer) VALUES (%s, %s, %s, %s, %s);"
-        cursor.execute(statement, (data["lastEntry"], data['username'], data["password"], data["joinedDate"], data["securityAnswer"]))
+        statement = "INSERT INTO PERSON (name, surname, birthDay, educationLevel, gender) VALUES (%s, %s, %s, %s, %s);"
+        cursor.execute(statement, (data["name"], data['surname'], data["birthday"], data["education"], data["gender"]))
+        statement = "INSERT INTO USERACCOUNT (person, lastEntry, username, password, joinedDate, securityAnswer, membershiptype) VALUES ((SELECT PERSON.id FROM PERSON WHERE (name=%s and surname=%s and birthDay=%s and educationLevel=%s and gender=%s)), %s, %s, %s, %s, %s, %s);"
+        cursor.execute(statement, (data["name"], data['surname'], data["birthday"], data["education"], data["gender"], data["lastEntry"], data['username'], data["password"], data["joinedDate"], data["securityAnswer"], data["Membership"]))
         connection.commit()
         session['username'] = data["username"]
         session['password'] = data["password"]
