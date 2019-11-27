@@ -15,10 +15,20 @@
                 Capital City:<input type="text" name="capital" class="input" maxlength="30"><br>
                 Language(long)<input type="text" name="Llong" class="input" maxlength="20"><br>
                 Language(short)<input type="text" name="Lshort" class="input" maLanguexlength="3"><br>
-                Area<input type="text" name="area" min=0 class="input" placeholder="In metersquares"><br>
-                GDP<input type="number" name="gpd"  min=0 step="0.01" class="input" placeholder="In Millions"><br>
-                Population<input type="number" name="population" min=0 class="input"><br>
-                Capital Coordinates: Longitude <input type="number" name="lon" min="-180" max="180" step="0.0000001"> Latitude <input type="number" name="lat" min="-90" max="90" step="0.0000001"><br>
+                Area<input type="text" name="area" min=0 class="input" value="0"><p>Kilometersquares</p><br>
+                GDP<input type="number" name="gdp"  min=0 step="0.01" class="input" value="0">
+                <select name="exp" id="sel2">
+                    <option value="1000">Thousand</option>
+                    <option value="1000000">Million</option>
+                    <option value="1000000000">Billion</option>
+                </select><br>
+                Population<input type="number" name="population" min=0 class="input" value="0">
+                <select name="exp2" id="sel3">
+                        <option value="1000">Thousand</option>
+                        <option value="1000000">Million</option>
+                        <option value="1000000000">Billion</option>
+                    </select><br>
+                Capital Coordinates (both coordianates needs to be present): Longitude <input type="number" name="lon" min="-180" max="180" step="0.0000001"> Latitude <input type="number" name="lat" min="-90" max="90" step="0.0000001"><br>
                 {% if tz %}
                 <label for="sel1">Timezone</label>
                 <select name="tz" class="form-control" id="sel1"> 
