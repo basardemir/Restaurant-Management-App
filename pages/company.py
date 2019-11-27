@@ -32,7 +32,7 @@ def company_add_page():
   )
 
 def company_delete_page(company_key):
-  
+  delete_company(company_key)
   return render_template("/companies/delete.html")
 
 def company_update_page(company_key):
@@ -50,6 +50,7 @@ def company_update_page(company_key):
       company.data["type"],
       company_key
     )
+    update_company(company_info)
     return redirect( url_for("company_details_page", company_key = company_key) )
   
   company.name.data             = _company["name"]
@@ -66,7 +67,6 @@ def company_update_page(company_key):
   )
 
 def company_details_page(company_key):
-  print(company_key)
   company = get_company(company_key)
   if(company is None):
     abort(404)
