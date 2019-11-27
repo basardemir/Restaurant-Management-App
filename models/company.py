@@ -1,3 +1,4 @@
+import os
 DB_URL = os.getenv("DATABASE_URL")
 
 import psycopg2 as dbapi2
