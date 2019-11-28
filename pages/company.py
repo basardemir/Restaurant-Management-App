@@ -32,11 +32,15 @@ def company_add_page():
   )
 
 def company_delete_page(company_key):
-  delete_company(company_key)
+  if request.method == "POST":
+    delete_company(company_key)
+    return redirect(url_for("companies_page"))
   return render_template("/companies/delete.html")
 
 def company_update_page(company_key):
   _company = get_company(company_key)
+  if(_company is None):
+    abort(404)
   company = CompanyForm()
 
   if company.validate_on_submit():
@@ -51,6 +55,7 @@ def company_update_page(company_key):
       company_key
     )
     update_company(company_info)
+
     return redirect( url_for("company_details_page", company_key = company_key) )
   
   company.name.data             = _company["name"]
@@ -60,7 +65,7 @@ def company_update_page(company_key):
   company.abbrevation.data      = _company["abbrevation"]
   company.foundation_date.data  = _company["foundation_date"]
   company.type.data             = _company["type"] if _company["type"] is not None else -1
-  print(_company["type"])
+
   return render_template(
     "/companies/update.html",
     form = company

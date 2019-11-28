@@ -63,8 +63,8 @@
                             <a class="nav-link" href="{{url_for('food_value_page', food_id = food_id)}}">Food Values</a>
                             <a class="nav-link text-secondary" href="#">Add to Cart</a>
                             {% if userType %}
-                            <a class="nav-link text-success " href="#" >Update</a>
-                            <a class="nav-link text-danger " href="#" >Delete</a>
+                            <a class="nav-link text-success " href="{{url_for('update_meal_page', food_id = food_id)}}" >Update</a>
+                            <a class="nav-link text-danger " href="{{url_for('delete_meal_page', food_id = food_id)}}" >Delete</a>
                             {% endif %}
                         </nav>                          
                     </td>
@@ -79,6 +79,5 @@
     </nav>  
     {% endif %}
 </div>
-    
 
 {%endblock%}
