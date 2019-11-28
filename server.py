@@ -8,11 +8,21 @@ app.config['SECRET_KEY'] = 'db2019'
 
 app.add_url_rule("/", view_func = views.home_page)
 
+## Company
 app.add_url_rule("/companies", view_func = views.companies_page, methods=["GET", "POST"])
 app.add_url_rule("/companies/create", view_func = views.company_add_page, methods=["GET", "POST"])
 app.add_url_rule("/companies/<int:company_key>/details", view_func = views.company_details_page, methods=["GET", "POST"])
 app.add_url_rule("/companies/<int:company_key>/edit", view_func = views.company_update_page, methods=["GET", "POST"])
 app.add_url_rule("/companies/<int:company_key>/delete", view_func = views.company_delete_page, methods=["GET", "POST"])
+
+## Card
+app.add_url_rule("/cards", view_func = views.cards_page, methods=["GET", "POST"])
+app.add_url_rule("/cards/create", view_func = views.card_add_page, methods=["GET", "POST"])
+app.add_url_rule("/cards/<int:card_key>/details", view_func = views.card_details_page, methods=["GET", "POST"])
+app.add_url_rule("/cards/<int:card_key>/edit", view_func = views.card_update_page, methods=["GET", "POST"])
+app.add_url_rule("/cards/<int:card_key>/delete", view_func = views.card_delete_page, methods=["GET", "POST"])
+
+
 
 ##COUNTRY TABLE
 app.add_url_rule("/countries", view_func=views.country_page, methods=["GET", "POST"]) ##Enterance Page to country table

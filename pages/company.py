@@ -13,16 +13,20 @@ def company_add_page():
   
   company = CompanyForm()
   if company.validate_on_submit():
-    company_info = (
-      company.data["name"],
-      company.data["information"],
-      company.data["mission"],
-      company.data["vision"],
-      company.data["abbrevation"],
-      company.data["foundation_date"],
-      company.data["type"]
-    )
     
+    user_key    = -1
+    
+    company_info = (
+      company.company["name"].data,
+      company.company["information"].data,
+      company.company["mission"].data,
+      company.company["vision"].data,
+      company.company["abbrevation"].data,
+      company.company["foundation_date"].data,
+      company.company["type"].data
+
+    )
+
     company_key = add_company(company_info)
     return redirect(url_for("company_details_page", company_key = company_key))
   
@@ -45,26 +49,26 @@ def company_update_page(company_key):
 
   if company.validate_on_submit():
     company_info = (
-      company.data["name"],
-      company.data["information"],
-      company.data["mission"],
-      company.data["vision"],
-      company.data["abbrevation"],
-      company.data["foundation_date"],
-      company.data["type"],
+      company.company["name"].data,
+      company.company["information"].data,
+      company.company["mission"].data,
+      company.company["vision"].data,
+      company.company["abbrevation"].data,
+      company.company["foundation_date"].data,
+      company.company["type"].data,
       company_key
     )
     update_company(company_info)
 
     return redirect( url_for("company_details_page", company_key = company_key) )
-  
-  company.name.data             = _company["name"]
-  company.information.data      = _company["information"]
-  company.mission.data          = _company["mission"]
-  company.vision.data           = _company["vision"]
-  company.abbrevation.data      = _company["abbrevation"]
-  company.foundation_date.data  = _company["foundation_date"]
-  company.type.data             = _company["type"] if _company["type"] is not None else -1
+
+  company.company["name"].data             = _company["name"]
+  company.company["information"].data      = _company["information"]
+  company.company["mission"].data          = _company["mission"]
+  company.company["vision"].data           = _company["vision"]
+  company.company["abbrevation"].data      = _company["abbrevation"]
+  company.company["foundation_date"].data  = _company["foundation_date"]
+  company.company["type"].data             = _company["type"] if _company["type"] is not None else -1
 
   return render_template(
     "/companies/update.html",

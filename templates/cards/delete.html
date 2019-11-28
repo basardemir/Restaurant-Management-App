@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+<div class="container">
+  
+  <form action="{{ request.path }}" method="POST">
+    <h3>Gerçekten silmek istiyor musunuz?</h3>
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a href="{{ url_for('cards_page') }}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+
+{% endblock %}

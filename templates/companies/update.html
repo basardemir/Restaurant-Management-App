@@ -1,122 +1,25 @@
 {% extends "layout.html" %}
-{% block title %} Companies / Update {% endblock %}
+{% block title %} Companies / Create {% endblock %}
 {% block content %}
+
 <div class="container">
-  <h1 class="display-4">Update <small class="text-muted font-italic">company</small></h1>
+  <h1 class="display-4">Create <small class="text-muted font-italic">company</small></h1>
   <hr>
   <form method="post" action="{{ request.path }}" >
-
     {{ form.csrf_token }}
-
-    <div class="form-row">
-      <div class="col-6 ">
-        <div class="form-group">
-            {{ form.name.label }}
-            {% if form.name.errors %}
-              {{ form.name(required=True, class='form-control is-invalid') }}
-            {% else %}
-              {{ form.name(required=True, class='form-control') }}
-            {% endif %}
-            
-            {% for error in form.name.errors %}
-            <div class="invalid-feedback">
-                {{ error }}
-            </div>
-            {% endfor %}
+    
+    {% for field, msg in form.errors.items() %}
+      {% for i in msg: %}
+        <div class="alert alert-warning" role="alert">
+          <strong>{{ msg[i][0] }}</strong>
         </div>
-        <div class="form-group">
-          {{ form.information.label }}
-          {% if form.information.errors %}
-            {{ form.information(required=True, class='form-control is-invalid') }}
-          {% else %}
-            {{ form.information(required=True, class='form-control') }}
-          {% endif %}
-          
-          {% for error in form.information.errors %}
-          <div class="invalid-feedback">
-              {{ error }}
-          </div>
-          {% endfor %}
-
-        </div>    
-        <div class="form-group">
-          {{ form.mission.label }}
-          {% if form.mission.errors %}
-            {{ form.mission(required=True, class='form-control is-invalid') }}
-          {% else %}
-            {{ form.mission(required=True, class='form-control') }}
-          {% endif %}
-          
-          {% for error in form.mission.errors %}
-          <div class="invalid-feedback">
-              {{ error }}
-          </div>
-          {% endfor %}
-        </div>
-        <div class="form-group">
-          {{ form.vision.label }}
-          {% if form.vision.errors %}
-            {{ form.vision(required=True, class='form-control is-invalid') }}
-          {% else %}
-            {{ form.vision(required=True, class='form-control') }}
-          {% endif %}
-          
-          {% for error in form.vision.errors %}
-          <div class="invalid-feedback">
-              {{ error }}
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="form-group">
-          {{ form.abbrevation.label }}
-          {% if form.abbrevation.errors %}
-            {{ form.abbrevation(required=True, class='form-control is-invalid') }}
-          {% else %}
-            {{ form.abbrevation(required=True, class='form-control') }}
-          {% endif %}
-          
-          {% for error in form.abbrevation.errors %}
-          <div class="invalid-feedback">
-              {{ error }}
-          </div>
-          {% endfor %}
-        </div>
-        <div class="form-group">
-          {{ form.foundation_date.label }}
-          {% if form.foundation_date.errors %}
-            {{ form.foundation_date(required=True, class='form-control is-invalid') }}
-          {% else %}
-            {{ form.foundation_date(required=True, class='form-control') }}
-          {% endif %}
-          
-          {% for error in form.foundation_date.errors %}
-          <div class="invalid-feedback">
-              {{ error }}
-          </div>
-          {% endfor %}
-
-        </div>
-        <div class="form-group">
-          {{ form.type.label }}
-          {% if form.type.errors %}
-            {{ form.type(required=True, class='form-control is-invalid') }}
-          {% else %}
-            {{ form.type(required=True, class='form-control') }}
-          {% endif %}
-          
-          {% for error in form.type.errors %}
-          <div class="invalid-feedback">
-              {{ error }}
-          </div>
-          {% endfor %}
-        </div>
-        <div class="float-right">
-          <button type="submit" class="btn btn-primary">Submit</button>
-          <a href="{{ url_for('companies_page') }}" class="btn btn-secondary">Cancel</a>
-        </div>
-      </div>
+      {% endfor %}
+    {% endfor %}
+    
+    {{ form.company( class_ = "mt-5 table table-hover") }}
+    <div class="text-center">
+      {{ form.submit }}
+      <a href="{{ url_for('companies_page') }}" class="btn btn-secondary">Cancel</a>
     </div>
   </form>
 </div>
