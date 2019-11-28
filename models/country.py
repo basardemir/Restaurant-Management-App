@@ -16,7 +16,7 @@ def get_results(cursor):
     res = []
     for i in data:
         res.append(i.values())
-    print(i)
+    cursor.close()
     return (res) #2d array 
 
 def get_all_countries():
@@ -52,19 +52,59 @@ def get_country(country_key):
             driving_lane,
             capital_city,
             coordinates.latitude,
-            coordinates.longitude
+            coordinates.longitude,
+            timezone.timezone_id
             from (((country join properties on (country.properties=properties.prop_id))
             join timezone on (country.timezone=timezone.timezone_id))
-            join coordinates on (country.capital_coordinates=coordinates.coord_id));"""
-            cursor.execute(query, country_key)
+            join coordinates on (country.capital_coordinates=coordinates.coord_id)) where country_id = %s;"""
+            cursor.execute(query, (country_key,)) #expecting a tuple for second argument
             return (get_results(cursor))
 
 def add_country(country):
-    print(country)
+    
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor() as cursor:
+            query = """INSERT INTO PROPERTIES (AREA, GDP, POPULATION) VALUES (%s,%s,%s) RETURNING PROP_ID"""
+            cursor.execute(query, (int(country[6]), float(country[7]*int(country[8])), float(country[9]*int(country[10]))))
+            prop_id = cursor.fetchall()[0][0]
+            connection.commit()
+            #print(query % (int(country[6]), float(country[7]*int(country[8])), float(country[9]*int(country[10]))))
+            #print(prop_id[0][0]) Prop_id is [(8,0)] a array of tuples with key at first value
+            query = """INSERT INTO COORDINATES (LONGITUDE, LATITUDE) VALUES (%s,%s) RETURNING COORD_ID"""
+            cursor.execute(query,(float(country[11]),float(country[12])))
+            coord_id = cursor.fetchall()[0][0]
+            connection.commit()
+            query = """INSERT INTO COUNTRY
+            (timezone,
+            properties,
+            capital_coordinates,
+            name,
+            country_code,
+            driving_lane,
+            capital_city,
+            language_long,
+            language_short) 
+            values (%s,%s,%s,%s,%s,%s,%s,%s,%s) RETURNING country_id"""
+            #print(query % (22,prop_id,coord_id,country[0],country[1],country[2],country[3],country[4],country[5]))
+            cursor.execute(query,(int(country[13]),prop_id,coord_id,country[0],country[1],country[2],country[3],country[4],country[5]))
+            country_id = cursor.fetchall()[0][0]
+            connection.commit()
+            cursor.close()
+    return country_id
 
 def update_country(country):
     print(country)
 
-def delete_country(country):
-    print(country)
+def delete_country(country_key):
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor() as cursor:
+            query = "DELETE FROM COUNTRY WHERE COUNTRY_ID = %s"
+            try:
+                cursor.execute(query, (country_key,))
+            except:
+                print("No country with given Id id found. No record was deleted.")
+                cursor.close()
+                return
+            connection.commit()
+            cursor.close()
 

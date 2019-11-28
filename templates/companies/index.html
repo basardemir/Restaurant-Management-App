@@ -11,7 +11,7 @@
   <form action="" method="POST" name="company_list">
     <div class="row">
       <div class="column mr-4">
-        <a href="{{ url_for('company_add_page') }}" class="btn btn-primary" target="_self" title="Add Company">Add Company</a>
+        <a href="{{ url_for('company_add_page') }}" class="btn btn-primary" title="Add Company">Add Company</a>
       </div>
     </div>
     {% if companies %}
@@ -41,14 +41,14 @@
           <td>{{ i['foundation_date'] }}</td>
           <td>{{ i['type'] }}</td>
           <td>
-            <a href="{# url_for('user_details_page', user_key = i['user_id']) #}" class="btn btn-outline-success" target="_blank">Founder</a>
+            <a href="{# url_for('user_details_page', user_key = i['user_id']) #}" class="btn btn-outline-success">Founder</a>
           </td>
           <td>
-            <a href="{# url_for('contact_details_page', contact_key = contact_id) #}" class="btn btn-outline-info" target="_blank">Contact </a>
+            <a href="{# url_for('contact_details_page', contact_key = contact_id) #}" class="btn btn-outline-info">Contact </a>
           </td>
           <td>
-            <a href="{{ url_for('company_update_page', company_key = i['company_id']) }}" class="btn btn-warning" target="_blank">Update</a>
-            <a href="{{ url_for('company_delete_page', company_key = i['company_id']) }}" class="btn btn-danger" target="_blank">Delete</a>
+            <a href="{{ url_for('company_update_page', company_key = i['company_id']) }}" class="btn btn-warning">Update</a>
+            <a href="{{ url_for('company_delete_page', company_key = i['company_id']) }}" class="btn btn-danger">Delete</a>
           </td>
         </tr>
         {% endfor %}
@@ -56,7 +56,7 @@
     </table>
     <div class="row">
       <div class="column mr-4">
-        <a href="{{ url_for('company_add_page') }}" class="btn btn-primary" target="_self" title="Add Company">Add Company</a>
+        <a href="{{ url_for('company_add_page') }}" class="btn btn-primary" title="Add Company">Add Company</a>
       </div>
     </div>
   </form>

@@ -62,5 +62,5 @@ def delete_company(company_key):
   with dbapi2.connect(DB_URL) as connection:
     with connection.cursor() as cursor:
       query = "delete from company where company_id = %s;"
-      cursor.execute( query, company_key )
+      cursor.execute( query, (company_key,) )
       connection.commit()
