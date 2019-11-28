@@ -6,10 +6,12 @@
 <div class="container-fluid">
 <div class="column mr-4">
 	<a href="{{ url_for('country_add_page') }}" class="btn btn-primary" target="_self" title="Add">Add Entry</a>
+	
 </div>
 
 {% if countries %}
 	<form action="" method="post" name="country_list">
+		<button type="submit" class="btn btn-primary">Delete Selected</button>
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -39,7 +41,7 @@
 					<td>
 					<nav class="nav">
 						<a class="nav-link text-success " href="{{ url_for('country_update_page', country_key=key) }}" >Update</a>
-						<a class="nav-link text-danger " href="#" >Delete</a>
+						<a class="nav-link text-danger " href="{{ url_for('country_delete_page', country_key=key) }}" >Delete</a>
 					</nav>
 					</td>
 				</tr>

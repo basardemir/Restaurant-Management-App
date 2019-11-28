@@ -47,8 +47,9 @@
                 <a href="/users/create" class="btn btn-outline-info">Sign Up</a>
               </form>
             {% else %}
-            <form class="form-inline my-2 my-lg-0">
-              <a href="/users/logout" class="btn btn-outline-success mr-2">Logout</a>
+            <form action="{{url_for('logout_page')}}" method="post" class="form-inline my-2 my-lg-0">
+              <a href="/users/profile" class="btn btn-outline-info">Profile: {{ session["username"] }}</a>
+              <button type="submit" class="btn btn-outline-success mr-2">Logout</a>
             </form>
             {% endif %}
           </div>

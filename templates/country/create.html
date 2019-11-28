@@ -2,48 +2,166 @@
 {% block title %}Add Country{% endblock %}
 
 {% block content %}
-<h1 class="title">Add Country</h1>
-<br>
-    <form action="" method="post" name="country_add">
-        <div class="field">
-            <div class="control">
+<h3>New Country</h3>
+<form method="post" action="{{ request.path }}">
+    {{ form.csrf_token }}
+    <div class="row">
+        <div class="col">
+        {{ form.name.label }}
+        {% if form.name.errors %}
+            {{ form.name(required=True, class='form-control is-invalid') }}
+        {% else %}
+            {{ form.name(required=True, class='form-control') }}
+        {% endif %}
+        
+        {% for error in form.name.errors %}
+        <div class="invalid-feedback">
+            {{ error }}
+        </div>
+        {% endfor %}
+        </div>
+        <div class="col">
+                {{ form.short_code.label }}
+                {% if form.short_code.errors %}
+                    {{ form.short_code(required=True, class='form-control is-invalid') }}
+                {% else %}
+                    {{ form.short_code(required=True, class='form-control') }}
+                {% endif %}
                 
-                Country Name:<input type="text" name="name" class="input" required="required" maxlength="30"> <br>
-                Country Short Code:<input type="text" name="code" class="input" required="required" maxlength="2"> <br>
-                <input type="radio" name="lane" value="left" class="input" checked> Left 
-                <input type="radio" name="lane" value="right" class="input" > Right <br>
-                Capital City:<input type="text" name="capital" class="input" maxlength="30"><br>
-                Language(long)<input type="text" name="Llong" class="input" maxlength="20"><br>
-                Language(short)<input type="text" name="Lshort" class="input" maLanguexlength="3"><br>
-                Area<input type="text" name="area" min=0 class="input" value="0"><p>Kilometersquares</p><br>
-                GDP<input type="number" name="gdp"  min=0 step="0.01" class="input" value="0">
-                <select name="exp" id="sel2">
-                    <option value="1000">Thousand</option>
-                    <option value="1000000">Million</option>
-                    <option value="1000000000">Billion</option>
-                </select><br>
-                Population<input type="number" name="population" min=0 class="input" value="0">
-                <select name="exp2" id="sel3">
-                        <option value="1000">Thousand</option>
-                        <option value="1000000">Million</option>
-                        <option value="1000000000">Billion</option>
-                    </select><br>
-                Capital Coordinates (both coordianates needs to be present): Longitude <input type="number" name="lon" min="-180" max="180" step="0.0000001"> Latitude <input type="number" name="lat" min="-90" max="90" step="0.0000001"><br>
-                {% if tz %}
-                <label for="sel1">Timezone</label>
-                <select name="tz" class="form-control" id="sel1"> 
-                    {% for time_id, time in tz %}
-                    <option value ="{{ time_id }}">{{ time }}</option>
-                    {% endfor %}
-                </select>
-                {% endif %}    
+                {% for error in form.short_code.errors %}
+                <div class="invalid-feedback">
+                    {{ error }}
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col">
+                {{ form.lane.label }}
+                {{ form.lane}}
             </div>
         </div>
-
-        <div class="field is-grouped">
-            <div class="control">
-              <button class="button is-primary is-small">Save</button>
+        <div class="row">
+            <div class="col">
+                {{ form.Capital_City.label }}
+                {% if form.Capital_City.errors %}
+                    {{ form.Capital_City(required=True, class='form-control is-invalid') }}
+                {% else %}
+                    {{ form.Capital_City(required=True, class='form-control') }}
+                {% endif %}
+                
+                {% for error in form.Capital_City.errors %}
+                <div class="invalid-feedback">
+                    {{ error }}
+                </div>
+                {% endfor %}
             </div>
-          </div>
-    </form>
+            <div class="col">
+                {{ form.Language_Long.label }}
+                {% if form.Language_Long.errors %}
+                    {{ form.Language_Long(required=True, class='form-control is-invalid') }}
+                {% else %}
+                    {{ form.Language_Long(required=True, class='form-control') }}
+                {% endif %}
+                
+                {% for error in form.Language_Long.errors %}
+                <div class="invalid-feedback">
+                    {{ error }}
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col">
+                {{ form.Language_Short.label }}
+                {% if form.Language_Short.errors %}
+                    {{ form.Language_Short(required=True, class='form-control is-invalid') }}
+                {% else %}
+                    {{ form.Language_Short(required=True, class='form-control') }}
+                {% endif %}
+                
+                {% for error in form.Language_Short.errors %}
+                <div class="invalid-feedback">
+                    {{ error }}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                {{ form.Area.label }}
+                {% if form.Area.errors %}
+                    {{ form.Area(required=True, class='form-control is-invalid') }}
+                {% else %}
+                    {{ form.Area(required=True, class='form-control') }}
+                {% endif %}
+                
+                {% for error in form.Area.errors %}
+                <div class="invalid-feedback">
+                    {{ error }}
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col">
+                {{ form.GDP.label }}
+                {% if form.GDP.errors %}
+                    {{ form.GDP(required=True, class='form-control is-invalid') }}
+                {% else %}
+                    {{ form.GDP(required=True, class='form-control') }}
+                {% endif %}
+                {{ form.GDP_multiplier(required=True, class='form-control') }}
+                {% for error in form.GDP.errors %}
+                <div class="invalid-feedback">
+                    {{ error }}
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col">
+                {{ form.Population.label }}
+                {% if form.Population.errors %}
+                    {{ form.Population(required=True, class='form-control is-invalid') }}
+                {% else %}
+                    {{ form.Population(required=True, class='form-control') }}
+                {% endif %}
+                {{ form.Population_multiplier(required=True, class='form-control') }}
+                {% for error in form.Population.errors %}
+                <div class="invalid-feedback">
+                    {{ error }}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                {{ form.Longitude.label }}
+                {% if form.Longitude.errors %}
+                    {{ form.Longitude(required=True, class='form-control is-invalid') }}
+                {% else %}
+                    {{ form.Longitude(required=True, class='form-control') }}
+                {% endif %}
+                
+                {% for error in form.Longitude.errors %}
+                <div class="invalid-feedback">
+                    {{ error }}
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col">
+                {{ form.Latitude.label }}
+                {% if form.Latitude.errors %}
+                    {{ form.Latitude(required=True, class='form-control is-invalid') }}
+                {% else %}
+                    {{ form.Latitude(required=True, class='form-control') }}
+                {% endif %}
+                
+                {% for error in form.Latitude.errors %}
+                <div class="invalid-feedback">
+                    {{ error }}
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col">
+                {{ form.timezone.label }}
+                {{ form.timezone(class = "form-control") }}
+            </div>
+        </div>
+        <button type="submit">Submit</button>
+</form>
+
 {% endblock %}
