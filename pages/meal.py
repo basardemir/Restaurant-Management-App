@@ -24,7 +24,6 @@ def meal_page():
         return render_template("/meals/meals.html", mealss=meals, userType=is_Manager, f_table = food_table)
     else:
         search_dict = request.form.to_dict()
-        print(search_dict)
         if search_dict['searched_meal_name']:
             s_meal_name = search_dict['searched_meal_name']
             s_meal_name += "%"
@@ -43,7 +42,6 @@ def meal_page():
         for s_m in searched_meals:
             statement += " or type='"+s_m+"'"
         statement += ";"
-        print(statement)
         cursor.execute(statement, {"meal_name": s_meal_name})
         food_table = cursor.fetchall()
         cursor.close()
@@ -104,4 +102,12 @@ def update_meal_page(food_id):
         food_properties = list(food_properties[0])
         connection.commit()
         return render_template("/meals/add_meal.html", key=food_id, food_props=food_properties, meal_types = mealTypes)
+    else:
+        updated_elements = request.form.to_dict()
+        updated_elements = list(updated_elements.values())
+        vegan = int(updated_elements[4] == "Vegan")
+        statement ="update food set food_name=%(food_name)s, brand_name=%(brand_name)s, price=%(price)s, isVegan=%(isVegan)s, type=%(type)s where food_id = %(food_id)s;" 
+        cursor.execute(statement, {'food_name': updated_elements[0], 'brand_name': updated_elements[1], 'price':updated_elements[2], 'isVegan':vegan, 'type':updated_elements[3], 'food_id':food_id})
+        connection.commit()
+        return redirect(url_for("meal_page"))
 
