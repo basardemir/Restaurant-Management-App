@@ -11,13 +11,13 @@
                         <th></th>
                         <th>Country Name</th>
                         <th>Country Code</th>
-                        <th>Driving Lane</th>
-                        <th>Language(Long)</th>
-                        <th>Language(Short)</th>
-                        <th>Capital City</th>
                         <th>Area</th>
                         <th>Population</th>
                         <th>GDP</th>
+                        <th>Capital City</th>
+                        <th>Language(Long)</th>
+                        <th>Language(Short</th>
+                        <th>Driving Lane</th>
                         <th>Timezone</th>
                         <th>Lon</th>
                         <th>Lat</th>
@@ -25,7 +25,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				{% for key,name,pop,area,gdp,tz,ls,ll,cc,dl,cc2,lat,lon in country %}
+				{% for key,name,pop,area,gdp,tz,ls,ll,cc,dl,cc2,lat,lon,tz_id in country %}
 				<tr>
 					<td><label class="checkbox">
 						<input type="checkbox" name="country_keys" value=" {{ key }}">
@@ -46,7 +46,7 @@
 					<td>
 					<nav class="nav">
 						<a class="nav-link text-success " href="{{ url_for('country_update_page', country_key=key) }}" >Update</a>
-						<a class="nav-link text-danger " href="#" >Delete</a>
+						<a class="nav-link text-danger " href="{{ url_for('country_delete_page', country_key=key) }}" >Delete</a>
 					</nav>
 					</td>
 				</tr>

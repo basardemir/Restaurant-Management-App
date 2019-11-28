@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 
-import psycopg2 as dbapi2  ##temp for test purposes
+import psycopg2 as dbapi2  
 from .forms.country_form import CountryForm
 from models.country import *
 url="postgres://ivpallnyfezioy:075baf8e129b0d52dbd6d87dd3c774363b0b10b499921f821378ed7084bfc744@ec2-46-137-187-23.eu-west-1.compute.amazonaws.com:5432/dagmb1jla3rmdp"
@@ -18,46 +18,89 @@ def tz_page():
 	return render_template("/timezone/index.html", list = timezone)
 
 def country_page():
+	if request.method == "POST":
+		for i in request.form.getlist("country_keys"):
+			delete_country(i)
+	
 	country = get_all_countries()
 	return render_template("/country/details.html", countries = country)
 	
 def country_add_page():
-	cursor = makeConnection()
-	cursor.execute("select * from timezone")
-	timezone = cursor.fetchall()
-	cursor.close()
-	if request.method =='GET':
-		return render_template("/country/create.html", tz=timezone, value = None)
-	else:
-		#Form structure name,country code, diving lane, capital city, langugage long, langugage short, area, gdp, population, Longitude, latitude, timezone
-		lon = request.form["lon"]
-		lat = request.form["lat"]
-		area = request.form["area"]
-		gdp = request.form["gdp"]
-		popu = request.form["population"]
-		#country = {"name":None,"code":None,"lane":None,"capital":None,"Llong":None, "Lshort":None, "timezone":None}
-		
-		#country["name"] = request.form["name"]
-		#country["code"] = request.form["code"]
-		#country["lane"] = request.form["lane"]
-		#country["capital"] = request.form["capital"]
-		#country["Llong"] = request.form["Llong"]
-		#country["Lshort"] = request.form["Lshort"]
-		#country["timezone"] = request.form["timezone"]
+	country = CountryForm()
 
-		cursor = makeConnection()
-		if lat != None and lon != None:
-			cursor.execute("INSERT INTO COORDINATES (LONGITUDE, LATITUDE) VALUES (%s, %s)" % (lon, lat))
-		cursor.execute("INSERT INTO PROPERTIES (AREA, GDP, POPULATION) VALUES (%s, %s, %s)" % (area, gdp, popu))
-		cursor.close()
-		return redirect(url_for("country_page")) #redirect to country_read_page for the latest entry
+	country.validate()
+	print(country.errors)
+	if country.validate_on_submit():
+		print("Validated")
+		country_info = (
+			country.data["name"],
+			country.data["short_code"],
+			country.data["lane"],
+			country.data["Capital_City"],
+			country.data["Language_Long"],
+			country.data["Language_Short"],
+			country.data["Area"],
+			country.data["GDP"],
+			country.data["GDP_multiplier"],
+			country.data["Population"],
+			country.data["Population_multiplier"],
+			country.data["Longitude"],
+			country.data["Latitude"],
+			country.data["timezone"]
+		)
+		key = add_country(country_info)
+		country = get_country(key) 
+		return redirect(url_for("country_read_page",country_key=key))
+	
+	return render_template("/country/create.html", form=country)
 
 def country_read_page(country_key):
 	country = get_country(country_key)
-	for i in country:
-		print(i)
 	return render_template("country/read.html", country=country, key = country_key)
 
 def country_update_page(country_key):
+	_country = get_country(country_key)
+	form = CountryForm()
 	
-	return render_template("country/update.html", key=country_key)
+	if form.validate_on_submit():
+		country_info = (
+				form.data["name"],
+				form.data["short_code"],
+				form.data["lane"],
+				form.data["Capital_City"],
+				form.data["Language_Long"],
+				form.data["Language_Short"],
+				form.data["Area"],
+				form.data["GDP"],
+				form.data["GDP_multiplier"],
+				form.data["Population"],
+				form.data["Population_multiplier"],
+				form.data["Longitude"],
+				form.data["Latitude"],
+				form.data["timezone"]
+			)
+		update_country(country_info)
+		return redirect(url_for("country_read_page", country_key = country_key ))
+
+	for key,name,pop,area,gdp,tz,ls,ll,cc,dl,cc2,lat,lon,tz_id in _country:
+		print(key,name,pop,area,gdp,tz,ls,ll,cc,dl,cc2,lat,lon)
+		form.name.data = name
+		form.short_code.data = cc
+		form.lane.data = dl
+		form.Capital_City.data = cc2
+		form.Language_Long.data = ll
+		form.Language_Short.data = ls
+		form.Area.data = area
+		form.GDP.data = gdp / 1000
+		form.GDP_multiplier.data = "1000"
+		form.Population.data = pop / 1000
+		form.Population_multiplier.data = "1000"
+		form.Longitude.data = lon
+		form.Latitude.data = lat
+		form.timezone.data = str(tz_id)
+		
+	return render_template("country/update.html", form=form)
+
+def country_delete_page(country_key):
+	delete_country(country_key)
+	return(redirect(url_for("country_page")))
