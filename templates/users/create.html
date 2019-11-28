@@ -2,100 +2,18 @@
 {% block title %}Create A User{% endblock %}
 
 {% block content %}
-<h1 class="title">Create User</h1>
-<form action="" method="post" name="{{url_for('add_user_page')}}">
-    <div class="field">
-        <label for="username" class="label">Username</label>
-        <div class="control">
-            <input type="text" name="username" class="input" required="required"/>
-        </div>
-        <label for="password" class="label">Password</label>
-        <div class="control">
-            <input type="password" name="password" class="input" required="required"/>
-        </div>
-        <label for="name" class="label">Name</label>
-        <div>
-            <input required="required" type="text" class="form-control" name="name">
-        </div>
-        <label for="surname" class="label">Surname</label>
-        <div>
-            <input required="required" type="text" class="form-control" name="surname">
-        </div>
-        <label for="securityQuestion" class="label">What is your mother's maiden name?</label>
-        <div>
-            <input required="required" type="text" class="form-control" placeholder="Mother's Maiden Name" name="securityQuestion">
-        </div>
-        <label for="Gender">Gender</label>
-        <select class="form-control" name="Gender">
-          <option>Male</option>
-          <option>Female</option>
-          <option>Other</option>
-        </select>
-        <label for="Birthday" class="label">Birthday</label>
-        <div>
-            <input required="required" type="date" class="form-control" name="Birthday">
-        </div>
-        <label for="Membership">Membership Type</label>
-        <select class="form-control" name="Membership">
-          <option>Boss</option>
-          <option>Employee</option>
-        </select>
-        <label for="Education">Education Level</label>
-        <select class="form-control" name="Education">
-          <option>University</option>
-          <option>High School</option>
-          <option>Middle School</option>
-          <option>Primary School</option>
-        </select>
-        <label for="phoneNumber" class="label">Phone Number</label>
-        <div>
-            <input required="required" type="number" class="form-control" name="phoneNumber">
-        </div>
-        <label for="email" class="label">Email</label>
-        <div>
-            <input required="required" type="email" class="form-control" name="email">
-        </div>
-        <label for="fax" class="label">Fax</label>
-        <div>
-            <input required="required" type="text" class="form-control" name="fax">
-        </div>
-        <label for="homePhone" class="label">Home Phone</label>
-        <div>
-            <input required="required" type="number" class="form-control" name="homePhone">
-        </div>
-        <label for="workmail" class="label">Work Mail</label>
-        <div>
-            <input required="required" type="email" class="form-control" name="workmail">
-        </div>
-        <label for="facebook" class="label">Facebook</label>
-        <div>
-            <input required="required" type="url" class="form-control" name="facebook">
-        </div>
-        <label for="twitter" class="label">Twitter</label>
-        <div>
-            <input required="required" type="url" class="form-control" name="twitter">
-        </div>
-        <label for="instagram" class="label">Instagram</label>
-        <div>
-            <input required="required" type="url" class="form-control" name="instagram">
-        </div>
-        <label for="discord" class="label">Discord</label>
-        <div>
-            <input required="required" type="url" class="form-control" name="discord">
-        </div>
-        <label for="youtube" class="label">Youtube</label>
-        <div>
-            <input required="required" type="url" class="form-control" name="youtube">
-        </div>
-        <label for="googleplus" class="label">Google+</label>
-        <div>
-            <input  required="required" type="url" class="form-control" name="googleplus">
-        </div>
-    </div>
-    <div class="field is-grouped">
-        <div class="control">
-            <button class="button is-primary is-small">Join</button>
-        </div>
-    </div>
-</form>
+<div class="container">
+  <h1 class="title">Create User</h1>
+  <form method="post" action="{{ request.path }}" >
+
+    {{ form.csrf_token }}
+      <div class="field">
+        {{form.useraccount(class_="table") }}
+        {{form.person(class_="table") }}
+        {{form.contactinfo(class_="table") }}
+        {{form.socialmedia(class_="table") }}
+        {{form.submit()}}
+      </div>
+  </form>
+</div>
 {% endblock %}
