@@ -8,14 +8,14 @@ msg = "The field must be filled."
 
 class PersonForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired(message = msg),Length(max=25, message="Username cannot be longer than 25 characters")], render_kw={"class": "form-control"})
-    surname = StringField("Surname", validators=[DataRequired(message=msg), Length(max=2, message="Surname cannot be longer than 25 characters")], render_kw={"class": "form-control"})
+    surname = StringField("Surname", validators=[DataRequired(message=msg), Length(max=25, message="Surname cannot be longer than 25 characters")], render_kw={"class": "form-control"})
     birthday = DateField("Birthday", validators=[DataRequired(message=msg)], render_kw={"class": "form-control"})
     educationLevel = RadioField("Education Level", choices=[("University","University"), ("High School", "High School"), ("Middle School", "Middle School"), ("Primary School", "Primary School")], default="University", render_kw={"class": "list-group list-group-horizontal"})
     gender = RadioField("Gender", choices=[("Female", "Female"), ("Male", "Male"), ("Other", "Other")], default="Female", render_kw={"class": "list-group list-group-horizontal"})
 
 class UserAccountForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired(message = msg),Length(max=25, message="Username cannot be longer than 25 characters")], render_kw={"class": "form-control"})
-    password = PasswordField("Password", validators=[DataRequired(message=msg), Length(max=2, message="Password cannot be longer than 25 characters")], render_kw={"class": "form-control"})
+    password = PasswordField("Password", validators=[DataRequired(message=msg), Length(max=25, message="Password cannot be longer than 25 characters")], render_kw={"class": "form-control"})
     membershiptype = RadioField("Membership Type",choices=[("Boss","Boss"), ("Employee", "Employee")], default="Boss", render_kw={"class": "list-group list-group-horizontal"})
     securityAnswer = StringField("Security Answer", validators=[Length(max=30, message="Security answer cannot be longer than 30 characters")], render_kw={"class": "form-control", "placeholder": "What is your mother's maiden name?"})
 
@@ -40,3 +40,7 @@ class Combine(FlaskForm):
     contactinfo = FormField(ContactInfoForm)
     socialmedia = FormField(SocialMedia)
     submit = SubmitField("Sign Up", render_kw={"class": "btn btn-outline-info"})
+
+class CallSocialMedia(FlaskForm):
+    socialmedia = FormField(SocialMedia)
+    submit = SubmitField("Update", render_kw={"class": "btn btn-outline-info"})
