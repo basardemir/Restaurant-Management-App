@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% block title %}Edit User Account{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1 class="title">Edit User Account</h1>
+  <form method="post" action="{{ request.path }}" >
+
+    {{ form.csrf_token }}
+      <div class="field">
+        {{form.user(class_="table") }}
+        {{form.submit()}}
+      </div>
+  </form>
+</div>
+{% endblock %}

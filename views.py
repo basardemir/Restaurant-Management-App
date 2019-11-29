@@ -5,6 +5,7 @@ from pages.company import *
 from pages.country import *
 from pages.users import *
 from pages.meal import *
+from pages.card import *
 
 def home_page():
   today = dt.today()

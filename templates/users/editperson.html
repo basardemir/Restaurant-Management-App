@@ -1,17 +1,14 @@
 {% extends 'layout.html' %}
-{% block title %}Create A User{% endblock %}
+{% block title %}Edit Personal Info{% endblock %}
 
 {% block content %}
 <div class="container">
-  <h1 class="title">Create User</h1>
+  <h1 class="title">Edit Personal Info</h1>
   <form method="post" action="{{ request.path }}" >
 
     {{ form.csrf_token }}
       <div class="field">
-        {{form.useraccount(class_="table") }}
         {{form.person(class_="table") }}
-        {{form.contactinfo(class_="table") }}
-        {{form.socialmedia(class_="table") }}
         {{form.submit()}}
       </div>
   </form>

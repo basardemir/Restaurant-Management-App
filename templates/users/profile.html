@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+{% block title %}Users{% endblock %}
+
+{% block content %}
+<div class="container">
+    <p>Name: {{user["name"]}} - Surname: {{user["surname"]}} - Birthday: {{user["birthday"]}} - Education: {{user["education"]}} - Gender: {{user["gender"]}} - Joined Date: {{user["joineddate"]}}<br/>Username: {{user["username"]}} - Password: {{user["password"]}} - Last Entry: {{user["lastentry"]}} - Security Answer: {{user["securityanswer"]}} - Membership: {{user["membershiptype"]}}<br/>Facebook: {{user["facebook"]}} - Twitter: {{user["twitter"]}} - Instagram: {{user["instagram"]}}<br/>Discord: {{user["discord"]}} - Youtube: {{user["youtube"]}} - Google+: {{user["googleplus"]}}<br/>Phone Number: {{user["phonenumber"]}} - Email: {{user["email"]}} - Fax: {{user["fax"]}} - Home Phone: {{user["homephone"]}} - Work Mail: {{user["workmail"]}}</p>
+    <a href="/users/edituseraccount">Edit User Account</a>
+    <a href="/users/editperson">Edit Personal Info</a>
+    <a href="/users/editcontactinfo">Edit Contact Info</a>
+    <a href="/users/editsocialmedia">Edit Social Media</a>
+</div>
+{% endblock %}

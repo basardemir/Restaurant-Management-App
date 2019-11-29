@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block title %}Card Details{% endblock %}
+{% block content %}
+{% if card %}
+<div class="container">
+  <div class="row">
+    <ul  class="list-unstyled">
+      <li>{{ card["name"] }}</li>
+      <li>{{ card["information"] }}</li>
+      <li>{{ card["mission"] }}</li>
+      <li>{{ card["vision"] }}</li>
+      <li>{{ card["abbrevation"] }}</li>
+      <li>{{ card["foundation_date"] }}</li>
+      <li>{{ card["type"] }}</li>
+      <li>{{ card["contact_id"] }}</li>
+    </ul>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

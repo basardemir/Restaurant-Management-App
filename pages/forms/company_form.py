@@ -1,13 +1,13 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, SelectField, ValidationError
-from wtforms.validators import DataRequired, NumberRange, Optional
-from wtforms_components import IntegerField
-from wtforms.fields.html5 import DateTimeLocalField
+from wtforms import SubmitField, FormField, StringField, TextAreaField, SelectField, ValidationError
+from wtforms.validators import DataRequired
+from wtforms.fields.html5 import DateField
+#from wtforms.fields.html5 import DateTimeLocalField
 
 from datetime import datetime
 
-msgRequired = "The column must be filled."
-msgChosen   = "Must choose one of them."
+msgRequired = "The {} must be filled."
+msgChosen   = "Must choose one {} of them."
 
 typeChoices = [
   ('-1', 'Choose one!'), 
@@ -17,16 +17,52 @@ typeChoices = [
 
 def unselectedValid(form, field):
   if field.data == "-1":
-    raise ValidationError(msgChosen)    
+    raise ValidationError(msgChosen.format(field.name))    
+
+class Company(FlaskForm):
   
+  name = StringField(
+    "Name", 
+    validators = [ DataRequired(message = msgRequired.format("name") )],
+    render_kw = { "class" : "form-control" }
+  )
+
+  information = TextAreaField(
+    "Information", 
+    validators = [ DataRequired(message = msgRequired.format("Information")) ],
+    render_kw = { "class" : "form-control" }
+  )
+
+  mission = TextAreaField(
+    "Mission",
+    validators = [ DataRequired(message = msgRequired.format("Mission")) ],
+    render_kw = { "class" : "form-control" }
+  )
+
+  vision = TextAreaField(
+    "Vision",
+    validators = [ DataRequired(message = msgRequired.format("Vision")) ],
+    render_kw = { "class" : "form-control" }
+  )
+
+  abbrevation = StringField(
+    "Abbrevation",
+    validators = [ DataRequired(message = msgRequired.format("Abbrevation")) ],
+    render_kw = { "class" : "form-control" }
+  )
+
+  foundation_date = DateField(
+    'Founded Date', 
+    render_kw = { "class" : "form-control" }
+  )
+
+  type = SelectField(
+    "Type", 
+    choices = typeChoices, 
+    validators = [ unselectedValid ],
+    render_kw = { "class" : "form-control" }
+  )
 
 class CompanyForm(FlaskForm):
-  
-  name            = StringField("Name", validators = [ DataRequired(message = msgRequired) ])
-  information     = TextAreaField("Information", validators = [ DataRequired(message = msgRequired) ])
-  mission         = TextAreaField("Mission", validators = [ DataRequired(message = msgRequired) ])
-  vision          = TextAreaField("Vision",  validators = [ DataRequired(message = msgRequired) ])
-  abbrevation     = StringField("Abbrevation",  validators = [ DataRequired(message = msgRequired) ])
-  foundation_date = DateTimeLocalField('Founded Date', format='%Y-%m-%dT%H:%M')
-  type            = SelectField("Type", choices = typeChoices, validators = [unselectedValid])
-
+  company = FormField(Company)
+  submit  = SubmitField( render_kw = { "class" : "btn btn-primary"})
