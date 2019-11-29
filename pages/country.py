@@ -28,8 +28,6 @@ def country_page():
 def country_add_page():
 	country = CountryForm()
 
-	country.validate()
-	print(country.errors)
 	if country.validate_on_submit():
 		print("Validated")
 		country_info = (
@@ -64,25 +62,30 @@ def country_update_page(country_key):
 	
 	if form.validate_on_submit():
 		country_info = (
-				form.data["name"],
+				list(_country[0])[0], #Country_id print(list(_country[0])[0])
+				list(_country[0])[14], #coord_id
+				list(_country[0])[15], #prop_id
+				
+				form.data["name"],	#country[3]
 				form.data["short_code"],
 				form.data["lane"],
 				form.data["Capital_City"],
 				form.data["Language_Long"],
 				form.data["Language_Short"],
-				form.data["Area"],
-				form.data["GDP"],
-				form.data["GDP_multiplier"],
-				form.data["Population"],
-				form.data["Population_multiplier"],
-				form.data["Longitude"],
-				form.data["Latitude"],
-				form.data["timezone"]
+				int(form.data["Area"]),	#country[9]
+				float(form.data["GDP"]),
+				int(form.data["GDP_multiplier"]),
+				float(form.data["Population"]),
+				int(form.data["Population_multiplier"]),
+				float(form.data["Longitude"]), #country[14]
+				float(form.data["Latitude"]),
+				int(form.data["timezone"])
 			)
+		
 		update_country(country_info)
 		return redirect(url_for("country_read_page", country_key = country_key ))
 
-	for key,name,pop,area,gdp,tz,ls,ll,cc,dl,cc2,lat,lon,tz_id in _country:
+	for key,name,pop,area,gdp,tz,ls,ll,cc,dl,cc2,lat,lon,tz_id,cr_id,pr_id in _country:
 		print(key,name,pop,area,gdp,tz,ls,ll,cc,dl,cc2,lat,lon)
 		form.name.data = name
 		form.short_code.data = cc

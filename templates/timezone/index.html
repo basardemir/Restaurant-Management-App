@@ -2,20 +2,21 @@
 {% block title %}Time Zone List{% endblock %}
 {% block content %}
 <h1 class="title">Time Zones</h1>
+<br>
 {% if list %}
-		<table class="table is-striped is-fullwidth">
-			
+	<div class ="container-fluid">
+		<table class="table table-striped">
 			<tr>
-				<th>Timezone ID</th>
-				<th>Timezone</th>
+				<th scope="col">Timezone ID</th>
+				<th scope="col">Timezone</th>
 			</tr>
 			{% for tz_id, tz_name in list %}
 			<tr>
-				<td>{{ tz_id }}</td>
+				<th scope="row">{{ tz_id }}</th>
 				<td>{{ tz_name }}</td>
 			</tr>
 			{% endfor %}
 		</table>
-	</form>
+	</div>
 {% endif %}
 {% endblock %}
