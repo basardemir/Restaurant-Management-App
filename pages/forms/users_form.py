@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, FormField, PasswordField, StringField, TextAreaField, SelectField, RadioField, FloatField, IntegerField
-from wtforms.validators import DataRequired, NumberRange, Length
+from wtforms import  FileField, SubmitField, FormField, PasswordField, StringField, TextAreaField, SelectField, RadioField, FloatField, IntegerField
+from wtforms.validators import DataRequired, NumberRange, Length, Regexp
 from wtforms.fields.html5 import DateField
 
 msg = "The field must be filled."
@@ -34,12 +34,17 @@ class SocialMedia(FlaskForm):
     youtube = StringField("Youtube", validators=[DataRequired(message = msg),Length(max=60, message="Youtube cannot be longer than 60 characters")], render_kw={"class": "form-control"})
     googleplus = StringField("Google+", validators=[DataRequired(message = msg),Length(max=60, message="Google+ cannot be longer than 60 characters")], render_kw={"class": "form-control"})
 
+class PhotoForm(FlaskForm):
+    photo = FileField("Photo", validators=[DataRequired(message = msg)])
+
 class Combine(FlaskForm):
     person = FormField(PersonForm)
     useraccount = FormField(UserAccountForm)
     contactinfo = FormField(ContactInfoForm)
     socialmedia = FormField(SocialMedia)
+    photo = FormField(PhotoForm)
     submit = SubmitField("Sign Up", render_kw={"class": "btn btn-outline-info"})
+
 
 class CallSocialMedia(FlaskForm):
     socialmedia = FormField(SocialMedia)

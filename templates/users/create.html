@@ -4,7 +4,7 @@
 {% block content %}
 <div class="container">
   <h1 class="title">Create User</h1>
-  <form method="post" action="{{ request.path }}" >
+  <form method="post" action="{{ request.path }}" enctype="multipart/form-data" >
 
     {{ form.csrf_token }}
       <div class="field">
@@ -12,6 +12,7 @@
         {{form.person(class_="table") }}
         {{form.contactinfo(class_="table") }}
         {{form.socialmedia(class_="table") }}
+        {{form.photo(class_="table") }}
         {{form.submit()}}
       </div>
   </form>

@@ -22,11 +22,14 @@ def users_page():
 def add_user_page():
     print("Add a user")
     useraccount = Combine()
-    print(useraccount.data)
+#    print(useraccount.data)
+    #print(request.files["photo-photo"])
     if useraccount.validate_on_submit():
         print("POSTED:")
-        data = {"username": useraccount.data["useraccount"]['username'], "password": useraccount.data["useraccount"]["password"], "phoneNumber": useraccount.data["contactinfo"]["phoneNumber"], "email": useraccount.data["contactinfo"]["email"], "fax": useraccount.data["contactinfo"]["fax"], "homePhone": useraccount.data["contactinfo"]["homePhone"], "workmail": useraccount.data["contactinfo"]["workmail"], "lastEntry": datetime.datetime.now(), "joinedDate": datetime.datetime.now(), "securityAnswer": useraccount.data["useraccount"]["securityAnswer"], "membership": 0, "name": useraccount.data["person"]["name"], "surname": useraccount.data["person"]["surname"], "gender": useraccount.data["person"]["gender"], "birthday": useraccount.data["person"]["birthday"], "education": useraccount.data["person"]["educationLevel"], "facebook": useraccount.data["socialmedia"]["facebook"], "twitter": useraccount.data["socialmedia"]["twitter"], "instagram": useraccount.data["socialmedia"]["instagram"], "discord": useraccount.data["socialmedia"]["discord"], "youtube": useraccount.data["socialmedia"]["youtube"], "googleplus": useraccount.data["socialmedia"]["googleplus"]}
-        print(useraccount.data)
+        photopath = "/static/" + request.files["photo-photo"].filename
+        print(photopath)
+        data = {"photo": photopath, "username": useraccount.data["useraccount"]['username'], "password": useraccount.data["useraccount"]["password"], "phoneNumber": useraccount.data["contactinfo"]["phoneNumber"], "email": useraccount.data["contactinfo"]["email"], "fax": useraccount.data["contactinfo"]["fax"], "homePhone": useraccount.data["contactinfo"]["homePhone"], "workmail": useraccount.data["contactinfo"]["workmail"], "lastEntry": datetime.datetime.now(), "joinedDate": datetime.datetime.now(), "securityAnswer": useraccount.data["useraccount"]["securityAnswer"], "membership": 0, "name": useraccount.data["person"]["name"], "surname": useraccount.data["person"]["surname"], "gender": useraccount.data["person"]["gender"], "birthday": useraccount.data["person"]["birthday"], "education": useraccount.data["person"]["educationLevel"], "facebook": useraccount.data["socialmedia"]["facebook"], "twitter": useraccount.data["socialmedia"]["twitter"], "instagram": useraccount.data["socialmedia"]["instagram"], "discord": useraccount.data["socialmedia"]["discord"], "youtube": useraccount.data["socialmedia"]["youtube"], "googleplus": useraccount.data["socialmedia"]["googleplus"]}
+       # print(useraccount.data)
         if useraccount.data["useraccount"]["membershiptype"] == "Boss":
             data["membership"] = 1
         else:
@@ -34,6 +37,7 @@ def add_user_page():
         #print(data)
         if create_user(data):
             print("User created")
+            request.files["photo-photo"].save("./static/" + request.files["photo-photo"].filename)
             session['username'] = data["username"]
             session['password'] = data["password"]
             session['logged_in'] = True

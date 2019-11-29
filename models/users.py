@@ -8,8 +8,9 @@ import psycopg2.extras
 def check_if_user_exists(data):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor() as cursor:
-            statement = "SELECT * FROM USERACCOUNT WHERE username=%s;"
-            cursor.execute(statement, (data["password"]))
+            #Cannot add the parameter to the execute statement since dbapi2 gives 'TypeError: not all arguments converted during string formatting', this was the only solution
+            statement = "SELECT * FROM USERACCOUNT WHERE username='%s';" % data["password"]
+            cursor.execute(statement)
             connection.commit()
             userlist = cursor.fetchall()
             print('userlist')
@@ -22,7 +23,7 @@ def check_if_user_exists(data):
 def select_all_users_and_info():
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cursor:
-            statement = "SELECT * FROM SOCIALMEDIA FULL OUTER JOIN (SELECT * FROM CONTACTINFO FULL OUTER JOIN (SELECT * FROM PERSON FULL OUTER JOIN (SELECT * FROM USERACCOUNT JOIN MEMBERSHIP ON USERACCOUNT.membershiptype = MEMBERSHIP.id) AS T2 ON PERSON.id = T2.person) AS T3 ON CONTACTINFO.id = T3.contactinfo) AS T4 ON T4.socialmedia = SOCIALMEDIA.id;"
+            statement = "SELECT * FROM SOCIALMEDIA FULL OUTER JOIN (SELECT * FROM CONTACTINFO FULL OUTER JOIN (SELECT * FROM (SELECT PERSON.id, contactinfo, name, surname, birthday, educationlevel, gender, path FROM PERSON JOIN PHOTO ON PHOTO.id = PERSON.photo) AS PER FULL OUTER JOIN (SELECT * FROM USERACCOUNT JOIN MEMBERSHIP ON USERACCOUNT.membershiptype = MEMBERSHIP.id) AS T2 ON PER.id = T2.person) AS T3 ON CONTACTINFO.id = T3.contactinfo) AS T4 ON T4.socialmedia = SOCIALMEDIA.id;"
             cursor.execute(statement)
             connection.commit()
             userlist = cursor.fetchall()
@@ -61,12 +62,39 @@ def insert_contactinfo(data, socialmedia_id):
             id = cursor.fetchone()[0]
             print(id)
             return id
-    
-def insert_person(data, contactinfo_id):
+
+def check_if_photo_exists(data):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor() as cursor:
-            statement = "INSERT INTO PERSON (contactinfo, name, surname, birthDay, educationLevel, gender) VALUES (%s, %s, %s, %s, %s, %s) RETURNING id;"
-            cursor.execute(statement, (contactinfo_id, data["name"], data['surname'], data["birthday"], data["education"], data["gender"]))
+            #Cannot add the parameter to the execute statement since dbapi2 gives 'TypeError: not all arguments converted during string formatting', this was the only solution
+            statement = "SELECT * FROM PHOTO WHERE (path='%s');" % data["photo"]
+            cursor.execute(statement)
+            connection.commit()
+            photolist = cursor.fetchall()
+            print('photolist')
+            print(photolist)
+            if photolist == []:
+                return False
+            else:
+                return True
+
+def insert_photo(data):
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor() as cursor:
+            #Cannot add the parameter to the execute statement since dbapi2 gives 'TypeError: not all arguments converted during string formatting', this was the only solution
+            statement = "INSERT INTO PHOTO (path) VALUES ('%s') RETURNING id;" % data["photo"]
+            cursor.execute(statement)
+            connection.commit()
+            print("Added photo")
+            id = cursor.fetchone()[0]
+            print(id)
+            return id
+    
+def insert_person(data, contactinfo_id, photo_id):
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor() as cursor:
+            statement = "INSERT INTO PERSON (contactinfo, photo, name, surname, birthDay, educationLevel, gender) VALUES (%s, %s, %s, %s, %s, %s, %s) RETURNING id;"
+            cursor.execute(statement, (contactinfo_id, photo_id, data["name"], data['surname'], data["birthday"], data["education"], data["gender"]))
             connection.commit()
             print("Added person")
             id = cursor.fetchone()[0]
@@ -89,9 +117,10 @@ def create_user(data):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor() as cursor:
             if check_if_user_exists(data) == False:
+                photoid = insert_photo(data)
                 id = insert_socialmedia(data)
                 id = insert_contactinfo(data, id)
-                id = insert_person(data, id)
+                id = insert_person(data, id, photoid)
                 id = insert_useraccount(data, id)
                 connection.commit()
                 print("User created")

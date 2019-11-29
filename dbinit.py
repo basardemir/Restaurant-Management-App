@@ -93,8 +93,8 @@ INIT_STATEMENTS = [
         fax VARCHAR(30), 
         homePhone VARCHAR(50), 
         workmail VARCHAR(50),
-        FOREIGN KEY (socialmedia) REFERENCES SOCIALMEDIA(id) on delete cascade on update cascade,
-        FOREIGN KEY (location) REFERENCES LOCATION(LOCATION_ID) on delete cascade on update cascade
+        FOREIGN KEY (socialmedia) REFERENCES SOCIALMEDIA(id) on delete set null on update set null,
+        FOREIGN KEY (location) REFERENCES LOCATION(LOCATION_ID) on delete set null on update set null
     );""",
     """CREATE TABLE IF NOT EXISTS PERSON (
         id SERIAL PRIMARY KEY, 
@@ -105,8 +105,8 @@ INIT_STATEMENTS = [
         birthDay DATE, 
         educationLevel VARCHAR(50), 
         gender VARCHAR(20),
-        FOREIGN KEY (contactinfo) REFERENCES CONTACTINFO(id) on delete cascade on update cascade,
-        FOREIGN KEY (photo) REFERENCES PHOTO(id) on delete cascade on update cascade
+        FOREIGN KEY (contactinfo) REFERENCES CONTACTINFO(id) on delete set null on update set null,
+        FOREIGN KEY (photo) REFERENCES PHOTO(id) on delete set null on update set null
     );""",
 		"""CREATE TABLE IF NOT EXISTS USERACCOUNT (
         id SERIAL PRIMARY KEY, 
@@ -117,8 +117,8 @@ INIT_STATEMENTS = [
         password VARCHAR(25), 
         joinedDate DATE, 
         securityAnswer VARCHAR(30),
-        FOREIGN KEY (person) REFERENCES PERSON(id) on delete cascade on update cascade,
-        FOREIGN KEY (membershiptype) REFERENCES MEMBERSHIP(id) on delete cascade on update cascade
+        FOREIGN KEY (person) REFERENCES PERSON(id) on delete set null on update set null,
+        FOREIGN KEY (membershiptype) REFERENCES MEMBERSHIP(id) on delete set null on update set null
     );""",
     
 	
