@@ -44,3 +44,20 @@ class Combine(FlaskForm):
 class CallSocialMedia(FlaskForm):
     socialmedia = FormField(SocialMedia)
     submit = SubmitField("Update", render_kw={"class": "btn btn-outline-info"})
+
+class CallContactInfo(FlaskForm):
+    contactinfo = FormField(ContactInfoForm)
+    submit = SubmitField("Update", render_kw={"class": "btn btn-outline-info"})
+
+class CallPerson(FlaskForm):
+    person = FormField(PersonForm)
+    submit = SubmitField("Update", render_kw={"class": "btn btn-outline-info"})
+
+class UserEditAccountForm(FlaskForm):
+    username = StringField("Username", validators=[DataRequired(message = msg),Length(max=25, message="Username cannot be longer than 25 characters")], render_kw={"class": "form-control"})
+    password = PasswordField("Password", validators=[DataRequired(message=msg), Length(max=25, message="Password cannot be longer than 25 characters")], render_kw={"class": "form-control"})
+    securityAnswer = StringField("Security Answer", validators=[Length(max=30, message="Security answer cannot be longer than 30 characters")], render_kw={"class": "form-control", "placeholder": "What is your mother's maiden name?"})
+
+class CallUserAccount(FlaskForm):
+    user = FormField(UserEditAccountForm)
+    submit = SubmitField("Update", render_kw={"class": "btn btn-outline-info"})

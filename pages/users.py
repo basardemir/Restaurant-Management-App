@@ -2,8 +2,8 @@ from flask import Flask, url_for, redirect, request, session, render_template
 #from passlib.hash import pbkdf2_sha256 as hasher
 import datetime
 from flask import current_app
-from .forms.users_form import UserAccountForm, Combine, CallSocialMedia, SocialMedia
-from models.users import create_user, select_a_socialmedia, update_socialmedia
+from .forms.users_form import UserAccountForm, Combine, CallSocialMedia, CallContactInfo, CallPerson, CallUserAccount
+from models.users import create_user, select_a_user, update_user, select_a_socialmedia, update_socialmedia, select_a_person, update_person, update_contactinfo, select_all_users_and_info, select_a_contactinfo
 import os
 DB_URL = os.getenv("DATABASE_URL")
 
@@ -15,12 +15,7 @@ url = "postgres://ivpallnyfezioy:075baf8e129b0d52dbd6d87dd3c774363b0b10b499921f8
 
 
 def users_page():
-    connection=dbapi2.connect(url)
-    cursor = connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
-    statement = "SELECT * FROM SOCIALMEDIA FULL OUTER JOIN (SELECT * FROM CONTACTINFO FULL OUTER JOIN (SELECT * FROM PERSON FULL OUTER JOIN (SELECT * FROM USERACCOUNT JOIN MEMBERSHIP ON USERACCOUNT.membershiptype = MEMBERSHIP.id) AS T2 ON PERSON.id = T2.person) AS T3 ON CONTACTINFO.id = T3.contactinfo) AS T4 ON T4.socialmedia = SOCIALMEDIA.id;"
-    cursor.execute(statement)
-    userlist = cursor.fetchall()
-    cursor.close()
+    userlist = select_all_users_and_info()
     print(userlist)
     return render_template("/users/read.html", users = userlist)
 
@@ -91,7 +86,6 @@ def logout_page():
 
 
 def editsocialmedia_page():
-    print(session == {})
     if session == {} or session["logged_in"] == False:
         return redirect(url_for("home_page"))
     data = select_a_socialmedia(session['username'], session['password'])
@@ -116,3 +110,70 @@ def editsocialmedia_page():
         if data["googleplus"] != None:
             form.socialmedia["googleplus"].data = data["googleplus"]
     return render_template("/users/editsocialmedia.html", user=session, form=form, data = data)  
+
+def editcontactinfo_page():
+    if session == {} or session["logged_in"] == False:
+        return redirect(url_for("home_page"))
+    data = select_a_contactinfo(session['username'], session['password'])
+    print(data)
+    form = CallContactInfo()
+    if request.method == "POST" and form.validate_on_submit():
+        print("POSTED:")
+        print(form.data)
+        contactinfodata = form.data["contactinfo"]
+        update_contactinfo(contactinfodata, session["username"], session["password"])
+        return redirect(url_for("profile_page"))
+    else:
+        if data["phonenumber"] != None:
+            form.contactinfo["phoneNumber"].data = data["phonenumber"]
+        if data["email"] != None:
+            form.contactinfo["email"].data = data["email"]
+        if data["fax"] != None:
+            form.contactinfo["fax"].data = data["fax"]
+        if data["homephone"] != None:
+            form.contactinfo["homePhone"].data = data["homephone"]
+        if data["workmail"] != None:
+            form.contactinfo["workmail"].data = data["workmail"]
+    return render_template("/users/editcontactinfo.html", user=session, form=form, data = data)  
+
+def editperson_page():
+    if session == {} or session["logged_in"] == False:
+        return redirect(url_for("home_page"))
+    data = select_a_person(session['username'], session['password'])
+    print(data)
+    form = CallPerson()
+    if request.method == "POST" and form.validate_on_submit():
+        print("POSTED:")
+        print(form.data)
+        persondata = form.data["person"]
+        update_person(persondata, session["username"], session["password"])
+        return redirect(url_for("profile_page"))
+    else:
+        if data["name"] != None:
+            form.person["name"].data = data["name"]
+        if data["surname"] != None:
+            form.person["surname"].data = data["surname"]
+        if data["birthday"] != None:
+            form.person["birthday"].data = data["birthday"]
+        if data["educationlevel"] != None:
+            form.person["educationLevel"].data = data["educationlevel"]
+        if data["gender"] != None:
+            form.person["gender"].data = data["gender"]
+    return render_template("/users/editperson.html", user=session, form=form, data = data)  
+
+def edituser_page():
+    if session == {} or session["logged_in"] == False:
+        return redirect(url_for("home_page"))
+    data = select_a_user(session['username'], session['password'])
+    form = CallUserAccount()
+    if request.method == "POST" and form.validate_on_submit():
+        userdata = form.data["user"]
+        print(userdata)
+        update_user(userdata, session["username"], session["password"])
+        return redirect(url_for("profile_page"))
+    else:
+        if data["username"] != None:
+            form.user["username"].data = data["username"]
+        if data["securityanswer"] != None:
+            form.user["securityAnswer"].data = data["securityanswer"]
+    return render_template("/users/edituseraccount.html", user=session, form=form, data = data)  

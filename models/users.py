@@ -1,7 +1,9 @@
 import os
 DB_URL = "postgres://ivpallnyfezioy:075baf8e129b0d52dbd6d87dd3c774363b0b10b499921f821378ed7084bfc744@ec2-46-137-187-23.eu-west-1.compute.amazonaws.com:5432/dagmb1jla3rmdp"	#os.getenv("DATABASE_URL")
-
+from flask import session
 import psycopg2 as dbapi2
+import psycopg2.extras
+
 
 def check_if_user_exists(data):
     with dbapi2.connect(DB_URL) as connection:
@@ -17,7 +19,26 @@ def check_if_user_exists(data):
             else:
                 return True
 
+def select_all_users_and_info():
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cursor:
+            statement = "SELECT * FROM SOCIALMEDIA FULL OUTER JOIN (SELECT * FROM CONTACTINFO FULL OUTER JOIN (SELECT * FROM PERSON FULL OUTER JOIN (SELECT * FROM USERACCOUNT JOIN MEMBERSHIP ON USERACCOUNT.membershiptype = MEMBERSHIP.id) AS T2 ON PERSON.id = T2.person) AS T3 ON CONTACTINFO.id = T3.contactinfo) AS T4 ON T4.socialmedia = SOCIALMEDIA.id;"
+            cursor.execute(statement)
+            connection.commit()
+            userlist = cursor.fetchall()
+            cursor.close()
+            return userlist
+    
 
+def select_users():
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor() as cursor:
+            statement = "SELECT * FROM USERACCOUNT"
+            cursor.execute(statement)
+            connection.commit()
+            data = cursor.fetchall()
+            return data
+    
 
 def insert_socialmedia(data):
     with dbapi2.connect(DB_URL) as connection:
@@ -105,4 +126,67 @@ def update_socialmedia(data, username, password):
             statement = "UPDATE SOCIALMEDIA SET facebook=%s, twitter=%s, instagram=%s, discord=%s, youtube=%s, googleplus=%s WHERE id=%s"
             cursor.execute(statement, (data["facebook"], data["twitter"], data["instagram"], data["discord"], data["youtube"], data["googleplus"], id))
             connection.commit()
-        
+
+
+def select_a_contactinfo(username, password):
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor(cursor_factory=dbapi2.extras.RealDictCursor) as cursor:
+            statement = "SELECT * FROM CONTACTINFO FULL OUTER JOIN (SELECT contactinfo FROM PERSON FULL OUTER JOIN (SELECT person FROM USERACCOUNT WHERE username=%s and password=%s) AS T2 ON PERSON.id = T2.person) AS T3 ON CONTACTINFO.id = T3.contactinfo;"
+            cursor.execute(statement, (username, password))
+            connection.commit()
+            data = cursor.fetchall()
+            return data[0]
+
+def update_contactinfo(data, username, password):
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor(cursor_factory=dbapi2.extras.RealDictCursor) as cursor:
+            id = select_a_contactinfo(username, password)["id"]
+            print(id)
+            #print(data)
+            statement = "UPDATE CONTACTINFO SET phoneNumber=%s, email=%s, fax=%s, homePhone=%s, workmail=%s WHERE id=%s"
+            cursor.execute(statement, (data["phoneNumber"], data["email"], data["fax"], data["homePhone"], data["workmail"], id))
+            connection.commit()
+
+
+def select_a_person(username, password):
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor(cursor_factory=dbapi2.extras.RealDictCursor) as cursor:
+            statement = "SELECT * FROM PERSON FULL OUTER JOIN (SELECT person FROM USERACCOUNT WHERE username=%s and password=%s) AS T2 ON PERSON.id = T2.person;"
+            cursor.execute(statement, (username, password))
+            connection.commit()
+            data = cursor.fetchall()
+            return data[0]
+
+def update_person(data, username, password):
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor(cursor_factory=dbapi2.extras.RealDictCursor) as cursor:
+            id = select_a_person(username, password)["id"]
+            print(id)
+            #print(data)
+            statement = "UPDATE PERSON SET name=%s, surname=%s, birthday=%s, educationLevel=%s, gender=%s WHERE id=%s"
+            cursor.execute(statement, (data["name"], data["surname"], data["birthday"], data["educationLevel"], data["gender"], id))
+            connection.commit()
+
+
+def select_a_user(username, password):
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor(cursor_factory=dbapi2.extras.RealDictCursor) as cursor:
+            statement = "SELECT * FROM USERACCOUNT WHERE username=%s and password=%s;"
+            cursor.execute(statement, (username, password))
+            connection.commit()
+            data = cursor.fetchall()
+            return data[0]
+
+def update_user(data, username, password):
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor(cursor_factory=dbapi2.extras.RealDictCursor) as cursor:
+            id = select_a_user(username, password)["id"]
+            print("UPDATE:")
+            print(data)
+            session["username"] = data["username"]
+            session["password"] = data["password"]
+            statement = "UPDATE USERACCOUNT SET username=%s, password=%s, securityAnswer=%s WHERE id=%s"
+            cursor.execute(statement, (data["username"], data["password"], data["securityAnswer"], id))
+            session["username"] = data["username"]
+            session["password"] = data["password"]
+            connection.commit()
