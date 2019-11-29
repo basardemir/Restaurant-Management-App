@@ -53,7 +53,9 @@ def get_country(country_key):
             capital_city,
             coordinates.latitude,
             coordinates.longitude,
-            timezone.timezone_id
+            timezone.timezone_id,
+            coordinates.coord_id,
+            properties.prop_id
             from (((country join properties on (country.properties=properties.prop_id))
             join timezone on (country.timezone=timezone.timezone_id))
             join coordinates on (country.capital_coordinates=coordinates.coord_id)) where country_id = %s;"""
@@ -93,8 +95,27 @@ def add_country(country):
     return country_id
 
 def update_country(country):
-    print(country)
-
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor() as cursor:
+            query = "UPDATE PROPERTIES SET AREA = %s, GDP= %s, POPULATION=%s WHERE prop_id = %s"
+            cursor.execute(query, (country[9], country[10]*country[11],country[12]*country[13], country[2]))
+            connection.commit()
+            query = "UPDATE COORDINATES SET LONGITUDE=%s, LATITUDE=%s WHERE coord_id = %s"
+            cursor.execute(query, (country[14],country[15],country[1]))
+            connection.commit()
+            query = """UPDATE COUNTRY SET
+            timezone=%s,
+            properties=%s,
+            capital_coordinates=%s,
+            name=%s,
+            country_code=%s,
+            driving_lane=%s,
+            capital_city=%s,
+            language_long=%s,
+            language_short=%s 
+            where country_id = %s"""
+            cursor.execute(query, (country[16],country[2],country[1],country[3],country[4],country[5],country[6],country[7],country[8], country[0]))
+            #print(query % (country[16],country[2],country[1],country[3],country[4],country[5],country[6],country[7],country[8], country[0]))
 def delete_country(country_key):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor() as cursor:

@@ -23,7 +23,7 @@ class CountryForm(FlaskForm):
     Area = FloatField("Area", validators=[NumberRange(min=0)])
     GDP = FloatField("GDP", validators=[NumberRange(min=0)])
     GDP_multiplier = SelectField("exp1",choices=[("1000","K"),("1000000","Mill"),("1000000000","Bill")])
-    Population = IntegerField("Population", validators=[NumberRange(min=0)])
+    Population = FloatField("Population", validators=[NumberRange(min=0)])
     Population_multiplier = SelectField("exp2",choices=[("1000","K"),("1000000","Mill"),("1000000000","Bill")])
     
     Longitude = FloatField("Longitude",validators=[NumberRange(min=-180, max=+180, message="Longitude needs to be between -180 and 180.")])
