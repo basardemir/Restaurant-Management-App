@@ -16,7 +16,7 @@ url = "postgres://ivpallnyfezioy:075baf8e129b0d52dbd6d87dd3c774363b0b10b499921f8
 
 def users_page():
     userlist = select_all_users_and_info()
-    print(userlist)
+   # print(userlist)
     return render_template("/users/read.html", users = userlist)
 
 def add_user_page():
@@ -28,7 +28,7 @@ def add_user_page():
         print("POSTED:")
         photopath = "/static/" + request.files["photo-photo"].filename
         print(photopath)
-        data = {"photo": photopath, "username": useraccount.data["useraccount"]['username'], "password": useraccount.data["useraccount"]["password"], "phoneNumber": useraccount.data["contactinfo"]["phoneNumber"], "email": useraccount.data["contactinfo"]["email"], "fax": useraccount.data["contactinfo"]["fax"], "homePhone": useraccount.data["contactinfo"]["homePhone"], "workmail": useraccount.data["contactinfo"]["workmail"], "lastEntry": datetime.datetime.now(), "joinedDate": datetime.datetime.now(), "securityAnswer": useraccount.data["useraccount"]["securityAnswer"], "membership": 0, "name": useraccount.data["person"]["name"], "surname": useraccount.data["person"]["surname"], "gender": useraccount.data["person"]["gender"], "birthday": useraccount.data["person"]["birthday"], "education": useraccount.data["person"]["educationLevel"], "facebook": useraccount.data["socialmedia"]["facebook"], "twitter": useraccount.data["socialmedia"]["twitter"], "instagram": useraccount.data["socialmedia"]["instagram"], "discord": useraccount.data["socialmedia"]["discord"], "youtube": useraccount.data["socialmedia"]["youtube"], "googleplus": useraccount.data["socialmedia"]["googleplus"]}
+        data = {"photo": photopath, "username": useraccount.data["useraccount"]['username'], "password": useraccount.data["useraccount"]["password"], "phoneNumber": useraccount.data["contactinfo"]["phoneNumber"], "email": useraccount.data["contactinfo"]["email"], "fax": useraccount.data["contactinfo"]["fax"], "homePhone": useraccount.data["contactinfo"]["homePhone"], "workmail": useraccount.data["contactinfo"]["workmail"], "lastEntry": datetime.datetime.now(), "joinedDate": datetime.datetime.now(), "securityAnswer": useraccount.data["useraccount"]["securityAnswer"], "membership": 0, "name": useraccount.data["person"]["name"], "surname": useraccount.data["person"]["surname"], "gender": useraccount.data["person"]["gender"], "birthday": useraccount.data["person"]["birthday"], "educationLevel": useraccount.data["person"]["educationLevel"], "facebook": useraccount.data["socialmedia"]["facebook"], "twitter": useraccount.data["socialmedia"]["twitter"], "instagram": useraccount.data["socialmedia"]["instagram"], "discord": useraccount.data["socialmedia"]["discord"], "youtube": useraccount.data["socialmedia"]["youtube"], "googleplus": useraccount.data["socialmedia"]["googleplus"]}
        # print(useraccount.data)
         if useraccount.data["useraccount"]["membershiptype"] == "Boss":
             data["membership"] = 1
