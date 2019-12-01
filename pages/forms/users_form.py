@@ -35,7 +35,7 @@ class SocialMedia(FlaskForm):
     googleplus = StringField("Google+", validators=[DataRequired(message = msg),Length(max=60, message="Google+ cannot be longer than 60 characters")], render_kw={"class": "form-control"})
 
 class PhotoForm(FlaskForm):
-    photo = FileField("Photo", validators=[DataRequired(message = msg)])
+    photo = FileField("Photo", validators=[DataRequired(message = msg)], render_kw={"accept": ".jpg"})
 
 class Combine(FlaskForm):
     person = FormField(PersonForm)

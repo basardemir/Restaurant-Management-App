@@ -3,7 +3,7 @@ from flask import Flask, url_for, redirect, request, session, render_template
 import datetime
 from flask import current_app
 from .forms.users_form import UserAccountForm, Combine, CallSocialMedia, CallContactInfo, CallPerson, CallUserAccount
-from models.users import create_user, select_a_user, update_user, select_a_socialmedia, update_socialmedia, select_a_person, update_person, update_contactinfo, select_all_users_and_info, select_a_contactinfo
+from models.users import create_user, select_a_user_and_info, delete_current_user, select_a_user, update_user, select_a_socialmedia, update_socialmedia, select_a_person, update_person, update_contactinfo, select_all_users_and_info, select_a_contactinfo
 import os
 DB_URL = os.getenv("DATABASE_URL")
 
@@ -70,15 +70,17 @@ def signin_page():
 
 def profile_page():
     if request.method == "GET":
-        connection=dbapi2.connect(url)
-        cursor = connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
-        statement = "SELECT * FROM SOCIALMEDIA FULL OUTER JOIN (SELECT * FROM CONTACTINFO FULL OUTER JOIN (SELECT * FROM PERSON FULL OUTER JOIN ((SELECT * FROM USERACCOUNT WHERE username=%s and password=%s) AS T1 JOIN MEMBERSHIP ON T1.membershiptype = MEMBERSHIP.id) AS T2 ON PERSON.id = T2.person) AS T3 ON CONTACTINFO.id = T3.contactinfo) AS T4 ON T4.socialmedia = SOCIALMEDIA.id;"
-        cursor.execute(statement, (session["username"], session["password"]))
-        user = cursor.fetchall()
-        print(user[0])
-        cursor.close()
-        return render_template("/users/profile.html", user=user[0])    
-
+        user = select_a_user_and_info(session['username'], session['password'])
+        print(user)
+        return render_template("/users/profile.html", user=user[0]) 
+    if request.method == 'POST':
+        print('POSTED:')   
+        delete_current_user()
+        session['username'] = ""
+        session['password'] = ''
+        session['logged_in'] = False
+        return redirect(url_for("home_page"))
+    
 def logout_page():
     if request.method == "POST":
         print("POSTED: logout")

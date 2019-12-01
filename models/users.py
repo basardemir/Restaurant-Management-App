@@ -30,6 +30,16 @@ def select_all_users_and_info():
             cursor.close()
             return userlist
     
+def select_a_user_and_info(username, password):
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cursor:
+            statement = "SELECT * FROM SOCIALMEDIA FULL OUTER JOIN (SELECT * FROM CONTACTINFO FULL OUTER JOIN (SELECT * FROM (SELECT PERSON.id, contactinfo, name, surname, birthday, educationlevel, gender, path FROM PERSON JOIN PHOTO ON PHOTO.id = PERSON.photo) AS PER FULL OUTER JOIN ((SELECT * FROM USERACCOUNT WHERE username = '%s' and password = '%s') AS T JOIN MEMBERSHIP ON T.membershiptype = MEMBERSHIP.id) AS T2 ON PER.id = T2.person) AS T3 ON CONTACTINFO.id = T3.contactinfo) AS T4 ON T4.socialmedia = SOCIALMEDIA.id;" % (username, password)
+            cursor.execute(statement)
+            connection.commit()
+            userlist = cursor.fetchall()
+            cursor.close()
+            return userlist
+    
 
 def select_users():
     with dbapi2.connect(DB_URL) as connection:
@@ -146,6 +156,15 @@ def select_a_socialmedia(username, password):
             data = cursor.fetchall()
             return data[0]
 
+def select_a_photo(username, password):
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor(cursor_factory=dbapi2.extras.RealDictCursor) as cursor:
+            statement = "SELECT * FROM PHOTO FULL OUTER JOIN (SELECT photo FROM PERSON FULL OUTER JOIN USERACCOUNT ON USERACCOUNT.person = PERSON.id) AS T1 ON T1.photo = PHOTO.id;"
+            cursor.execute(statement, (username, password))
+            connection.commit()
+            data = cursor.fetchall()
+            return data[0]
+
 def update_socialmedia(data, username, password):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor(cursor_factory=dbapi2.extras.RealDictCursor) as cursor:
@@ -219,3 +238,62 @@ def update_user(data, username, password):
             session["username"] = data["username"]
             session["password"] = data["password"]
             connection.commit()
+
+def delete_a_person(id):
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor() as cursor:
+            statement = "DELETE FROM PERSON WHERE id = %s" % id
+            cursor.execute(statement)
+            connection.commit()
+            
+def delete_a_photo(id):
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor() as cursor:
+            statement = "DELETE FROM PHOTO WHERE id = %s" % id
+            cursor.execute(statement)
+            connection.commit()
+
+def delete_a_contactinfo(id):
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor() as cursor:
+            statement = "DELETE FROM CONTACTINFO WHERE id = %s" % id
+            cursor.execute(statement)
+            connection.commit()
+
+def delete_a_socialmedia(id):
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor() as cursor:
+            statement = "DELETE FROM SOCIALMEDIA WHERE id = %s" % id
+            cursor.execute(statement)
+            connection.commit()
+
+def delete_a_user(id):
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor() as cursor:
+            statement = "DELETE FROM USERACCOUNT WHERE id = %s" % id
+            cursor.execute(statement)
+            connection.commit()
+
+def delete_current_user():
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor() as cursor:
+            id = select_a_user(session['username'], session['password'])["id"]
+            person_id = select_a_person(session['username'], session['password'])["id"]
+            photo_id = select_a_photo(session['username'], session['password'])["id"]
+            contactinfo_id = select_a_contactinfo(session['username'], session['password'])["id"]
+            socialmedia_id = select_a_socialmedia(session['username'], session['password'])["id"]
+            #print(id)
+            if(photo_id != None):
+                delete_a_photo(photo_id)
+            if(socialmedia_id != None):
+                delete_a_socialmedia(socialmedia_id)
+            if(contactinfo_id != None):
+                delete_a_contactinfo(contactinfo_id)
+            if(person_id != None):
+                delete_a_person(person_id)
+            if(id != None):
+                delete_a_user(id)
+
+#            statement = "DELETE FROM USERACCOUNT WHERE id = %s"
+            #cursor.execute(statement, id))
+            
