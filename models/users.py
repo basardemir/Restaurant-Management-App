@@ -9,12 +9,10 @@ def check_if_user_exists(data):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor() as cursor:
             #Cannot add the parameter to the execute statement since dbapi2 gives 'TypeError: not all arguments converted during string formatting', this was the only solution
-            statement = "SELECT * FROM USERACCOUNT WHERE username='%s';" % data["password"]
+            statement = "SELECT * FROM USERACCOUNT WHERE username='%s';" % data["username"]
             cursor.execute(statement)
             connection.commit()
             userlist = cursor.fetchall()
-            print('userlist')
-            print(userlist)
             if userlist == []:
                 return False
             else:
@@ -23,8 +21,17 @@ def check_if_user_exists(data):
 
 def select_users():
     with dbapi2.connect(DB_URL) as connection:
-        with connection.cursor() as cursor:
+        with connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cursor:
             statement = "SELECT * FROM USERACCOUNT"
+            cursor.execute(statement)
+            connection.commit()
+            data = cursor.fetchall()
+            return data
+
+def select_users_membership_and_photo():
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cursor:
+            statement = "SELECT * FROM (SELECT * FROM USERACCOUNT JOIN MEMBERSHIP ON MEMBERSHIP.id = USERACCOUNT.membershiptype) AS USERANDMEMBER FULL OUTER JOIN (SELECT PHOTO.path, PERSON.id FROM PHOTO JOIN PERSON ON PERSON.photo = PHOTO.id) AS T1 ON T1.id = USERANDMEMBER.person"
             cursor.execute(statement)
             connection.commit()
             data = cursor.fetchall()
@@ -42,18 +49,17 @@ def select_person():
 def select_all_users_and_info():
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cursor:
-            statement = "SELECT * FROM SOCIALMEDIA FULL OUTER JOIN (SELECT * FROM CONTACTINFO FULL OUTER JOIN (SELECT * FROM (SELECT PERSON.id, contactinfo, name, surname, birthday, educationLevel, gender, path FROM PERSON JOIN PHOTO ON PHOTO.id = PERSON.photo) AS PER FULL OUTER JOIN (SELECT * FROM USERACCOUNT JOIN MEMBERSHIP ON USERACCOUNT.membershiptype = MEMBERSHIP.id) AS T2 ON PER.id = T2.person) AS T3 ON CONTACTINFO.id = T3.contactinfo) AS T4 ON T4.socialmedia = SOCIALMEDIA.id;"
+            statement = "SELECT * FROM SOCIALMEDIA JOIN (SELECT * FROM CONTACTINFO JOIN (SELECT * FROM (SELECT PERSON.id, contactinfo, name, surname, birthday, educationLevel, gender, path FROM PERSON JOIN PHOTO ON PHOTO.id = PERSON.photo) AS PER JOIN (SELECT * FROM USERACCOUNT JOIN MEMBERSHIP ON USERACCOUNT.membershiptype = MEMBERSHIP.id) AS T2 ON PER.id = T2.person) AS T3 ON CONTACTINFO.id = T3.contactinfo) AS T4 ON T4.socialmedia = SOCIALMEDIA.id;"
             cursor.execute(statement)
             connection.commit()
             userlist = cursor.fetchall()
             cursor.close()
-            print(userlist)
             return userlist
     
-def select_a_user_and_info(username, password):
+def select_a_user_and_info(userid):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cursor:
-            statement = "SELECT * FROM SOCIALMEDIA FULL OUTER JOIN (SELECT * FROM CONTACTINFO FULL OUTER JOIN (SELECT * FROM (SELECT PERSON.id, contactinfo, name, surname, birthday, educationLevel, gender, path FROM PERSON JOIN PHOTO ON PHOTO.id = PERSON.photo) AS PER FULL OUTER JOIN ((SELECT * FROM USERACCOUNT WHERE username = '%s' and password = '%s') AS T JOIN MEMBERSHIP ON T.membershiptype = MEMBERSHIP.id) AS T2 ON PER.id = T2.person) AS T3 ON CONTACTINFO.id = T3.contactinfo) AS T4 ON T4.socialmedia = SOCIALMEDIA.id;" % (username, password)
+            statement = "SELECT * FROM SOCIALMEDIA JOIN (SELECT * FROM CONTACTINFO JOIN (SELECT * FROM (SELECT PERSON.id, contactinfo, name, surname, birthday, educationLevel, gender, path FROM PERSON JOIN PHOTO ON PHOTO.id = PERSON.photo) AS PER JOIN ((SELECT * FROM USERACCOUNT WHERE id = '%s') AS T JOIN MEMBERSHIP ON T.membershiptype = MEMBERSHIP.id) AS T2 ON PER.id = T2.person) AS T3 ON CONTACTINFO.id = T3.contactinfo) AS T4 ON T4.socialmedia = SOCIALMEDIA.id;" % (userid)
             cursor.execute(statement)
             connection.commit()
             userlist = cursor.fetchall()
@@ -67,9 +73,7 @@ def insert_socialmedia(data):
             statement = "INSERT INTO SOCIALMEDIA (facebook, twitter, instagram, discord, youtube, googleplus) VALUES (%s, %s, %s, %s, %s, %s) RETURNING id;"
             cursor.execute(statement, (data["facebook"], data['twitter'], data["instagram"], data["discord"], data["youtube"], data["googleplus"]))
             connection.commit()
-            print("Added socialmedia")
             id = cursor.fetchone()[0]
-            print(id)
             return id
     
 def insert_contactinfo(data, socialmedia_id):
@@ -78,9 +82,7 @@ def insert_contactinfo(data, socialmedia_id):
             statement = "INSERT INTO CONTACTINFO (socialmedia, phoneNumber, email, fax, homePhone, workmail) VALUES (%s, %s, %s, %s, %s, %s) RETURNING id;"
             cursor.execute(statement, (socialmedia_id, data['phoneNumber'], data["email"], data["fax"], data["homePhone"], data["workmail"]))
             connection.commit()
-            print("Added contactinfo")
             id = cursor.fetchone()[0]
-            print(id)
             return id
 
 def check_if_photo_exists(data):
@@ -91,8 +93,6 @@ def check_if_photo_exists(data):
             cursor.execute(statement)
             connection.commit()
             photolist = cursor.fetchall()
-            print('photolist')
-            print(photolist)
             if photolist == []:
                 return False
             else:
@@ -105,9 +105,7 @@ def insert_photo(data):
             statement = "INSERT INTO PHOTO (path) VALUES ('%s') RETURNING id;" % data["photo"]
             cursor.execute(statement)
             connection.commit()
-            print("Added photo")
             id = cursor.fetchone()[0]
-            print(id)
             return id
     
 def insert_person(data, contactinfo_id, photo_id):
@@ -116,9 +114,7 @@ def insert_person(data, contactinfo_id, photo_id):
             statement = "INSERT INTO PERSON (contactinfo, photo, name, surname, birthDay, educationLevel, gender) VALUES (%s, %s, %s, %s, %s, %s, %s) RETURNING id;"
             cursor.execute(statement, (contactinfo_id, photo_id, data["name"], data['surname'], data["birthday"], data["educationLevel"], data["gender"]))
             connection.commit()
-            print("Added person")
             id = cursor.fetchone()[0]
-            print(id)
             return id
     
     
@@ -128,26 +124,22 @@ def insert_useraccount(data, person_id):
             statement = "INSERT INTO USERACCOUNT (person, lastEntry, username, password, joinedDate, securityAnswer, membershiptype) VALUES (%s, %s, %s, %s, %s, %s, %s) RETURNING id;"
             cursor.execute(statement, (person_id, data["lastEntry"], data['username'], data["password"], data["joinedDate"], data["securityAnswer"], data["membership"]))
             connection.commit()
-            print("Added useraccount")
             id = cursor.fetchone()[0]
-            print(id)
             return id
 
 def create_user(data):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor() as cursor:
             if check_if_user_exists(data) == False:
-                print(data)
                 photoid = insert_photo(data)
                 id = insert_socialmedia(data)
                 id = insert_contactinfo(data, id)
                 id = insert_person(data, id, photoid)
                 id = insert_useraccount(data, id)
                 connection.commit()
-                print("User created")
-                return True
+                return [True, id]
             else:
-                return False
+                return [False, -1]
 
 def select_socialmedia():
     with dbapi2.connect(DB_URL) as connection:
@@ -158,97 +150,94 @@ def select_socialmedia():
             data = cursor.fetchall()
             return data
 
-def select_a_socialmedia(username, password):
+def select_a_socialmedia(userid):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor(cursor_factory=dbapi2.extras.RealDictCursor) as cursor:
-            statement = "SELECT * FROM SOCIALMEDIA WHERE id = (SELECT socialmedia FROM CONTACTINFO FULL OUTER JOIN (SELECT contactinfo FROM PERSON FULL OUTER JOIN ((SELECT person FROM USERACCOUNT WHERE username=%s and password=%s)) AS T2 ON PERSON.id = T2.person) AS T3 ON CONTACTINFO.id = T3.contactinfo);"
-            cursor.execute(statement, (username, password))
+            statement = "SELECT * FROM SOCIALMEDIA JOIN (SELECT socialmedia FROM CONTACTINFO JOIN (SELECT contactinfo FROM PERSON JOIN ((SELECT person FROM USERACCOUNT WHERE id='%s')) AS T2 ON PERSON.id = T2.person) AS T3 ON T3.contactinfo = CONTACTINFO.id) AS T4 ON T4.socialmedia = SOCIALMEDIA.id;" % userid
+            cursor.execute(statement, userid)
             connection.commit()
             data = cursor.fetchall()
             return data[0]
 
-def select_a_photo(username, password):
+def select_a_photo(userid):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor(cursor_factory=dbapi2.extras.RealDictCursor) as cursor:
-            statement = "SELECT * FROM PHOTO FULL OUTER JOIN (SELECT photo FROM PERSON FULL OUTER JOIN USERACCOUNT ON USERACCOUNT.person = PERSON.id) AS T1 ON T1.photo = PHOTO.id;"
-            cursor.execute(statement, (username, password))
+            statement = "SELECT * FROM PHOTO JOIN (SELECT photo FROM PERSON JOIN (SELECT person FROM USERACCOUNT WHERE id = %s) AS T2 ON T2.person = PERSON.id) AS T1 ON T1.photo = PHOTO.id;" % userid
+            cursor.execute(statement)
             connection.commit()
             data = cursor.fetchall()
             return data[0]
 
-def update_socialmedia(data, username, password):
+def update_socialmedia(data, userid):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor(cursor_factory=dbapi2.extras.RealDictCursor) as cursor:
-            id = select_a_socialmedia(username, password)["id"]
-            print(id)
-            #print(data)
+            id = select_a_socialmedia(userid)["id"]
             statement = "UPDATE SOCIALMEDIA SET facebook=%s, twitter=%s, instagram=%s, discord=%s, youtube=%s, googleplus=%s WHERE id=%s"
             cursor.execute(statement, (data["facebook"], data["twitter"], data["instagram"], data["discord"], data["youtube"], data["googleplus"], id))
             connection.commit()
 
 
-def select_a_contactinfo(username, password):
+def select_a_contactinfo(userid):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor(cursor_factory=dbapi2.extras.RealDictCursor) as cursor:
-            statement = "SELECT * FROM CONTACTINFO FULL OUTER JOIN (SELECT contactinfo FROM PERSON FULL OUTER JOIN (SELECT person FROM USERACCOUNT WHERE username=%s and password=%s) AS T2 ON PERSON.id = T2.person) AS T3 ON CONTACTINFO.id = T3.contactinfo;"
-            cursor.execute(statement, (username, password))
+            statement = "SELECT * FROM CONTACTINFO JOIN (SELECT contactinfo FROM PERSON JOIN ((SELECT person FROM USERACCOUNT WHERE id='%s')) AS T2 ON PERSON.id = T2.person) AS T3 ON T3.contactinfo = CONTACTINFO.id" % userid
+            cursor.execute(statement)
             connection.commit()
             data = cursor.fetchall()
             return data[0]
 
-def update_contactinfo(data, username, password):
+def update_contactinfo(data, userid):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor(cursor_factory=dbapi2.extras.RealDictCursor) as cursor:
-            id = select_a_contactinfo(username, password)["id"]
-            print(id)
-            #print(data)
+            id = select_a_contactinfo(userid)["id"]
             statement = "UPDATE CONTACTINFO SET phoneNumber=%s, email=%s, fax=%s, homePhone=%s, workmail=%s WHERE id=%s"
             cursor.execute(statement, (data["phoneNumber"], data["email"], data["fax"], data["homePhone"], data["workmail"], id))
             connection.commit()
 
 
-def select_a_person(username, password):
+def select_a_person(userid):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor(cursor_factory=dbapi2.extras.RealDictCursor) as cursor:
-            statement = "SELECT * FROM PERSON FULL OUTER JOIN (SELECT person FROM USERACCOUNT WHERE username=%s and password=%s) AS T2 ON PERSON.id = T2.person;"
-            cursor.execute(statement, (username, password))
+            statement = "SELECT * FROM PERSON JOIN (SELECT person FROM USERACCOUNT WHERE id='%s') AS T2 ON PERSON.id = T2.person;" % userid
+            cursor.execute(statement)
             connection.commit()
             data = cursor.fetchall()
             return data[0]
 
-def update_person(data, username, password):
+def update_person(data, userid):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor(cursor_factory=dbapi2.extras.RealDictCursor) as cursor:
-            id = select_a_person(username, password)["id"]
-            print(id)
-            #print(data)
+            id = select_a_person(userid)["id"]
             statement = "UPDATE PERSON SET name=%s, surname=%s, birthday=%s, educationLevel=%s, gender=%s WHERE id=%s"
             cursor.execute(statement, (data["name"], data["surname"], data["birthday"], data["educationLevel"], data["gender"], id))
             connection.commit()
 
 
-def select_a_user(username, password):
+def select_a_user(userid):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor(cursor_factory=dbapi2.extras.RealDictCursor) as cursor:
-            statement = "SELECT * FROM USERACCOUNT WHERE username=%s and password=%s;"
-            cursor.execute(statement, (username, password))
+            statement = "SELECT * FROM USERACCOUNT WHERE id='%s';"  % userid
+            cursor.execute(statement)
             connection.commit()
             data = cursor.fetchall()
             return data[0]
 
-def update_user(data, username, password):
+def update_user(data, userid):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor(cursor_factory=dbapi2.extras.RealDictCursor) as cursor:
-            id = select_a_user(username, password)["id"]
-            print("UPDATE:")
-            print(data)
-            session["username"] = data["username"]
-            session["password"] = data["password"]
             statement = "UPDATE USERACCOUNT SET username=%s, password=%s, securityAnswer=%s WHERE id=%s"
-            cursor.execute(statement, (data["username"], data["password"], data["securityAnswer"], id))
+            cursor.execute(statement, (data["username"], data["password"], data["securityAnswer"], userid))
             session["username"] = data["username"]
             session["password"] = data["password"]
             connection.commit()
+
+def update_user_lastentry(data, userid):
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor(cursor_factory=dbapi2.extras.RealDictCursor) as cursor:
+            statement = "UPDATE USERACCOUNT SET lastEntry=%s WHERE id=%s"
+            cursor.execute(statement, (data["lastEntry"], userid))
+            connection.commit()
+
 
 def delete_a_person(id):
     with dbapi2.connect(DB_URL) as connection:
@@ -288,12 +277,11 @@ def delete_a_user(id):
 def delete_current_user():
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor() as cursor:
-            id = select_a_user(session['username'], session['password'])["id"]
-            person_id = select_a_person(session['username'], session['password'])["id"]
-            photo_id = select_a_photo(session['username'], session['password'])["id"]
-            contactinfo_id = select_a_contactinfo(session['username'], session['password'])["id"]
-            socialmedia_id = select_a_socialmedia(session['username'], session['password'])["id"]
-            #print(id)
+            id = select_a_user(session['userid'])["id"]
+            person_id = select_a_person(session['userid'])["id"]
+            photo_id = select_a_photo(session['userid'])["id"]
+            contactinfo_id = select_a_contactinfo(session['userid'])["id"]
+            socialmedia_id = select_a_socialmedia(session['userid'])["id"]
             if(photo_id != None):
                 delete_a_photo(photo_id)
             if(socialmedia_id != None):
@@ -305,6 +293,4 @@ def delete_current_user():
             if(id != None):
                 delete_a_user(id)
 
-#            statement = "DELETE FROM USERACCOUNT WHERE id = %s"
-            #cursor.execute(statement, id))
             

@@ -3,7 +3,7 @@ from flask import Flask, url_for, redirect, request, session, render_template
 import datetime
 from flask import current_app
 from .forms.users_form import UserAccountForm, Combine, CallSocialMedia, CallContactInfo, CallPerson, CallUserAccount
-from models.users import create_user, select_a_user_and_info, delete_current_user, select_a_user, update_user, select_a_socialmedia, update_socialmedia, select_a_person, update_person, update_contactinfo, select_all_users_and_info, select_a_contactinfo
+from models.users import create_user, update_user_lastentry, select_users_membership_and_photo, select_users, select_a_user_and_info, delete_current_user, select_a_user, update_user, select_a_socialmedia, update_socialmedia, select_a_person, update_person, update_contactinfo, select_all_users_and_info, select_a_contactinfo
 import os
 DB_URL = os.getenv("DATABASE_URL")
 
@@ -15,66 +15,48 @@ url = "postgres://ivpallnyfezioy:075baf8e129b0d52dbd6d87dd3c774363b0b10b499921f8
 
 
 def users_page():
-    userlist = select_all_users_and_info()
-   # print(userlist)
+    userlist = select_users_membership_and_photo()
     return render_template("/users/read.html", users = userlist)
 
 def add_user_page():
-    print("Add a user")
     useraccount = Combine()
-#    print(useraccount.data)
-    #print(request.files["photo-photo"])
     if useraccount.validate_on_submit():
-        print("POSTED:")
         photopath = "/static/" + request.files["photo-photo"].filename
-        print(photopath)
         data = {"photo": photopath, "username": useraccount.data["useraccount"]['username'], "password": useraccount.data["useraccount"]["password"], "phoneNumber": useraccount.data["contactinfo"]["phoneNumber"], "email": useraccount.data["contactinfo"]["email"], "fax": useraccount.data["contactinfo"]["fax"], "homePhone": useraccount.data["contactinfo"]["homePhone"], "workmail": useraccount.data["contactinfo"]["workmail"], "lastEntry": datetime.datetime.now(), "joinedDate": datetime.datetime.now(), "securityAnswer": useraccount.data["useraccount"]["securityAnswer"], "membership": 0, "name": useraccount.data["person"]["name"], "surname": useraccount.data["person"]["surname"], "gender": useraccount.data["person"]["gender"], "birthday": useraccount.data["person"]["birthday"], "educationLevel": useraccount.data["person"]["educationLevel"], "facebook": useraccount.data["socialmedia"]["facebook"], "twitter": useraccount.data["socialmedia"]["twitter"], "instagram": useraccount.data["socialmedia"]["instagram"], "discord": useraccount.data["socialmedia"]["discord"], "youtube": useraccount.data["socialmedia"]["youtube"], "googleplus": useraccount.data["socialmedia"]["googleplus"]}
-       # print(useraccount.data)
         if useraccount.data["useraccount"]["membershiptype"] == "Boss":
             data["membership"] = 1
         else:
             data["membership"] = 2
-        #print(data)
-        if create_user(data):
-            print("User created")
+        response = create_user(data)
+        if response[0]:
             request.files["photo-photo"].save("./static/" + request.files["photo-photo"].filename)
             session['username'] = data["username"]
             session['password'] = data["password"]
+            session['userid'] = response[1]
             session['logged_in'] = True
-        else:
-            print("User already exists")
         return redirect(url_for("users_page"))
     return render_template("/users/create.html", form=useraccount)
     
 def signin_page():
     if request.method == "GET":
-        print("Add a user")
         return render_template("/users/login.html")
     else:
-        print("POSTED:")
-        data = {"username": request.form['username'], "password": request.form["password"]}
-        print(data)
-        connection=dbapi2.connect(url)
-        cursor = connection.cursor()
-        statement = "SELECT * FROM USERACCOUNT;"
-        cursor.execute(statement)
-        userlist = cursor.fetchall()
-        cursor.close()
-        print(userlist)
+        data = {"username": request.form['username'], "password": request.form["password"], "lastEntry": datetime.datetime.now()}
+        userlist = select_users()
         for item in userlist :
-            if item[4] == data["username"] and item[5] == data["password"]:
+            if item["username"] == data["username"] and item["password"] == data["password"]:
                 session['username'] = data["username"]
                 session['password'] = data["password"]
+                session['userid'] = item["id"]
                 session['logged_in'] = True
+                update_user_lastentry(data, session["userid"])
         return redirect(url_for("users_page"))
 
 def profile_page():
     if request.method == "GET":
-        user = select_a_user_and_info(session['username'], session['password'])
-        print(user)
+        user = select_a_user_and_info(session['userid'])
         return render_template("/users/profile.html", user=user[0]) 
     if request.method == 'POST':
-        print('POSTED:')   
         delete_current_user()
         session['username'] = ""
         session['password'] = ''
@@ -83,24 +65,21 @@ def profile_page():
     
 def logout_page():
     if request.method == "POST":
-        print("POSTED: logout")
         session['username'] = ""
         session['password'] = ''
+        session['userid'] = None
         session['logged_in'] = False
-        print(session)
         return redirect(url_for("home_page"))
 
 
 def editsocialmedia_page():
     if session == {} or session["logged_in"] == False:
         return redirect(url_for("home_page"))
-    data = select_a_socialmedia(session['username'], session['password'])
+    data = select_a_socialmedia(session['userid'])
     form = CallSocialMedia()
     if request.method == "POST" and form.validate_on_submit():
-        print("POSTED:")
-        print(form.data)
         socialdata = form.data["socialmedia"]
-        update_socialmedia(socialdata, session["username"], session["password"])
+        update_socialmedia(socialdata, session["userid"])
         return redirect(url_for("profile_page"))
     else:
         if data["facebook"] != None:
@@ -120,14 +99,11 @@ def editsocialmedia_page():
 def editcontactinfo_page():
     if session == {} or session["logged_in"] == False:
         return redirect(url_for("home_page"))
-    data = select_a_contactinfo(session['username'], session['password'])
-    print(data)
+    data = select_a_contactinfo(session['userid'])
     form = CallContactInfo()
     if request.method == "POST" and form.validate_on_submit():
-        print("POSTED:")
-        print(form.data)
         contactinfodata = form.data["contactinfo"]
-        update_contactinfo(contactinfodata, session["username"], session["password"])
+        update_contactinfo(contactinfodata, session["userid"])
         return redirect(url_for("profile_page"))
     else:
         if data["phonenumber"] != None:
@@ -145,14 +121,11 @@ def editcontactinfo_page():
 def editperson_page():
     if session == {} or session["logged_in"] == False:
         return redirect(url_for("home_page"))
-    data = select_a_person(session['username'], session['password'])
-    print(data)
+    data = select_a_person(session['userid'])
     form = CallPerson()
     if request.method == "POST" and form.validate_on_submit():
-        print("POSTED:")
-        print(form.data)
         persondata = form.data["person"]
-        update_person(persondata, session["username"], session["password"])
+        update_person(persondata, session["userid"])
         return redirect(url_for("profile_page"))
     else:
         if data["name"] != None:
@@ -170,12 +143,11 @@ def editperson_page():
 def edituser_page():
     if session == {} or session["logged_in"] == False:
         return redirect(url_for("home_page"))
-    data = select_a_user(session['username'], session['password'])
+    data = select_a_user(session['userid'])
     form = CallUserAccount()
     if request.method == "POST" and form.validate_on_submit():
         userdata = form.data["user"]
-        print(userdata)
-        update_user(userdata, session["username"], session["password"])
+        update_user(userdata, session["userid"])
         return redirect(url_for("profile_page"))
     else:
         if data["username"] != None:
