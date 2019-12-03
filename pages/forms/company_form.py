@@ -1,10 +1,12 @@
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, FormField, StringField, TextAreaField, SelectField, ValidationError
+from wtforms import Field, SubmitField, FormField, StringField, TextAreaField, SelectField, ValidationError, FieldList
 from wtforms.validators import DataRequired
 from wtforms.fields.html5 import DateField
 #from wtforms.fields.html5 import DateTimeLocalField
 
 from datetime import datetime
+
+from ..forms.users_form import UserAccountForm, ContactInfoForm, PersonForm
 
 msgRequired = "The {} must be filled."
 msgChosen   = "Must choose one {} of them."
@@ -63,6 +65,8 @@ class Company(FlaskForm):
     render_kw = { "class" : "form-control" }
   )
 
+
 class CompanyForm(FlaskForm):
-  company = FormField(Company)
-  submit  = SubmitField( render_kw = { "class" : "btn btn-primary"})
+  company   = FormField(Company)
+  contact   = FormField(ContactInfoForm)
+  submit    = SubmitField( render_kw = { "class" : "btn btn-primary"})

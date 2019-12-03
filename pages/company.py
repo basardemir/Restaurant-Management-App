@@ -1,39 +1,47 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session, abort
 
 from models.company import *
+from models.users import insert_contactinfo, update_contactinfo, select_a_user_and_info
 
 from .forms.company_form import CompanyForm
-
+import datetime
 
 def companies_page():
   companies = get_all_companies()
   return render_template("/companies/index.html", companies = companies)
 
 def company_add_page():
-  
-  company = CompanyForm()
-  if company.validate_on_submit():
-    
-    user_key    = -1
-    
-    company_info = (
-      company.company["name"].data,
-      company.company["information"].data,
-      company.company["mission"].data,
-      company.company["vision"].data,
-      company.company["abbrevation"].data,
-      company.company["foundation_date"].data,
-      company.company["type"].data
+  if session and session["logged_in"] == False:
+    return redirect(url_for('signin_page'))
+  else:
+    user_id     = session['userid']
+    s = select_a_user_and_info(user_id)[0]['membershiptype']
+    if s != 'Boss':
+      return redirect(url_for("access_denied_page"))
+    company = CompanyForm()
+    if company.validate_on_submit():
+      
+      contact_id  = insert_contactinfo(company.contact.data, None)
 
+      company_info = (
+        company.company["name"].data,
+        company.company["information"].data,
+        company.company["mission"].data,
+        company.company["vision"].data,
+        company.company["abbrevation"].data,
+        company.company["foundation_date"].data,
+        company.company["type"].data,
+        user_id,
+        contact_id
+      )
+
+      company_key = add_company(company_info)
+      return redirect(url_for("company_details_page", company_key = company_key))
+
+    return render_template(
+      "/companies/create.html",
+      form = company
     )
-
-    company_key = add_company(company_info)
-    return redirect(url_for("company_details_page", company_key = company_key))
-  
-  return render_template(
-    "/companies/create.html",
-    form = company
-  )
 
 def company_delete_page(company_key):
   if request.method == "POST":
@@ -43,11 +51,13 @@ def company_delete_page(company_key):
 
 def company_update_page(company_key):
   _company = get_company(company_key)
+  
   if(_company is None):
     abort(404)
   company = CompanyForm()
 
   if company.validate_on_submit():
+
     company_info = (
       company.company["name"].data,
       company.company["information"].data,

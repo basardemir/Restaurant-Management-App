@@ -12,3 +12,8 @@ def home_page():
   day_name = today.strftime("%A")
   return render_template("home.html",day=day_name)
 
+def not_found_page():
+  return render_template("error-404.html")
+
+def access_denied_page():
+  return render_template("error-403.html")

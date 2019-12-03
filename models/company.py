@@ -27,11 +27,31 @@ def get_all_companies():
         companies.append( res )
   return companies
 
+def get_id_and_name_of_companies():
+  companies = []
+  with dbapi2.connect(DB_URL) as connection:
+    with connection.cursor() as cursor:
+      query = "select company_id, name from company order by company_id;"
+      cursor.execute(query)
+      companies = list(cursor.fetchall())
+  return companies
+
 def get_company(company_key):
   res = None
   with dbapi2.connect(DB_URL) as connection:
     with connection.cursor() as cursor:
       query = "select * from company where company_id = %s;"
+      cursor.execute(query, (company_key, ))
+      company = list( cursor.fetchone() )
+      desc = list( cursor.description[i][0] for i in range(0, len(cursor.description)) )
+      res = dict(zip(desc, company ))
+  return res
+
+def get_contact_by_company(company_key):
+  res = None
+  with dbapi2.connect(DB_URL) as connection:
+    with connection.cursor() as cursor:
+      query = "select * from contactinfo where id = %s;"
       cursor.execute(query, (company_key, ))
       company = list( cursor.fetchone() )
       desc = list( cursor.description[i][0] for i in range(0, len(cursor.description)) )
@@ -45,7 +65,7 @@ def add_company(company):
   company_id = -1
   with dbapi2.connect(DB_URL) as connection:
     with connection.cursor() as cursor:
-      query = "insert into company(name, information, mission, vision, abbrevation, foundation_date, type) values(%s, %s, %s, %s, %s, %s, %s) RETURNING company_id;"
+      query = "insert into company(name, information, mission, vision, abbrevation, foundation_date, type, user_id, contact_id) values(%s, %s, %s, %s, %s, %s, %s, %s, %s) RETURNING company_id;"
       cursor.execute(query, company)
       connection.commit()
       company_id = cursor.fetchone()[0]
