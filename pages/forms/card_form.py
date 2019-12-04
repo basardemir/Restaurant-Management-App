@@ -6,31 +6,37 @@ from wtforms.fields.html5 import DateField
 from colour import Color
 from datetime import datetime, timedelta
 
-#from models.company import get_id_and_name_of_companies
+from flask import session
+
 from models.card import check_card_number
-from models.users import check_if_user_exists, DB_URL
+from models.users import check_if_user_exists, select_a_user_and_info, get_user_by_username
 
 import random
 import string
 
 msgRequired = "The {} must be filled."
 msgChosen   = "Must choose one {} of them."
+msgValidations = [
+  "Username not found.",
+  "This user is not a customer!"
+]
 typeChoices = [
   (0, 'Inactive'), 
   (1, 'Active')
 ]
-def uniqueValue():
-  return "".join([random.choice(string.ascii_uppercase + string.digits) for i in range(16) ])
 
-def checkCardNumber(form, field):
-  res = check_card_number(field.data)
-  if res == 0:
-    field.data = uniqueValue()
-    raise ValidationError("Card Number is not unique")
 
 def checkUser(form, field):
-  if not check_if_user_exists({"username":field.data}):
-    raise ValidationError("Username not found.")    
+  
+  if not check_if_user_exists( {"username":field.data} ):
+    raise ValidationError(msgValidations[0])
+  else:
+    
+    user_id = get_user_by_username(field.data)['id']
+    
+    t = select_a_user_and_info( user_id )[0]['membershiptype']
+    if t != 'Customer':
+      raise ValidationError(msgValidations[1])
   
 class Card(FlaskForm):
   points = IntegerField(
@@ -63,16 +69,16 @@ class Card(FlaskForm):
 
   card_number = StringField(
     "Card Number",
-    validators= [ Length(min=16, max=16, message = "The column size must be 16" ), checkCardNumber ],
-    default = uniqueValue(),
-    render_kw = {"class": "form-control"}
+    validators= [ Length(min=16, max=16, message = "The column size must be 16" )],
+    render_kw = {"class": "form-control", "readonly" : True}
   )
 
 class CardForm(FlaskForm):
   card      = FormField(Card)
   username  = StringField(
     "Username",
-    validators = [ checkUser ]
+    validators = [ checkUser ],
+    render_kw = { "class" : "form-control" }
   )
   submit    = SubmitField( render_kw = { "class" : "btn btn-primary"})
 

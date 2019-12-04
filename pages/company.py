@@ -13,14 +13,12 @@ def companies_page():
 def company_add_page():
   if session and session["logged_in"] == False:
     return redirect(url_for('signin_page'))
+  elif select_a_user_and_info(session['userid'])[0]['membershiptype'] != 'Boss':
+    return redirect(url_for("access_denied_page"))
   else:
-    user_id     = session['userid']
-    s = select_a_user_and_info(user_id)[0]['membershiptype']
-    if s != 'Boss':
-      return redirect(url_for("access_denied_page"))
     company = CompanyForm()
     if company.validate_on_submit():
-      
+      user_id     = session['userid']
       contact_id  = insert_contactinfo(company.contact.data, None)
 
       company_info = (
@@ -53,8 +51,10 @@ def company_update_page(company_key):
   _company = get_company(company_key)
   
   if(_company is None):
-    abort(404)
-  company = CompanyForm()
+    return redirect(url_for("not_found_page"))
+  
+  _contact  = get_contact_by_company(company_key)
+  company   = CompanyForm()
 
   if company.validate_on_submit():
 
@@ -68,6 +68,7 @@ def company_update_page(company_key):
       company.company["type"].data,
       company_key
     )
+    update_contactinfo(company.company)
     update_company(company_info)
 
     return redirect( url_for("company_details_page", company_key = company_key) )
@@ -79,7 +80,12 @@ def company_update_page(company_key):
   company.company["abbrevation"].data      = _company["abbrevation"]
   company.company["foundation_date"].data  = _company["foundation_date"]
   company.company["type"].data             = _company["type"] if _company["type"] is not None else -1
-
+  company.contact["phoneNumber"].data      = _contact["phonenumber"]
+  company.contact["email"].data            = _contact["email"]
+  company.contact["fax"].data              = _contact["fax"]
+  company.contact["homePhone"].data        = _contact["homephone"]
+  company.contact["workmail"].data         = _contact["workmail"]
+  
   return render_template(
     "/companies/update.html",
     form = company

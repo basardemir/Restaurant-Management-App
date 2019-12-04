@@ -10,13 +10,25 @@
     
     {% for field, msg in form.errors.items() %}
       {% for i in msg: %}
-        <div class="alert alert-warning" role="alert">
-          <strong>{{ msg[i][0] }}</strong>
-        </div>
+        {% if msg[i] %}
+          {% for k in msg[i] %}
+          <div class="alert alert-warning" role="alert">
+            <strong>{{ k }}</strong>
+          </div>  
+          {% endfor %}
+        {% else %}
+          <div class="alert alert-warning" role="alert">
+            <strong>{{ msg[0] }}</strong>
+          </div>  
+        {% endif%}
       {% endfor %}
     {% endfor %}
+    <div class="mt-5 form-group">
+      <label for="Username"><b>Update Username</b></label>
+      {{ form.username }}
+    </div>
+    {{ form.card( class_ = " table table-hover") }}
     
-    {{ form.card( class_ = "mt-5 table table-hover") }}
     <div class="text-center">
       {{ form.submit }}
       <a href="{{ url_for('cards_page') }}" class="btn btn-secondary">Cancel</a>

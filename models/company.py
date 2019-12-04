@@ -3,18 +3,6 @@ DB_URL = os.getenv("DATABASE_URL")
 
 import psycopg2 as dbapi2
 
-class Company:
-  def __init__(self, name, information, mission, vision, abbrevation, foundation_date, type, user_id = None, contact_id = None):
-    self.name             = name
-    self.information      = information
-    self.mission          = mission
-    self.vision           = vision
-    self.abbrevation      = abbrevation
-    self.foundation_date  = foundation_date
-    self.type             = type
-    self.user_id          = user_id
-    self.contact_id       = contact_id
-
 def get_all_companies():
   companies = []
   with dbapi2.connect(DB_URL) as connection:
@@ -36,6 +24,17 @@ def get_id_and_name_of_companies():
       companies = list(cursor.fetchall())
   return companies
 
+def get_company_by_user(user_key):
+  res = None
+  with dbapi2.connect(DB_URL) as connection:
+    with connection.cursor() as cursor:
+      query = "select * from company where user_id = %s;"
+      cursor.execute(query, (user_key, ))
+      company = list( cursor.fetchone() )
+      desc = list( cursor.description[i][0] for i in range(0, len(cursor.description)) )
+      res = dict(zip(desc, company ))
+  return res
+
 def get_company(company_key):
   res = None
   with dbapi2.connect(DB_URL) as connection:
@@ -51,8 +50,9 @@ def get_contact_by_company(company_key):
   res = None
   with dbapi2.connect(DB_URL) as connection:
     with connection.cursor() as cursor:
+      contact_id = get_company(company_key)["contact_id"]
       query = "select * from contactinfo where id = %s;"
-      cursor.execute(query, (company_key, ))
+      cursor.execute(query, (contact_id, ))
       company = list( cursor.fetchone() )
       desc = list( cursor.description[i][0] for i in range(0, len(cursor.description)) )
       res = dict(zip(desc, company ))

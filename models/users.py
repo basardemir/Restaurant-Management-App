@@ -5,6 +5,17 @@ import psycopg2 as dbapi2
 import psycopg2.extras
 
 
+def get_user_by_username(username):
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor() as cursor:
+            statement = "SELECT * FROM USERACCOUNT WHERE username = %s;"
+            cursor.execute(statement, (username, ))
+            connection.commit()
+            userlist = list( cursor.fetchone() )
+            desc = list( cursor.description[i][0] for i in range(0, len(cursor.description)) )
+            res = dict(zip(desc, userlist ))
+            return res
+
 def check_if_user_exists(data):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor() as cursor:

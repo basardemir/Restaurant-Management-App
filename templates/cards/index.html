@@ -22,6 +22,7 @@
           <th>Surname</th>
           <th>Expire Date</th>
           <th>Points</th>
+          <th>Color</th>
           <th>Card Number</th>
           <th>Company</th>
           <th>Operations</th>
@@ -30,10 +31,11 @@
       <tbody>
         {% for i in cards %}
         <tr>
-          <td>{{ i['card_id'] }}</td>
+          <td>{{ i['name'] }}</td>
           <td>{{ i['surname'] }}</td>
           <td>{{ i['expire_date'] }}</td>
           <td>{{ i['points'] }}</td>
+          <td>{{ i['color'] }}</td>
           <td>{{ i['card_number'] }}</td>
           <td>{{ i['company'] }}</td>
           <td>
@@ -43,8 +45,8 @@
             <a href="{# url_for('contact_details_page', contact_key = contact_id) #}" class="btn btn-outline-info">Contact </a>
           </td>
           <td>
-            <a href="{# url_for('card_update_page', card_key = i['card_id']) #}" class="btn btn-warning">Update</a>
-            <a href="{# url_for('card_delete_page', card_key = i['card_id']) #}" class="btn btn-danger">Delete</a>
+            <a href="{{ url_for('card_update_page', card_key = i['card_id']) }}" class="btn btn-warning">Update</a>
+            <a href="{{ url_for('card_delete_page', card_key = i['card_id']) }}" class="btn btn-danger">Delete</a>
           </td>
         </tr>
         {% endfor %}
