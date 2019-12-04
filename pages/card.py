@@ -6,6 +6,9 @@ from models.users import get_user_by_username
 
 from .forms.card_form import CardForm
 
+import random
+import string
+
 def uniqueValue():
   return "".join([random.choice(string.ascii_uppercase + string.digits) for i in range(16) ])
 

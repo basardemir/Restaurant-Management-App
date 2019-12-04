@@ -39,12 +39,7 @@
           <td>{{ i['card_number'] }}</td>
           <td>{{ i['company'] }}</td>
           <td>
-            <a href="{# url_for('user_details_page', user_key = i['user_id']) #}" class="btn btn-outline-success">Founder</a>
-          </td>
-          <td>
-            <a href="{# url_for('contact_details_page', contact_key = contact_id) #}" class="btn btn-outline-info">Contact </a>
-          </td>
-          <td>
+            <a href="{{ url_for('card_details_page', card_key = i['card_id']) }}" class="btn btn-outline-info">Details </a>
             <a href="{{ url_for('card_update_page', card_key = i['card_id']) }}" class="btn btn-warning">Update</a>
             <a href="{{ url_for('card_delete_page', card_key = i['card_id']) }}" class="btn btn-danger">Delete</a>
           </td>

@@ -11,8 +11,6 @@ from flask import session
 from models.card import check_card_number
 from models.users import check_if_user_exists, select_a_user_and_info, get_user_by_username
 
-import random
-import string
 
 msgRequired = "The {} must be filled."
 msgChosen   = "Must choose one {} of them."
