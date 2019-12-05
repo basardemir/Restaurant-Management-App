@@ -129,3 +129,22 @@ def delete_country(country_key):
             connection.commit()
             cursor.close()
 
+
+def get_all_province():
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor() as cursor:
+            query = """select
+            country,
+            province_id,
+            country.name,
+            province_name,
+            properties.population,
+            mayor,
+            timezone.timezone,
+            province_code
+            from (((province join properties on (province.properties=properties.prop_id))
+            join timezone on (province.timezone=timezone.timezone_id))
+            join country on (country.country_id=province.country));
+            """
+            cursor.execute(query)
+            return (get_results(cursor))
