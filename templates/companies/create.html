@@ -3,8 +3,6 @@
 {% block content %}
 
 <div class="container">
-  <h1 class="display-4">Create <small class="text-muted font-italic">company</small></h1>
-  <hr>
   <form method="post" action="{{ request.path }}" >
     {{ form.csrf_token }}
     
@@ -15,8 +13,12 @@
         </div>
       {% endfor %}
     {% endfor %}
-    
+    <h1 class="display-4">Create <small class="text-muted font-italic">company</small></h1>
+    <hr>
     {{ form.company( class_ = "mt-5 table table-hover") }}
+    <h1 class="display-4">Complete <small class="text-muted font-italic">contact</small></h1>
+    <hr>  
+    {{ form.contact( class_ = "mt-5 table table-hover") }}
     <div class="text-center">
       {{ form.submit }}
       <a href="{{ url_for('companies_page') }}" class="btn btn-secondary">Cancel</a>

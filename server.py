@@ -7,6 +7,8 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'db2019'
 
 app.add_url_rule("/", view_func = views.home_page)
+app.add_url_rule("/404-not-found", view_func= views.not_found_page)
+app.add_url_rule("/403-access-denied", view_func= views.access_denied_page)
 
 ## Company
 app.add_url_rule("/companies", view_func = views.companies_page, methods=["GET", "POST"])

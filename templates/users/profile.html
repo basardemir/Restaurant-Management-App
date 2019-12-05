@@ -3,10 +3,27 @@
 
 {% block content %}
 <div class="container">
-    <p>Name: {{user["name"]}} - Surname: {{user["surname"]}} - Birthday: {{user["birthday"]}} - Education: {{user["education"]}} - Gender: {{user["gender"]}} - Joined Date: {{user["joineddate"]}}<br/>Username: {{user["username"]}} - Password: {{user["password"]}} - Last Entry: {{user["lastentry"]}} - Security Answer: {{user["securityanswer"]}} - Membership: {{user["membershiptype"]}}<br/>Facebook: {{user["facebook"]}} - Twitter: {{user["twitter"]}} - Instagram: {{user["instagram"]}}<br/>Discord: {{user["discord"]}} - Youtube: {{user["youtube"]}} - Google+: {{user["googleplus"]}}<br/>Phone Number: {{user["phonenumber"]}} - Email: {{user["email"]}} - Fax: {{user["fax"]}} - Home Phone: {{user["homephone"]}} - Work Mail: {{user["workmail"]}}</p>
+    <p>Name: {{user["name"]}} - Surname: {{user["surname"]}} - Birthday: {{user["birthday"]}} - Education:
+        {{user["educationLevel"]}} - Gender: {{user["gender"]}} - Joined Date: {{user["joineddate"]}}<br />Username:
+        {{user["username"]}} - Password: {{user["password"]}} - Last Entry: {{user["lastentry"]}} - Security Answer:
+        {{user["securityanswer"]}} - Membership: {{user["membershiptype"]}}<br />Facebook: {{user["facebook"]}} -
+        Twitter: {{user["twitter"]}} - Instagram: {{user["instagram"]}}<br />Discord: {{user["discord"]}} - Youtube:
+        {{user["youtube"]}} - Google+: {{user["googleplus"]}}<br />Phone Number: {{user["phonenumber"]}} - Email:
+        {{user["email"]}} - Fax: {{user["fax"]}} - Home Phone: {{user["homephone"]}} - Work Mail: {{user["workmail"]}}
+        Photo: <img src="{{user['path']}}" alt="User Image" width="200" height="200">
+    </p>
     <a href="/users/edituseraccount">Edit User Account</a>
     <a href="/users/editperson">Edit Personal Info</a>
     <a href="/users/editcontactinfo">Edit Contact Info</a>
     <a href="/users/editsocialmedia">Edit Social Media</a>
+
+    <h1 class="title">Delete Account</h1>
+    <form action="" method="post" name="{{url_for('profile_page')}}">
+        <div class="field is-grouped">
+            <div class="control">
+                <button class="button is-primary is-small">Delete Account</button>
+            </div>
+        </div>
+    </form>
 </div>
 {% endblock %}

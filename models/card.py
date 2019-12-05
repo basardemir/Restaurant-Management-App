@@ -3,11 +3,22 @@ import psycopg2 as dbapi2
 
 DB_URL = os.getenv("DATABASE_URL")
 
+
+def check_card_number(card_number):
+  res = None
+  with dbapi2.connect(DB_URL) as connection:
+    with connection.cursor() as cursor:
+      query = "select COUNT(*) from card where card_number = %s;"
+      cursor.execute(query, (card_number, ))
+      res = cursor.fetchone()[0]
+  return res
+
+
 def get_all_cards():
   cards = []
   with dbapi2.connect(DB_URL) as connection:
     with connection.cursor() as cursor:
-      query = "select card_id, p.name as name, p.surname as surname, points, expire_date, card_number, com.name as company from card full join company as com on card.company_id = com.company_id full join useraccount as users on card.user_id = users.id full join person as p on p.id = users.person"
+      query = "select card_id, p.name as name, color , p.surname as surname, points, expire_date, card_number, com.name as company from card left outer join company as com on card.company_id = com.company_id left join useraccount as users on card.user_id = users.id inner join person as p on p.id = users.person"
       cursor.execute(query)
       desc = list( cursor.description[i][0] for i in range(0, len(cursor.description)) )
       for i in cursor:
@@ -19,7 +30,7 @@ def get_card(card_key):
   res = None
   with dbapi2.connect(DB_URL) as connection:
     with connection.cursor() as cursor:
-      query = "select * from card where card_id = %s;"
+      query = "select * from card full join useraccount on card.user_id = useraccount.id where card_id = %s;"
       cursor.execute(query, (card_key, ))
       card = list( cursor.fetchone() )
       desc = list( cursor.description[i][0] for i in range(0, len(cursor.description)) )
@@ -33,7 +44,7 @@ def add_card(card):
   card_id = -1
   with dbapi2.connect(DB_URL) as connection:
     with connection.cursor() as cursor:
-      query = "insert into card(points, card_number, is_active, color, activation_date, expire_date) values(%s, %s, %s, %s, %s, %s) RETURNING card_id;"
+      query = "insert into card(points, card_number, is_active, color, expire_date, user_id, company_id) values(%s, %s, %s, %s, %s, %s, %s) RETURNING card_id;"
       cursor.execute(query, card)
       connection.commit()
       card_id = cursor.fetchone()[0]
@@ -42,7 +53,7 @@ def add_card(card):
 def update_card(card):
   with dbapi2.connect(DB_URL) as connection:
     with connection.cursor() as cursor:
-      query = "update card set points = %s, card_number = %s, is_active = %s, color = %s, activation_date = %s, expire_date = %s where card_id = %s;"
+      query = "update card set points = %s, card_number = %s, is_active = %s, color = %s, expire_date = %s, user_id = %s, company_id=%s where card_id = %s;"
       cursor.execute(query, card)
       connection.commit()
 

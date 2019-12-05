@@ -25,8 +25,6 @@
           <th>Abbrevation</th>
           <th>Founded Date</th>
           <th>Type</th>
-          <th>Founder</th>
-          <th>Contact</th>
           <th>Operations</th>
         </tr>
       </thead>
@@ -41,12 +39,7 @@
           <td>{{ i['foundation_date'] }}</td>
           <td>{{ i['type'] }}</td>
           <td>
-            <a href="{# url_for('user_details_page', user_key = i['user_id']) #}" class="btn btn-outline-success">Founder</a>
-          </td>
-          <td>
-            <a href="{# url_for('contact_details_page', contact_key = contact_id) #}" class="btn btn-outline-info">Contact </a>
-          </td>
-          <td>
+            <a href="{{ url_for('company_details_page', company_key = i['company_id']) }}" class="btn btn-info">Details </a>
             <a href="{{ url_for('company_update_page', company_key = i['company_id']) }}" class="btn btn-warning">Update</a>
             <a href="{{ url_for('company_delete_page', company_key = i['company_id']) }}" class="btn btn-danger">Delete</a>
           </td>
