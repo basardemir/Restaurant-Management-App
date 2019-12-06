@@ -39,7 +39,7 @@ def add_user_page():
     
 def signin_page():
     if request.method == "GET":
-        return render_template("/users/login.html")
+        return render_template("/users/login.html", alert="false")
     else:
         data = {"username": request.form['username'], "password": request.form["password"], "lastEntry": datetime.datetime.now()}
         userlist = select_users()
@@ -50,8 +50,9 @@ def signin_page():
                 session['userid'] = item["id"]
                 session['logged_in'] = True
                 update_user_lastentry(data, session["userid"])
-        return redirect(url_for("users_page"))
-
+                return redirect(url_for("home_page"))
+    return render_template("/users/login.html", alert="true")
+    
 def profile_page():
     if request.method == "GET":
         user = select_a_user_and_info(session['userid'])
