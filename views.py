@@ -6,7 +6,7 @@ from pages.country import *
 from pages.users import *
 from pages.meal import *
 from pages.card import *
-
+from pages.province import *
 def home_page():
   today = dt.today()
   day_name = today.strftime("%A")

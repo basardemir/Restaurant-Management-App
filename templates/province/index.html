@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block title %}Country List{% endblock %}
+{% block content %}
+<h1 class="title">Countries</h1>
+
+<div class="container-fluid">
+<div class="column mr-4">
+	<a href="{{ url_for('country_add_page') }}" class="btn btn-primary" target="_self" title="Add">Add Entry</a>
+	<button type="submit" class="btn btn-danger">Delete Selected</button>
+</div>
+<br>
+{% if list %}
+	<form action="" method="post" name="country_list">
+		
+		<div class="container-fluid"></div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Province</th>
+					<th>Country</th>
+					<th>Population</th>
+					<th>Mayor</th>
+					<th>Timezone</th>
+					<th>Plate Code</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for C_key,P_key,C_name,P_name,pop,mayor,tz,PC in list %}
+				<tr>
+					<td>
+                        <label class="checkbox">
+                            <input type="checkbox" name="province_keys" value=" {{ P_key }}">
+                        </label>
+					</td>
+					<td><a href="{{ url_for('province_read_page', province_key=P_key) }}">{{ P_name }}</a></td>
+                    <td><a href="{{ url_for('country_read_page', country_key=C_key) }}">{{ C_name }}</a></td>
+					<td>{{ pop }}</td>
+					<td>{{ mayor }}</td>
+                    <td>{{ tz }}</td>
+                    <td>{{ PC }}</td>
+					<td>
+					<nav class="nav">
+						<a class="nav-link text-success " href="{{ url_for('province_update_page', province_key=P_key) }}" >Update</a>
+						<a class="nav-link text-danger " href="{{ url_for('province_delete_page', province_key=P_key) }}" >Delete</a>
+					</nav>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</form>
+{% endif %}
+</div>
+{% endblock %}

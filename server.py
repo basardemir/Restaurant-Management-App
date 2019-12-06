@@ -34,7 +34,12 @@ app.add_url_rule("/countries/<int:country_key>/edit", view_func=views.country_up
 app.add_url_rule("/countries/<int:country_key>/delete", view_func=views.country_delete_page)
 #TIMEZONE TABLE
 app.add_url_rule("/tz", view_func=views.tz_page,) 
-
+#Province Table
+app.add_url_rule("/provinces", view_func=views.province_page, methods=["GET","POST"])
+app.add_url_rule("/provinces/create", view_func=views.province_add_page, methods=["GET", "POST"]) 
+app.add_url_rule("/provinces/<int:province_key>", view_func=views.province_read_page)
+app.add_url_rule("/provinces/<int:province_key>/edit", view_func=views.province_update_page, methods=["GET","POST"])
+app.add_url_rule("/provinces/<int:province_key>/delete", view_func=views.province_delete_page)
 #Users
 app.add_url_rule("/users", view_func=views.users_page)
 app.add_url_rule("/users/signin", view_func=views.signin_page, methods=["GET", "POST"])
