@@ -46,16 +46,15 @@ def get_company(company_key):
       res = dict(zip(desc, company ))
   return res
 
-def get_contact_by_company(company_key):
+def get_contact_of_company(contact_id):
   res = None
   with dbapi2.connect(DB_URL) as connection:
     with connection.cursor() as cursor:
-      contact_id = get_company(company_key)["contact_id"]
       query = "select * from contactinfo where id = %s;"
       cursor.execute(query, (contact_id, ))
-      company = list( cursor.fetchone() )
+      contact = list( cursor.fetchone() )
       desc = list( cursor.description[i][0] for i in range(0, len(cursor.description)) )
-      res = dict(zip(desc, company ))
+      res = dict(zip(desc, contact ))
   return res
 
 def search_company_by_columns(company_key):
