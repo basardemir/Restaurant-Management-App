@@ -21,7 +21,7 @@
             <div class="col">
                 <div class="form-group">
                     <label for="meal_type_select">Type of the meal</label>
-                    <select multiple class="form-control" id="meal_type_select" name="meal_option">
+                    <select class="form-control" id="meal_type_select" name="meal_option">
                         {% for type in meal_types%}
                             {% if type == food_props[4]%}
                             <option value="{{type}}" selected>{{type}}</option>
@@ -66,19 +66,112 @@
             </div>
             <div class="row">
                 <div class="col-sm">
-                    <input type="number" class="form-control" placeholder="Calories" name="calories" value="">
+                    <input type="number" class="form-control" placeholder="Calories" name="calories" value="{{nutr_props[4]}}">
                 </div>
                 <div class="col-sm">
-                    <input type="number" class="form-control" placeholder="Carbohydrates" name="carbohydrates" value="">
+                    <input type="number" class="form-control" placeholder="Carbohydrates" name="carbohydrates" value="{{nutr_props[2]}}">
                 </div>
                 <div class="col-sm">
-                    <input type="number" class="form-control" placeholder="Fats" name="fats" value="">
+                    <input type="number" class="form-control" placeholder="Fats" name="fat" value="{{nutr_props[1]}}">
                 </div>
                 <div class="col-sm">
-                    <input type="number" class="form-control" placeholder="Protein" name="protein" value="">
+                    <input type="number" class="form-control" placeholder="Protein" name="protein" value="{{nutr_props[0]}}">
                 </div>
                 <div class="col-sm">
-                    <input type="number" class="form-control" placeholder="Cholesterol" name="cholesterol" value="">
+                    <input type="number" class="form-control" placeholder="Cholesterol" name="cholesterol" value="{{nutr_props[3]}}">
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="container-fluid">
+            <div class="row-center">
+                <h3>Ingredients</h3>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <div class="form-group">
+                        <select class="form-control" id="meal_type_select" name="meal_option">
+                            {% for type in meal_types%}
+                                {% if type == food_props[4]%}
+                                <option value="{{type}}" selected>{{type}}</option>
+                                {%else%}
+                                <option value="{{type}}">{{type}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <input type="number" class="form-control" placeholder="Calories" name="asdsd" value="">
+                </div>  
+                <div class="col-sm">
+                    <input type="number" class="form-control" placeholder="Calories" name="aww" value="">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm">
+                    <div class="form-group">
+                        <select class="form-control" id="meal_type_select" name="meal_option">
+                            {% for type in meal_types%}
+                                {% if type == food_props[4]%}
+                                <option value="{{type}}" selected>{{type}}</option>
+                                {%else%}
+                                <option value="{{type}}">{{type}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <input type="number" class="form-control" placeholder="Calories" name="a" value="">
+                </div>  
+                <div class="col-sm">
+                    <input type="number" class="form-control" placeholder="Calories" name="aa" value="">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm">
+                    <div class="form-group">
+                        <select class="form-control" id="meal_type_select" name="meal_option">
+                            {% for type in meal_types%}
+                                {% if type == food_props[4]%}
+                                <option value="{{type}}" selected>{{type}}</option>
+                                {%else%}
+                                <option value="{{type}}">{{type}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <input type="number" class="form-control" placeholder="Calories" name="aaa" value="">
+                </div>  
+                <div class="col-sm">
+                    <input type="number" class="form-control" placeholder="Calories" name="aaaa" value="">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm">
+                    <div class="form-group">
+                        <select class="form-control" id="meal_type_select" name="meal_option">
+                            {% for type in meal_types%}
+                                {% if type == food_props[4]%}
+                                <option value="{{type}}" selected>{{type}}</option>
+                                {%else%}
+                                <option value="{{type}}">{{type}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <input type="number" class="form-control" placeholder="Calories" name="aaaa" value="">
+                </div>  
+                <div class="col-sm">
+                    <input type="number" class="form-control" placeholder="Calories" name="as" value="">
                 </div>
             </div>
         </div>
