@@ -52,7 +52,7 @@ def food_value_page(food_id):
 def add_meal_page():
     mealTypes = ["Burger", "Fries", "Salad", "Drink", "Desert", "Side Meal"]
     if request.method == "GET":
-        return render_template("/meals/add_meal.html", meal_types = mealTypes, food_props="")
+        return render_template("/meals/add_meal.html", meal_types = mealTypes, food_props="", nutr_props="")
     else:
         print("asdd")
         print(insert_meal(request.form))
