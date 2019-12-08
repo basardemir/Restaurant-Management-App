@@ -44,17 +44,17 @@
                 <a class="nav-link" href="#">sample link</a>
               </li>
             </ul>
-            {% if session["logged_in"] == False or session == {} %}
-              <form class="form-inline my-2 my-lg-0">
-                <a href="/users/signin" class="btn btn-outline-success mr-2">Login</a>
-                <a href="/users/create" class="btn btn-outline-info">Sign Up</a>
-              </form>
-            {% else %}
+            {% if session["logged_in"] == True %}
             <form action="{{url_for('logout_page')}}" method="post" class="form-inline my-2 my-lg-0">
               <a href="/users/profile" class="btn btn-outline-info">Profile: {{ session["username"] }}</a>
               <button type="submit" class="btn btn-outline-success mr-2">Logout</a>
             </form>
-            {% endif %}
+            {% else %}
+            <form class="form-inline my-2 my-lg-0">
+              <a href="/users/signin" class="btn btn-outline-success mr-2">Login</a>
+              <a href="/users/create" class="btn btn-outline-info">Sign Up</a>
+            </form>
+          {% endif %}
           </div>
         </div>
       </nav>
