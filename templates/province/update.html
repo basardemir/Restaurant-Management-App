@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block title %} Province / Update {% endblock %}
+{% block content %}
+
+<div class="container">
+  <form method="post" action="{{ request.path }}" >
+    {{ form.csrf_token }}
+    
+    {% for field, msg in form.errors.items() %}
+      {% for i in msg: %}
+        <div class="alert alert-warning" role="alert">
+          <strong>{{ msg[i][0] }}</strong>
+        </div>
+      {% endfor %}
+    {% endfor %}
+    <h1 class="display-4">Update <small class="text-muted font-italic">province</small></h1>
+    <hr>
+    {{ form.province( class_ = "mt-5 table table-hover") }}
+    <h1 class="display-4">Properties</h1>
+    <hr>  
+    {{ form.prop( class_ = "mt-5 table table-hover") }}
+    <div class="text-center">
+      {{ form.submit }}
+      <a href="{{ url_for('province_page') }}" class="btn btn-secondary">Cancel</a>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

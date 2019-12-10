@@ -1,17 +1,16 @@
 {% extends "layout.html" %}
-{% block title %}Country List{% endblock %}
+{% block title %}Province List{% endblock %}
 {% block content %}
-<h1 class="title">Countries</h1>
 
 <div class="container-fluid">
 <div class="column mr-4">
-	<a href="{{ url_for('country_add_page') }}" class="btn btn-primary" target="_self" title="Add">Add Entry</a>
-	<button type="submit" class="btn btn-danger">Delete Selected</button>
+	<a href="{{ url_for('province_add_page') }}" class="btn btn-primary" target="_self" title="Add">Add Entry</a>
 </div>
 <br>
+<h1 class="display-4">Provinces: Displaying {{ count }} Entries</h1>
 {% if list %}
-	<form action="" method="post" name="country_list">
-		
+	<form action="" method="post" name="province_list">
+		<button type="submit" class="btn btn-danger">Delete Selected</button>
 		<div class="container-fluid"></div>
 		<table class="table table-striped">
 			<thead>

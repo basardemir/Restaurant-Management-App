@@ -39,7 +39,7 @@ app.add_url_rule("/provinces", view_func=views.province_page, methods=["GET","PO
 app.add_url_rule("/provinces/create", view_func=views.province_add_page, methods=["GET", "POST"]) 
 app.add_url_rule("/provinces/<int:province_key>", view_func=views.province_read_page)
 app.add_url_rule("/provinces/<int:province_key>/edit", view_func=views.province_update_page, methods=["GET","POST"])
-app.add_url_rule("/provinces/<int:province_key>/delete", view_func=views.province_delete_page)
+app.add_url_rule("/provinces/<int:province_key>/delete", view_func=views.province_delete_page) #question
 #Users
 app.add_url_rule("/users", view_func=views.users_page)
 app.add_url_rule("/users/signin", view_func=views.signin_page, methods=["GET", "POST"])

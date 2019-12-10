@@ -1,23 +1,5 @@
-import os
-
-online = False
-if online:
-    DB_URL = os.getenv("DATABASE_URL")
-else:
-    DB_URL = "postgres://ivpallnyfezioy:075baf8e129b0d52dbd6d87dd3c774363b0b10b499921f821378ed7084bfc744@ec2-46-137-187-23.eu-west-1.compute.amazonaws.com:5432/dagmb1jla3rmdp"
-
+from .db_prop import DB_URL, get_results
 import psycopg2 as dbapi2
-
-def get_results(cursor):
-    desc = cursor.description
-    column_names = [col[0] for col in desc]
-    data = [dict(zip(column_names,row)) for row in cursor.fetchall()] #array of dict
-    #data[0].values() values of the first row
-    res = []
-    for i in data:
-        res.append(i.values())
-    cursor.close()
-    return (res) #2d array 
 
 def get_all_countries():
     with dbapi2.connect(DB_URL) as connection:
@@ -116,6 +98,7 @@ def update_country(country):
             where country_id = %s"""
             cursor.execute(query, (country[16],country[2],country[1],country[3],country[4],country[5],country[6],country[7],country[8], country[0]))
             #print(query % (country[16],country[2],country[1],country[3],country[4],country[5],country[6],country[7],country[8], country[0]))
+
 def delete_country(country_key):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor() as cursor:
@@ -130,21 +113,3 @@ def delete_country(country_key):
             cursor.close()
 
 
-def get_all_province():
-    with dbapi2.connect(DB_URL) as connection:
-        with connection.cursor() as cursor:
-            query = """select
-            country,
-            province_id,
-            country.name,
-            province_name,
-            properties.population,
-            mayor,
-            timezone.timezone,
-            province_code
-            from (((province join properties on (province.properties=properties.prop_id))
-            join timezone on (province.timezone=timezone.timezone_id))
-            join country on (country.country_id=province.country));
-            """
-            cursor.execute(query)
-            return (get_results(cursor))

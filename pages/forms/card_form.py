@@ -3,7 +3,7 @@ from wtforms import SelectField, FormField, SubmitField, StringField, RadioField
 from wtforms.validators import DataRequired, Optional, Length
 from wtforms_components import IntegerField, ColorField
 from wtforms.fields.html5 import DateField
-from colour import Color
+#from colour import Color
 from datetime import datetime, timedelta
 
 from flask import session
