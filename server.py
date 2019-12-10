@@ -58,5 +58,8 @@ app.add_url_rule("/meals/add_meal", view_func=views.add_meal_page, methods=["GET
 app.add_url_rule("/meals/<int:food_id>/delete", view_func=views.delete_meal_page, methods=["GET", "POST"])
 app.add_url_rule("/meals/<int:food_id>/update", view_func=views.update_meal_page, methods=["GET", "POST"])
 
+#Ingredients
+app.add_url_rule("/ingredients/add", view_func=views.add_ingredient_page, methods=["GET", "POST"])
+
 if __name__ == "__main__":
     app.run()

@@ -57,8 +57,7 @@ def get_contactinfo_with_id(contactinfo_id):
 def update_contactinfo_with_id(contactinfo_id, data):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor(cursor_factory=dbapi2.extras.RealDictCursor) as cursor:
-            id = select_a_contactinfo(userid)["id"]
-            statemenryt = "UPDATE CONTACTINFO SET phoneNumber=%s, email=%s, fax=%s, homePhone=%s, workmail=%s WHERE id=%s"
+            statement = "UPDATE CONTACTINFO SET phoneNumber=%s, email=%s, fax=%s, homePhone=%s, workmail=%s WHERE id=%s"
             cursor.execute(statement, (data["phoneNumber"], data["email"], data["fax"], data["homePhone"], data["workmail"], contactinfo_id))
             connection.commit()
 

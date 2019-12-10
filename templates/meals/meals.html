@@ -75,7 +75,13 @@
     </div>  
     {% if userType %}
     <nav class="nav justify-content-center">
-        <a class="btn btn-primary btn-lg active" href="/meals/add_meal" role='button'>Add a meal</a>
+        <div class="col-md">
+            <a class="btn btn-primary btn-lg" href="/meals/add_meal" role='button'>Add a meal</a>
+        </div>
+        <div class="col-xs-1-12">
+            <a class="btn btn-primary btn-lg" href="/meals/add_ingred" role='button'>Add a ingredient</a>
+        </div>
+        
     </nav>  
     {% endif %}
 </div>

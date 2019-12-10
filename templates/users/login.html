@@ -3,21 +3,35 @@
 
 {% block content %}
 <h1 class="title">Login</h1>
-<form action="" method="post" name="{{url_for('add_user_page')}}">
+<script>
+    $(document).ready(() => {
+        if ("{{alert}}" == "true") {
+            alert("User doesn't exist");
+        }
+    });
+</script>
+<form id="form" action="" method="post" name="{{url_for('add_user_page')}}" id="form">
     <div class="field">
         <label for="username" class="label">Username</label>
         <div class="control">
-            <input type="text" name="username" class="input" required="required"/>
+            <input type="text" name="username" class="input" required="required" />
         </div>
         <label for="password" class="label">Password</label>
         <div class="control">
-            <input type="password" name="password" class="input" required="required"/>
+            <input type="password" name="password" class="input" required="required" />
         </div>
     </div>
-    <div class="field is-grouped">
+    <div id="buttondiv" class="field is-grouped">
         <div class="control">
-            <button class="button is-primary is-small">Sign in</button>
+            <button id="button" class="button is-primary is-small">Sign in</button>
         </div>
     </div>
 </form>
+<script>
+    $(document).ready(() => {
+        $("#form").submit(() => {
+            $("#buttondiv").html("<div class='spinner-border' role = 'status'></div> ")
+        })
+    });
+</script>
 {% endblock %}

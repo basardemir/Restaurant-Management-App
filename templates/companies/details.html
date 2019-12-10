@@ -2,19 +2,48 @@
 {% block title %}Company Details{% endblock %}
 {% block content %}
 {% if company %}
+
 <div class="container">
   <div class="row">
-    <ul  class="list-unstyled">
-      <li>{{ company["name"] }}</li>
-      <li>{{ company["information"] }}</li>
-      <li>{{ company["mission"] }}</li>
-      <li>{{ company["vision"] }}</li>
-      <li>{{ company["abbrevation"] }}</li>
-      <li>{{ company["foundation_date"] }}</li>
-      <li>{{ company["type"] }}</li>
-      <li>{{ company["contact_id"] }}</li>
-    </ul>
+    <div class="col-12 row">
+      <div class="col-6">
+        <h1 class="display-4">Company </h1>
+        <hr >
+        <ul>
+          <li>Name: {{ company["name"] }}</li>
+          <li>Information: {{ company["information"] }}</li>
+          <li>Mission: {{ company["mission"] }}</li>
+          <li>Vision: {{ company["vision"] }}</li>
+          <li>Abbrevation: {{ company["abbrevation"] }}</li>
+          <li>Foundation Date: {{ company["foundation_date"] }}</li>
+          <li>Company Type: {{ company["type"] }}</li>
+        </ul>
+      </div>
+      <div class="col-6">
+        <h1 class="display-4 ">Founder</h1>
+        <hr >
+        <div class="text-center">
+          <img src="{{ founder[0]['path'] }}" class="img-fluid round-circle" width="250" height="250">
+        </div>
+        <ul>
+          <li>Founder: {{ founder[0]['name '] }} {{ founder[0]['surname']  }}  </li>
+          <li>Gender: {{ founder[0]['gender'] }}</li>
+          <li>Birthday: {{ founder[0]['birthday'] }}</li>
+          <li>Education Level: {{ founder[0]['educationlevel'] }}</li>
+        </ul>
+      </div>
+    </div>
   </div>
+    <h1 class="display-4 ">Contact to Company</h1>
+    <hr >
+    <ul>
+      <li>Phone Number: {{ contact['phonenumber '] }}</li>
+      <li>Email: {{ contact['email'] }}</li>
+      <li>Fax: {{ contact['fax'] }}</li>
+      <li>2nd Phone Number: {{ contact['homephone'] }}</li>
+      <li>Work Mail: {{ contact['workmail'] }}</li>
+    </ul>
 </div>
+
 {% endif %}
 {% endblock %}

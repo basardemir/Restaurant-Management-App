@@ -19,27 +19,30 @@ def users_page():
     return render_template("/users/read.html", users = userlist)
 
 def add_user_page():
-    useraccount = Combine()
-    if useraccount.validate_on_submit():
-        photopath = "/static/" + request.files["photo-photo"].filename
-        data = {"photo": photopath, "username": useraccount.data["useraccount"]['username'], "password": useraccount.data["useraccount"]["password"], "phoneNumber": useraccount.data["contactinfo"]["phoneNumber"], "email": useraccount.data["contactinfo"]["email"], "fax": useraccount.data["contactinfo"]["fax"], "homePhone": useraccount.data["contactinfo"]["homePhone"], "workmail": useraccount.data["contactinfo"]["workmail"], "lastEntry": datetime.datetime.now(), "joinedDate": datetime.datetime.now(), "securityAnswer": useraccount.data["useraccount"]["securityAnswer"], "membership": 0, "name": useraccount.data["person"]["name"], "surname": useraccount.data["person"]["surname"], "gender": useraccount.data["person"]["gender"], "birthday": useraccount.data["person"]["birthday"], "educationLevel": useraccount.data["person"]["educationLevel"], "facebook": useraccount.data["socialmedia"]["facebook"], "twitter": useraccount.data["socialmedia"]["twitter"], "instagram": useraccount.data["socialmedia"]["instagram"], "discord": useraccount.data["socialmedia"]["discord"], "youtube": useraccount.data["socialmedia"]["youtube"], "googleplus": useraccount.data["socialmedia"]["googleplus"]}
-        if useraccount.data["useraccount"]["membershiptype"] == "Boss":
-            data["membership"] = 1
-        else:
-            data["membership"] = 2
-        response = create_user(data)
-        if response[0]:
-            request.files["photo-photo"].save("./static/" + request.files["photo-photo"].filename)
-            session['username'] = data["username"]
-            session['password'] = data["password"]
-            session['userid'] = response[1]
-            session['logged_in'] = True
-        return redirect(url_for("users_page"))
-    return render_template("/users/create.html", form=useraccount)
-    
+    if request.method == "GET":
+        useraccount = Combine()
+        return render_template("/users/create.html", form=useraccount)
+    else:
+        useraccount = Combine()
+        if useraccount.validate_on_submit():
+            photopath = "/static/" + request.files["photo-photo"].filename
+            data = {"photo": photopath, "username": useraccount.data["useraccount"]['username'], "password": useraccount.data["useraccount"]["password"], "phoneNumber": useraccount.data["contactinfo"]["phoneNumber"], "email": useraccount.data["contactinfo"]["email"], "fax": useraccount.data["contactinfo"]["fax"], "homePhone": useraccount.data["contactinfo"]["homePhone"], "workmail": useraccount.data["contactinfo"]["workmail"], "lastEntry": datetime.datetime.now(), "joinedDate": datetime.datetime.now(), "securityAnswer": useraccount.data["useraccount"]["securityAnswer"], "membership": 0, "name": useraccount.data["person"]["name"], "surname": useraccount.data["person"]["surname"], "gender": useraccount.data["person"]["gender"], "birthday": useraccount.data["person"]["birthday"], "educationLevel": useraccount.data["person"]["educationLevel"], "facebook": useraccount.data["socialmedia"]["facebook"], "twitter": useraccount.data["socialmedia"]["twitter"], "instagram": useraccount.data["socialmedia"]["instagram"], "discord": useraccount.data["socialmedia"]["discord"], "youtube": useraccount.data["socialmedia"]["youtube"], "googleplus": useraccount.data["socialmedia"]["googleplus"]}
+            if useraccount.data["useraccount"]["membershiptype"] == "Boss":
+                data["membership"] = 1
+            else:
+                data["membership"] = 2
+            response = create_user(data)
+            if response[0]:
+                request.files["photo-photo"].save("./static/" + request.files["photo-photo"].filename)
+                session['username'] = data["username"]
+                session['password'] = data["password"]
+                session['userid'] = response[1]
+                session['logged_in'] = True
+            return redirect(url_for("users_page"))
+
 def signin_page():
     if request.method == "GET":
-        return render_template("/users/login.html")
+        return render_template("/users/login.html", alert="false")
     else:
         data = {"username": request.form['username'], "password": request.form["password"], "lastEntry": datetime.datetime.now()}
         userlist = select_users()
@@ -50,8 +53,9 @@ def signin_page():
                 session['userid'] = item["id"]
                 session['logged_in'] = True
                 update_user_lastentry(data, session["userid"])
-        return redirect(url_for("users_page"))
-
+                return redirect(url_for("home_page"))
+    return render_template("/users/login.html", alert="true")
+    
 def profile_page():
     if request.method == "GET":
         user = select_a_user_and_info(session['userid'])

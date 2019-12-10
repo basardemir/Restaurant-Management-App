@@ -4,7 +4,10 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     
@@ -41,17 +44,17 @@
                 <a class="nav-link" href="#">sample link</a>
               </li>
             </ul>
-            {% if session["logged_in"] == False or session == {} %}
-              <form class="form-inline my-2 my-lg-0">
-                <a href="/users/signin" class="btn btn-outline-success mr-2">Login</a>
-                <a href="/users/create" class="btn btn-outline-info">Sign Up</a>
-              </form>
-            {% else %}
+            {% if session["logged_in"] == True %}
             <form action="{{url_for('logout_page')}}" method="post" class="form-inline my-2 my-lg-0">
               <a href="/users/profile" class="btn btn-outline-info">Profile: {{ session["username"] }}</a>
               <button type="submit" class="btn btn-outline-success mr-2">Logout</a>
             </form>
-            {% endif %}
+            {% else %}
+            <form class="form-inline my-2 my-lg-0">
+              <a href="/users/signin" class="btn btn-outline-success mr-2">Login</a>
+              <a href="/users/create" class="btn btn-outline-info">Sign Up</a>
+            </form>
+          {% endif %}
           </div>
         </div>
       </nav>
