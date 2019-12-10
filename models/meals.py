@@ -41,8 +41,6 @@ def insert_meal(meal_info):
 
             statement2 = "insert into nutritional_value (protein, fat, carbohydrates, cholesterol, calories) values (%(protein)s, %(fat)s, %(carbohydrates)s, %(cholesterol)s, %(calories)s) RETURNING nutritional_value_id;"
             
-            print("asd")
-            
             cursor.execute(statement2, {'protein': meal_info['protein'], 'fat': meal_info['fat'], 'carbohydrates': meal_info['carbohydrates'], 'cholesterol': meal_info['cholesterol'],'calories': meal_info['calories']})
 
             connection.commit()
