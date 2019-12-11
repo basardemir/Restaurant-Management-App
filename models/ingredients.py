@@ -83,6 +83,15 @@ def get_ingredient_by_id(ingred_id):
             ingredient = cursor.fetchall()[0]
             return ingredient
 
+def get_names():
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor() as cursor:
+            statement = "select ingredient_name, ingredient_id from ingredient;"
+            cursor.execute(statement)
+            names = cursor.fetchall()
+            connection.commit()
+            return names
+
 
 
 

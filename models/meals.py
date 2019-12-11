@@ -57,9 +57,18 @@ def insert_meal(meal_info):
             connection.commit()
             
             food_id = cursor.fetchone()[0]
+            stat = "insert into ingredients_for_food (food_id, ingredient_id, amount) values ( %(food_id)s, %(ingred_id)s, %(amount)s);"
+            for i in range(1, 5):
+                if meal_info['ingredient'+str(i)] != None and int(meal_info['Amount'+str(i)] != "") != 0:
+                    cursor.execute(stat, {'food_id': food_id, 'ingred_id': meal_info['ingredient'+str(i)], 'amount': meal_info['Amount'+str(i)]})
+
+            connection.commit()
 
             
-            return food_id
+            
+
+            
+            
 
 
 def update_meal(new_props, food_id):
@@ -91,7 +100,8 @@ def delete_meal(food_id):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor() as cursor:
             
-            
+            statement3 = "delete from ingredients_for_food where food_id=%(food_id)s;"
+            cursor.execute(statement3, {'food_id': food_id})
 
             statement2 = "select nutrition_id from food where food_id = %(food_id)s"
             cursor.execute(statement2, {'food_id': food_id})
@@ -133,6 +143,7 @@ def select_all_by_id(food_id):
 
 
             return food_props, nutr_props
+
 
         
             

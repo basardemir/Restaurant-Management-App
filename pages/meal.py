@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import psycopg2 as dbapi2
 import os
 from models.meals import *
+from models.ingredients import *
 # DB_URL = os.getenv("DATABASE_URL")
 DB_URL = "postgres://ivpallnyfezioy:075baf8e129b0d52dbd6d87dd3c774363b0b10b499921f821378ed7084bfc744@ec2-46-137-187-23.eu-west-1.compute.amazonaws.com:5432/dagmb1jla3rmdp"
 
@@ -51,11 +52,11 @@ def food_value_page(food_id):
 
 def add_meal_page():
     mealTypes = ["Burger", "Fries", "Salad", "Drink", "Desert", "Side Meal"]
+    ingredients = get_names()
     if request.method == "GET":
-        return render_template("/meals/add_meal.html", meal_types = mealTypes, food_props="", nutr_props="")
+        return render_template("/meals/add_meal.html", meal_types = mealTypes, ingreds = ingredients, food_props="", nutr_props="")
     else:
-        print("asdd")
-        print(insert_meal(request.form))
+        insert_meal(request.form)
         return redirect(url_for('meal_page')) 
 
 def delete_meal_page(food_id):
