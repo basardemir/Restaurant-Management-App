@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block title %}Delete Item{%endblock%}
+{%block content%}
+
+<div class="container" style="margin-bottom: 100px;">
+    <div class="row">
+        <h2>Are you sure to delete {{name}}</h2>
+    </div>
+    <nav class="nav justify-content">
+        <form action="" method="post">
+            <button type="submit" class="btn btn-success btn-lg" style="margin-right: 50px;">Yes</button>  
+        </form>
+        <a href="/ingredients" class="btn btn-danger btn-lg active" role="button" style>No</a> 
+    </nav>
+    
+
+</div>
+
+
+
+
+{%endblock%}

@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block title %} Update Ingredient {% endblock %}
+{% block content %}
+
+<div class="container">
+  <form method="post" action="{{ request.path }}", enctype="multipart/form-data" >
+    {{ form.csrf_token }}
+    
+    {% for field, msg in form.errors.items() %}
+      {% for i in msg: %}
+        {% if msg[i] %}
+          {% for k in msg[i] %}
+          <div class="alert alert-warning" role="alert">
+            <strong>{{ k }}</strong>
+          </div>  
+          {% endfor %}
+        {% else %}
+          <div class="alert alert-warning" role="alert">
+            <strong>{{ msg[0] }}</strong>
+          </div>  
+        {% endif%}
+      {% endfor %}
+    {% endfor %}
+    
+    <h1 class="display-4">Update an Ingredient</h1>
+    
+    <hr>
+      {{form.ingredient.ingred_name}}
+      <hr>
+      {{form.ingredient.ingred_type}}
+      <hr>
+      {{form.ingredient.unit_weight}}
+      <hr>
+      {{form.ingredient.volume}}
+      <hr>
+      {{form.ingredient.ideal_temp}}
+      <hr>
+      {{form.submit_button}}
+  </form>
+</div>
+
+{% endblock %}
