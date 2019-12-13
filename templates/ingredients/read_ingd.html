@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% block title %}Ingredients{%endblock%}
+{%block content%}
+
+<div class="container-fluid">
+    <h1>
+        Ingredients 
+    </h1>
+    <hr>
+    <div class="col">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Picture</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Unit Weight</th>
+                    <th>Volume</th>
+                    <th>Temperature</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ingred_id, path, name, type, weight, vol, tempr in ing_table %}
+                <tr>
+                    <td><img style="max-height:65px; max-width:65px; overflow: hidden" src="{{path}}" class="rounded float-left" alt="Ingredient"></td>
+                    <td>{{name}}</td>
+                    <td>{{type}}</td>
+                    <td>{{weight}}</td>
+                    <td>{{vol}}</td>
+                    <td>{{tempr}}</td> 
+                    <td>                            
+                        <nav class="nav">
+                            <a class="nav-link" href="{{url_for('ingredient_nutr_values', ingred_id = ingred_id)}}">Nutrition Values</a>
+                            {% if userType %}
+                            <a class="nav-link text-success " href="{{url_for('update_ingredient_page', ingred_id = ingred_id)}}" >Update</a>
+                            <a class="nav-link text-danger " href="{{url_for('delete_ingredient_page', ingred_id = ingred_id)}}" >Delete</a>
+                            {% endif %}
+                        </nav>                          
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>  
+    </div>  
+    {% if userType %}
+    <nav class="nav justify-content-center">
+        <div class="col-md">
+            <a class="btn btn-primary btn-lg" href="/ingredients/add" role='button'>Add a Ingredient</a>
+        </div>
+    </nav>  
+    {% endif %}
+</div>
+
+{%endblock%}

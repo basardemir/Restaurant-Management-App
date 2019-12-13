@@ -21,5 +21,79 @@ def add_ingredient(data):
             connection.commit()
 
 
+def show_all_ingredients():
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor() as cursor:
+            statement = "select ingredient_id, path, ingredient_name, ingredient_type, unit_weight, ingredient_volume, temperature_for_stowing from (photo inner join ingredient on photo_id = id);"
+            cursor.execute(statement)
+            ingred_table = cursor.fetchall()
+            connection.commit()
+            return ingred_table
+
+def get_nutr_values(ingred_id):
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor() as cursor:
+            statement = "select ingredient_name, calories, carbohydrates, fat, protein, cholesterol from (nutritional_value join ingredient on nutrition_id = nutritional_value_id) where ingredient_id = %(ingred_id)s;"
+            cursor.execute(statement, {'ingred_id': ingred_id})
+            nutrition_table = cursor.fetchall()
+            return nutrition_table
+
+def select_ingred_name_by_id(ingred_id):
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor() as cursor:
+            statement = "select ingredient_name from ingredient where ingredient_id = %(ingred_id)s; "
+            cursor.execute(statement, {'ingred_id': ingred_id})
+            ingred_name = cursor.fetchone()[0]
+            connection.commit()
+            return ingred_name
+
+def delete_ingred(ingred_id):
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor() as cursor:
+            statement = "select photo_id, nutrition_id from ingredient where (ingredient_id = %(ingred_id)s);"
+            cursor.execute(statement, {'ingred_id': ingred_id})
+
+            photo_id, nutrition_id = cursor.fetchone()
+            print(photo_id, nutrition_id)
+
+            statement4 = "delete from ingredient where ingredient_id=%(id)s;"
+            cursor.execute(statement4, {'id': ingred_id})
+
+            statement2 = "delete from photo where id = %(photo_id)s;"
+            cursor.execute(statement2, {'photo_id': photo_id})
+
+            statement3 = "delete from nutritional_value where(nutritional_value_id = %(nutr_id)s);"
+            cursor.execute(statement3, {'nutr_id': nutrition_id})
+
+            connection.commit()
+
+def update_ingred(new_props, ingred_id):
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor() as cursor:
+            print(new_props['ingredient-ingred_name'])
+            statement = "update ingredient set ingredient_name=%(ingred_name)s, ingredient_type=%(ingred_type)s, unit_weight=%(weight)s, ingredient_volume=%(volume)s, temperature_for_stowing=%(temp)s where ingredient_id = %(ingred_id)s;"
+            cursor.execute(statement, {'ingred_name': new_props['ingredient-ingred_name'], 'ingred_type':new_props['ingredient-ingred_type'], 'weight':new_props['ingredient-unit_weight'], 'volume':new_props['ingredient-volume'], 'temp':new_props['ingredient-ideal_temp'], 'ingred_id': ingred_id})
+            connection.commit()
+
+def get_ingredient_by_id(ingred_id):
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor() as cursor:
+            statement = "select ingredient_name, ingredient_type, unit_weight, ingredient_volume, temperature_for_stowing from ingredient where ingredient_id = %(ingred_id)s;"
+            cursor.execute(statement, {'ingred_id': ingred_id})
+            ingredient = cursor.fetchall()[0]
+            return ingredient
+
+def get_names():
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor() as cursor:
+            statement = "select ingredient_name, ingredient_id from ingredient;"
+            cursor.execute(statement)
+            names = cursor.fetchall()
+            connection.commit()
+            return names
+
+
+
+
 
 

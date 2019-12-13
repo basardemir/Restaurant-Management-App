@@ -27,3 +27,7 @@ class Ingredient_Page(FlaskForm):
     nutrition = FormField(Nutrition_Form)
     photo = FormField(Photo_Form)
     submit_button = SubmitField( render_kw = { "class" : "btn btn-primary"})
+
+class Ing_with_Button(FlaskForm):
+    ingredient = FormField(Ingredient_Form)
+    submit_button = SubmitField( render_kw = { "class" : "btn btn-primary"})

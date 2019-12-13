@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block title %}Nutritional Value{%endblock%}
+{%block content%}
+
+
+<h1>
+    Nutritional Information for {{nutritions[0][0]}}
+</h1>
+<div class="container-fluid">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Protein</th>
+                <th>Fat</th>
+                <th>Carbohydrates</th>
+                <th>Cholesterol</th>
+                <th>Calories(kcal)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for food_name, calorie, carbo, fat, protein, chol in nutritions%}
+            <tr>
+                <td>{{protein}}g</td>
+                <td>{{fat}}g</td>
+                <td>{{carbo}}g</td>
+                <td>{{chol}}g</td>
+                <td>{{calorie}}kcal</td>  
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>  
+    <a href="/ingredients" class="btn btn-secondary btn-lg active" role="button">Back</a>    
+</div>
+
+{%endblock%}

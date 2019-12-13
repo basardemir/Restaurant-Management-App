@@ -4,7 +4,7 @@
 {% block content %}
 <ul class="list-group">
     {% for item in users %}
-        <li class="list-group-item">Username: {{item["username"]}} - Password: {{item["password"]}} - Last Entry: {{item["lastentry"]}} - Joined Date: {{item["joineddate"]}} - Security Answer: {{item["securityanswer"]}} - Membership: {{item["membershiptype"]}} <br/> Photo: <img src="{{item['path']}}" alt="User Image" width="200" height="200"></li>
+        <li class="list-group-item">Username: {{item["username"]}} - Last Entry: {{item["lastentry"]}} - Joined Date: {{item["joineddate"]}} - Security Answer: {{item["securityanswer"]}} - Membership: {{item["membershiptype"]}} <br/> Photo: <img src="{{item['path']}}" alt="User Image" width="200" height="200"></li>
     {% endfor %}
 </ul>
 {% endblock %}
