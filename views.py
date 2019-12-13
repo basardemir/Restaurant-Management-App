@@ -8,6 +8,7 @@ from pages.meal import *
 from pages.card import *
 from pages.province import *
 from pages.ingredient import *
+from pages.location import *
 
 def home_page():
   today = dt.today()

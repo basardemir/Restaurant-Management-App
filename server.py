@@ -40,6 +40,12 @@ app.add_url_rule("/provinces/create", view_func=views.province_add_page, methods
 app.add_url_rule("/provinces/<int:province_key>", view_func=views.province_read_page)
 app.add_url_rule("/provinces/<int:province_key>/edit", view_func=views.province_update_page, methods=["GET","POST"])
 app.add_url_rule("/provinces/<int:province_key>/delete", view_func=views.province_delete_page) #question
+#Location Table
+app.add_url_rule("/location", view_func=views.location_page, methods=["GET", "POST"])
+app.add_url_rule("/location/create", view_func=views.location_add_page, methods=["GET", "POST"]) 
+app.add_url_rule("/location/<int:location_key>", view_func=views.location_read_page)
+app.add_url_rule("/location/<int:location_key>/edit", view_func=views.location_update_page, methods=["GET","POST"])
+app.add_url_rule("/location/<int:location_key>/delete", view_func=views.location_delete_page) #question
 #Users
 app.add_url_rule("/users", view_func=views.users_page)
 app.add_url_rule("/users/signin", view_func=views.signin_page, methods=["GET", "POST"])

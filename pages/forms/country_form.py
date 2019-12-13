@@ -4,6 +4,7 @@ from wtforms.validators import DataRequired, NumberRange, Length
 from wtforms_components import IntegerField
 import psycopg2 as dbapi2
 msg = "The column must be filled."
+msgRequired = "The {} column must be filled"
 
 url="postgres://ivpallnyfezioy:075baf8e129b0d52dbd6d87dd3c774363b0b10b499921f821378ed7084bfc744@ec2-46-137-187-23.eu-west-1.compute.amazonaws.com:5432/dagmb1jla3rmdp"
 connection = dbapi2.connect(url)
@@ -12,7 +13,22 @@ cursor.execute("select * from timezone")
 timezone = cursor.fetchall()
 cursor.execute("select country_id, name from country")
 country = cursor.fetchall()
+cursor.execute("select province_id, province_name from province") #il_idsi il adı ve ilin bağlı olduğu ülke
+province_list = cursor.fetchall()
 cursor.close()
+
+def refresh():
+    url="postgres://ivpallnyfezioy:075baf8e129b0d52dbd6d87dd3c774363b0b10b499921f821378ed7084bfc744@ec2-46-137-187-23.eu-west-1.compute.amazonaws.com:5432/dagmb1jla3rmdp"
+    connection = dbapi2.connect(url)
+    cursor = connection.cursor()
+    cursor.execute("select * from timezone")
+    timezone = cursor.fetchall()
+    cursor.execute("select country_id, name from country")
+    country = cursor.fetchall()
+    cursor.execute("select province_id, province_name from province") #il_idsi il adı ve ilin bağlı olduğu ülke
+    province_list = cursor.fetchall()
+    cursor.close()
+
 
 class CountryForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired(message = msg),Length(max=30, min=4,message="Name length has to be between 4 and 30")])
@@ -51,9 +67,22 @@ class Province(FlaskForm):
     province_code = IntegerField("Province Code", validators=[DataRequired(message=msg), NumberRange(min=0, message="Cannot be smaller than 0")])
     timezone = SelectField("Timezone", choices=[(str(tz_id),tz_name) for tz_id, tz_name in timezone])
 
+class Location(FlaskForm):
+    country = SelectField("Country", choices=[(str(c_id),c_name) for c_id, c_name in country])
+    province = SelectField("Province", choices=[(str(p_id), p_name) for p_id, p_name in province_list])
+    county = StringField("County", validators=[DataRequired(message=msgRequired.format("County")), Length(max=40, message="County lenght has to be shorter than 40 characters")])
+    neighborhood = StringField("Neighborhood", validators=[DataRequired(message=msgRequired.format("Neighborhood")),Length(max=40, message="Neighborhood lenght has to be shorter than 40 characters")])
+    street = StringField("Street", validators=[DataRequired(message=msgRequired.format("Street")),Length(max=40, message="Neighborhood lenght has to be shorter than 40 characters")])
+    zipcode = IntegerField("Zipcode", validators=[DataRequired(message=msgRequired.format("Zipcode")), NumberRange(min=10000, max=99999, message="Invalid Zipcode")])
+    description = TextAreaField("Description", validators=[Length(max=200, message="Description cannot be longer than 200 characters" )])
+
 class ProvinceForm(FlaskForm):
     province = FormField(Province)
     prop = FormField(Properties)
     submit = SubmitField( render_kw = { "class" : "btn btn-primary"})
 
+class LocationForm(FlaskForm):
+    location = FormField(Location)
+    coord = FormField(Coordinates)
+    submit = SubmitField( render_kw = { "class" : "btn btn-primary"})
 
