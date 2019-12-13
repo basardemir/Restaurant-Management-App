@@ -4,3 +4,4 @@ gunicorn>=19.9
 Flask-WTF==0.14
 WTForms-Components==0.10.4
 colour==0.1.5
+passlib==1.7.2
