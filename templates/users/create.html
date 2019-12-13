@@ -16,5 +16,23 @@
         {{form.submit()}}
       </div>
   </form>
+  <script>
+      $(document).ready(() => {
+        let decodeHtmlEntity = function(x) {
+          return x.replace(/&#(\d+);/g, function(match, dec) {
+            return String.fromCharCode(dec);
+          });
+        };
+        let obj = JSON.parse(decodeHtmlEntity("{{errors}}"));
+        let str = '';
+        for(let i in obj){
+          for(let j in obj[i]){
+            str += obj[i][j] + '\n';
+          }
+        }
+        if(str != '')
+          alert(str);
+      });
+    </script>  
 </div>
 {% endblock %}

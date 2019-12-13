@@ -114,7 +114,7 @@ INIT_STATEMENTS = [
         membershiptype INTEGER,
         lastEntry DATE, 
         username VARCHAR(25), 
-        password VARCHAR(25), 
+        password VARCHAR(100), 
         joinedDate DATE, 
         securityAnswer VARCHAR(30),
         FOREIGN KEY (person) REFERENCES PERSON(id) on delete set null on update set null,

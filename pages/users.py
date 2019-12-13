@@ -1,6 +1,7 @@
 from flask import Flask, url_for, redirect, request, session, render_template
-#from passlib.hash import pbkdf2_sha256 as hasher
+from passlib.hash import pbkdf2_sha256 as hasher
 import datetime
+import json
 from flask import current_app
 from .forms.users_form import UserAccountForm, Combine, CallSocialMedia, CallContactInfo, CallPerson, CallUserAccount
 from models.users import create_user, update_user_lastentry, select_users_membership_and_photo, select_users, select_a_user_and_info, delete_current_user, select_a_user, update_user, select_a_socialmedia, update_socialmedia, select_a_person, update_person, update_contactinfo, select_all_users_and_info, select_a_contactinfo
@@ -21,12 +22,13 @@ def users_page():
 def add_user_page():
     if request.method == "GET":
         useraccount = Combine()
-        return render_template("/users/create.html", form=useraccount)
+        return render_template("/users/create.html", form=useraccount, errors={})
     else:
         useraccount = Combine()
         if useraccount.validate_on_submit():
             photopath = "/static/" + request.files["photo-photo"].filename
-            data = {"photo": photopath, "username": useraccount.data["useraccount"]['username'], "password": useraccount.data["useraccount"]["password"], "phoneNumber": useraccount.data["contactinfo"]["phoneNumber"], "email": useraccount.data["contactinfo"]["email"], "fax": useraccount.data["contactinfo"]["fax"], "homePhone": useraccount.data["contactinfo"]["homePhone"], "workmail": useraccount.data["contactinfo"]["workmail"], "lastEntry": datetime.datetime.now(), "joinedDate": datetime.datetime.now(), "securityAnswer": useraccount.data["useraccount"]["securityAnswer"], "membership": 0, "name": useraccount.data["person"]["name"], "surname": useraccount.data["person"]["surname"], "gender": useraccount.data["person"]["gender"], "birthday": useraccount.data["person"]["birthday"], "educationLevel": useraccount.data["person"]["educationLevel"], "facebook": useraccount.data["socialmedia"]["facebook"], "twitter": useraccount.data["socialmedia"]["twitter"], "instagram": useraccount.data["socialmedia"]["instagram"], "discord": useraccount.data["socialmedia"]["discord"], "youtube": useraccount.data["socialmedia"]["youtube"], "googleplus": useraccount.data["socialmedia"]["googleplus"]}
+            hashedpassword = hasher.hash(useraccount.data["useraccount"]["password"])
+            data = {"photo": photopath, "username": useraccount.data["useraccount"]['username'], "password": hashedpassword, "phoneNumber": useraccount.data["contactinfo"]["phoneNumber"], "email": useraccount.data["contactinfo"]["email"], "fax": useraccount.data["contactinfo"]["fax"], "homePhone": useraccount.data["contactinfo"]["homePhone"], "workmail": useraccount.data["contactinfo"]["workmail"], "lastEntry": datetime.datetime.now(), "joinedDate": datetime.datetime.now(), "securityAnswer": useraccount.data["useraccount"]["securityAnswer"], "membership": 0, "name": useraccount.data["person"]["name"], "surname": useraccount.data["person"]["surname"], "gender": useraccount.data["person"]["gender"], "birthday": useraccount.data["person"]["birthday"], "educationLevel": useraccount.data["person"]["educationLevel"], "facebook": useraccount.data["socialmedia"]["facebook"], "twitter": useraccount.data["socialmedia"]["twitter"], "instagram": useraccount.data["socialmedia"]["instagram"], "discord": useraccount.data["socialmedia"]["discord"], "youtube": useraccount.data["socialmedia"]["youtube"], "googleplus": useraccount.data["socialmedia"]["googleplus"]}
             if useraccount.data["useraccount"]["membershiptype"] == "Boss":
                 data["membership"] = 1
             else:
@@ -39,6 +41,13 @@ def add_user_page():
                 session['userid'] = response[1]
                 session['logged_in'] = True
             return redirect(url_for("users_page"))
+        else:
+            errs = []
+            for fieldName, errorMessages in useraccount.errors.items():
+                errs.append(errorMessages)
+            errjson = json.dumps(errs)
+            return render_template("/users/create.html", form=useraccount, errors=errjson)
+        return render_template("/users/create.html", form=useraccount)
 
 def signin_page():
     if request.method == "GET":
@@ -47,7 +56,7 @@ def signin_page():
         data = {"username": request.form['username'], "password": request.form["password"], "lastEntry": datetime.datetime.now()}
         userlist = select_users()
         for item in userlist :
-            if item["username"] == data["username"] and item["password"] == data["password"]:
+            if item["username"] == data["username"] and hasher.verify(data["password"], item["password"]):
                 session['username'] = data["username"]
                 session['password'] = data["password"]
                 session['userid'] = item["id"]
@@ -85,6 +94,12 @@ def editsocialmedia_page():
         socialdata = form.data["socialmedia"]
         update_socialmedia(socialdata, session["userid"])
         return redirect(url_for("profile_page"))
+    elif request.method == "POST" and not form.validate_on_submit():
+        errs = []
+        for fieldName, errorMessages in form.errors.items():
+            errs.append(errorMessages)
+        errjson = json.dumps(errs)
+        return render_template("/users/editsocialmedia.html", user=session, form=form, data = data, errors=errjson)
     else:
         if data["facebook"] != None:
             form.socialmedia["facebook"].data = data["facebook"]
@@ -109,6 +124,13 @@ def editcontactinfo_page():
         contactinfodata = form.data["contactinfo"]
         update_contactinfo(contactinfodata, session["userid"])
         return redirect(url_for("profile_page"))
+    elif request.method == "POST" and not form.validate_on_submit():
+        errs = []
+        for fieldName, errorMessages in form.errors.items():
+            print(errorMessages)
+            errs.append(errorMessages)
+        errjson = json.dumps(errs)
+        return render_template("/users/editcontactinfo.html", user=session, form=form, data = data, errors=errjson)
     else:
         if data["phonenumber"] != None:
             form.contactinfo["phoneNumber"].data = data["phonenumber"]
@@ -131,6 +153,12 @@ def editperson_page():
         persondata = form.data["person"]
         update_person(persondata, session["userid"])
         return redirect(url_for("profile_page"))
+    elif request.method == "POST" and not form.validate_on_submit():
+        errs = []
+        for fieldName, errorMessages in form.errors.items():
+            errs.append(errorMessages)
+        errjson = json.dumps(errs)
+        return render_template("/users/editperson.html", user=session, form=form, data = data, errors=errjson)
     else:
         if data["name"] != None:
             form.person["name"].data = data["name"]
@@ -153,6 +181,12 @@ def edituser_page():
         userdata = form.data["user"]
         update_user(userdata, session["userid"])
         return redirect(url_for("profile_page"))
+    elif request.method == "POST" and not form.validate_on_submit():
+        errs = []
+        for fieldName, errorMessages in form.errors.items():
+            errs.append(errorMessages)
+        errjson = json.dumps(errs)
+        return render_template("/users/edituseraccount.html", user=session, form=form, data = data, errors=errjson)
     else:
         if data["username"] != None:
             form.user["username"].data = data["username"]
