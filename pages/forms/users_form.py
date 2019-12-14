@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import SelectField, FileField, SubmitField, FormField, PasswordField, StringField, TextAreaField, SelectField, RadioField, FloatField, IntegerField
 from wtforms.validators import DataRequired, NumberRange, Length, Regexp, Email
 from wtforms.fields.html5 import DateField
+from models.location_model import get_all_location_with_dict
 
 msg = "The field must be filled."
 
@@ -25,6 +26,12 @@ class ContactInfoForm(FlaskForm):
     fax = StringField("Fax", validators=[Regexp(regex="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$", message="Not a valid fax number"), DataRequired(message = msg),Length(max=30, message="Fax cannot be longer than 30 characters")], render_kw={"class": "form-control"})
     homePhone = StringField("Phone Number(Home)", validators=[DataRequired(message = msg),Length(max=50, message="Home phone number cannot be longer than 50 characters")], render_kw={"class": "form-control"})
     workmail = StringField("Work Email", validators=[Email(message="Not a valid work email"), DataRequired(message = msg),Length(max=50, message="Work email cannot be longer than 50 characters")], render_kw={"class": "form-control"})
+    locations = get_all_location_with_dict()
+    options = []
+    for item in locations:
+        options.append((item['location_id'], item["street"] + ", " + item["neighborhood"] + "," + item["county"] + "," + item["province_name"] + "," + item["name"] + "," + item["zipcode"]))
+    print(locations)
+    location = SelectField("Location", choices=options,  render_kw={"class": "custom-select"})
 
 class SocialMedia(FlaskForm):
     facebook = StringField("Facebook", validators=[Regexp(regex="(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})", message="Not a valid Facebook link"),DataRequired(message = msg),Length(max=60, message="Facebook cannot be longer than 60 characters")], render_kw={"class": "form-control"})

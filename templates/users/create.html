@@ -14,11 +14,6 @@
         {{form.socialmedia(class_="table") }}
         {{form.photo(class_="table") }}
         {{form.submit()}}
-        <select name="location">
-          {% for item in locations %}
-            <option value="{{item['location_id']}}">{{item["street"], item["neighborhood"], item["county"], item["province_name"], item["name"], item["zipcode"]}}</option>
-          {% endfor %}
-        </select>
       </div>
   </form>
   <script>
