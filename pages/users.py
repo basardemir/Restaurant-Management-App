@@ -36,6 +36,7 @@ def add_user_page():
                 request.files["photo-photo"].save("./static/" + request.files["photo-photo"].filename)
                 session['username'] = data["username"]
                 session['password'] = data["password"]
+                session['membershiptype'] = 'Boss' if data['membership'] == 1 else 'Customer'
                 session['userid'] = response[1]
                 session['logged_in'] = True
             return redirect(url_for("users_page"))
@@ -52,6 +53,7 @@ def signin_page():
                 session['password'] = data["password"]
                 session['userid'] = item["id"]
                 session['logged_in'] = True
+                session['membershiptype'] = 'Boss' if select_a_user(session['userid'])['membershiptype'] == 1 else 'Customer'
                 update_user_lastentry(data, session["userid"])
                 return redirect(url_for("home_page"))
     return render_template("/users/login.html", alert="true")
@@ -65,10 +67,13 @@ def profile_page():
         session['username'] = ""
         session['password'] = ''
         session['logged_in'] = False
+        session['membershiptype'] = ''
+        
         return redirect(url_for("home_page"))
     
 def logout_page():
     if request.method == "POST":
+        session['membershiptype'] = ''
         session['username'] = ""
         session['password'] = ''
         session['userid'] = None
