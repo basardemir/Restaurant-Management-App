@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block title %}Location List{% endblock %}
+{% block content %}
+
+<div class="container-fluid">
+<div class="column mr-4">
+	<a href="{{ url_for('location_add_page') }}" class="btn btn-primary" target="_self" title="Add">Add Entry</a>
+</div>
+<br>
+<h1 class="display-4">Location: Displaying Location Entry</h1>
+{% if list %}
+	<form action="" method="post" name="location_list">		<div class="container-fluid"></div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Province</th>
+					<th>Country</th>
+					<th></th>
+					<th>Description</th>
+					<th>Zipcode</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for Loc_id, C_key, C_name,P_key, P_name, county, neigh, street, zipcode, description in list %}
+				<tr>
+                    <td>{{ Loc_id }}</td>
+					<td><a href="{{ url_for('province_read_page', province_key=P_key) }}">{{ P_name }}</a></td>
+                    <td><a href="{{ url_for('country_read_page', country_key=C_key) }}">{{ C_name }}</a></td>
+					<td>{{ county }}, {{ neigh }}, {{ street }} </td>
+                    <td>{{ description }}</td>
+                    <td>{{ zipcode }}</td>
+					<td>
+					<nav class="nav">
+						<a class="nav-link text-success " href="{{ url_for('location_update_page', location_key=P_key) }}" >Update</a>
+						<a class="nav-link text-danger " href="{{ url_for('location_delete_page', location_key=P_key) }}" >Delete</a>
+					</nav>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</form>
+{% endif %}
+</div>
+{% endblock %}

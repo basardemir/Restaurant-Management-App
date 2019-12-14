@@ -132,3 +132,4 @@ def delete_province(province_key):
             DELETE FROM PROVINCE WHERE PROVINCE_ID = %s;
             COMMIT TRANSACTION;"""
             cursor.execute(query,(province_key,))
+            connection.commit()

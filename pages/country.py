@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 
 import psycopg2 as dbapi2  
-from .forms.country_form import CountryForm
+from .forms.country_form import CountryForm, refresh
 from models.country_model import *
 url="postgres://ivpallnyfezioy:075baf8e129b0d52dbd6d87dd3c774363b0b10b499921f821378ed7084bfc744@ec2-46-137-187-23.eu-west-1.compute.amazonaws.com:5432/dagmb1jla3rmdp"
 
@@ -26,6 +26,7 @@ def country_page():
 	return render_template("/country/details.html", countries = country)
 	
 def country_add_page():
+
 	country = CountryForm()
 
 	if country.validate_on_submit():

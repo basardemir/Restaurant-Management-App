@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session, abort
 
-from .forms.country_form import ProvinceForm
+from .forms.country_form import ProvinceForm, refresh
 from models.province_model import *
 
 import psycopg2 as dbapi2  
