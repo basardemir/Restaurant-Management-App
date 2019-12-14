@@ -5,6 +5,7 @@ import json
 from flask import current_app
 from .forms.users_form import UserAccountForm, Combine, CallSocialMedia, CallContactInfo, CallPerson, CallUserAccount
 from models.users import create_user, update_user_lastentry, select_users_membership_and_photo, select_users, select_a_user_and_info, delete_current_user, select_a_user, update_user, select_a_socialmedia, update_socialmedia, select_a_person, update_person, update_contactinfo, select_all_users_and_info, select_a_contactinfo
+from models.location_model import get_all_location_with_dict
 import os
 DB_URL = os.getenv("DATABASE_URL")
 
@@ -21,14 +22,15 @@ def users_page():
 
 def add_user_page():
     if request.method == "GET":
+        locations = get_all_location_with_dict()
         useraccount = Combine()
-        return render_template("/users/create.html", form=useraccount, errors={})
+        return render_template("/users/create.html", form=useraccount, errors={}, locations=locations)
     else:
         useraccount = Combine()
         if useraccount.validate_on_submit():
             photopath = "/static/" + request.files["photo-photo"].filename
             hashedpassword = hasher.hash(useraccount.data["useraccount"]["password"])
-            data = {"photo": photopath, "username": useraccount.data["useraccount"]['username'], "password": hashedpassword, "phoneNumber": useraccount.data["contactinfo"]["phoneNumber"], "email": useraccount.data["contactinfo"]["email"], "fax": useraccount.data["contactinfo"]["fax"], "homePhone": useraccount.data["contactinfo"]["homePhone"], "workmail": useraccount.data["contactinfo"]["workmail"], "lastEntry": datetime.datetime.now(), "joinedDate": datetime.datetime.now(), "securityAnswer": useraccount.data["useraccount"]["securityAnswer"], "membership": 0, "name": useraccount.data["person"]["name"], "surname": useraccount.data["person"]["surname"], "gender": useraccount.data["person"]["gender"], "birthday": useraccount.data["person"]["birthday"], "educationLevel": useraccount.data["person"]["educationLevel"], "facebook": useraccount.data["socialmedia"]["facebook"], "twitter": useraccount.data["socialmedia"]["twitter"], "instagram": useraccount.data["socialmedia"]["instagram"], "discord": useraccount.data["socialmedia"]["discord"], "youtube": useraccount.data["socialmedia"]["youtube"], "googleplus": useraccount.data["socialmedia"]["googleplus"]}
+            data = {"location": request.form["location"], "photo": photopath, "username": useraccount.data["useraccount"]['username'], "password": hashedpassword, "phoneNumber": useraccount.data["contactinfo"]["phoneNumber"], "email": useraccount.data["contactinfo"]["email"], "fax": useraccount.data["contactinfo"]["fax"], "homePhone": useraccount.data["contactinfo"]["homePhone"], "workmail": useraccount.data["contactinfo"]["workmail"], "lastEntry": datetime.datetime.now(), "joinedDate": datetime.datetime.now(), "securityAnswer": useraccount.data["useraccount"]["securityAnswer"], "membership": 0, "name": useraccount.data["person"]["name"], "surname": useraccount.data["person"]["surname"], "gender": useraccount.data["person"]["gender"], "birthday": useraccount.data["person"]["birthday"], "educationLevel": useraccount.data["person"]["educationLevel"], "facebook": useraccount.data["socialmedia"]["facebook"], "twitter": useraccount.data["socialmedia"]["twitter"], "instagram": useraccount.data["socialmedia"]["instagram"], "discord": useraccount.data["socialmedia"]["discord"], "youtube": useraccount.data["socialmedia"]["youtube"], "googleplus": useraccount.data["socialmedia"]["googleplus"]}
             if useraccount.data["useraccount"]["membershiptype"] == "Boss":
                 data["membership"] = 1
             else:
@@ -47,7 +49,8 @@ def add_user_page():
             for fieldName, errorMessages in useraccount.errors.items():
                 errs.append(errorMessages)
             errjson = json.dumps(errs)
-            return render_template("/users/create.html", form=useraccount, errors=errjson)
+            locations = get_all_location_with_dict()
+            return render_template("/users/create.html", form=useraccount, errors=errjson, locations=locations)
         return render_template("/users/create.html", form=useraccount)
 
 def signin_page():
@@ -127,6 +130,8 @@ def editcontactinfo_page():
     form = CallContactInfo()
     if request.method == "POST" and form.validate_on_submit():
         contactinfodata = form.data["contactinfo"]
+        contactinfodata["location"] = (request.form["location"])
+        print(contactinfodata)
         update_contactinfo(contactinfodata, session["userid"])
         return redirect(url_for("profile_page"))
     elif request.method == "POST" and not form.validate_on_submit():
@@ -147,7 +152,8 @@ def editcontactinfo_page():
             form.contactinfo["homePhone"].data = data["homephone"]
         if data["workmail"] != None:
             form.contactinfo["workmail"].data = data["workmail"]
-    return render_template("/users/editcontactinfo.html", user=session, form=form, data = data)  
+        locations = get_all_location_with_dict()
+        return render_template("/users/editcontactinfo.html", user=session, form=form, data = data, locations=locations)  
 
 def editperson_page():
     if session == {} or session["logged_in"] == False:

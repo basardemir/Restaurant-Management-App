@@ -8,7 +8,8 @@
         {{user["username"]}} - Last Entry: {{user["lastentry"]}} - Security Answer:
         {{user["securityanswer"]}} - Membership: {{user["membershiptype"]}}<br />Facebook: {{user["facebook"]}} -
         Twitter: {{user["twitter"]}} - Instagram: {{user["instagram"]}}<br />Discord: {{user["discord"]}} - Youtube:
-        {{user["youtube"]}} - Google+: {{user["googleplus"]}}<br />Phone Number: {{user["phonenumber"]}} - Email:
+        {{user["youtube"]}} - Google+: {{user["googleplus"]}}<br />Street: {{user["street"]}} - Neighbourhood: {{user["neighborhood"]}} - 
+        County: {{user["county"]}} - Province: {{user["province_name"]}} - Country: {{user["country_name"]}} - {{user["zipcode"]}}<br />Phone Number: {{user["phonenumber"]}} - Email:
         {{user["email"]}} - Fax: {{user["fax"]}} - Home Phone: {{user["homephone"]}} - Work Mail: {{user["workmail"]}}
         Photo: <img src="{{user['path']}}" alt="User Image" width="200" height="200">
     </p>
@@ -21,7 +22,7 @@
     <form action="" method="post" name="{{url_for('profile_page')}}">
         <div class="field is-grouped">
             <div class="control">
-                <button class="button is-primary is-small">Delete Account</button>
+                <button class="btn btn-outline-info">Delete Account</button>
             </div>
         </div>
     </form>

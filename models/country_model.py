@@ -1,6 +1,26 @@
 from .db_prop import DB_URL, get_results
 import psycopg2 as dbapi2
 
+def get_all_countries_with_dict():
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor(cursor_factory=dbapi2.extras.RealDictCursor) as cursor:
+            query = """select
+            country_id,
+            name,
+            properties.population,
+            properties.area,
+            properties.gdp,
+            timezone.timezone,
+            language_short
+            from (((country join properties on (country.properties=properties.prop_id))
+            join timezone on (country.timezone=timezone.timezone_id))
+            join coordinates on (country.capital_coordinates=coordinates.coord_id));"""
+            cursor.execute(query)
+            connection.commit()
+            res = cursor.fetchall()
+            print(res)
+            return res
+
 def get_all_countries():
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor() as cursor:
