@@ -10,6 +10,7 @@ from pages.province import *
 from pages.ingredient import *
 from pages.location import *
 from pages.restaurant import *
+from pages.order import *
 
 def home_page():
   today = dt.today()
