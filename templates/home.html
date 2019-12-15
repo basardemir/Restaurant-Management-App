@@ -13,18 +13,20 @@
           <li class="list-group-item">
             <a class="btn btn-primary btn-lg" href="{{ url_for('cards_page')}}">Cards</a>
           </li>
-          <li class="list-group-item">
-            <a class="btn btn-primary btn-lg" href="{{ url_for('country_page') }}">Countries</a>
-          </li>
-          <li class="list-group-item">
-            <a class="btn btn-primary btn-lg" href="{{ url_for('tz_page') }}">Timezones</a>
-          </li>
-          <li class="list-group-item">
-            <a class="btn btn-primary btn-lg" href="{{ url_for('location_page')}}">Location</a>
-          </li>
-          <li class="list-group-item">
-            <a class="btn btn-primary btn-lg" href="{{ url_for('province_page') }}">Province</a>
-          </li>
+          {% if session["membershiptype"] == "Admin" %}
+            <li class="list-group-item">
+              <a class="btn btn-primary btn-lg" href="{{ url_for('country_page') }}">Countries</a>
+            </li>
+            <li class="list-group-item">
+              <a class="btn btn-primary btn-lg" href="{{ url_for('tz_page') }}">Timezones</a>
+            </li>
+            <li class="list-group-item">
+              <a class="btn btn-primary btn-lg" href="{{ url_for('location_page')}}">Location</a>
+            </li>
+            <li class="list-group-item">
+              <a class="btn btn-primary btn-lg" href="{{ url_for('province_page') }}">Province</a>
+            </li>
+            {% endif %}
         </ul>
         <ul class="list-group list-group-flush list-group-horizontal justify-content-center mt-5">
           <li class="list-group-item">
