@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block title %} Payment {% endblock %}
+{% block content %}
+
+<div class="container">
+  <form method="post" action="{{ request.path }}" >
+    {{ form.csrf_token }}
+    
+    {% for field, msg in form.errors.items() %}
+      {% for i in msg: %}
+        <div class="alert alert-warning" role="alert">
+          <strong>{{ msg[i][0] }}</strong>
+        </div>
+      {% endfor %}
+    {% endfor %}
+
+    <h1 class="display-4">Payment <small class="text-muted font-italic">page</small></h1>
+    <hr>
+    {{ form.order( class_ = "mt-5 table table-hover") }}
+    {{ form.meals }}
+    <div class="text-center">
+      {{ form.submit }}
+      <a href="{{ url_for('orders_page') }}" class="btn btn-secondary">Cancel</a>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

@@ -8,6 +8,8 @@ from datetime import datetime
 
 from ..forms.users_form import UserAccountForm, ContactInfoForm, PersonForm
 
+from models.users import select_users
+
 msgRequired = "The {} must be filled."
 msgChosen   = "Must choose one {} of them."
 
@@ -70,3 +72,21 @@ class CompanyForm(FlaskForm):
   company   = FormField(Company)
   contact   = FormField(ContactInfoForm)
   submit    = SubmitField( render_kw = { "class" : "btn btn-primary"})
+
+def get_usernames():
+  data = list()
+  for i in select_users():
+    data.append( ( i['id'], i['username'] ) )
+  return data
+
+class Founder(FlaskForm):
+  username = SelectField(
+    "Select your new boss",
+    coerce=int,
+    choices = get_usernames(),
+    render_kw = { "class" : "form-control" }
+  )
+
+class FounderForm(FlaskForm):
+  founder  = FormField(Founder)
+  submit   = SubmitField( render_kw = { "class" : "btn btn-primary"})

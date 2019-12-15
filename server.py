@@ -16,6 +16,7 @@ app.add_url_rule("/companies/create", view_func = views.company_add_page, method
 app.add_url_rule("/companies/<int:company_key>/details", view_func = views.company_details_page, methods=["GET", "POST"])
 app.add_url_rule("/companies/<int:company_key>/edit", view_func = views.company_update_page, methods=["GET", "POST"])
 app.add_url_rule("/companies/<int:company_key>/delete", view_func = views.company_delete_page, methods=["GET", "POST"])
+app.add_url_rule("/companies/<int:company_key>/set_founder", view_func = views.company_setfounder_page, methods=["GET", "POST"])
 
 ## Card
 app.add_url_rule("/cards", view_func = views.cards_page, methods=["GET", "POST"])
@@ -24,6 +25,12 @@ app.add_url_rule("/cards/<int:card_key>/details", view_func = views.card_details
 app.add_url_rule("/cards/<int:card_key>/edit", view_func = views.card_update_page, methods=["GET", "POST"])
 app.add_url_rule("/cards/<int:card_key>/delete", view_func = views.card_delete_page, methods=["GET", "POST"])
 
+## Order
+app.add_url_rule("/orders", view_func = views.orders_page, methods=["GET", "POST"])
+app.add_url_rule("/payment", view_func = views.payment_page, methods=["GET", "POST"])
+app.add_url_rule("/orders/<int:order_key>/details", view_func = views.order_details_page, methods=["GET", "POST"])
+app.add_url_rule("/orders/<int:order_key>/edit", view_func = views.order_update_page, methods=["GET", "POST"])
+app.add_url_rule("/orders/<int:order_key>/cancel", view_func = views.order_cancel_page, methods=["GET", "POST"])
 
 
 ##COUNTRY TABLE

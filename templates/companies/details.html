@@ -22,15 +22,19 @@
       <div class="col-6">
         <h1 class="display-4 ">Founder</h1>
         <hr >
-        <div class="text-center">
-          <img src="{{ founder[0]['path'] }}" class="img-fluid round-circle" width="250" height="250">
-        </div>
-        <ul>
-          <li>Founder: {{ founder[0]['name '] }} {{ founder[0]['surname']  }}  </li>
-          <li>Gender: {{ founder[0]['gender'] }}</li>
-          <li>Birthday: {{ founder[0]['birthday'] }}</li>
-          <li>Education Level: {{ founder[0]['educationlevel'] }}</li>
-        </ul>
+        {% if founder %}
+          <div class="text-center">
+            <img src="{{ founder['path'] }}" class="img-fluid round-circle" width="250" height="250">
+          </div>
+          <ul>
+            <li>Founder: {{ founder['name'] }} {{ founder['surname']  }}  </li>
+            <li>Gender: {{ founder['gender'] }}</li>
+            <li>Birthday: {{ founder['birthday'] }}</li>
+            <li>Education Level: {{ founder['educationlevel'] }}</li>
+          </ul>
+        {% else %}
+          <p>This company has no founder yet.</p>
+        {% endif %}
       </div>
     </div>
   </div>

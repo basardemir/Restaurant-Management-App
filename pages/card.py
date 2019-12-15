@@ -17,6 +17,8 @@ def checkCardNumber(cardnumber):
   if res != 0:
     field.data = uniqueValue()
     raise ValidationError("Card Number is not unique")
+    return False
+  return True
 
 def cards_page():
   if session and session["logged_in"] == False:
@@ -34,8 +36,9 @@ def card_add_page():
     return redirect(url_for("access_denied_page"))
   else:
     card = CardForm()
-    
-    if card.validate_on_submit() and checkCardNumber(card.card["card_number"].data):
+    x = checkCardNumber(card.card["card_number"].data)
+  
+    if card.validate_on_submit() and x:
       
       user_key    = get_user_by_username(card.username.data)['id']
       company_key = get_company_by_user(session['userid'])['company_id']
