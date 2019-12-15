@@ -36,26 +36,13 @@ def insert_meal(meal_info):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor() as cursor:
             statement = "insert into FOOD (nutrition_id, food_name, brand_name, price, isVegan, type) VALUES (%(nutrition_id)s, %(food_name)s, %(brand_name)s, %(price)s, %(vegan)s, %(meal_option)s) RETURNING food_id;"
-            
-            print(meal_info)
-
-            statement2 = "insert into nutritional_value (protein, fat, carbohydrates, cholesterol, calories) values (%(protein)s, %(fat)s, %(carbohydrates)s, %(cholesterol)s, %(calories)s) RETURNING nutritional_value_id;"
-            
+            statement2 = "insert into nutritional_value (protein, fat, carbohydrates, cholesterol, calories) values (%(protein)s, %(fat)s, %(carbohydrates)s, %(cholesterol)s, %(calories)s) RETURNING nutritional_value_id;"  
             cursor.execute(statement2, {'protein': meal_info['protein'], 'fat': meal_info['fat'], 'carbohydrates': meal_info['carbohydrates'], 'cholesterol': meal_info['cholesterol'],'calories': meal_info['calories']})
-
             connection.commit()
-
             nutrition_id = cursor.fetchone()[0]
-
-            print(nutrition_id)
-
             vegan = int(meal_info["VeganorNot"] == "Vegan")
-
             cursor.execute(statement, {'nutrition_id': nutrition_id, 'food_name': meal_info['meal_name'], 'brand_name': meal_info['brand_name'], 'price': meal_info['price'], 'vegan': vegan, 'meal_option': meal_info['meal_option']})
-            
-            
             connection.commit()
-            
             food_id = cursor.fetchone()[0]
             stat = "insert into ingredients_for_food (food_id, ingredient_id, amount) values ( %(food_id)s, %(ingred_id)s, %(amount)s);"
             for i in range(1, 5):

@@ -7,12 +7,12 @@ def add_ingredient_page():
     if request.method == "GET":
         return render_template("/ingredients/add_ingd.html", form = _form)
     else:
-        if _form.validate_on_submit():
-            photo_path = "./static/" + request.files["photo-photo"].filename
-            data = {"ingredient_name" : request.form['ingredient-ingred_name'], "ingredient_type": request.form['ingredient-ingred_type'], "unit_weight": request.form['ingredient-unit_weight'], "volume": request.form['ingredient-volume'], "ideal_temp": request.form['ingredient-ideal_temp'], "protein": request.form['nutrition-protein'], "carbohydrates": request.form['nutrition-carbohydrates'], "fat": request.form["nutrition-fat"], "cholesterol": request.form['nutrition-cholesterol'], "calories": request.form['nutrition-calories'], "photo_path": photo_path}
-            add_ingredient(data)
-            request.files["photo-photo"].save("./static/" + request.files["photo-photo"].filename)
-            return redirect(url_for('show_ingredients'))
+        print(request.form)
+        photo_path = "./static/" + request.files["photo-photo"].filename
+        data = {"ingredient_name" : request.form['ingredient-ingred_name'], "ingredient_type": request.form['ingredient-ingred_type'], "unit_weight": request.form['ingredient-unit_weight'], "volume": request.form['ingredient-volume'], "ideal_temp": request.form['ingredient-ideal_temp'], "protein": request.form['nutrition-protein'], "carbohydrates": request.form['nutrition-carbohydrates'], "fat": request.form["nutrition-fat"], "cholesterol": request.form['nutrition-cholesterol'], "calories": request.form['nutrition-calories'], "photo_path": photo_path, "rest_id": request.form['restaurant-restaurant'], 'stock': request.form['restaurant-stock'], 'expire_date': request.form['restaurant-expire_date']}
+        add_ingredient(data)
+        request.files["photo-photo"].save("./static/" + request.files["photo-photo"].filename)
+        return redirect(url_for('show_ingredients'))
 
 def show_ingredients():
     ing_table = show_all_ingredients()
@@ -42,7 +42,7 @@ def update_ingredient_page(ingred_id):
         _form.ingredient['volume'].data = ingred[3]
         _form.ingredient['ideal_temp'].data = ingred[4]
         
-        return render_template("/ingredients/update_ingred.html", form=_form, props=ingred)
+        return render_template("/ingredients/update_ingred.html", form=_form)
    
     else:
         update_ingred(request.form, ingred_id)

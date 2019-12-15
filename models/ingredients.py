@@ -16,8 +16,12 @@ def add_ingredient(data):
             cursor.execute(statement_nutr, {'protein': data['protein'], 'fat': data['fat'], 'carbohydrates': data['carbohydrates'], 'cholesterol': data['cholesterol'], 'calories': data['calories']})
             nutrition_id = cursor.fetchone()[0]
             
-            statement_ing = "insert into ingredient (nutrition_id, photo_id, ingredient_name, ingredient_type, unit_weight, ingredient_volume, temperature_for_stowing) values (%(nutrition_id)s, %(photo_id)s, %(ingredient_name)s, %(ingredient_type)s, %(unit_weight)s, %(ingredient_volume)s, %(temperature_for_stowing)s);"
+            statement_ing = "insert into ingredient (nutrition_id, photo_id, ingredient_name, ingredient_type, unit_weight, ingredient_volume, temperature_for_stowing) values (%(nutrition_id)s, %(photo_id)s, %(ingredient_name)s, %(ingredient_type)s, %(unit_weight)s, %(ingredient_volume)s, %(temperature_for_stowing)s) returning ingredient_id;"
             cursor.execute(statement_ing, {'nutrition_id': nutrition_id, "photo_id": photo_id, 'ingredient_name': data['ingredient_name'], 'ingredient_type': data['ingredient_type'], 'unit_weight': data['unit_weight'], "ingredient_volume": data['volume'], "temperature_for_stowing": data['ideal_temp']})
+            ingredient_id = cursor.fetchone()[0]
+
+            statement_stock = "insert into stock (ingredient_id, restaurant_id, expire_date, stock_left) values (%(ing_id)s, %(rest_id)s, %(stock)s, %(date)s);"
+            cursor.execute(statement_stock, {'ing_id': ingredient_id, 'rest_id': data['rest_id'], 'stock': data['stock'], 'date': data['expire_date']})
             connection.commit()
 
 
@@ -54,7 +58,9 @@ def delete_ingred(ingred_id):
             cursor.execute(statement, {'ingred_id': ingred_id})
 
             photo_id, nutrition_id = cursor.fetchone()
-            print(photo_id, nutrition_id)
+            
+            statement5 = "delete from stock where ingredient_id = %(id)s;"
+            cursor.execute(statement5, {'id': ingred_id})
 
             statement4 = "delete from ingredient where ingredient_id=%(id)s;"
             cursor.execute(statement4, {'id': ingred_id})

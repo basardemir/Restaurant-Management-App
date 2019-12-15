@@ -48,7 +48,7 @@
             <tbody>
                 {% for food_id, food_name, brand_name, price, isVegan, type in f_table %}
                 <tr>
-                    <td><img src="../static/3746.png" cla../static/3746.pngss="rounded float-left" alt="Meal"></td>
+                    <td><img src="../static/3746.png" class="rounded float-left" alt="Meal"></td>
                     <td>{{food_name}}</td>
                     <td>{{brand_name}}</td>
                     <td>{{price}}tl</td>
@@ -61,7 +61,11 @@
                     <td>                            
                         <nav class="nav">
                             <a class="nav-link" href="{{url_for('food_value_page', food_id = food_id)}}">Food Values</a>
-                            <a class="nav-link text-secondary" href="#">Add to Cart</a>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label" for="inlineCheckbox1">Add to Cart</label>
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" name="{{food_name}}">
+                                
+                            </div>
                             {% if userType %}
                             <a class="nav-link text-success " href="{{url_for('update_meal_page', food_id = food_id)}}" >Update</a>
                             <a class="nav-link text-danger " href="{{url_for('delete_meal_page', food_id = food_id)}}" >Delete</a>
@@ -79,7 +83,7 @@
             <a class="btn btn-primary btn-lg" href="/meals/add_meal" role='button'>Add a meal</a>
         </div>
         <div class="col-xs-1-12">
-            <a class="btn btn-primary btn-lg" href="/meals/add_ingred" role='button'>Add a ingredient</a>
+            <a class="btn btn-primary btn-lg" href="/ingredients/add" role='button'>Add a ingredient</a>
         </div>
         
     </nav>  
