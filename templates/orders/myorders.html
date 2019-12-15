@@ -1,38 +1,37 @@
 {% extends "layout.html" %}
-{% block title %}Card Details{% endblock %}
-{% block content %}
-{% if card %}
+{% block title %}Myorders{% endblock %}
+{% block content%}
+  
+
 <div class="container">
-  <div class="row">
-    <div class="col-12 row">
-      <div class="col-6">
-        <h1 class="display-4">Card Information {% if card['is_active'] %} <sup>({{ "Active" }})</sup> {% else %} ({{ "Passive" }}) {% endif %}</h1>
-        <hr style="padding:5px 0;background-color: {{ card['color'] }}">
-        <ul>
-          <li>Card Number: {{ card['card_number'] }} </li>
-          <li>Points: {{ card['points'] }} </li>
-          <li>Activation Date: {{ card['activation_date'] }} </li>
-          <li>Expire Date: {{ card['expire_date'] }} </li>
-          <li>Connected to <a href="{{ url_for('company_details_page', company_key = card['company_id']) }}" target="_blank">{{ card['name'] }} company</a> </li>
-          <li>Company Information: {{card['company_information']}}</li>
-        </ul>
-      </div>
-      <div class="col-6">
-        <h1 class="display-4 pb-1">User Information</h1><br>
-        <hr style="padding:5px 0;background-color: {{ card['color'] }}" class="mt-5">
-        
-        <div class="text-center">
-          <img src="{{ card['path'] }}" class="img-fluid round-circle" width="250" height="250">
-        </div>
-        <ul>
-          <li>Card Owner: {{ card['person_name']  }}  </li>
-          <li>Gender: {{ card['gender'] }}</li>
-          <li>Birthday: {{ card['birthday'] }}</li>
-          <li>Education Level: {{ card['educationlevel'] }}</li>
-        </ul>
-      </div>
-    </div>
-  </div>
+  <h1 class="display-4">My <small class="text-muted font-italic">orders</small></h1>
+  <hr>
 </div>
-{% endif %}
+<div class="container mt-2">
+  <form action="{{ request.path }}" method="POST">
+    {% if myorders %}
+    <table class="table table-light table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Surname</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in myorders %}
+        <tr>
+          <td>{{ i }}</td>
+          <td>{{ i }}</td>
+          <td>
+            <a href="{{ url_for('order_details_page', order_key = i['order_id']) }}" class="btn btn-outline-info">Details </a>
+            <a href="{{ url_for('order_update_page', order_key = i['order_id']) }}" class="btn btn-warning">Update</a>
+            <a href="{{ url_for('order_cancel_page', order_key = i['order_id']) }}" class="btn btn-danger">Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </form>
+</div>
+  {% endif %}
 {% endblock %}

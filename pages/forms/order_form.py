@@ -35,13 +35,14 @@ class Order(FlaskForm):
   end_at = DateTimeLocalField(
     'End Datetime',
     format = '%Y-%m-%dT%H:%M',
-    default = ( datetime.now() + timedelta(minutes=(30)) ),
+    default = ( datetime.now() + timedelta(minutes=(60)) ),
     render_kw = { "class" : "form-control" }
   )
 
   rate = RadioField(
     "Rate",
     default = 0,
+    coerce=int,
     choices = [ (1, "1"), (2, "2"), (3, "3"), (4, "4"), (5, "5"), ],
     validators = [ DataRequired(message = msgRequired.format("rate"))],
     render_kw = { "class" : "list-group list-group-horizontal" }
