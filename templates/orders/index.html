@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block title %}Cards{% endblock %}
+{% block content%}
+  
+
+<div class="container">
+  <h1 class="display-4">Index <small class="text-muted font-italic">cards</small></h1>
+  <hr>
+</div>
+<div class="container mt-2">
+  <form action="" method="POST">
+    <div class="row">
+      <div class="column mr-4">
+        <a href="{{ url_for('card_add_page') }}" class="btn btn-primary" title="Add Card">Add Card</a>
+      </div>
+    </div>
+    {% if cards %}
+    <table class="table table-light table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Surname</th>
+          <th>Expire Date</th>
+          <th>Points</th>
+          <th>Color</th>
+          <th>Card Number</th>
+          <th>Company</th>
+          <th>Operations</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in cards %}
+        <tr>
+          <td>{{ i['name'] }}</td>
+          <td>{{ i['surname'] }}</td>
+          <td>{{ i['expire_date'] }}</td>
+          <td>{{ i['points'] }}</td>
+          <td>{{ i['color'] }}</td>
+          <td>{{ i['card_number'] }}</td>
+          <td>{{ i['company'] }}</td>
+          <td>
+            <a href="{{ url_for('card_details_page', card_key = i['card_id']) }}" class="btn btn-outline-info">Details </a>
+            <a href="{{ url_for('card_update_page', card_key = i['card_id']) }}" class="btn btn-warning">Update</a>
+            <a href="{{ url_for('card_delete_page', card_key = i['card_id']) }}" class="btn btn-danger">Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="row">
+      <div class="column mr-4">
+        <a href="{{ url_for('card_add_page') }}" class="btn btn-primary" title="Add Card">Add Card</a>
+      </div>
+    </div>
+  </form>
+</div>
+  {% endif %}
+{% endblock %}

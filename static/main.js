@@ -30,4 +30,26 @@ $(document).ready( function(){
     sett = colours[val] ? colours[val] : val
     document.getElementsByName("card-color")[0].value = sett
   }
+  
+  
 })
+
+var vale = document.getElementsByClassName("amount_of_check")
+  var allsum = 0
+  for(let i=0;i<vale.length;i++){
+    var itm  = parseFloat(vale.item(i).getAttribute('data-price'))
+    var stock = parseFloat(vale.item(i).value)
+    allsum = allsum + itm * stock
+  }
+  document.getElementsByName("order-price")[0].value = allsum.toFixed(2)
+  
+  $(".amount_of_check").change(function(){
+    var vale = document.getElementsByClassName("amount_of_check")
+    var allsum = 0
+    for(let i=0;i<vale.length;i++){
+      var itm  = parseFloat(vale.item(i).getAttribute('data-price'))
+      var stock = parseFloat(vale.item(i).value)
+      allsum = allsum + itm * stock
+    }
+    document.getElementsByName("order-price")[0].value = allsum.toFixed(2)
+  });

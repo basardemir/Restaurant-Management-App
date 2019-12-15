@@ -34,7 +34,7 @@ class Order(FlaskForm):
 
   end_at = DateTimeLocalField(
     'End Datetime',
-    format = '%Y-%m-%d%H:%M:%S',
+    format = '%Y-%m-%dT%H:%M',
     default = ( datetime.now() + timedelta(minutes=(30)) ),
     render_kw = { "class" : "form-control" }
   )
@@ -48,6 +48,5 @@ class Order(FlaskForm):
   )
 
 class OrderForm(FlaskForm):
-
   order     = FormField(Order)
   submit    = SubmitField( render_kw = { "class" : "btn btn-primary"})
