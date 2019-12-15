@@ -21,21 +21,26 @@ def users_page():
     return render_template("/users/read.html", users = userlist)
 
 def add_user_page():
+    print(request.method)
     if request.method == "GET":
         locations = get_all_location_with_dict()
         useraccount = Combine()
         return render_template("/users/create.html", form=useraccount, errors={}, locations=locations)
     else:
         useraccount = Combine()
+        print(useraccount)
         if useraccount.validate_on_submit():
             photopath = "/static/" + request.files["photo-photo"].filename
             hashedpassword = hasher.hash(useraccount.data["useraccount"]["password"])
-            data = {"location": request.form["location"], "photo": photopath, "username": useraccount.data["useraccount"]['username'], "password": hashedpassword, "phoneNumber": useraccount.data["contactinfo"]["phoneNumber"], "email": useraccount.data["contactinfo"]["email"], "fax": useraccount.data["contactinfo"]["fax"], "homePhone": useraccount.data["contactinfo"]["homePhone"], "workmail": useraccount.data["contactinfo"]["workmail"], "lastEntry": datetime.datetime.now(), "joinedDate": datetime.datetime.now(), "securityAnswer": useraccount.data["useraccount"]["securityAnswer"], "membership": 0, "name": useraccount.data["person"]["name"], "surname": useraccount.data["person"]["surname"], "gender": useraccount.data["person"]["gender"], "birthday": useraccount.data["person"]["birthday"], "educationLevel": useraccount.data["person"]["educationLevel"], "facebook": useraccount.data["socialmedia"]["facebook"], "twitter": useraccount.data["socialmedia"]["twitter"], "instagram": useraccount.data["socialmedia"]["instagram"], "discord": useraccount.data["socialmedia"]["discord"], "youtube": useraccount.data["socialmedia"]["youtube"], "linkedin": useraccount.data["socialmedia"]["linkedin"]}
+            print(useraccount.data)
+            data = {"location": useraccount.data["contactinfo"]["location"], "photo": photopath, "username": useraccount.data["useraccount"]['username'], "password": hashedpassword, "phoneNumber": useraccount.data["contactinfo"]["phoneNumber"], "email": useraccount.data["contactinfo"]["email"], "fax": useraccount.data["contactinfo"]["fax"], "homePhone": useraccount.data["contactinfo"]["homePhone"], "workmail": useraccount.data["contactinfo"]["workmail"], "lastEntry": datetime.datetime.now(), "joinedDate": datetime.datetime.now(), "securityAnswer": useraccount.data["useraccount"]["securityAnswer"], "membershiptype": useraccount.data["useraccount"]["membershiptype"], "name": useraccount.data["person"]["name"], "surname": useraccount.data["person"]["surname"], "gender": useraccount.data["person"]["gender"], "birthday": useraccount.data["person"]["birthday"], "educationLevel": useraccount.data["person"]["educationLevel"], "facebook": useraccount.data["socialmedia"]["facebook"], "twitter": useraccount.data["socialmedia"]["twitter"], "instagram": useraccount.data["socialmedia"]["instagram"], "discord": useraccount.data["socialmedia"]["discord"], "youtube": useraccount.data["socialmedia"]["youtube"], "linkedin": useraccount.data["socialmedia"]["linkedin"], "membership": 0}
             if useraccount.data["useraccount"]["membershiptype"] == "Boss":
                 data["membership"] = 1
             else:
                 data["membership"] = 2
+            print("Creating")
             response = create_user(data)
+            print(response)
             if response[0]:
                 request.files["photo-photo"].save("./static/" + request.files["photo-photo"].filename)
                 session['username'] = data["username"]

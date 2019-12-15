@@ -17,7 +17,7 @@ class PersonForm(FlaskForm):
 class UserAccountForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired(message = msg),Length(max=25, message="Username cannot be longer than 25 characters")], render_kw={"class": "form-control"})
     password = PasswordField("Password", validators=[DataRequired(message=msg), Length(max=25, message="Password cannot be longer than 25 characters")], render_kw={"class": "form-control"})
-    membershiptype = RadioField("Membership Type",choices=[("Boss","Boss"), ("Employee", "Employee")], default="Boss", render_kw={"class": "list-group list-group-horizontal"})
+    membershiptype = RadioField("Membership Type",choices=[("Boss","Boss"), ("Customer", "Customer")], default="Boss", render_kw={"class": "list-group list-group-horizontal"})
     securityAnswer = TextAreaField("Security Answer", validators=[Length(max=30, message="Security answer cannot be longer than 30 characters")], render_kw={"class": "form-control", "placeholder": "What is your mother's maiden name?"})
 
 class ContactInfoForm(FlaskForm):
