@@ -23,7 +23,7 @@ def checkCardNumber(cardnumber):
 def cards_page():
   if session and session["logged_in"] == False:
     return redirect(url_for('signin_page'))
-  elif select_a_user_and_info(session['userid'])[0]['membershiptype'] != 'Boss':
+  elif session['membershiptype'] != 'Boss':
     return redirect(url_for("access_denied_page"))
   else:
     cards = get_all_cards()
@@ -32,7 +32,7 @@ def cards_page():
 def card_add_page():
   if session and session["logged_in"] == False:
     return redirect(url_for('signin_page'))
-  elif select_a_user_and_info(session['userid'])[0]['membershiptype'] != 'Boss':
+  elif session['membershiptype'] != 'Boss':
     return redirect(url_for("access_denied_page"))
   else:
     card = CardForm()
@@ -66,7 +66,7 @@ def card_add_page():
 def card_delete_page(card_key):
   if session and session["logged_in"] == False:
     return redirect(url_for('signin_page'))
-  elif select_a_user_and_info(session['userid'])[0]['membershiptype'] != 'Boss':
+  elif session['membershiptype'] != 'Boss':
     return redirect(url_for("access_denied_page"))
   else:
     if request.method == "POST":
@@ -77,7 +77,7 @@ def card_delete_page(card_key):
 def card_update_page(card_key):
   if session and session["logged_in"] == False:
     return redirect(url_for('signin_page'))
-  elif select_a_user_and_info(session['userid'])[0]['membershiptype'] != 'Boss':
+  elif session['membershiptype'] != 'Boss':
     return redirect(url_for("access_denied_page"))
   else:
     _card = get_card(card_key)
@@ -118,7 +118,7 @@ def card_update_page(card_key):
 def card_details_page(card_key):
   if session and session["logged_in"] == False:
     return redirect(url_for('signin_page'))
-  elif select_a_user_and_info(session['userid'])[0]['membershiptype'] != 'Boss':
+  elif session['membershiptype'] != 'Boss':
     return redirect(url_for("access_denied_page"))
   else:
     card = get_card(card_key)
