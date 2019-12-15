@@ -30,9 +30,11 @@ def get_company_by_user(user_key):
     with connection.cursor() as cursor:
       query = "select * from company where user_id = %s;"
       cursor.execute(query, (user_key, ))
-      company = list( cursor.fetchone() )
-      desc = list( cursor.description[i][0] for i in range(0, len(cursor.description)) )
-      res = dict(zip(desc, company ))
+      data = cursor.fetchone()
+      if data:
+        company = list( data )
+        desc = list( cursor.description[i][0] for i in range(0, len(cursor.description)) )
+        res = dict(zip(desc, company ))
   return res
 
 def get_company(company_key):
@@ -41,9 +43,11 @@ def get_company(company_key):
     with connection.cursor() as cursor:
       query = "select * from company where company_id = %s;"
       cursor.execute(query, (company_key, ))
-      company = list( cursor.fetchone() )
-      desc = list( cursor.description[i][0] for i in range(0, len(cursor.description)) )
-      res = dict(zip(desc, company ))
+      data = cursor.fetchone()
+      if data:
+        company = list( data )
+        desc = list( cursor.description[i][0] for i in range(0, len(cursor.description)) )
+        res = dict(zip(desc, company ))
   return res
 
 def get_contact_of_company(contact_id):
@@ -52,9 +56,11 @@ def get_contact_of_company(contact_id):
     with connection.cursor() as cursor:
       query = "select * from contactinfo where id = %s;"
       cursor.execute(query, (contact_id, ))
-      contact = list( cursor.fetchone() )
-      desc = list( cursor.description[i][0] for i in range(0, len(cursor.description)) )
-      res = dict(zip(desc, contact ))
+      data = cursor.fetchone()
+      if data:
+        contact = list( data )
+        desc = list( cursor.description[i][0] for i in range(0, len(cursor.description)) )
+        res = dict(zip(desc, contact ))
   return res
 
 def search_company_by_columns(company_key):
