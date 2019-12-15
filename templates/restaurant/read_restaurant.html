@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block title %}Restaurants{%endblock%}
+{%block content%}
+
+<div class="container-fluid">
+    <h1>
+        Restaurants 
+    </h1>
+    <hr>
+    <div class="col">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Score</th>
+                    <th>Capacity</th>
+                    <th>Opening Date</th>
+                    <th>Manager</th>
+                    <th>Total Earning</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for id, name, score, capacity, opening_date, manager, total in restaurants %}
+                <tr>
+                    <td</td>
+                    <td>{{name}}</td>
+                    <td>{{score}}</td>
+                    <td>{{capacity}}</td>
+                    <td>{{opening_date}}</td>
+                    <td>{{manager}}</td> 
+                    <td>{{total}}</td> 
+                    <td>                            
+                        <nav class="nav">
+                            <a class="nav-link" href="#">Nutrition Values</a>
+                            {% if userType %}
+                            <a class="nav-link text-success " href="{{url_for('update_restaurant_page', restaurant_id = id)}}" >Update</a>
+                            <a class="nav-link text-danger " href="{{url_for('delete_restaurant_page', restaurant_id = id)}}" >Delete</a>
+                            {% endif %}
+                        </nav>                          
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>  
+    </div>  
+    {% if userType %}
+    <nav class="nav justify-content-center">
+        <div class="col-md">
+            <a class="btn btn-primary btn-lg" href="/restaurant/add" role='button'>Add a Restaurant</a>
+        </div>
+    </nav>  
+    {% endif %}
+</div>
+
+{%endblock%}
