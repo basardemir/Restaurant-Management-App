@@ -3,31 +3,34 @@
 
 {% block content %}
 <div class="container">
-  <h1 class="title">Edit Personal Info</h1>
-  <form method="post" action="{{ request.path }}" >
+  <h1 class="text-center">Edit Personal Info</h1>
+  <form method="post" action="{{ request.path }}">
 
     {{ form.csrf_token }}
-      <div class="field">
-        {{form.person(class_="table") }}
+    <div class="field">
+      {{form.person(class_="table") }}
+      <div class="container-fluid text-center">
         {{form.submit()}}
       </div>
+
+    </div>
   </form>
   <script>
-      $(document).ready(() => {
-        let decodeHtmlEntity = function(x) {
-          return x.replace(/&#(\d+);/g, function(match, dec) {
-            return String.fromCharCode(dec);
-          });
-        };
-        let obj = JSON.parse(decodeHtmlEntity("{{errors}}"));
-        let str = '';
-        for(let i in obj){
-          for(let j in obj[i]){
-            str += obj[i][j] + '\n';
-          }
+    $(document).ready(() => {
+      let decodeHtmlEntity = function (x) {
+        return x.replace(/&#(\d+);/g, function (match, dec) {
+          return String.fromCharCode(dec);
+        });
+      };
+      let obj = JSON.parse(decodeHtmlEntity("{{errors}}"));
+      let str = '';
+      for (let i in obj) {
+        for (let j in obj[i]) {
+          str += obj[i][j] + '\n';
         }
-        alert(str);
-      });
-    </script>  
+      }
+      alert(str);
+    });
+  </script>
 </div>
 {% endblock %}

@@ -5,6 +5,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 mx-auto">
+        {% if session["logged_in"] == True %}
         <ul class="list-group list-group-flush list-group-horizontal">
           <li class="list-group-item">
             <a class="btn btn-primary btn-lg" href="{{ url_for('companies_page') }}">Companies</a>
@@ -34,12 +35,13 @@
             <a class="btn btn-primary btn-lg" href="{{ url_for('location_page')}}">Location</a>
           </li>
         </ul>
+        {% endif %}
       </div>
     </div>
     <div class="row mt-5">
       <div class="jumbotron">
         <h5>Welcome to Restaurant Management App!</h5>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia nobis illum cupiditate, aspernatur quasi temporibus tempore praesentium corrupti ab mollitia veniam exercitationem quos commodi voluptatibus dignissimos quas dolorem, omnis eius?</p>
+        <p>RestMang is a Restaurant Management App that lets the user organize your company and restaurants, or lets the user give orders from restaurants.</p>
       </div>
     </div>
     

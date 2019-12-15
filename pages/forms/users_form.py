@@ -30,7 +30,6 @@ class ContactInfoForm(FlaskForm):
     options = []
     for item in locations:
         options.append((item['location_id'], item["street"] + ", " + item["neighborhood"] + "," + item["county"] + "," + item["province_name"] + "," + item["name"] + "," + item["zipcode"]))
-    print(locations)
     location = SelectField("Location", coerce=int, choices=options,  render_kw={"class": "custom-select"})
 
 class SocialMedia(FlaskForm):
@@ -39,7 +38,7 @@ class SocialMedia(FlaskForm):
     instagram = StringField("Instagram", validators=[Regexp(regex="(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})", message="Not a valid Instagram link"), DataRequired(message = msg),Length(max=60, message="Instagram cannot be longer than 60 characters")], render_kw={"class": "form-control"})
     discord = StringField("Discord", validators=[Regexp(regex="(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})", message="Not a valid Discord link"), DataRequired(message = msg),Length(max=60, message="Discord cannot be longer than 60 characters")], render_kw={"class": "form-control"})
     youtube = StringField("Youtube", validators=[Regexp(regex="(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})", message="Not a valid Youtube link"), DataRequired(message = msg),Length(max=60, message="Youtube cannot be longer than 60 characters")], render_kw={"class": "form-control"})
-    googleplus = StringField("Google+", validators=[Regexp(regex="(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})", message="Not a valid Google+ link"), DataRequired(message = msg),Length(max=60, message="Google+ cannot be longer than 60 characters")], render_kw={"class": "form-control"})
+    linkedin = StringField("LinkedIn", validators=[Regexp(regex="(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})", message="Not a valid Google+ link"), DataRequired(message = msg),Length(max=60, message="Google+ cannot be longer than 60 characters")], render_kw={"class": "form-control"})
 
 class PhotoForm(FlaskForm):
     photo = FileField("Photo", validators=[DataRequired(message = msg)], render_kw={"accept": ".jpg"})

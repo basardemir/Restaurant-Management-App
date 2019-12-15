@@ -30,7 +30,7 @@ def add_user_page():
         if useraccount.validate_on_submit():
             photopath = "/static/" + request.files["photo-photo"].filename
             hashedpassword = hasher.hash(useraccount.data["useraccount"]["password"])
-            data = {"location": request.form["location"], "photo": photopath, "username": useraccount.data["useraccount"]['username'], "password": hashedpassword, "phoneNumber": useraccount.data["contactinfo"]["phoneNumber"], "email": useraccount.data["contactinfo"]["email"], "fax": useraccount.data["contactinfo"]["fax"], "homePhone": useraccount.data["contactinfo"]["homePhone"], "workmail": useraccount.data["contactinfo"]["workmail"], "lastEntry": datetime.datetime.now(), "joinedDate": datetime.datetime.now(), "securityAnswer": useraccount.data["useraccount"]["securityAnswer"], "membership": 0, "name": useraccount.data["person"]["name"], "surname": useraccount.data["person"]["surname"], "gender": useraccount.data["person"]["gender"], "birthday": useraccount.data["person"]["birthday"], "educationLevel": useraccount.data["person"]["educationLevel"], "facebook": useraccount.data["socialmedia"]["facebook"], "twitter": useraccount.data["socialmedia"]["twitter"], "instagram": useraccount.data["socialmedia"]["instagram"], "discord": useraccount.data["socialmedia"]["discord"], "youtube": useraccount.data["socialmedia"]["youtube"], "googleplus": useraccount.data["socialmedia"]["googleplus"]}
+            data = {"location": request.form["location"], "photo": photopath, "username": useraccount.data["useraccount"]['username'], "password": hashedpassword, "phoneNumber": useraccount.data["contactinfo"]["phoneNumber"], "email": useraccount.data["contactinfo"]["email"], "fax": useraccount.data["contactinfo"]["fax"], "homePhone": useraccount.data["contactinfo"]["homePhone"], "workmail": useraccount.data["contactinfo"]["workmail"], "lastEntry": datetime.datetime.now(), "joinedDate": datetime.datetime.now(), "securityAnswer": useraccount.data["useraccount"]["securityAnswer"], "membership": 0, "name": useraccount.data["person"]["name"], "surname": useraccount.data["person"]["surname"], "gender": useraccount.data["person"]["gender"], "birthday": useraccount.data["person"]["birthday"], "educationLevel": useraccount.data["person"]["educationLevel"], "facebook": useraccount.data["socialmedia"]["facebook"], "twitter": useraccount.data["socialmedia"]["twitter"], "instagram": useraccount.data["socialmedia"]["instagram"], "discord": useraccount.data["socialmedia"]["discord"], "youtube": useraccount.data["socialmedia"]["youtube"], "linkedin": useraccount.data["socialmedia"]["linkedin"]}
             if useraccount.data["useraccount"]["membershiptype"] == "Boss":
                 data["membership"] = 1
             else:
@@ -119,8 +119,8 @@ def editsocialmedia_page():
             form.socialmedia["discord"].data = data["discord"]
         if data["youtube"] != None:
             form.socialmedia["youtube"].data = data["youtube"]
-        if data["googleplus"] != None:
-            form.socialmedia["googleplus"].data = data["googleplus"]
+        if data["linkedin"] != None:
+            form.socialmedia["linkedin"].data = data["linkedin"]
     return render_template("/users/editsocialmedia.html", user=session, form=form, data = data)  
 
 def editcontactinfo_page():
@@ -131,13 +131,12 @@ def editcontactinfo_page():
     if request.method == "POST" and form.validate_on_submit():
         contactinfodata = form.data["contactinfo"]
         contactinfodata["location"] = (request.form["location"])
-        print(contactinfodata)
         update_contactinfo(contactinfodata, session["userid"])
         return redirect(url_for("profile_page"))
     elif request.method == "POST" and not form.validate_on_submit():
         errs = []
         for fieldName, errorMessages in form.errors.items():
-            print(errorMessages)
+            #print(errorMessages)
             errs.append(errorMessages)
         errjson = json.dumps(errs)
         return render_template("/users/editcontactinfo.html", user=session, form=form, data = data, errors=errjson)

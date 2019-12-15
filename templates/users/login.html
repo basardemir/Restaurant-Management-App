@@ -1,8 +1,7 @@
 {% extends 'layout.html' %}
-{% block title %}Create A User{% endblock %}
+{% block title %}Login{% endblock %}
 
 {% block content %}
-<h1 class="title">Login</h1>
 <script>
     $(document).ready(() => {
         if ("{{alert}}" == "true") {
@@ -10,18 +9,15 @@
         }
     });
 </script>
-<form id="form" action="" method="post" name="{{url_for('add_user_page')}}" id="form">
-    <div class="field">
-        <label for="username" class="label">Username</label>
-        <div class="control">
-            <input type="text" name="username" class="input" required="required" />
-        </div>
-        <label for="password" class="label">Password</label>
-        <div class="control">
-            <input type="password" name="password" class="input" required="required" />
-        </div>
+<form id="form" class="container-fluid w-75" action="" method="post" name="{{url_for('add_user_page')}}">
+    <h1 class="text-center">Login</h1>
+    <div class="field-group">
+        <label style="font-weight: bold; margin-top: 0.75rem;" for="username" class="label">Username</label>
+        <input type="text" name="username" class="form-control" required="required" />
+        <label style="font-weight: bold; margin-top: 0.75rem;" for="password" class="label">Password</label>
+        <input type="password" name="password" class="form-control" required="required" />
     </div>
-    <div id="buttondiv" class="field is-grouped">
+    <div id="buttondiv" class="field is-grouped text-center" style="margin-top: 1rem;">
         <div class="control">
             <button id="button" class="btn btn-outline-info">Sign in</button>
         </div>

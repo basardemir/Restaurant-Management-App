@@ -16,7 +16,7 @@ INIT_STATEMENTS = [
         instagram VARCHAR(60),
         discord VARCHAR(60),
         youtube VARCHAR(60),
-        googleplus VARCHAR(60)
+        linkedin VARCHAR(60)
     );""",
 		"""CREATE TABLE IF NOT EXISTS TIMEZONE(
 			TIMEZONE_ID SERIAL PRIMARY KEY,
@@ -93,8 +93,8 @@ INIT_STATEMENTS = [
         fax VARCHAR(30), 
         homePhone VARCHAR(50), 
         workmail VARCHAR(50),
-        FOREIGN KEY (socialmedia) REFERENCES SOCIALMEDIA(id) on delete set null on update set null,
-        FOREIGN KEY (location) REFERENCES LOCATION(LOCATION_ID) on delete set null on update set null
+        FOREIGN KEY (socialmedia) REFERENCES SOCIALMEDIA(id) on delete set null,
+        FOREIGN KEY (location) REFERENCES LOCATION(LOCATION_ID) on delete set null
     );""",
     """CREATE TABLE IF NOT EXISTS PERSON (
         id SERIAL PRIMARY KEY, 
@@ -105,8 +105,8 @@ INIT_STATEMENTS = [
         birthDay DATE, 
         educationLevel VARCHAR(50), 
         gender VARCHAR(20),
-        FOREIGN KEY (contactinfo) REFERENCES CONTACTINFO(id) on delete set null on update set null,
-        FOREIGN KEY (photo) REFERENCES PHOTO(id) on delete set null on update set null
+        FOREIGN KEY (contactinfo) REFERENCES CONTACTINFO(id) on delete set null,
+        FOREIGN KEY (photo) REFERENCES PHOTO(id) on delete set null
     );""",
 		"""CREATE TABLE IF NOT EXISTS USERACCOUNT (
         id SERIAL PRIMARY KEY, 
@@ -117,8 +117,8 @@ INIT_STATEMENTS = [
         password VARCHAR(100), 
         joinedDate DATE, 
         securityAnswer VARCHAR(30),
-        FOREIGN KEY (person) REFERENCES PERSON(id) on delete set null on update set null,
-        FOREIGN KEY (membershiptype) REFERENCES MEMBERSHIP(id) on delete set null on update set null
+        FOREIGN KEY (person) REFERENCES PERSON(id) on delete set null,
+        FOREIGN KEY (membershiptype) REFERENCES MEMBERSHIP(id) on delete set null
     );""",
     
 	

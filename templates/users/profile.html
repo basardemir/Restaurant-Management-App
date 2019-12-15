@@ -2,29 +2,57 @@
 {% block title %}Users{% endblock %}
 
 {% block content %}
-<div class="container">
-    <p>Name: {{user["name"]}} - Surname: {{user["surname"]}} - Birthday: {{user["birthday"]}} - Education:
-        {{user["educationLevel"]}} - Gender: {{user["gender"]}} - Joined Date: {{user["joineddate"]}}<br />Username:
-        {{user["username"]}} - Last Entry: {{user["lastentry"]}} - Security Answer:
-        {{user["securityanswer"]}} - Membership: {{user["membershiptype"]}}<br />Facebook: {{user["facebook"]}} -
-        Twitter: {{user["twitter"]}} - Instagram: {{user["instagram"]}}<br />Discord: {{user["discord"]}} - Youtube:
-        {{user["youtube"]}} - Google+: {{user["googleplus"]}}<br />Street: {{user["street"]}} - Neighbourhood: {{user["neighborhood"]}} - 
-        County: {{user["county"]}} - Province: {{user["province_name"]}} - Country: {{user["country_name"]}} - {{user["zipcode"]}}<br />Phone Number: {{user["phonenumber"]}} - Email:
-        {{user["email"]}} - Fax: {{user["fax"]}} - Home Phone: {{user["homephone"]}} - Work Mail: {{user["workmail"]}}
-        Photo: <img src="{{user['path']}}" alt="User Image" width="200" height="200">
-    </p>
-    <a href="/users/edituseraccount">Edit User Account</a>
-    <a href="/users/editperson">Edit Personal Info</a>
-    <a href="/users/editcontactinfo">Edit Contact Info</a>
-    <a href="/users/editsocialmedia">Edit Social Media</a>
+<div class="container-fluid text-center">
+    <img src="{{user['path']}}" alt="User Image" width="200" height="200">
+    <div class="border border-primary rounded">
+        <h3>Account Info</h3>
+        <p> Username:{{user["username"]}} - Joined Date: {{user["joineddate"]}} - Last Entry: {{user["lastentry"]}} -
+            Security Answer:
+            {{user["securityanswer"]}} - Membership: {{user["membershiptype"]}}</p>
+    </div>
+    <div class="border border-secondary rounded" style="margin-top: 1rem;  padding: 0.5rem">
+        <h3>Personal Info</h3>
+        <p>Name: {{user["name"]}} - Surname: {{user["surname"]}} - Birthday: {{user["birthday"]}} - Education:
+            {{user["educationLevel"]}} - Gender: {{user["gender"]}}</p>
+    </div>
+    <div class="border border-success rounded" style="margin-top: 1rem;  padding: 0.5rem">
+        <h3>Contact Info</h3>
+        <p>Phone Number: {{user["phonenumber"]}} - Email:
+            {{user["email"]}} - Fax: {{user["fax"]}} - Home Phone: {{user["homephone"]}} - Work Mail:
+            {{user["workmail"]}}</p>
+    </div>
+    <div class="border border-primary rounded" style="margin-top: 1rem;  padding: 0.5rem">
+        <h3>Social Media Info</h3>
+        <p>Facebook: {{user["facebook"]}} -
+            Twitter: {{user["twitter"]}} - Instagram: {{user["instagram"]}} - Discord: {{user["discord"]}} <br/> Youtube:
+            {{user["youtube"]}} - LinkedIn: {{user["linkedin"]}}</p>
+    </div>
+    <div class="border border-secondary rounded" style="margin-top: 1rem;  padding: 0.5rem">
+        <h3>Location Info</h3>
+        Street: {{user["street"]}} - Neighbourhood: {{user["neighborhood"]}} -
+        County: {{user["county"]}} - Province: {{user["province_name"]}} - Country: {{user["country_name"]}} -
+        Zipcode: {{user["zipcode"]}}
 
-    <h1 class="title">Delete Account</h1>
-    <form action="" method="post" name="{{url_for('profile_page')}}">
-        <div class="field is-grouped">
-            <div class="control">
-                <button class="btn btn-outline-info">Delete Account</button>
+        </p>
+    </div>
+    <div class="border border-success rounded" style="margin-top: 1rem;  padding: 0.5rem">
+        <h5>Edit Info</h5>
+        <p>
+            <a href="/users/edituseraccount">Edit User Account</a> -
+            <a href="/users/editperson">Edit Personal Info</a> -
+            <a href="/users/editcontactinfo">Edit Contact Info</a> -
+            <a href="/users/editsocialmedia">Edit Social Media</a>
+        </p>
+    </div>
+    <div class="border border-primary rounded" style="margin-top: 1rem;  padding: 0.5rem">
+        <h4 class="text-center">Delete Account</h4>
+        <form action="" method="post" name="{{url_for('profile_page')}}">
+            <div class="field is-grouped">
+                <div class="control">
+                    <button class="btn btn-outline-info">Delete Account</button>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
 {% endblock %}

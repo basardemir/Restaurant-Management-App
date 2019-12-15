@@ -65,8 +65,8 @@ def update_contactinfo_with_id(contactinfo_id, data):
 def insert_socialmedia(data):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor() as cursor:
-            statement = "INSERT INTO SOCIALMEDIA (facebook, twitter, instagram, discord, youtube, googleplus) VALUES (%s, %s, %s, %s, %s, %s) RETURNING id;"
-            cursor.execute(statement, (data["facebook"], data['twitter'], data["instagram"], data["discord"], data["youtube"], data["googleplus"]))
+            statement = "INSERT INTO SOCIALMEDIA (facebook, twitter, instagram, discord, youtube, linkedin) VALUES (%s, %s, %s, %s, %s, %s) RETURNING id;"
+            cursor.execute(statement, (data["facebook"], data['twitter'], data["instagram"], data["discord"], data["youtube"], data["linkedin"]))
             connection.commit()
             id = cursor.fetchone()[0]
             return id
@@ -261,8 +261,8 @@ def update_socialmedia(data, userid):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor(cursor_factory=dbapi2.extras.RealDictCursor) as cursor:
             id = select_a_socialmedia(userid)["id"]
-            statement = "UPDATE SOCIALMEDIA SET facebook=%s, twitter=%s, instagram=%s, discord=%s, youtube=%s, googleplus=%s WHERE id=%s"
-            cursor.execute(statement, (data["facebook"], data["twitter"], data["instagram"], data["discord"], data["youtube"], data["googleplus"], id))
+            statement = "UPDATE SOCIALMEDIA SET facebook=%s, twitter=%s, instagram=%s, discord=%s, youtube=%s, linkedin=%s WHERE id=%s"
+            cursor.execute(statement, (data["facebook"], data["twitter"], data["instagram"], data["discord"], data["youtube"], data["linkedin"], id))
             connection.commit()
 
 

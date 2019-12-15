@@ -19,7 +19,6 @@ def get_all_location_with_dict():
             join country on (province.country = country.country_id))
             """
             cursor.execute(query)
-            cursor.execute(query)
             connection.commit()
             res = cursor.fetchall()
             return res
