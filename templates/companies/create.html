@@ -19,6 +19,8 @@
     <h1 class="display-4">Complete <small class="text-muted font-italic">contact</small></h1>
     <hr>  
     {{ form.contact( class_ = "mt-5 table table-hover") }}
+    <p class="text-right">If you cannot find your location, you can create by using link below</p>
+    <a href="{{ url_for('location_page') }}" class="float-right btn btn-dark">Add Location</a>
     <div class="text-center">
       {{ form.submit }}
       <a href="{{ url_for('companies_page') }}" class="btn btn-secondary">Cancel</a>

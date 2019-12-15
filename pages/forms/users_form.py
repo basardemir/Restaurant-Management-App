@@ -31,7 +31,7 @@ class ContactInfoForm(FlaskForm):
     for item in locations:
         options.append((item['location_id'], item["street"] + ", " + item["neighborhood"] + "," + item["county"] + "," + item["province_name"] + "," + item["name"] + "," + item["zipcode"]))
     print(locations)
-    location = SelectField("Location", choices=options,  render_kw={"class": "custom-select"})
+    location = SelectField("Location", coerce=int, choices=options,  render_kw={"class": "custom-select"})
 
 class SocialMedia(FlaskForm):
     facebook = StringField("Facebook", validators=[Regexp(regex="(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})", message="Not a valid Facebook link"),DataRequired(message = msg),Length(max=60, message="Facebook cannot be longer than 60 characters")], render_kw={"class": "form-control"})
