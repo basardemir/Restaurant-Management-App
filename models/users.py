@@ -75,8 +75,8 @@ def insert_socialmedia(data):
 def insert_contactinfo(data, socialmedia_id):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor() as cursor:
-            statement = "INSERT INTO CONTACTINFO (socialmedia, phoneNumber, email, fax, homePhone, workmail) VALUES (%s, %s, %s, %s, %s, %s) RETURNING id;"
-            cursor.execute(statement, (socialmedia_id, data['phoneNumber'], data["email"], data["fax"], data["homePhone"], data["workmail"]))
+            statement = "INSERT INTO CONTACTINFO (socialmedia, location, phoneNumber, email, fax, homePhone, workmail) VALUES (%s, %s, %s, %s, %s, %s, %s) RETURNING id;"
+            cursor.execute(statement, (socialmedia_id, data["location"], data['phoneNumber'], data["email"], data["fax"], data["homePhone"], data["workmail"]))
             connection.commit()
             id = cursor.fetchone()[0]
             return id
@@ -161,7 +161,21 @@ def select_all_users_and_info():
 def select_a_user_and_info(userid):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cursor:
-            statement = "SELECT * FROM SOCIALMEDIA JOIN (SELECT * FROM CONTACTINFO JOIN (SELECT * FROM (SELECT PERSON.id, contactinfo, name, surname, birthday, educationLevel, gender, path FROM PERSON JOIN PHOTO ON PHOTO.id = PERSON.photo) AS PER JOIN ((SELECT * FROM USERACCOUNT WHERE id = %s) AS T JOIN MEMBERSHIP ON T.membershiptype = MEMBERSHIP.id) AS T2 ON PER.id = T2.person) AS T3 ON CONTACTINFO.id = T3.contactinfo) AS T4 ON T4.socialmedia = SOCIALMEDIA.id;"
+            statement = """SELECT * FROM (select 
+            location_id,
+            country.country_id,
+            country.name as country_name,
+            province.province_id,
+            province.province_name,
+            county,
+            neighborhood,
+            street,
+            zipcode,
+            description from 
+            ((location join province on (location.province = province.province_id))
+            join country on (province.country = country.country_id))) AS T6 JOIN 
+            (SELECT * FROM SOCIALMEDIA JOIN (SELECT * FROM CONTACTINFO JOIN (SELECT * FROM (SELECT PERSON.id, contactinfo, name, surname, birthday, educationLevel, gender, path FROM PERSON JOIN PHOTO ON PHOTO.id = PERSON.photo) AS PER JOIN ((SELECT * FROM USERACCOUNT WHERE id = %s) AS T JOIN MEMBERSHIP ON T.membershiptype = MEMBERSHIP.id) AS T2 ON PER.id = T2.person) AS T3 ON CONTACTINFO.id = T3.contactinfo) AS T4 ON T4.socialmedia = SOCIALMEDIA.id)
+            AS T5 ON T5.location=T6.location_id;"""
             cursor.execute(statement, (userid, ))
             connection.commit()
             userlist = cursor.fetchall()
@@ -255,7 +269,21 @@ def update_socialmedia(data, userid):
 def select_a_contactinfo(userid):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor(cursor_factory=dbapi2.extras.RealDictCursor) as cursor:
-            statement = "SELECT * FROM CONTACTINFO JOIN (SELECT contactinfo FROM PERSON JOIN ((SELECT person FROM USERACCOUNT WHERE id=%s)) AS T2 ON PERSON.id = T2.person) AS T3 ON T3.contactinfo = CONTACTINFO.id"
+            statement = """SELECT * FROM 
+            (select 
+            location_id,
+            country.country_id,
+            country.name,
+            province.province_id,
+            province.province_name,
+            county,
+            neighborhood,
+            street,
+            zipcode,
+            description from 
+            ((location join province on (location.province = province.province_id))
+            join country on (province.country = country.country_id))) AS T4 JOIN
+            (SELECT * FROM CONTACTINFO JOIN (SELECT contactinfo FROM PERSON JOIN ((SELECT person FROM USERACCOUNT WHERE id=%s)) AS T2 ON PERSON.id = T2.person) AS T3 ON T3.contactinfo = CONTACTINFO.id) AS T5 ON T4.location_id = T5.location"""
             cursor.execute(statement, (userid, ))
             connection.commit()
             data = cursor.fetchall()
@@ -265,8 +293,8 @@ def update_contactinfo(data, userid):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor(cursor_factory=dbapi2.extras.RealDictCursor) as cursor:
             id = select_a_contactinfo(userid)["id"]
-            statement = "UPDATE CONTACTINFO SET phoneNumber=%s, email=%s, fax=%s, homePhone=%s, workmail=%s WHERE id=%s"
-            cursor.execute(statement, (data["phoneNumber"], data["email"], data["fax"], data["homePhone"], data["workmail"], id))
+            statement = "UPDATE CONTACTINFO SET location=%s, phoneNumber=%s, email=%s, fax=%s, homePhone=%s, workmail=%s WHERE id=%s"
+            cursor.execute(statement, (data["location"], data["phoneNumber"], data["email"], data["fax"], data["homePhone"], data["workmail"], id))
             connection.commit()
 
 

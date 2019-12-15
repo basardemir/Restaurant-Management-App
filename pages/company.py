@@ -3,13 +3,13 @@ from flask import Flask, render_template, request, redirect, url_for, session, a
 from models.company import *
 from models.users import insert_contactinfo, update_contactinfo_with_id, select_a_user_and_info
 
-from .forms.company_form import CompanyForm
+from .forms.company_form import CompanyForm, FounderForm
 import datetime
 
 def companies_page():
   if session and session["logged_in"] == False:
     return redirect(url_for('signin_page'))
-  elif select_a_user_and_info(session['userid'])[0]['membershiptype'] != 'Boss':
+  elif session['membershiptype'] != 'Boss':
     return redirect(url_for("access_denied_page"))
   else:
     companies = get_all_companies()
@@ -18,7 +18,7 @@ def companies_page():
 def company_add_page():
   if session and session["logged_in"] == False:
     return redirect(url_for('signin_page'))
-  elif select_a_user_and_info(session['userid'])[0]['membershiptype'] != 'Boss':
+  elif session['membershiptype'] != 'Boss':
     return redirect(url_for("access_denied_page"))
   else:
     company = CompanyForm()
@@ -49,7 +49,7 @@ def company_add_page():
 def company_delete_page(company_key):
   if session and session["logged_in"] == False:
     return redirect(url_for('signin_page'))
-  elif select_a_user_and_info(session['userid'])[0]['membershiptype'] != 'Boss':
+  elif session['membershiptype'] != 'Boss':
     return redirect(url_for("access_denied_page"))
   else:
     if request.method == "POST":
@@ -60,7 +60,7 @@ def company_delete_page(company_key):
 def company_update_page(company_key):
   if session and session["logged_in"] == False:
     return redirect(url_for('signin_page'))
-  elif select_a_user_and_info(session['userid'])[0]['membershiptype'] != 'Boss':
+  elif session['membershiptype'] != 'Boss':
     return redirect(url_for("access_denied_page"))
   else:
     _company = get_company(company_key)
@@ -83,7 +83,6 @@ def company_update_page(company_key):
         company.company["type"].data,
         company_key
       )
-      print(company.contact.data)
       update_contactinfo_with_id(_company["contact_id"], company.contact.data)
       update_company(company_info)
 
@@ -108,15 +107,17 @@ def company_update_page(company_key):
     )
 
 def company_details_page(company_key):
+
   if session and session["logged_in"] == False:
     return redirect(url_for('signin_page'))
-  elif select_a_user_and_info(session['userid'])[0]['membershiptype'] != 'Boss':
+  elif session['membershiptype'] != 'Boss':
     return redirect(url_for("access_denied_page"))
   else:
     company = get_company(company_key)
     contact = get_contact_of_company( company['contact_id'] )
     founder = select_a_user_and_info( company['user_id'])
-
+    if founder:
+      founder = founder[0]
     if(company is None):
       abort(404)
     return render_template(
@@ -124,4 +125,27 @@ def company_details_page(company_key):
       company = company,
       contact = contact,
       founder = founder
+    )
+
+def company_setfounder_page(company_key):
+  if session and session["logged_in"] == False:
+    return redirect(url_for('signin_page'))
+  elif session['membershiptype'] != 'Boss':
+    return redirect(url_for("access_denied_page"))
+  else:
+    founder = FounderForm()
+    
+    if founder.validate_on_submit():
+      
+      update_company_founder( 
+        ( founder.founder["username"].data, company_key )
+      )
+
+      return redirect(url_for("companies_page"))
+
+    founder.founder["username"].data = None
+
+    return render_template(
+      "/companies/set_founder.html",
+      form = founder
     )

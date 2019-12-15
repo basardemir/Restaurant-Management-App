@@ -42,6 +42,9 @@
             <a href="{{ url_for('company_details_page', company_key = i['company_id']) }}" class="btn btn-info">Details </a>
             <a href="{{ url_for('company_update_page', company_key = i['company_id']) }}" class="btn btn-warning">Update</a>
             <a href="{{ url_for('company_delete_page', company_key = i['company_id']) }}" class="btn btn-danger">Delete</a>
+            {% if not i['user_id'] %}
+            <a href="{{ url_for('company_setfounder_page', company_key = i['company_id']) }}" class="btn btn-warning">Set Founder</a>
+            {% endif%}
           </td>
         </tr>
         {% endfor %}

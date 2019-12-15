@@ -77,9 +77,17 @@ def update_company(company):
       cursor.execute(query, company)
       connection.commit()
 
+def update_company_founder(company):
+  with dbapi2.connect(DB_URL) as connection:
+    with connection.cursor() as cursor:
+      query = "update company set user_id = %s where company_id = %s;"
+      cursor.execute(query, company)
+      connection.commit()
+
 def delete_company(company_key):
   with dbapi2.connect(DB_URL) as connection:
     with connection.cursor() as cursor:
       query = "delete from company where company_id = %s;"
       cursor.execute( query, (company_key,) )
       connection.commit()
+
