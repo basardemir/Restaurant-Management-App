@@ -38,9 +38,11 @@
           <li class="list-group-item">
             <a class="btn btn-secondary btn-lg" href="{{ url_for('orders_page')}}">Orders</a>
           </li>
+          {% if session["membershiptype"] == "Admin" %}
           <li class="list-group-item">
             <a class="btn btn-secondary btn-lg" href="{{ url_for('users_page') }}">Users</a>
           </li>
+          {% endif %}
         </ul>
         {% endif %}
       </div>
