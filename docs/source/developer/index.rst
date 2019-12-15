@@ -16,9 +16,8 @@ Database Design
 Code
 ----
 
-**explain the technical structure of your code**
+The application was coded with python using the flask framework. Other packages used were wtforms, colour, and passlib.
 
-**to include a code listing, use the following example**::
 
    .. code-block:: python
 

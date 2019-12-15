@@ -8,6 +8,7 @@ The user who has an account may sign in from this page using the username and pa
 If the user sends a valid form, the values of the form will be checked from the database. If a user exists, a session will be created for the user and the user will be logged in. 
 
    .. code-block:: python
+   
         data = {"username": request.form['username'], "password": request.form["password"], "lastEntry": datetime.datetime.now()}
         userlist = select_users()
         for item in userlist :
