@@ -7,7 +7,7 @@ def get_all_orders():
   orders = []
   with dbapi2.connect(DB_URL) as connection:
     with connection.cursor() as cursor:
-      query = "select * from order"
+      query = "select * from orders"
       cursor.execute(query)
       desc = list( cursor.description[i][0] for i in range(0, len(cursor.description)) )
       for i in cursor:
@@ -31,7 +31,7 @@ def add_order(order):
   order_id = -1
   with dbapi2.connect(DB_URL) as connection:
     with connection.cursor() as cursor:
-      query = "insert into order(price, note, payment_type, rate, end_at, restaurant_id, customer_id) values(%s, %s, %s, %s, %s, %s, %s, %s, %s) RETURNING order_id;"
+      query = "insert into orders(price, note, payment_type, rate, end_at, restaurant_id, customer_id) values(%s, %s, %s, %s, %s, %s, %s, %s, %s) RETURNING order_id;"
       cursor.execute(query, order)
       connection.commit()
       order_id = cursor.fetchone()[0]
@@ -48,14 +48,14 @@ def connect_order_and_food(orderfood):
 def update_order(order):
   with dbapi2.connect(DB_URL) as connection:
     with connection.cursor() as cursor:
-      query = "update order set price = %s, note = %s, payment_type = %s, rate = %s, end_at = %s where order_id = %s;"
+      query = "update orders set price = %s, note = %s, payment_type = %s, rate = %s, end_at = %s where order_id = %s;"
       cursor.execute(query, order)
       connection.commit()
 
 def delete_order(order_key):
   with dbapi2.connect(DB_URL) as connection:
     with connection.cursor() as cursor:
-      query = "delete from order where order_id = %s;"
+      query = "delete from orders where order_id = %s;"
       cursor.execute( query, (order_key,) )
       connection.commit()
 

@@ -7,26 +7,40 @@ from .forms.order_form import OrderForm
 import datetime
 
 def orders_page():
-  if session and session["logged_in"] == False:
+  '''if session and session["logged_in"] == False:
     return redirect(url_for('signin_page'))
   #elif session['membershiptype'] != 'Admin':
     #return redirect(url_for("access_denied_page"))
   else:
     orders = get_all_orders()
-    return render_template("/orders/index.html", orders = orders)
+    return render_template("/orders/index.html", orders = orders)'''
+  
+  return redirect(url_for("payment_page", meals=[22,23]))
 
-def payment_page():
+def payment_page(meals):
   if session and session["logged_in"] == False:
     return redirect(url_for('signin_page'))
   else:
+    if meals:
+      print(meals)
+
+    #meal_id #meal_name #stock_size #price
+    meals_list = [
+      (23, "ot", 50, 25.3),
+      (22, "mot", 30, 12.3),
+    ]
+    #max_amount - stock adedi
     
     order = OrderForm()
+    
     if order.validate_on_submit():
       order_key = -1
       return redirect(url_for("order_details_page", order_key = order_key))
+    
     return render_template(
       "/orders/payment.html",
-      form = order
+      form = order,
+      meals = meals_list
     )
 
 def order_cancel_page(order_key):

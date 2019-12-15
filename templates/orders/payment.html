@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="container">
-  <form method="post" action="{{ request.path }}" >
+  <form method="post" action="{{ request.path }}" name="payment_list">
     {{ form.csrf_token }}
     
     {% for field, msg in form.errors.items() %}
@@ -16,8 +16,28 @@
 
     <h1 class="display-4">Payment <small class="text-muted font-italic">page</small></h1>
     <hr>
+    <table class="table table-light">
+      <thead>
+        <th>Meal Name</th>
+        <th>Stock</th>
+        <th>Price</th>
+      </thead>
+      <tbody>
+        {% set count = namespace(value=0) %}
+        {% for i in meals %}
+          {% set count.value = count.value + 1 %}
+          <tr>
+            <td>{{ i[1] }}</td>
+            <td>
+              <input type="number" data-key="{{ i[0] }}" data-price="{{ i[3] }}" name="amount_of_check" class="amount_of_check" id="amount_of_check-{{ count.value }}" value=1 min=1 max="{{ i[2]}}" > 
+            </td>
+            <td>{{ i[3] }}</td>
+          </tr>
+        {% endfor%}
+      </tbody>
+    </table>
     {{ form.order( class_ = "mt-5 table table-hover") }}
-    {{ form.meals }}
+    
     <div class="text-center">
       {{ form.submit }}
       <a href="{{ url_for('orders_page') }}" class="btn btn-secondary">Cancel</a>
