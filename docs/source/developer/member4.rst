@@ -255,16 +255,16 @@ For deleting with checkboxes selected in index.html we add the following to loca
         
 .. code-block::python
 
-    :emphasize-lines: 2,3,4
-            def location_page():
-                if request.method == "POST":
-                    for i in request.form.getlist("location_keys"):
-                        delete_location(i)
-                location = get_all_location()
-                return render_template("/location/index.html", list = location) 
+    def location_page():
+        if request.method == "POST":
+            for i in request.form.getlist("location_keys"):
+                delete_location(i)
+        location = get_all_location()
+        return render_template("/location/index.html", list = location) 
                 
 Unfinished / Problematic Features
 ==============
+
 * Only the create location page was suppose to be accessable by the users, however the lack of authentcation allows anyone with the url can access the main pages of these tables and
 do alterations. 
 * While creating a location absance of javascript to hide option according to selected country allows users to combine a country with any of the provinces
