@@ -119,7 +119,7 @@ def company_details_page(company_key):
     if founder:
       founder = founder[0]
     if(company is None):
-      abort(404)
+      return redirect(url_for("not_found_page"))
     return render_template(
       "/companies/details.html",
       company = company,

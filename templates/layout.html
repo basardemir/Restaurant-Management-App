@@ -32,6 +32,7 @@
             </ul>
             {% if session["logged_in"] == True %}
             <form action="{{url_for('logout_page')}}" method="post" class="form-inline my-2 my-lg-0">
+              <a href="{{ url_for('my_card_page') }}" class="btn btn-outline-info">My card</a>
               <a href="{{ url_for('my_orders_page') }}" class="btn btn-outline-dark">My orders</a>
               <a href="/users/profile" class="btn btn-outline-info">Profile: {{ session["username"] }}</a>
               <button type="submit" class="btn btn-outline-success mr-2">Logout</a>

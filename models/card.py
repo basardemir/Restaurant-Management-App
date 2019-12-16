@@ -28,8 +28,21 @@ def get_card(card_key):
   res = None
   with dbapi2.connect(DB_URL) as connection:
     with connection.cursor() as cursor:
-      query = "select CONCAT(p.name,' ',p.surname) as person_name, color, ph.path as path, p.birthDay, p.educationLevel, p.gender, card_number, points, is_active, activation_date, expire_date, card.company_id as company_id, c.name as company_name, c.information as company_information from card full join useraccount on card.user_id = useraccount.id full join company as c on c.company_id = card.company_id full join person as p on p.id = useraccount.person full join photo as ph on p.photo = ph.id where card_id = %s;"
+      query = "select username, CONCAT(p.name,' ',p.surname) as person_name, color, ph.path as path, p.birthDay, p.educationLevel, p.gender, card_number, points, is_active, activation_date, expire_date, card.company_id as company_id, c.name as company_name, c.information as company_information from card full join useraccount on card.user_id = useraccount.id full join company as c on c.company_id = card.company_id full join person as p on p.id = useraccount.person full join photo as ph on p.photo = ph.id where card_id = %s;"
       cursor.execute(query, (card_key, ))
+      data = cursor.fetchone()
+      if data:
+        card = list( data )
+        desc = list( cursor.description[i][0] for i in range(0, len(cursor.description)) )
+        res = dict(zip(desc, card ))
+  return res
+
+def get_card_by_user(user_key):
+  res = None
+  with dbapi2.connect(DB_URL) as connection:
+    with connection.cursor() as cursor:
+      query = "select username, CONCAT(p.name,' ',p.surname) as person_name, color, ph.path as path, p.birthDay, p.educationLevel, p.gender, card_number, points, is_active, activation_date, expire_date, card.company_id as company_id, c.name as company_name, c.information as company_information from card inner join useraccount on card.user_id = useraccount.id full join company as c on c.company_id = card.company_id full join person as p on p.id = useraccount.person full join photo as ph on p.photo = ph.id where useraccount.id = %s;"
+      cursor.execute(query, (user_key, ))
       data = cursor.fetchone()
       if data:
         card = list( data )

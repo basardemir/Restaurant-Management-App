@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, abort
 
 from models.card import *
 from models.company import get_company_by_user
@@ -82,7 +82,7 @@ def card_update_page(card_key):
   else:
     _card = get_card(card_key)
     if(_card is None):
-      abort(404)
+      return redirect(url_for("not_found_page"))
     card = CardForm()
 
     if card.validate_on_submit():
@@ -122,9 +122,21 @@ def card_details_page(card_key):
     return redirect(url_for("access_denied_page"))
   else:
     card = get_card(card_key)
-    print(card)
     if(card is None):
-      abort(404)
+      return redirect(url_for("not_found_page"))
+    return render_template(
+      "/cards/details.html",
+      card = card
+    )
+
+def my_card_page():
+  if session and session["logged_in"] == False:
+    return redirect(url_for('signin_page'))
+  else:
+
+    card = get_card_by_user(session['userid'])
+    if(card is None):
+      return redirect(url_for("not_found_page"))
     return render_template(
       "/cards/details.html",
       card = card

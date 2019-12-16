@@ -1,10 +1,10 @@
 {% extends "layout.html" %}
-{% block title %}{% endblock %}
+{% block title %}Company / Delete{% endblock %}
 {% block content %}
 <div class="container">
   
   <form action="{{ request.path }}" method="POST">
-    <h3>Gerçekten silmek istiyor musunuz?</h3>
+    <h3>Are you sure to delete your company?</h3>
     
     <button type="submit" class="btn btn-primary">Submit</button>
     <a href="{{ url_for('companies_page') }}" class="btn btn-secondary">Cancel</a>

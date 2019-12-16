@@ -2,37 +2,37 @@
 {% block title %}Card Details{% endblock %}
 {% block content %}
 {% if card %}
-<div class="container">
-  <div class="row">
-    <div class="col-12 row">
-      <div class="col-6">
-        <h1 class="display-4">Card Information {% if card['is_active'] %} <sup>({{ "Active" }})</sup> {% else %} ({{ "Passive" }}) {% endif %}</h1>
-        <hr style="padding:5px 0;background-color: {{ card['color'] }}">
-        <ul>
-          <li>Card Number: {{ card['card_number'] }} </li>
-          <li>Points: {{ card['points'] }} </li>
-          <li>Activation Date: {{ card['activation_date'] }} </li>
-          <li>Expire Date: {{ card['expire_date'] }} </li>
-          <li>Connected to <a href="{{ url_for('company_details_page', company_key = card['company_id']) }}" target="_blank">{{ card['name'] }} company</a> </li>
-          <li>Company Information: {{card['company_information']}}</li>
-        </ul>
-      </div>
-      <div class="col-6">
-        <h1 class="display-4 pb-1">User Information</h1><br>
-        <hr style="padding:5px 0;background-color: {{ card['color'] }}" class="mt-5">
-        
-        <div class="text-center">
-          <img src="{{ card['path'] }}" class="img-fluid round-circle" width="250" height="250">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 row">
+        <div class="col-6">
+          <h1 class="display-4">Card Information {% if card['is_active'] %} <sup>({{ "Active" }})</sup> {% else %} ({{ "Passive" }}) {% endif %}</h1>
+          <hr style="padding:5px 0;background-color: {{ card['color'] }}">
+          <ul>
+            <li>Card Number: {{ card['card_number'] }} </li>
+            <li>Points: {{ card['points'] }} </li>
+            <li>Activation Date: {{ card['activation_date'] }} </li>
+            <li>Expire Date: {{ card['expire_date'] }} </li>
+            <li>Connected to <a href="{{ url_for('company_details_page', company_key = card['company_id']) }}" target="_blank">{{ card['name'] }} company</a> </li>
+            <li>Company Information: {{card['company_information']}}</li>
+          </ul>
         </div>
-        <ul>
-          <li>Card Owner: {{ card['person_name']  }}  </li>
-          <li>Gender: {{ card['gender'] }}</li>
-          <li>Birthday: {{ card['birthday'] }}</li>
-          <li>Education Level: {{ card['educationlevel'] }}</li>
-        </ul>
+        <div class="col-6">
+          <h1 class="display-4 pb-1">User Information</h1><br>
+          <hr style="padding:5px 0;background-color: {{ card['color'] }}" class="mt-5">
+          
+          <div class="text-center">
+            <img src="{{ card['path'] }}" class="img-fluid round-circle" width="250" height="250">
+          </div>
+          <ul>
+            <li>Card Owner: {{ card['person_name']  }}  </li>
+            <li>Gender: {{ card['gender'] }}</li>
+            <li>Birthday: {{ card['birthday'] }}</li>
+            <li>Education Level: {{ card['educationlevel'] }}</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
-</div>
 {% endif %}
 {% endblock %}

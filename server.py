@@ -21,7 +21,7 @@ app.add_url_rule("/403-access-denied", view_func= views.access_denied_page)
 ## Company
 app.add_url_rule("/companies", view_func = views.companies_page, methods=["GET", "POST"])
 app.add_url_rule("/companies/create", view_func = views.company_add_page, methods=["GET", "POST"])
-app.add_url_rule("/companies/<int:company_key>/details", view_func = views.company_details_page, methods=["GET", "POST"])
+app.add_url_rule("/companies/<int:company_key>/details", view_func = views.company_details_page, methods=["GET"])
 app.add_url_rule("/companies/<int:company_key>/edit", view_func = views.company_update_page, methods=["GET", "POST"])
 app.add_url_rule("/companies/<int:company_key>/delete", view_func = views.company_delete_page, methods=["GET", "POST"])
 app.add_url_rule("/companies/<int:company_key>/set_founder", view_func = views.company_setfounder_page, methods=["GET", "POST"])
@@ -29,9 +29,10 @@ app.add_url_rule("/companies/<int:company_key>/set_founder", view_func = views.c
 ## Card
 app.add_url_rule("/cards", view_func = views.cards_page, methods=["GET", "POST"])
 app.add_url_rule("/cards/create", view_func = views.card_add_page, methods=["GET", "POST"])
-app.add_url_rule("/cards/<int:card_key>/details", view_func = views.card_details_page, methods=["GET", "POST"])
+app.add_url_rule("/cards/<int:card_key>/details", view_func = views.card_details_page, methods=["GET"])
 app.add_url_rule("/cards/<int:card_key>/edit", view_func = views.card_update_page, methods=["GET", "POST"])
 app.add_url_rule("/cards/<int:card_key>/delete", view_func = views.card_delete_page, methods=["GET", "POST"])
+app.add_url_rule("/my_card", view_func=views.my_card_page, methods=["GET"])
 
 ## Order
 app.add_url_rule("/orders", view_func = views.orders_page, methods=["GET", "POST"])
