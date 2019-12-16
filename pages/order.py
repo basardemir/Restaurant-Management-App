@@ -148,6 +148,8 @@ def comment_order_page(order_key):
       comment_info = (
         comment.comment["title"].data,
         comment.comment["description"].data,
+        int(comment.comment["speed"].data),
+        int(comment.comment["taste"].data),
         user_id,
         order_key
       )

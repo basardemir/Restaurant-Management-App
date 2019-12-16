@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, FormField, StringField, TextAreaField, SelectField, ValidationError, FloatField
+from wtforms import SubmitField, FormField, StringField, TextAreaField, SelectField, ValidationError, FloatField, BooleanField
 from wtforms.validators import DataRequired, NumberRange, Length
 from wtforms_components import IntegerField
 
@@ -24,6 +24,15 @@ class Comment(FlaskForm):
     ],
     render_kw = { "class" : "form-control" }
   )
+  #BooleanField = checkbox
+
+  speed = BooleanField(
+    "speed"
+  )
+  taste = BooleanField(
+    "taste"
+  )
+  
 
 class CommentForm(FlaskForm):
   comment = FormField(Comment)
