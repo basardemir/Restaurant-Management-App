@@ -135,16 +135,12 @@ def editsocialmedia_page():
     return render_template("/users/editsocialmedia.html", user=session, form=form, data = data)  
 
 def editcontactinfo_page():
-    print("Editing")
-    print(request.method)
     if session == {} or session["logged_in"] == False:
         return redirect(url_for("home_page"))
     data = select_a_contactinfo(session['userid'])
     form = CallContactInfo()
     if request.method == "POST" and form.validate_on_submit():
-        print("POSTING")
         contactinfodata = form.data["contactinfo"]
-        print(contactinfodata)
         update_contactinfo(contactinfodata, session["userid"])
         return redirect(url_for("profile_page"))
     elif request.method == "POST" and not form.validate_on_submit():

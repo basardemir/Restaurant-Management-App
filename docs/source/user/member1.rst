@@ -38,3 +38,16 @@ The user who has an existing user account may view their information from the pr
       :alt: Profile Page
 
       The Profile Page of the application.
+
+
+Editing 
+-----------
+
+The user may edit their user account information, personal information, contact information, and social media information by clicking the editing links in the profile page. Once clicked, the user will be redirected to the desired form.
+
+
+.. figure:: editing.png
+      :scale: 50 %
+      :alt: Editing Page
+
+      An Editing Page of the application.

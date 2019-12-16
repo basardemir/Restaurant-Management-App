@@ -57,7 +57,31 @@ The user who has an existing user account may access information from their user
             user = select_a_user_and_info(session['userid'])
             return render_template("/users/profile.html", user=user[0]) 
 
-Editing
+Editing 
 -----------
 
-The user may edit the current information about their account, personal information, contact information, and social media information.
+The user may edit the current information about their account, personal information, contact information, and social media information. The user is redirected to the form of the table they desire to edit. The user may change the desired field they would like to change. Once the form is submitted, the data sent will be used to update the database of the updated table.
+
+
+   .. code-block:: python
+
+        #One of the editing pages
+        def edituser_page():
+            data = select_a_user(session['userid'])
+            form = CallUserAccount()
+            if request.method == "POST" and form.validate_on_submit():
+                userdata = form.data["user"]
+                update_user(userdata, session["userid"])
+                return redirect(url_for("profile_page"))
+            elif request.method == "POST" and not form.validate_on_submit():
+                errs = []
+                for fieldName, errorMessages in form.errors.items():
+                    errs.append(errorMessages)
+                errjson = json.dumps(errs)
+                return render_template("/users/edituseraccount.html", user=session, form=form, data = data, errors=errjson)
+            else:
+                if data["username"] != None:
+                    form.user["username"].data = data["username"]
+                if data["securityanswer"] != None:
+                    form.user["securityAnswer"].data = data["securityanswer"]
+            return render_template("/users/edituseraccount.html", user=session, form=form, data = data)  
