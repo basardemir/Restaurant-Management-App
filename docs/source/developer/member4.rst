@@ -114,6 +114,7 @@ In the location/create.html we have the following format for rendering the form.
 For validating submissions from html in python we use validate_on_submit() method
         
 .. code-block:: python
+
     :emphasize-lines: 3,4,5,6,7,8,9,10,11,12,13,14,15,16,17
         def location_add_page():
         location = LocationForm()
@@ -140,6 +141,7 @@ Once the submission is validated two tuples, locations and coordinates, are fill
 |location_model.py
        
 .. code-block:: python
+
         def add_location(location, coord):  
             with dbapi2.connect(DB_URL) as connection:
                 with connection.cursor() as cursor:
@@ -162,11 +164,14 @@ Once the submission is validated two tuples, locations and coordinates, are fill
                     retLoc = cursor.fetchone()[0]
             return retLoc
 For other province and country tables add operation is exactly the same with small query changes.
+
 Read Operation
 =================
+
 The index.html expects a 2d array and unpacks elements accordingly
         
 .. code-block:: html
+
         <div class="column mr-4">
             <a href="{{ url_for('location_add_page') }}" class="btn btn-primary" target="_self" title="Add">Add Entry</a>
         </div>
@@ -216,12 +221,14 @@ The index.html expects a 2d array and unpacks elements accordingly
 the list is populated in location in pages through sql queries in location_model.py
        
 .. code-block::python
+
         def location_page():
             location = get_all_location()
             return render_template("/location/index.html", list = location)
 get_all_location in location_model.py
 
 .. code-block::python
+
         def get_all_location():
             with dbapi2.connect(DB_URL) as connection:
                 with connection.cursor() as cursor:
@@ -243,14 +250,16 @@ get_all_location in location_model.py
                     return get_results(cursor)
 For deleting with checkboxes selected in index.html we add the following to location.py
         
-        ..code-block::python
-        :emphasize-lines: 2,3,4
-                def location_page():
-                    if request.method == "POST":
-                        for i in request.form.getlist("location_keys"):
-                            delete_location(i)
-                    location = get_all_location()
-                    return render_template("/location/index.html", list = location)   
+.. code-block::python
+
+    :emphasize-lines: 2,3,4
+            def location_page():
+                if request.method == "POST":
+                    for i in request.form.getlist("location_keys"):
+                        delete_location(i)
+                location = get_all_location()
+                return render_template("/location/index.html", list = location) 
+                
 Unfinished / Problematic Features
 ==============
 * Only the create location page was suppose to be accessable by the users, however the lack of authentcation allows anyone with the url can access the main pages of these tables and
