@@ -78,6 +78,7 @@ Flask Form for location.
 In location.py in pages, we use create an instance of the flask form we designed and sent it to html.
         
 .. code-block:: python
+
         def location_add_page():
             location = LocationForm()
             return render_template("/location/create.html", form = location)
@@ -85,6 +86,7 @@ In location.py in pages, we use create an instance of the flask form we designed
 In the location/create.html we have the following format for rendering the form.
        
 .. code-block:: html
+
         <div class="container">
         <form method="post" action="{{ request.path }}" >
             {{ form.csrf_token }}
