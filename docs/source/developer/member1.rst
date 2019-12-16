@@ -2,7 +2,7 @@ Parts Implemented by İbrahim Berat Kaya
 ================================
 
 Login
-========
+-----------
 
 The user who has an account may sign in from this page using the username and password of the user. Once the user enters the account information, a request to the server will be made.  
 If the user sends a valid form, the values of the form will be checked from the database. If a user exists, a session will be created for the user and the user will be logged in. 
@@ -22,7 +22,7 @@ If the user sends a valid form, the values of the form will be checked from the 
                 return redirect(url_for("home_page"))
 
 Sign Up
-========
+-----------
 
 The user who would like to join this application may create an account by entering the required information. Once the user enters the account information, they should click the sign up button. 
 If the user enters a valid username that currently does not exists, they will join RestMang, and they will be redirected to the homepage. If the username is already taken, they will be alerted that the username is already taken.
@@ -41,7 +41,7 @@ If the user enters a valid username that currently does not exists, they will jo
 
 
 Profile
-========
+-----------
 
 The user who has an existing user account may access information from their user account once they view the profile page while logged in. Once the user goes to the profile page, the information about the user will be retrieved from the database. The information will then be shown to the user.
 

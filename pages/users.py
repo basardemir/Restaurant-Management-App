@@ -84,9 +84,7 @@ def signin_page():
     
 def profile_page():
     if request.method == "GET":
-        print(session)
         user = select_a_user_and_info(session['userid'])
-        print(user)
         return render_template("/users/profile.html", user=user[0]) 
     if request.method == 'POST':
         delete_current_user()
