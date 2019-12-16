@@ -4,42 +4,51 @@
 
   <div class="container-fluid">
     <div class="row">
-      <div class="col-12 mx-auto">
+      <div class="col-12">
         {% if session["logged_in"] == True %}
-        <ul class="list-group list-group-flush list-group-horizontal">
+        <ul class="list-group list-group-flush list-group-horizontal justify-content-center">
           <li class="list-group-item">
             <a class="btn btn-primary btn-lg" href="{{ url_for('companies_page') }}">Companies</a>
           </li>
           <li class="list-group-item">
-            <a class="btn btn-primary btn-lg" href="{{ url_for('country_page') }}">Countries</a>
-          </li>
-          <li class="list-group-item">
-            <a class="btn btn-primary btn-lg" href="{{ url_for('tz_page') }}">Timezones</a>
-          </li>
-          <li class="list-group-item">
-            <a class="btn btn-primary btn-lg" href="{{ url_for('province_page') }}">Province</a>
-          </li>
-          <li class="list-group-item">
-            <a class="btn btn-primary btn-lg" href="{{ url_for('users_page') }}">Users</a>
-          </li>
-          <li class="list-group-item">
-            <a class="btn btn-primary btn-lg" href="{{ url_for('meal_page')}}">Meals</a>
-          </li>
-          <li class="list-group-item">
             <a class="btn btn-primary btn-lg" href="{{ url_for('cards_page')}}">Cards</a>
           </li>
+          {% if session["membershiptype"] == "Admin" %}
+            <li class="list-group-item">
+              <a class="btn btn-primary btn-lg" href="{{ url_for('country_page') }}">Countries</a>
+            </li>
+            <li class="list-group-item">
+              <a class="btn btn-primary btn-lg" href="{{ url_for('tz_page') }}">Timezones</a>
+            </li>
+            <li class="list-group-item">
+              <a class="btn btn-primary btn-lg" href="{{ url_for('location_page')}}">Location</a>
+            </li>
+            <li class="list-group-item">
+              <a class="btn btn-primary btn-lg" href="{{ url_for('province_page') }}">Province</a>
+            </li>
+            {% endif %}
+        </ul>
+        <ul class="list-group list-group-flush list-group-horizontal justify-content-center mt-5">
           <li class="list-group-item">
-            <a class="btn btn-primary btn-lg" href="{{ url_for('show_ingredients')}}">Ingredients</a>
+            <a class="btn btn-secondary btn-lg" href="{{ url_for('show_ingredients')}}">Ingredients</a>
           </li>
           <li class="list-group-item">
-            <a class="btn btn-primary btn-lg" href="{{ url_for('location_page')}}">Location</a>
+            <a class="btn btn-secondary btn-lg" href="{{ url_for('meal_page')}}">Meals</a>
           </li>
+          <li class="list-group-item">
+            <a class="btn btn-secondary btn-lg" href="{{ url_for('orders_page')}}">Orders</a>
+          </li>
+          {% if session["membershiptype"] == "Admin" %}
+          <li class="list-group-item">
+            <a class="btn btn-secondary btn-lg" href="{{ url_for('users_page') }}">Users</a>
+          </li>
+          {% endif %}
         </ul>
         {% endif %}
       </div>
     </div>
-    <div class="row mt-5">
-      <div class="jumbotron">
+    <div class="row mt-5 justify-content-center">
+      <div class="jumbotron ">
         <h5>Welcome to Restaurant Management App!</h5>
         <p>RestMang is a Restaurant Management App that lets the user organize your company and restaurants, or lets the user give orders from restaurants.</p>
       </div>
