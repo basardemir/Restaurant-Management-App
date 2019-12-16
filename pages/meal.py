@@ -17,9 +17,7 @@ def meal_page():
         print(request.form)
         orders = []
         for item in request.form:
-            if update_stock(item):
-                order = select_restaurant_price(item)
-                orders.append(order)
+            orders.append(item)
         return redirect(url_for('payment_page', meals=orders))
     
 def food_value_page(food_id):
