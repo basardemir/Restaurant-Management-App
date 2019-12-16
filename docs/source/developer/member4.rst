@@ -218,6 +218,7 @@ The index.html expects a 2d array and unpacks elements accordingly
             </form>
         {% endif %}
         </div>
+        
 the list is populated in location in pages through sql queries in location_model.py
        
 .. code-block::python
@@ -225,6 +226,7 @@ the list is populated in location in pages through sql queries in location_model
         def location_page():
             location = get_all_location()
             return render_template("/location/index.html", list = location)
+
 get_all_location in location_model.py
 
 .. code-block::python
@@ -248,6 +250,7 @@ get_all_location in location_model.py
                     """
                     cursor.execute(query)
                     return get_results(cursor)
+                    
 For deleting with checkboxes selected in index.html we add the following to location.py
         
 .. code-block::python
