@@ -254,6 +254,7 @@ get_all_location in location_model.py
 For deleting with checkboxes selected in index.html we add the following to location.py
                     
 .. code-block:: python
+
    :emphasize-lines: 2,3,4
 
    def location_page():
