@@ -110,8 +110,6 @@ def company_details_page(company_key):
 
   if session and session["logged_in"] == False:
     return redirect(url_for('signin_page'))
-  elif session['membershiptype'] != 'Boss':
-    return redirect(url_for("access_denied_page"))
   else:
     company = get_company(company_key)
     contact = get_contact_of_company( company['contact_id'] )

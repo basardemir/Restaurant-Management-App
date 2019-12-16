@@ -118,8 +118,6 @@ def card_update_page(card_key):
 def card_details_page(card_key):
   if session and session["logged_in"] == False:
     return redirect(url_for('signin_page'))
-  elif session['membershiptype'] != 'Boss':
-    return redirect(url_for("access_denied_page"))
   else:
     card = get_card(card_key)
     if(card is None):
@@ -133,7 +131,6 @@ def my_card_page():
   if session and session["logged_in"] == False:
     return redirect(url_for('signin_page'))
   else:
-
     card = get_card_by_user(session['userid'])
     if(card is None):
       return redirect(url_for("not_found_page"))
