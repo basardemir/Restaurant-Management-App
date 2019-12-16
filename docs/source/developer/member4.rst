@@ -47,7 +47,8 @@ from the tables.Return value of get_results(cursor) is a 2d array which can be d
 
 
 In this one the returning result is a dictionary with table's column names as key values.
-    .. code-block:: python
+
+        .. code-block:: python
 
             desc = list(cursor.description[i][0] for i in range(0 ,len(cursor.description)))
             table = list(cursor.fetchone())
@@ -75,13 +76,15 @@ Flask Form for location.
             submit = SubmitField( render_kw = { "class" : "btn btn-primary"})
 
 In location.py in pages, we use create an instance of the flask form we desined and sent it to html.
+        
         .. code-block:: python
                 def location_add_page():
                     location = LocationForm()
                     return render_template("/location/create.html", form = location)
 
 In the location/create.html we have the following format for rendering the form.
-        .. code-block:: html
+       
+       .. code-block:: html
                 <div class="container">
                 <form method="post" action="{{ request.path }}" >
                     {{ form.csrf_token }}
@@ -107,6 +110,7 @@ In the location/create.html we have the following format for rendering the form.
                 </div>
 
 For validating submissions from html in python we use validate_on_submit() method
+        
         ..code-block:: python
             :emphasize-lines: 3,4,5,6,7,8,9,10,11,12,13,14,15,16,17
                 def location_add_page():
@@ -132,7 +136,8 @@ For validating submissions from html in python we use validate_on_submit() metho
 
 Once the submission is validated two tuples, locations and coordinates, are filled with the submitted input. These tuples are then send to *location_model.py* to be inserted into a query and stored on the database.
 |location_model.py
-        ..code-block:: python
+       
+       ..code-block:: python
                 def add_location(location, coord):  
                     with dbapi2.connect(DB_URL) as connection:
                         with connection.cursor() as cursor:
@@ -158,6 +163,7 @@ For other province and country tables add operation is exactly the same with sma
 Read Operation
 =================
 The index.html expects a 2d array and unpacks elements accordingly
+        
         ..code-block:: html
                 <div class="column mr-4">
                     <a href="{{ url_for('location_add_page') }}" class="btn btn-primary" target="_self" title="Add">Add Entry</a>
@@ -206,11 +212,13 @@ The index.html expects a 2d array and unpacks elements accordingly
                 {% endif %}
                 </div>
 the list is populated in location in pages through sql queries in location_model.py
-        ..code-block::python
+       
+       ..code-block::python
                 def location_page():
                     location = get_all_location()
                     return render_template("/location/index.html", list = location)
 get_all_location in location_model.py
+        
         ..code-block::python
                 def get_all_location():
                     with dbapi2.connect(DB_URL) as connection:
@@ -232,6 +240,7 @@ get_all_location in location_model.py
                             cursor.execute(query)
                             return get_results(cursor)
 For deleting with checkboxes selected in index.html we add the following to location.py
+        
         ..code-block::python
         :emphasize-lines: 2,3,4
                 def location_page():
