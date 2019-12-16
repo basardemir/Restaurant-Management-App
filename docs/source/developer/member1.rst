@@ -21,7 +21,7 @@ If the user sends a valid form, the values of the form will be checked from the 
                 update_user_lastentry(data, session["userid"])
                 return redirect(url_for("home_page"))
 
-Sign Up
+Signup
 -----------
 
 The user who would like to join this application may create an account by entering the required information. Once the user enters the account information, they should click the sign up button. 
@@ -57,3 +57,7 @@ The user who has an existing user account may access information from their user
             user = select_a_user_and_info(session['userid'])
             return render_template("/users/profile.html", user=user[0]) 
 
+Editing
+-----------
+
+The user may edit the current information about their account, personal information, contact information, and social media information.

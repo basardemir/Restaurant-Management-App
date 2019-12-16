@@ -14,7 +14,7 @@ If the user enters a valid username and password, they will be redirected to the
 
       The Login Page of the application.
 
-Sign Up
+Signup
 -----------
 
 The user who would like to join this application may create an account by entering the required information. Once the user enters the account information, they should click the sign up button. 
@@ -22,9 +22,9 @@ If the user enters a valid username that currently does not exists, they will jo
 
 .. figure:: signup.png
       :scale: 50 %
-      :alt: Sign Up Page
+      :alt: Signup Page
 
-      The Sign Up Page of the application.
+      The Signup Page of the application.
 
 
 Profile 
