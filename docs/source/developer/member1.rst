@@ -30,14 +30,19 @@ If the user enters a valid username that currently does not exists, they will jo
 
    .. code-block:: python
    
-        if check_if_user_exists(data) == False:
-                photoid = insert_photo(data)
-                id = insert_socialmedia(data)
-                id = insert_contactinfo(data, id)
-                id = insert_person(data, id, photoid)
-                id = insert_useraccount(data, id)
-                connection.commit()
-                return [True, id]
+        response = create_user(data)
+        if response[0]:
+            request.files["photo-photo"].save("./static/" + request.files["photo-photo"].filename)
+            session['username'] = data["username"]
+            session['password'] = data["password"]
+            session['membershiptype'] = 'Boss' if data['membership'] == 1 else 'Customer'
+            session['userid'] = response[1]
+            session['logged_in'] = True
+            return redirect(url_for("users_page"))
+        else:
+            errs = [["Username is already taken"]]
+            errjson = json.dumps(errs)
+            return render_template("/users/create.html", form=useraccount, errors=errjson, locations=locations)
 
 
 Profile
