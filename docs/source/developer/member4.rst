@@ -253,8 +253,9 @@ get_all_location in location_model.py
                     
 For deleting with checkboxes selected in index.html we add the following to location.py
         
-.. code-block:: python
+.. code-block:: 
     :emphasize-lines: 2,3,4
+    
     def location_page():
         if request.method == "POST":
             for i in request.form.getlist("location_keys"):
