@@ -30,6 +30,9 @@
         </tbody>
     </table> 
     <hr> 
+    <h2>
+        Ingredient count for meal {{nutritions[0][0]}}
+    </h2>
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
@@ -41,7 +44,7 @@
         <tbody>
             <tr>
                 {%for value in dictt%}
-                    <td>{{value[1]}}g</td>
+                    <td>{{value[1]}}</td>
                 {%endfor%}
             </tr>
         </tbody>

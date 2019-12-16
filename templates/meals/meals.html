@@ -38,11 +38,11 @@
                         <nav class="nav">
                             <a class="nav-link" href="{{url_for('food_value_page', food_id = food_id)}}">Food Values</a>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label" for="inlineCheckbox1">Add to Cart</label>
+                                <label class="form-check-label" for="inlineCheckbox1">Add to Cart  </label>
                                 <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="{{food_id}}" name="{{food_id}}">
                                 
                             </div>
-                            {% if userType == 'Boss' %}
+                            {% if userType == 'Boss' or userType == 'Admin' %}
                             <a class="nav-link text-success " href="{{url_for('update_meal_page', food_id = food_id)}}" >Update</a>
                             <a class="nav-link text-danger " href="{{url_for('delete_meal_page', food_id = food_id)}}" >Delete</a>
                             {% endif %}
@@ -55,7 +55,7 @@
     </div> 
     <button type="submit" class="btn btn-success btn-lg" style="margin-right: 50px;">Order</button>  
     </form> 
-    {% if userType == 'Boss' %}
+    {% if userType == 'Boss' or userType == 'Admin' %}
     <nav class="nav justify-content-center">
         <div class="col-md">
             <a class="btn btn-primary btn-lg" href="/meals/add_meal" role='button'>Add a meal</a>
