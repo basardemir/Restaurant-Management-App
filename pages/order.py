@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session, abort
 
 from models.orders import *
+from models.meals import select_restaurant_price, max_meal_possible
 
 from .forms.order_form import OrderForm
 from .forms.comment_form import CommentForm
@@ -19,16 +20,20 @@ def payment_page(meals):
   if session and session["logged_in"] == False:
     return redirect(url_for('signin_page'))
   else:
-    if meals:
-      meals
-
-    #meal_id #meal_name #stock_size #price
-    meals_list = [
-      (28, "ot", 50, 25.3),
-      (29, "mot", 30, 12.3),
-    ]
-    #max_amount - stock adedi
+    if meals is None:
+      return redirect(url_for("not_found_page"))
     
+    meals_list = list()
+    restaurant_id = -1
+
+    for i in meals:
+      food          = select_restaurant_price(int(i))
+      name          = food[0] ## food name
+      restaurant_id = food[1] ## restaurant_id
+      price         = food[2] ## food price
+      stock         = max_meal_possible( int(i) )
+      meals_list.append( ( i, name, stock, price ) )
+
     order = OrderForm()
     
     if order.validate_on_submit():
@@ -38,7 +43,6 @@ def payment_page(meals):
         ar.append( request.form.get("amount_of_check_{}".format(i)) ) 
 
       user_id = session['userid']
-      restaurant_id = 14
 
       order_info = (
         order.order["price"].data,
@@ -115,10 +119,9 @@ def order_details_page(order_key):
     order = get_detailed_order_food(order_key, "order")
     comment = get_order_related_comments(order_key)
     order_details = get_order_details(order_key)
-    print(order_details)
     
     if(order is None):
-      abort(404)
+      return redirect(url_for("not_found_page"))
     return render_template(
       "/orders/details.html",
       order = order,
@@ -132,7 +135,7 @@ def my_orders_page():
   else:
 
     myorders = get_order(session["userid"], "user")
-
+    
     return render_template(
       "/orders/myorders.html",
       myorders = myorders,
@@ -167,4 +170,10 @@ def comment_order_page(order_key):
       "/orders/comment.html",
       form = comment
     )
-    
+   
+def order_delivered_page():
+  if request.method == "POST":
+    order_key = request.form.get("order_key")
+    update_order_delivered( order_key )
+    update_stock_by_order_key(order_key)
+    return redirect( url_for("home_page") )
