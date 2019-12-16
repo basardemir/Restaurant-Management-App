@@ -58,7 +58,7 @@ SQL Query:
 
 HTML Form:
 
-    .. code-block:: html
+.. code-block:: html
 
     <form id="form" class="container-fluid w-75" action="" method="post" name="{{url_for('add_user_page')}}">
         <h1 class="text-center">Login</h1>
