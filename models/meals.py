@@ -25,6 +25,7 @@ def get_food_value(food_id):
 def insert_meal(meal_info, photo_path):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor() as cursor:
+            print(photo_path)
             statement = "insert into FOOD (nutrition_id, photo_id, food_name, brand_name, price, isVegan, type) VALUES (%(nutrition_id)s, %(photo_id)s, %(food_name)s, %(brand_name)s, %(price)s, %(vegan)s, %(meal_option)s) RETURNING food_id;"
             statement2 = "insert into nutritional_value (protein, fat, carbohydrates, cholesterol, calories) values (%(protein)s, %(fat)s, %(carbohydrates)s, %(cholesterol)s, %(calories)s) RETURNING nutritional_value_id;"  
             statement3 = "insert into photo (path) values (%(path)s) returning id;"
@@ -54,7 +55,7 @@ def update_meal(new_props, food_id):
             
             vegan = int(new_props['VeganorNot'] == "Vegan")
             
-            cursor.execute(statement, {'food_name': new_props['meal_name'], 'brand_name': new_props['brand_name'], 'price':new_props['price'], 'isVegan':vegan, 'type':new_props['meal_option'], 'food_id':food_id})
+            cursor.execute(statement, {'food_name': new_props['meal_name'], 'brand_name': new_props['restaurant'], 'price':new_props['price'], 'isVegan':vegan, 'type':new_props['meal_type'], 'food_id':food_id})
             
             
             print(new_props)
@@ -63,7 +64,7 @@ def update_meal(new_props, food_id):
             nutrition_id = cursor.fetchone()[0]
 
             statement3 = "update nutritional_value set protein=%(protein)s, fat=%(fat)s, carbohydrates=%(carbohydrates)s, cholesterol=%(cholesterol)s, calories=%(calories)s where nutritional_value_id = %(nutrition_id)s;"
-            
+            print(new_props)
             cursor.execute(statement3, {'nutrition_id': nutrition_id, 'calories':  new_props['calories'], 'carbohydrates': new_props['carbohydrates'], 'fat': new_props['fat'], 'protein': new_props['protein'], 'cholesterol': new_props['cholesterol']})
 
             connection.commit()
@@ -159,6 +160,17 @@ def select_restaurant_price(food_id):
             connection.commit()
             return orders
 
+def max_meal_possible(food_id):
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor() as cursor:
+            statement="select food_name, stock_left, amount, price from ((food f join ingredients_for_food iff on f.food_id=iff.food_id) join ingredient ing on ing.ingredient_id=iff.ingredient_id join stock s on s.ingredient_id = iff.ingredient_id) where f.food_id = %(id)s;"
+            cursor.execute(statement, {'id':food_id})
+            info = cursor.fetchall()
+            connection.commit()
+            min_value = 123456789
+            for item in info:
+                min_value = min(min_value, (item[1]//item[2]))
+            return min_value
         
             
             

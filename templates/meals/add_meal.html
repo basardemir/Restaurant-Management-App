@@ -16,7 +16,7 @@
                         <option value="{{item[0]}}">{{item[1]}}</option>
                     {% endfor %}
                 </select>
-            </div>
+            </div> 
             <div class="col">
                 <input type="number" min="1" step="1" class="form-control" placeholder="Price ( TL )" id="Price" name="price" value="{{food_props[2]}}" required>
             </div>
@@ -24,7 +24,7 @@
         <div class="row" style="margin-top: 10px;">
             <div class="col">
                 <div class="form-group">
-                    <label for="meal_type_select">Type of the meal</label>
+                    <label for="meal_type">Type of the meal</label>
                     <input type="text" class="form-control" placeholder="Meal Type (eg. Burger)" name="meal_type" value="" required>
                 </div>
             </div>
@@ -79,6 +79,7 @@
             </div>
         </div>
         <hr>
+        {% if add %}
         <div class="container-fluid">
             <div class="row-center">
                 <h3>Made of</h3>
@@ -148,6 +149,7 @@
             </div>
         </div>
         {{form.photo( class_ = "mt-5 table table-hover" )}}
+        {%endif%}
         <nav class="nav justify-content-center" style="margin-top: 20px;">
             <button style="margin-top: 20px;">Add Meal</button>
         </nav> 
