@@ -28,7 +28,24 @@
             </tr>
             {%endfor%}
         </tbody>
-    </table>  
+    </table> 
+    <hr> 
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                {% for keys in dictt %}
+                    <th>{{keys[0]}}</th>
+                {%endfor%}
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {%for value in dictt%}
+                    <td>{{value[1]}}g</td>
+                {%endfor%}
+            </tr>
+        </tbody>
+    </table> 
     <a href="/meals" class="btn btn-secondary btn-lg active" role="button">Back</a>    
 </div>
 

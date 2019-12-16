@@ -5,13 +5,17 @@
 
 <h1>Add a Meal</h1>
 <div class="container-fluid">
-    <form action="", method="POST">
+    <form action="", method="POST", enctype="multipart/form-data">
         <div class="row">
             <div class="col">
                 <input type="text" class="form-control" placeholder="Meal Name" name="meal_name" value="{{food_props[0]}}" required>
             </div>
             <div class="col">
-                <input type="text" class="form-control" placeholder="Brand Name" name="brand_name" value="{{food_props[1]}}" required>
+                <select class="form-control" id="restaurant_select" name="restaurant">
+                    {% for item in restaurant.items()%}
+                        <option value="{{item[0]}}">{{item[1]}}</option>
+                    {% endfor %}
+                </select>
             </div>
             <div class="col">
                 <input type="number" min="1" step="1" class="form-control" placeholder="Price ( TL )" id="Price" name="price" value="{{food_props[2]}}" required>
@@ -21,15 +25,7 @@
             <div class="col">
                 <div class="form-group">
                     <label for="meal_type_select">Type of the meal</label>
-                    <select class="form-control" id="meal_type_select" name="meal_option">
-                        {% for type in meal_types%}
-                            {% if type == food_props[4]%}
-                            <option value="{{type}}" selected>{{type}}</option>
-                            {%else%}
-                            <option value="{{type}}">{{type}}</option>
-                            {% endif %}
-                        {% endfor %}
-                    </select>
+                    <input type="text" class="form-control" placeholder="Meal Type (eg. Burger)" name="meal_type" value="" required>
                 </div>
             </div>
         </div>
@@ -151,6 +147,7 @@
                 </div>  
             </div>
         </div>
+        {{form.photo( class_ = "mt-5 table table-hover" )}}
         <nav class="nav justify-content-center" style="margin-top: 20px;">
             <button style="margin-top: 20px;">Add Meal</button>
         </nav> 

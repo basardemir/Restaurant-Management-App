@@ -5,31 +5,7 @@
     Meals 
 </h1>
 <div class="container-fluid">
-    
-    <div class="col">
-        <h2>Search</h2>
-        <form action="" method="POST">
-            <div class="row">
-                <div class="col">
-                    <input type="text" class="form-control" placeholder="Meal Name" name="searched_meal_name">
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                {% for meal in mealss %}
-                <div class="col">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" name="{{meal}}">
-                        <label class="form-check-label" for="inlineCheckbox1">{{ meal }}</label>
-                    </div>
-                </div>
-                {% endfor %}
-                <div class="col">
-                        <button style="margin-top: 20px;">Search Meal</button>
-                </div>
-            </div>
-        </form>
-    </div>
+    <form action="", method="POST">
     <hr>
     <div class="col">
         <h2>Results</h2>
@@ -46,9 +22,9 @@
                 </tr>
             </thead>
             <tbody>
-                {% for food_id, food_name, brand_name, price, isVegan, type in f_table %}
+                {% for food_id, path, food_name, brand_name, price, isVegan, type in f_table %}
                 <tr>
-                    <td><img src="../static/3746.png" class="rounded float-left" alt="Meal"></td>
+                    <td><img style="max-height:65px; max-width:65px; overflow: hidden" src="{{path}}" class="rounded float-left" alt="Ingredient"></td>
                     <td>{{food_name}}</td>
                     <td>{{brand_name}}</td>
                     <td>{{price}}tl</td>
@@ -63,10 +39,10 @@
                             <a class="nav-link" href="{{url_for('food_value_page', food_id = food_id)}}">Food Values</a>
                             <div class="form-check form-check-inline">
                                 <label class="form-check-label" for="inlineCheckbox1">Add to Cart</label>
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" name="{{food_name}}">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="{{food_id}}" name="{{food_id}}">
                                 
                             </div>
-                            {% if userType %}
+                            {% if userType == 'Boss' %}
                             <a class="nav-link text-success " href="{{url_for('update_meal_page', food_id = food_id)}}" >Update</a>
                             <a class="nav-link text-danger " href="{{url_for('delete_meal_page', food_id = food_id)}}" >Delete</a>
                             {% endif %}
@@ -76,8 +52,10 @@
                 {% endfor %}
             </tbody>
         </table>  
-    </div>  
-    {% if userType %}
+    </div> 
+    <button type="submit" class="btn btn-success btn-lg" style="margin-right: 50px;">Order</button>  
+    </form> 
+    {% if userType == 'Boss' %}
     <nav class="nav justify-content-center">
         <div class="col-md">
             <a class="btn btn-primary btn-lg" href="/meals/add_meal" role='button'>Add a meal</a>
