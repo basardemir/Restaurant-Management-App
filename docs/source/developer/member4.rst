@@ -219,9 +219,9 @@ The index.html expects a 2d array and unpacks elements accordingly
         {% endif %}
         </div>
         
-the list is populated in location in pages through sql queries in location_model.py
+The list is populated in location in pages through sql queries in location_model.py
        
-.. code-block::python
+.. code-block:: python
 
         def location_page():
             location = get_all_location()
@@ -229,7 +229,7 @@ the list is populated in location in pages through sql queries in location_model
 
 get_all_location in location_model.py
 
-.. code-block::python
+.. code-block:: python
 
         def get_all_location():
             with dbapi2.connect(DB_URL) as connection:
@@ -253,7 +253,7 @@ get_all_location in location_model.py
                     
 For deleting with checkboxes selected in index.html we add the following to location.py
         
-.. code-block::python
+.. code-block:: python
 
     def location_page():
         if request.method == "POST":
@@ -267,6 +267,8 @@ Unfinished / Problematic Features
 
 * Only the create location page was suppose to be accessable by the users, however the lack of authentcation allows anyone with the url can access the main pages of these tables and
 do alterations. 
+
 * While creating a location absance of javascript to hide option according to selected country allows users to combine a country with any of the provinces
 . Plan was to filter the selectField options with java script once a country was selected but I was not able to built this feature. 
+
 * Updating operation on locations doesn't work.
