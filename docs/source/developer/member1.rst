@@ -56,6 +56,25 @@ SQL Query:
                 data = cursor.fetchall()
                 return data
 
+HTML Form:
+
+    .. code-block:: html
+
+    <form id="form" class="container-fluid w-75" action="" method="post" name="{{url_for('add_user_page')}}">
+        <h1 class="text-center">Login</h1>
+        <div class="field-group">
+            <label style="font-weight: bold; margin-top: 0.75rem;" for="username" class="label">Username</label>
+            <input type="text" name="username" class="form-control" required="required" />
+            <label style="font-weight: bold; margin-top: 0.75rem;" for="password" class="label">Password</label>
+            <input type="password" name="password" class="form-control" required="required" />
+        </div>
+        <div id="buttondiv" class="field is-grouped text-center" style="margin-top: 1rem;">
+            <div class="control">
+                <button id="button" class="btn btn-outline-info">Sign in</button>
+            </div>
+        </div>
+    </form>
+
 
 Python Code:
 
@@ -97,6 +116,7 @@ SQL Query:
                     else:
                         return [False, -1]
 
+
 Insert function:
 
    .. code-block:: python
@@ -104,11 +124,25 @@ Insert function:
         def insert_socialmedia(data):
             with dbapi2.connect(DB_URL) as connection:
                 with connection.cursor() as cursor:
-statement = "INSERT INTO SOCIALMEDIA (facebook, twitter, instagram, discord, youtube, linkedin) VALUES (%s, %s, %s, %s, %s, %s) RETURNING id;"
-cursor.execute(statement, (data["facebook"], data['twitter'], data["instagram"], data["discord"], data["youtube"], data["linkedin"]))
-connection.commit()
-id = cursor.fetchone()[0]
-return id
+                    statement = "INSERT INTO SOCIALMEDIA (facebook, twitter, instagram, discord, youtube, linkedin) VALUES (%s, %s, %s, %s, %s, %s) RETURNING id;"
+                    cursor.execute(statement, (data["facebook"], data['twitter'], data["instagram"], data["discord"], data["youtube"], data["linkedin"]))
+                    connection.commit()
+                    id = cursor.fetchone()[0]
+                    return id
+
+WTForm:
+
+   .. code-block:: python
+
+    class Combine(FlaskForm):
+        person = FormField(PersonForm)
+        useraccount = FormField(UserAccountForm)
+        contactinfo = FormField(ContactInfoForm)
+        socialmedia = FormField(SocialMedia)
+        photo = FormField(PhotoForm)
+        submit = SubmitField("Sign Up", render_kw={"class": "btn btn-outline-info"})
+
+
 
 Python Code:
 
@@ -154,6 +188,7 @@ SQL Query:
                     cursor.close()
                     return userlist
 
+
 Python Code:
 
    .. code-block:: python
@@ -181,6 +216,19 @@ SQL Query:
                     data = cursor.fetchall()
                     return data[0]
 
+
+WTForm:
+
+   .. code-block:: python
+
+    class UserEditAccountForm(FlaskForm):
+        username = StringField("Username", validators=[DataRequired(message = msg),Length(max=25, message="Username cannot be longer than 25 characters")], render_kw={"class": "form-control"})
+        password = PasswordField("Password", validators=[DataRequired(message=msg), Length(max=25, message="Password cannot be longer than 25 characters")], render_kw={"class": "form-control"})
+        securityAnswer = StringField("Security Answer", validators=[Length(max=30, message="Security answer cannot be longer than 30 characters")], render_kw={"class": "form-control", "placeholder": "What is your mother's maiden name?"})
+
+    class CallUserAccount(FlaskForm):
+        user = FormField(UserEditAccountForm)
+        submit = SubmitField("Update", render_kw={"class": "btn btn-outline-info"})
 
 
 Python Code:
