@@ -38,3 +38,17 @@ If the user enters a valid username that currently does not exists, they will jo
                 id = insert_useraccount(data, id)
                 connection.commit()
                 return [True, id]
+
+
+Profile
+========
+
+The user who has an existing user account may access information from their user account once they view the profile page while logged in. Once the user goes to the profile page, the information about the user will be retrieved from the database. The information will then be shown to the user.
+
+
+   .. code-block:: python
+   
+        if request.method == "GET":
+            user = select_a_user_and_info(session['userid'])
+            return render_template("/users/profile.html", user=user[0]) 
+

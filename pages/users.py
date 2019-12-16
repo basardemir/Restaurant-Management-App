@@ -22,8 +22,8 @@ def users_page():
 
 def add_user_page():
     print(request.method)
+    locations = get_all_location_with_dict()
     if request.method == "GET":
-        locations = get_all_location_with_dict()
         useraccount = Combine()
         return render_template("/users/create.html", form=useraccount, errors={}, locations=locations)
     else:
@@ -44,7 +44,11 @@ def add_user_page():
                 session['membershiptype'] = 'Boss' if data['membership'] == 1 else 'Customer'
                 session['userid'] = response[1]
                 session['logged_in'] = True
-            return redirect(url_for("users_page"))
+                return redirect(url_for("users_page"))
+            else:
+                errs = [["Username is already taken"]]
+                errjson = json.dumps(errs)
+                return render_template("/users/create.html", form=useraccount, errors=errjson, locations=locations)
         else:
             errs = []
             for fieldName, errorMessages in useraccount.errors.items():
@@ -80,7 +84,9 @@ def signin_page():
     
 def profile_page():
     if request.method == "GET":
+        print(session)
         user = select_a_user_and_info(session['userid'])
+        print(user)
         return render_template("/users/profile.html", user=user[0]) 
     if request.method == 'POST':
         delete_current_user()

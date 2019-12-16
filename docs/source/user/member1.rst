@@ -25,3 +25,16 @@ If the user enters a valid username that currently does not exists, they will jo
       :alt: Sign Up Page
 
       The Sign Up Page of the application.
+
+
+Profile 
+==========
+
+The user who has an existing user account may view their information from the profile page. The profile page contains information about the account of the user, the personal information about the user, contact information about the user, social media links about the user, and the user's location information.
+
+
+.. figure:: profile.png
+      :scale: 50 %
+      :alt: Profile Page
+
+      The Profile Page of the application.
