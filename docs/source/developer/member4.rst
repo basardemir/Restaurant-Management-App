@@ -75,7 +75,7 @@ Flask Form for location.
             coord = FormField(Coordinates)
             submit = SubmitField( render_kw = { "class" : "btn btn-primary"})
 
-In location.py in pages, we use create an instance of the flask form we designed and sent it to html.
+In location.py in pages, we create an instance of the flask form we designed and sent it to html.
         
 .. code-block:: python
 
