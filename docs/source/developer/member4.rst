@@ -18,7 +18,8 @@ from a reliable and detailed enough source would have sufficed.
 Structure
 =========
 Each main table has it's own CRUD pages. Inputs are controlled by flask-WTForms.
-.. figure:: file_order.png
+
+        .. figure:: file_order.png
         :scale: 50 %
         :alt: html files per table
         After the delete operation the user is redirected to the main 
@@ -75,7 +76,7 @@ Flask Form for location.
             coord = FormField(Coordinates)
             submit = SubmitField( render_kw = { "class" : "btn btn-primary"})
 
-In location.py in pages, we use create an instance of the flask form we desined and sent it to html.
+In location.py in pages, we use create an instance of the flask form we designed and sent it to html.
         
         .. code-block:: python
                 def location_add_page():
