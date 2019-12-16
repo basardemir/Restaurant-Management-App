@@ -47,30 +47,6 @@ def get_all_location():
             #print(result)
             return get_results(cursor)
 
-def get_all_location():
-    with dbapi2.connect(DB_URL) as connection:
-        with connection.cursor() as cursor:
-            query = """select 
-            location_id,
-            country.country_id,
-            country.name,
-            province.province_id,
-            province.province_name,
-            county,
-            neighborhood,
-            street,
-            zipcode,
-            description from 
-            ((location join province on (location.province = province.province_id))
-            join country on (province.country = country.country_id))
-            """
-            cursor.execute(query)
-            #desc = list(cursor.description[i][0] for i in range(0 ,len(cursor.description)))
-            #province = list(cursor.fetchone())
-            #result = dict(zip(desc, province))
-            #print(result)
-            return get_results(cursor)
-
 def get_location(location_key):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor() as cursor:
