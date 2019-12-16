@@ -13,6 +13,9 @@
           <li class="list-group-item">
             <a class="btn btn-primary btn-lg" href="{{ url_for('cards_page')}}">Cards</a>
           </li>
+          <li class="list-group-item">
+            <a class="btn btn-primary btn-lg" href="{{ url_for('show_restaurant_page')}}">Restaurants</a>
+          </li>
           {% if session["membershiptype"] == "Admin" %}
             <li class="list-group-item">
               <a class="btn btn-primary btn-lg" href="{{ url_for('country_page') }}">Countries</a>

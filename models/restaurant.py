@@ -5,7 +5,7 @@ DB_URL = "postgres://ivpallnyfezioy:075baf8e129b0d52dbd6d87dd3c774363b0b10b49992
 def get_all_restaurants():
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor() as cursor:
-            statement = "select restaurant_id, company.name, score, capacity, opening_date, manager, total_earning from (restaurant join company on company_belongs = company_id); "
+            statement = "select restaurant_id, company.name, score, capacity, opening_date, manager, total_earning from (restaurant left join company on company_belongs = company_id); "
             cursor.execute(statement)
             restaurant = cursor.fetchall()
             connection.commit()
@@ -49,8 +49,8 @@ def delete_restaurant(restaurant_id):
         with connection.cursor() as cursor:     
             statement1 = "delete from restaurant where restaurant_id = %(id)s;"
             statement2 = "delete from stock where restaurant_id = %(id)s;"
-            cursor.execute(statement1, {'id': restaurant_id})
             cursor.execute(statement2, {'id': restaurant_id})
+            cursor.execute(statement1, {'id': restaurant_id})
 
             connection.commit()
 

@@ -17,12 +17,11 @@ def meal_page():
         print(request.form)
         orders = []
         for item in request.form:
-            if update_stock(item):
-                order = select_restaurant_price(item)
-                orders.append(order)
+            orders.append(item)
         return redirect(url_for('payment_page', meals=orders))
     
 def food_value_page(food_id):
+    max_meal_possible(food_id)
     nutrition_table, ingreds = get_food_value(food_id)
     return render_template("/meals/food_value.html", nutritions = nutrition_table, food_id=food_id, dictt = ingreds)
 
@@ -35,11 +34,12 @@ def add_meal_page():
         for item in reversed(rests):
             rest_dict[item[0]] = "Name:"+str(item[1])+", Manager:"+str(item[2])
         print(rest_dict)
-        return render_template("/meals/add_meal.html", ingreds = ingredients, food_props="", nutr_props="", restaurant=rest_dict, form = photo_form)
+        return render_template("/meals/add_meal.html", ingreds = ingredients, food_props="", nutr_props="", restaurant=rest_dict, form = photo_form, add=1)
     else:
-        print(request.form)
+        print(request.files)
         photo_path = "./static/" + request.files["photo"].filename
         insert_meal(request.form, photo_path)
+        request.files["photo"].save("./static/" + request.files["photo"].filename)
         return redirect(url_for('meal_page')) 
 
 def delete_meal_page(food_id):
@@ -51,11 +51,15 @@ def delete_meal_page(food_id):
         return redirect(url_for("meal_page"))
 
 def update_meal_page(food_id):
-    mealTypes = ["Burger", "Fries", "Salad", "Drink", "Desert", "Side Meal"]
+    photo_form = Photo_Form()
+    ingredients = get_names()
     if request.method == "GET":
         food_properties, nutr_props = select_all_by_id(food_id) 
-        print(nutr_props)
-        return render_template("/meals/add_meal.html", key=food_id, food_props=food_properties, nutr_props = nutr_props, meal_types = mealTypes)
+        rests = get_brands()
+        rest_dict = {}
+        for item in reversed(rests):
+            rest_dict[item[0]] = "Name:"+str(item[1])+", Manager:"+str(item[2])
+        return render_template("/meals/add_meal.html", key=food_id, food_props=food_properties, nutr_props = nutr_props, restaurant=rest_dict, form = photo_form, ingreds = ingredients, add = 0)
     else:
         update_meal(request.form, food_id)
         

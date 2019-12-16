@@ -2,7 +2,7 @@ Parts Implemented by İbrahim Berat Kaya
 ================================
 
 Login
-========
+-----------
 
 The user who has an account may sign in from this page using the username and password of the user. Once the user enters the account information, a request to the server will be made.  
 If the user sends a valid form, the values of the form will be checked from the database. If a user exists, a session will be created for the user and the user will be logged in. 
@@ -21,8 +21,8 @@ If the user sends a valid form, the values of the form will be checked from the 
                 update_user_lastentry(data, session["userid"])
                 return redirect(url_for("home_page"))
 
-Sign Up
-========
+Signup
+-----------
 
 The user who would like to join this application may create an account by entering the required information. Once the user enters the account information, they should click the sign up button. 
 If the user enters a valid username that currently does not exists, they will join RestMang, and they will be redirected to the homepage. If the username is already taken, they will be alerted that the username is already taken.
@@ -30,18 +30,23 @@ If the user enters a valid username that currently does not exists, they will jo
 
    .. code-block:: python
    
-        if check_if_user_exists(data) == False:
-                photoid = insert_photo(data)
-                id = insert_socialmedia(data)
-                id = insert_contactinfo(data, id)
-                id = insert_person(data, id, photoid)
-                id = insert_useraccount(data, id)
-                connection.commit()
-                return [True, id]
+        response = create_user(data)
+        if response[0]:
+            request.files["photo-photo"].save("./static/" + request.files["photo-photo"].filename)
+            session['username'] = data["username"]
+            session['password'] = data["password"]
+            session['membershiptype'] = 'Boss' if data['membership'] == 1 else 'Customer'
+            session['userid'] = response[1]
+            session['logged_in'] = True
+            return redirect(url_for("users_page"))
+        else:
+            errs = [["Username is already taken"]]
+            errjson = json.dumps(errs)
+            return render_template("/users/create.html", form=useraccount, errors=errjson, locations=locations)
 
 
 Profile
-========
+-----------
 
 The user who has an existing user account may access information from their user account once they view the profile page while logged in. Once the user goes to the profile page, the information about the user will be retrieved from the database. The information will then be shown to the user.
 
@@ -52,3 +57,31 @@ The user who has an existing user account may access information from their user
             user = select_a_user_and_info(session['userid'])
             return render_template("/users/profile.html", user=user[0]) 
 
+Editing 
+-----------
+
+The user may edit the current information about their account, personal information, contact information, and social media information. The user is redirected to the form of the table they desire to edit. The user may change the desired field they would like to change. Once the form is submitted, the data sent will be used to update the database of the updated table.
+
+
+   .. code-block:: python
+
+        #One of the editing pages
+        def edituser_page():
+            data = select_a_user(session['userid'])
+            form = CallUserAccount()
+            if request.method == "POST" and form.validate_on_submit():
+                userdata = form.data["user"]
+                update_user(userdata, session["userid"])
+                return redirect(url_for("profile_page"))
+            elif request.method == "POST" and not form.validate_on_submit():
+                errs = []
+                for fieldName, errorMessages in form.errors.items():
+                    errs.append(errorMessages)
+                errjson = json.dumps(errs)
+                return render_template("/users/edituseraccount.html", user=session, form=form, data = data, errors=errjson)
+            else:
+                if data["username"] != None:
+                    form.user["username"].data = data["username"]
+                if data["securityanswer"] != None:
+                    form.user["securityAnswer"].data = data["securityanswer"]
+            return render_template("/users/edituseraccount.html", user=session, form=form, data = data)  

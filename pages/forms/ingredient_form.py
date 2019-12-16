@@ -10,7 +10,7 @@ url="postgres://ivpallnyfezioy:075baf8e129b0d52dbd6d87dd3c774363b0b10b499921f821
 def restaurant_extractor():
     connection = dbapi2.connect(url)
     cursor = connection.cursor()
-    statement = "select restaurant_id, company.name, manager from (restaurant join company on company_belongs = company_id);"
+    statement = "select restaurant_id, company.name, manager from (restaurant full join company on company_belongs = company_id);"
     cursor.execute(statement)
     rests = cursor.fetchall()
     rest_dict = {}

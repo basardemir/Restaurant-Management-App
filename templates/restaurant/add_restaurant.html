@@ -28,10 +28,9 @@
       {{form.restaurant( class_ = "mt-5 table table-hover" )}}
       {{form.company( class_ = "mt-5 table table-hover" )}}
       {{form.contact_info( class_ = "mt-5 table table-hover" )}}
-      <h3>If there is no Company or Contact Info that suits you, you can add from below</h3>
+      <h3>If there is no Company that suits you, you can add from below</h3>
       <nav class="nav justify-content-center">
-        <a class="nav-link active" href="#">Add Company</a>
-        <a class="nav-link active" href="#">Add Contact Info</a>
+        <a class="nav-link active" href="{{url_for('company_add_page')}}">Add Company</a>
       </nav>
       <hr>
       {{form.submit_button}}

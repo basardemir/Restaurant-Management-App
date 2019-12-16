@@ -21,7 +21,6 @@ def users_page():
     return render_template("/users/read.html", users = userlist)
 
 def add_user_page():
-    print(request.method)
     locations = get_all_location_with_dict()
     if request.method == "GET":
         useraccount = Combine()
@@ -84,9 +83,7 @@ def signin_page():
     
 def profile_page():
     if request.method == "GET":
-        print(session)
         user = select_a_user_and_info(session['userid'])
-        print(user)
         return render_template("/users/profile.html", user=user[0]) 
     if request.method == 'POST':
         delete_current_user()
@@ -144,7 +141,6 @@ def editcontactinfo_page():
     form = CallContactInfo()
     if request.method == "POST" and form.validate_on_submit():
         contactinfodata = form.data["contactinfo"]
-        contactinfodata["location"] = (request.form["location"])
         update_contactinfo(contactinfodata, session["userid"])
         return redirect(url_for("profile_page"))
     elif request.method == "POST" and not form.validate_on_submit():
