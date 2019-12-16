@@ -114,7 +114,7 @@ In the location/create.html we have the following format for rendering the form.
 For validating submissions from html in python we use validate_on_submit() method
         
 .. code-block:: python
-   
+   :emphasize-lines: 3,4,5,6,7,8,9,10,11,12,13,14,15,16,17
    def location_add_page():
    location = LocationForm()
    if location.validate_on_submit():
