@@ -1,6 +1,5 @@
 Parts Implemented by Uğur Demir
-================================
-
+********************************
 Location
 ==========
 
@@ -18,8 +17,14 @@ from a reliable and detailed enough source would have sufficed.
 
 Structure
 =========
-Each main table has it's own CRUD pages. Inputs are controlled by flask-WTForms. After the delete operation the user is redirected to the main 
-index.html so there is no delete.html. The database operations are done in an another file called the {table_name}_model.py. Necessary queries are defined
+Each main table has it's own CRUD pages. Inputs are controlled by flask-WTForms.
+.. figure:: file_order.png
+        :scale: 50 %
+        :alt: html files per table
+        After the delete operation the user is redirected to the main 
+        index.html so there is no delete.html.
+
+The database operations are done in an another file called the {table_name}_model.py. Necessary queries are defined
 and executed using the functions within the model files. 
 
 Database operations
@@ -48,5 +53,13 @@ Return value of get_results(cursor) is a 2d array which can be directly sent to 
             table = list(cursor.fetchone())
             result = dict(zip(desc, table))
             return result
-            
+
 In this one the returning result is a dictionary with table's column names as key values.
+
+Unfinished / Problematic Features
+==============
+* Only the create location page was suppose to be accessable by the users, however the lack of authentcation allows anyone with the url can access the main pages of these tables and
+do alterations. 
+* While creating a location absance of javascript to hide option according to selected country allows users to combine a country with any of the provinces
+. Plan was to filter the selectField options with java script once a country was selected but I was not able to built this feature. 
+* Updating operation on locations doesn't work.
