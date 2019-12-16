@@ -33,17 +33,16 @@ from the tables.Return value of get_results(cursor) is a 2d array which can be d
 
 .. code-block:: python
 
-def get_results(cursor):
-    desc = cursor.description
-    column_names = [col[0] for col in desc]
-    data = [dict(zip(column_names,row)) for row in cursor.fetchall()] #array of dict
-    #data[0].values() values of the first row
-    res = []
-    for i in data:
-        res.append(i.values())
-    cursor.close()
-    return (res) #2d array 
-
+    def get_results(cursor):
+        desc = cursor.description
+        column_names = [col[0] for col in desc]
+        data = [dict(zip(column_names,row)) for row in cursor.fetchall()] #array of dict
+        #data[0].values() values of the first row
+        res = []
+        for i in data:
+            res.append(i.values())
+        cursor.close()
+        return (res) #2d array 
 
 In this one the returning result is a dictionary with table's column names as key values.
 
@@ -53,7 +52,9 @@ In this one the returning result is a dictionary with table's column names as ke
     table = list(cursor.fetchone())
     result = dict(zip(desc, table))
     return result
+    
 Flask Form for location.
+
 .. code-block:: python
 
     class Location(FlaskForm):
