@@ -29,7 +29,7 @@
           <tr>
             <td>{{ i[1] }}</td>
             <td>
-              <input type="number" data-key="{{ i[0] }}" data-price="{{ i[3] }}" name="amount_of_check-{{ count.value }}" class="amount_of_check" id="amount_of_check-{{ count.value }}" value=1 min=1 max="{{ i[2]}}" > 
+              <input type="number" data-key="{{ i[0] }}" data-price="{{ i[3] }}" name="amount_of_check_{{ count.value }}" class="amount_of_check" id="amount_of_check_{{ count.value }}" value=1 min=1 max="{{ i[2]}}" > 
             </td>
             <td>{{ i[3] }}</td>
           </tr>
@@ -44,5 +44,29 @@
     </div>
   </form>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    var vale = document.getElementsByClassName("amount_of_check")
+    var allsum = 0
+    for(let i=0;i<vale.length;i++){
+      var itm  = parseFloat(vale.item(i).getAttribute('data-price'))
+      var stock = parseFloat(vale.item(i).value)
+      allsum = allsum + itm * stock
+    }
+    document.getElementsByName("order-price")[0].value = allsum.toFixed(2)
+    
+    $(".amount_of_check").change(function(){
+      var vale = document.getElementsByClassName("amount_of_check")
+      var allsum = 0
+      for(let i=0;i<vale.length;i++){
+        var itm  = parseFloat(vale.item(i).getAttribute('data-price'))
+        var stock = parseFloat(vale.item(i).value)
+        allsum = allsum + itm * stock
+      }
+      document.getElementsByName("order-price")[0].value = allsum.toFixed(2)
+    });
+  })
+</script>
 
 {% endblock %}

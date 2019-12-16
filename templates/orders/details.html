@@ -1,1 +1,22 @@
-order details...
+{% extends "layout.html" %}
+{% block title %}Order Details{% endblock %}
+{% block content %}
+{% if order %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 row">
+      <div class="col-6">
+        <h1 class="display-4">Order Details</h1>
+        <hr >
+       
+      </div>
+      <div class="col-6">
+        <h1 class="display-4 ">Comments</h1>
+        <hr >
+    </div>
+  </div>
+</div>
+
+{% endif %}
+{% endblock %}

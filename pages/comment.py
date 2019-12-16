@@ -27,7 +27,6 @@ def comment_add_page():
     )
 
     comment_key = add_comment(comment_info)
-    return redirect(url_for("comment_details_page", comment_key = comment_key))
   
   return render_template(
     "/comments/create.html",

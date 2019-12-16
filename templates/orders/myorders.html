@@ -2,7 +2,6 @@
 {% block title %}Myorders{% endblock %}
 {% block content%}
   
-
 <div class="container">
   <h1 class="display-4">My <small class="text-muted font-italic">orders</small></h1>
   <hr>
@@ -13,19 +12,33 @@
     <table class="table table-light table-hover">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Surname</th>
+          <th>#</th>
+          <th>Price</th>
+          <th>Note</th>
+          <th>Type</th>
+          <th>Rate</th>
+          <th>Start Date</th>
+          <th>End Date</th>
         </tr>
       </thead>
       <tbody>
         {% for i in myorders %}
         <tr>
-          <td>{{ i }}</td>
-          <td>{{ i }}</td>
+          <td>{{ i['order_id'] }}</td>
+          <td>{{ i['price'] }}</td>
+          <td>{{ i['note'] }}</td>
+          <td>{{ i['type'] }}</td>
+          <td>{{ i['rate'] }}</td>
+          <td>{{ i['created_at'] }}</td>
+          <td>{{ i['end_at'] }}</td>
           <td>
+            {% if i['end_at'] < date_now %}
+              <a href="{{ url_for('comment_order_page', order_key = i['order_id']) }}" class="btn btn-outline-dark">Make Comment </a>
+            {% else %}
+              <a href="{{ url_for('order_update_page', order_key = i['order_id']) }}" class="btn btn-outline-warning">Update Order </a>
+              <a href="{{ url_for('order_cancel_page', order_key = i['order_id']) }}" class="btn btn-outline-danger">Cancel Order </a>
+            {% endif %}
             <a href="{{ url_for('order_details_page', order_key = i['order_id']) }}" class="btn btn-outline-info">Details </a>
-            <a href="{{ url_for('order_update_page', order_key = i['order_id']) }}" class="btn btn-warning">Update</a>
-            <a href="{{ url_for('order_cancel_page', order_key = i['order_id']) }}" class="btn btn-danger">Delete</a>
           </td>
         </tr>
         {% endfor %}

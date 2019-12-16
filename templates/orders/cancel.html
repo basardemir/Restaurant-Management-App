@@ -1,1 +1,14 @@
-order cancel....
+{% extends "layout.html" %}
+{% block title %}Order / Cancel{% endblock %}
+{% block content %}
+<div class="container">
+  
+  <form action="{{ request.path }}" method="POST">
+    <h3>Do you wanna really cancel your order?</h3>
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a href="{{ url_for('orders_page') }}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+
+{% endblock %}

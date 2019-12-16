@@ -1,57 +1,49 @@
 {% extends "layout.html" %}
-{% block title %}Cards{% endblock %}
+{% block title %}All Orders{% endblock %}
 {% block content%}
   
-
 <div class="container">
-  <h1 class="display-4">Index <small class="text-muted font-italic">cards</small></h1>
+  <h1 class="display-4">All <small class="text-muted font-italic">orders</small></h1>
   <hr>
 </div>
 <div class="container mt-2">
-  <form action="" method="POST">
-    <div class="row">
-      <div class="column mr-4">
-        <a href="{{ url_for('card_add_page') }}" class="btn btn-primary" title="Add Card">Add Card</a>
-      </div>
-    </div>
-    {% if cards %}
+  <form action="{{ request.path }}" method="POST">
+    {% if orders %}
     <table class="table table-light table-hover">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Surname</th>
-          <th>Expire Date</th>
-          <th>Points</th>
-          <th>Color</th>
-          <th>Card Number</th>
-          <th>Company</th>
-          <th>Operations</th>
+          <th>#</th>
+          <th>Price</th>
+          <th>Note</th>
+          <th>Type</th>
+          <th>Rate</th>
+          <th>Start Date</th>
+          <th>End Date</th>
         </tr>
       </thead>
       <tbody>
-        {% for i in cards %}
+        {% for i in orders %}
         <tr>
-          <td>{{ i['name'] }}</td>
-          <td>{{ i['surname'] }}</td>
-          <td>{{ i['expire_date'] }}</td>
-          <td>{{ i['points'] }}</td>
-          <td>{{ i['color'] }}</td>
-          <td>{{ i['card_number'] }}</td>
-          <td>{{ i['company'] }}</td>
+          <td>{{ i['order_id'] }}</td>
+          <td>{{ i['price'] }}</td>
+          <td>{{ i['note'] }}</td>
+          <td>{{ i['type'] }}</td>
+          <td>{{ i['rate'] }}</td>
+          <td>{{ i['created_at'] }}</td>
+          <td>{{ i['end_at'] }}</td>
           <td>
-            <a href="{{ url_for('card_details_page', card_key = i['card_id']) }}" class="btn btn-outline-info">Details </a>
-            <a href="{{ url_for('card_update_page', card_key = i['card_id']) }}" class="btn btn-warning">Update</a>
-            <a href="{{ url_for('card_delete_page', card_key = i['card_id']) }}" class="btn btn-danger">Delete</a>
+            {% if i['end_at'] < date_now %}
+              <a href="{{ url_for('comment_order_page', order_key = i['order_id']) }}" class="btn btn-outline-dark">Make Comment </a>
+            {% else %}
+              <a href="{{ url_for('order_update_page', order_key = i['order_id']) }}" class="btn btn-outline-warning">Update Order </a>
+              <a href="{{ url_for('order_cancel_page', order_key = i['order_id']) }}" class="btn btn-outline-danger">Cancel Order </a>
+            {% endif %}
+            <a href="{{ url_for('order_details_page', order_key = i['order_id']) }}" class="btn btn-outline-info">Details </a>
           </td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
-    <div class="row">
-      <div class="column mr-4">
-        <a href="{{ url_for('card_add_page') }}" class="btn btn-primary" title="Add Card">Add Card</a>
-      </div>
-    </div>
   </form>
 </div>
   {% endif %}

@@ -16,29 +16,28 @@ def get_all_orders():
   return orders
 
 def get_order(key, type):
-  res = None
+  orders = []
   with dbapi2.connect(DB_URL) as connection:
     with connection.cursor() as cursor:
       query = ""
       if type == "restaurant":
-        query = "select * from orders where restaurant_id = %s;"
+        query = "select * from orders where restaurant_id = %s order by end_at desc;"
       elif type == "user":
-        query = "select * from orders where user_id = %s;"
+        query = "select * from orders where user_id = %s order by end_at desc;"
       else:
-        query = "select * from orders where order_id = %s;"
+        query = "select * from orders where order_id = %s order by end_at desc;"
       cursor.execute(query, (key, ))
-      data = cursor.fetchone()
-      if data:
-        order = list( data )
-        desc = list( cursor.description[i][0] for i in range(0, len(cursor.description)) )
-        res = dict(zip(desc, order ))
-  return res
+      desc = list( cursor.description[i][0] for i in range(0, len(cursor.description)) )
+      for i in cursor:
+        res = dict(zip(desc, list(i) ))
+        orders.append( res )
+  return orders
 
 def add_order(order):
   order_id = -1
   with dbapi2.connect(DB_URL) as connection:
     with connection.cursor() as cursor:
-      query = "insert into orders(price, note, type, rate, end_at, restaurant_id, user_id) values(%s, %s, %s, %s, %s, %s, %s) RETURNING order_id;"
+      query = "insert into orders(price, note, type, rate, end_at, created_at, restaurant_id, user_id) values(%s, %s, %s, %s, %s, %s, %s, %s) RETURNING order_id;"
       cursor.execute(query, order)
       connection.commit()
       order_id = cursor.fetchone()[0]
@@ -49,6 +48,13 @@ def connect_order_and_food(orderfood):
     with connection.cursor() as cursor:
       query = "insert into order_food(order_id, food_id, amount) values(%s, %s, %s);"
       cursor.execute(query, orderfood)
+      connection.commit()
+
+def make_comment_to_order(comment):
+  with dbapi2.connect(DB_URL) as connection:
+    with connection.cursor() as cursor:
+      query = "insert into comment(title, description, user_id, order_id) values(%s, %s, %s, %s);"
+      cursor.execute(query, comment)
       connection.commit()
 
 def update_order(order):

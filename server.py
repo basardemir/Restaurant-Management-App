@@ -3,6 +3,14 @@ import views
 
 app = Flask(__name__)
 
+## start 
+# https://exploreflask.com/en/latest/views.html#custom-converters
+
+from util import ListConverter
+app.url_map.converters['list'] = ListConverter
+
+## end
+
 
 app.config['SECRET_KEY'] = 'db2019'
 
@@ -28,10 +36,14 @@ app.add_url_rule("/cards/<int:card_key>/delete", view_func = views.card_delete_p
 ## Order
 app.add_url_rule("/orders", view_func = views.orders_page, methods=["GET", "POST"])
 app.add_url_rule("/myorders", view_func = views.my_orders_page, methods=["GET", "POST"])
-app.add_url_rule("/payment/<meals>", view_func = views.payment_page, methods=["GET", "POST"])
+app.add_url_rule("/payment/<list:meals>", view_func = views.payment_page, methods=["GET", "POST"])
 app.add_url_rule("/orders/<int:order_key>/details", view_func = views.order_details_page, methods=["GET", "POST"])
 app.add_url_rule("/orders/<int:order_key>/edit", view_func = views.order_update_page, methods=["GET", "POST"])
 app.add_url_rule("/orders/<int:order_key>/cancel", view_func = views.order_cancel_page, methods=["GET", "POST"])
+
+## Comment to Order
+app.add_url_rule("/orders/<int:order_key>/comment", view_func = views.comment_order_page, methods=["GET", "POST"])
+
 
 
 ##COUNTRY TABLE
