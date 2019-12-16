@@ -58,24 +58,24 @@ Flask Form for location.
 .. code-block:: python
 
     class Location(FlaskForm):
-    country = SelectField("Country", choices=[(str(c_id),c_name) for c_id, c_name in country])
-    province = SelectField("Province", choices=[(str(p_id), p_name) for p_id, p_name in province_list])
-    county = StringField("County", validators=[DataRequired(message=msgRequired.format("County")), Length(max=40, message="County lenght has to be shorter than 40 characters")])
-    neighborhood = StringField("Neighborhood", validators=[DataRequired(message=msgRequired.format("Neighborhood")),Length(max=40, message="Neighborhood lenght has to be shorter than 40 characters")])
-    street = StringField("Street", validators=[DataRequired(message=msgRequired.format("Street")),Length(max=40, message="Neighborhood lenght has to be shorter than 40 characters")])
-    zipcode = IntegerField("Zipcode", validators=[DataRequired(message=msgRequired.format("Zipcode")), NumberRange(min=10000, max=99999, message="Invalid Zipcode")])
-    description = TextAreaField("Description", validators=[Length(max=200, message="Description cannot be longer than 200 characters" )])
+        country = SelectField("Country", choices=[(str(c_id),c_name) for c_id, c_name in country])
+        province = SelectField("Province", choices=[(str(p_id), p_name) for p_id, p_name in province_list])
+        county = StringField("County", validators=[DataRequired(message=msgRequired.format("County")), Length(max=40, message="County lenght has to be shorter than 40 characters")])
+        neighborhood = StringField("Neighborhood", validators=[DataRequired(message=msgRequired.format("Neighborhood")),Length(max=40, message="Neighborhood lenght has to be shorter than 40 characters")])
+        street = StringField("Street", validators=[DataRequired(message=msgRequired.format("Street")),Length(max=40, message="Neighborhood lenght has to be shorter than 40 characters")])
+        zipcode = IntegerField("Zipcode", validators=[DataRequired(message=msgRequired.format("Zipcode")), NumberRange(min=10000, max=99999, message="Invalid Zipcode")])
+        description = TextAreaField("Description", validators=[Length(max=200, message="Description cannot be longer than 200 characters" )])
 
-            class Coordinates(FlaskForm):
-            Longitude = FloatField("Longitude",validators=[NumberRange(min=-180, max=+180, message="Longitude needs to be between -180 and 180.")])
-            Latitude = FloatField("Latitude", validators=[NumberRange(min=-90,max=90,message="Latitude needs to be between -90 and 90.")])
+    class Coordinates(FlaskForm):
+        Longitude = FloatField("Longitude",validators=[NumberRange(min=-180, max=+180, message="Longitude needs to be between -180 and 180.")])
+        Latitude = FloatField("Latitude", validators=[NumberRange(min=-90,max=90,message="Latitude needs to be between -90 and 90.")])
 
-            class LocationForm(FlaskForm):
-            location = FormField(Location)
-            coord = FormField(Coordinates)
-            submit = SubmitField( render_kw = { "class" : "btn btn-primary"})
+    class LocationForm(FlaskForm):
+        location = FormField(Location)
+        coord = FormField(Coordinates)
+        submit = SubmitField( render_kw = { "class" : "btn btn-primary"})
 
-In location.py in pages, we use create an instance of the flask form we designed and sent it to html.
+In location.py in pages, we create an instance of the flask form we designed and sent it to html.
         
 .. code-block:: python
 
