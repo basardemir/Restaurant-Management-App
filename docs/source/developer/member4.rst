@@ -32,6 +32,15 @@ The returning values from a query had to be formatted in most cases before being
 from the tables.Return value of get_results(cursor) is a 2d array which can be directly sent to html.
 
 .. code-block:: python
+   :emphasize-lines: 3,5
+
+   def some_function():
+       interesting = False
+       print 'This line is highlighted.'
+       print 'This one is not...'
+       print '...but this one is.'
+
+.. code-block:: python
 
     def get_results(cursor):
         desc = cursor.description
