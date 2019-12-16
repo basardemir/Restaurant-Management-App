@@ -32,15 +32,6 @@ The returning values from a query had to be formatted in most cases before being
 from the tables.Return value of get_results(cursor) is a 2d array which can be directly sent to html.
 
 .. code-block:: python
-   :emphasize-lines: 3,5
-
-   def some_function():
-       interesting = False
-       print 'This line is highlighted.'
-       print 'This one is not...'
-       print '...but this one is.'
-
-.. code-block:: python
 
     def get_results(cursor):
         desc = cursor.description
@@ -123,28 +114,28 @@ In the location/create.html we have the following format for rendering the form.
 For validating submissions from html in python we use validate_on_submit() method
         
 .. code-block:: python
+   :emphasize-lines: 3,4,5,6,7,8,9,10,11,12,13,14,15,16,17
+   
+   def location_add_page():
+   location = LocationForm()
+   if location.validate_on_submit():
+      location_info = ( 
+          int(location.location["province"].data),
+          location.location["county"].data,
+          location.location["neighborhood"].data,
+          location.location["street"].data,
+          location.location["zipcode"].data,
+          location.location["description"].data
+      )
+      coord_info = (
+          float(location.coord["Longitude"].data),
+          float(location.coord["Latitude"].data)
+      )
+      location_id = add_location(location_info, coord_info)
+      location = get_location(location_id)
+      return render_template("/location/details.html", list = location)
 
-    :emphasize-lines: 3,4,5,6,7,8,9,10,11,12,13,14,15,16,17
-        def location_add_page():
-        location = LocationForm()
-        if location.validate_on_submit():
-            location_info = ( 
-                int(location.location["province"].data),
-                location.location["county"].data,
-                location.location["neighborhood"].data,
-                location.location["street"].data,
-                location.location["zipcode"].data,
-                location.location["description"].data
-            )
-            coord_info = (
-                float(location.coord["Longitude"].data),
-                float(location.coord["Latitude"].data)
-            )
-            location_id = add_location(location_info, coord_info)
-            location = get_location(location_id)
-            return render_template("/location/details.html", list = location)
-
-        return render_template("/location/create.html", form = location)
+   return render_template("/location/create.html", form = location)
 
 Once the submission is validated two tuples, locations and coordinates, are filled with the submitted input. These tuples are then send to *location_model.py* to be inserted into a query and stored on the database.
 |location_model.py
@@ -263,7 +254,6 @@ get_all_location in location_model.py
 For deleting with checkboxes selected in index.html we add the following to location.py
                     
 .. code-block:: python
-
    :emphasize-lines: 2,3,4
 
    def location_page():
