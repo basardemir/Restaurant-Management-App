@@ -32,7 +32,7 @@
                     <td>                            
                         <nav class="nav">
                             <a class="nav-link" href="{{url_for('ingredient_nutr_values', ingred_id = ingred_id)}}">Nutrition Values</a>
-                            {% if userType %}
+                            {% if userType == 'Boss' or userType == 'Admin' %}
                             <a class="nav-link text-success " href="{{url_for('update_ingredient_page', ingred_id = ingred_id)}}" >Update</a>
                             <a class="nav-link text-danger " href="{{url_for('delete_ingredient_page', ingred_id = ingred_id)}}" >Delete</a>
                             {% endif %}
@@ -43,7 +43,7 @@
             </tbody>
         </table>  
     </div>  
-    {% if userType %}
+    {% if userType == 'Boss' or userType == 'Admin' %}
     <nav class="nav justify-content-center">
         <div class="col-md">
             <a class="btn btn-primary btn-lg" href="/ingredients/add" role='button'>Add a Ingredient</a>

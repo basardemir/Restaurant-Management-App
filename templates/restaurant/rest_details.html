@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block title %}Restaurant Details{%endblock%}
+{%block content%}
+
+
+<h1>
+    Stock Information
+</h1>
+<div class="container-fluid">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Ingredient Name</th>
+                <th>Stock</th>
+                <th>Expire Date (Month-Day-Year)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for name, stock, date in stock%}
+            <tr>
+                <td>{{name}}</td>
+                <td>{{stock}}</td>
+                <td>{{date}}</td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table> 
+    
+    <a href="/meals" class="btn btn-secondary btn-lg active" role="button">Back</a>    
+</div>
+
+{%endblock%}

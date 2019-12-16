@@ -82,6 +82,7 @@ app.add_url_rule("/ingredients/<int:ingred_id>/update", view_func=views.update_i
 #Restaurants
 app.add_url_rule("/restaurant/add", view_func=views.add_restaurant_page, methods=["GET", "POST"])
 app.add_url_rule("/restaurant", view_func=views.show_restaurant_page)
+app.add_url_rule("/restaurant/<int:restaurant_id>/details", view_func=views.stock_page)
 app.add_url_rule("/restaurant/<int:restaurant_id>/update", view_func=views.update_restaurant_page, methods=["GET", "POST"])
 app.add_url_rule("/restaurant/<int:restaurant_id>/delete", view_func=views.delete_restaurant_page, methods=["GET", "POST"])
 

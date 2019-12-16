@@ -54,3 +54,12 @@ def delete_restaurant(restaurant_id):
 
             connection.commit()
 
+def stock_by_id(restaurant_id):
+    with dbapi2.connect(DB_URL) as connection:
+        with connection.cursor() as cursor:   
+            statement = "select ingredient_name, stock_left, expire_date from stock join ingredient on stock.ingredient_id=ingredient.ingredient_id where restaurant_id = %(id)s; "
+            cursor.execute(statement, {'id': restaurant_id})
+            stock = cursor.fetchall()
+            connection.commit()
+            return stock
+

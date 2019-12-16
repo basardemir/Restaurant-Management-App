@@ -16,7 +16,7 @@ def add_ingredient_page():
 
 def show_ingredients():
     ing_table = show_all_ingredients()
-    return render_template("/ingredients/read_ingd.html", ing_table = ing_table, userType = 1)
+    return render_template("/ingredients/read_ingd.html", ing_table = ing_table, userType = session['membershiptype'])
 
 def ingredient_nutr_values(ingred_id):
     table = get_nutr_values(ingred_id)

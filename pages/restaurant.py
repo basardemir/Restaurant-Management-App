@@ -16,7 +16,7 @@ def add_restaurant_page():
 
 def show_restaurant_page():
     restaurants = get_all_restaurants()
-    return render_template("restaurant/read_restaurant.html", restaurants=restaurants, userType = 1)
+    return render_template("restaurant/read_restaurant.html", restaurants=restaurants, userType = session['membershiptype'])
 
 
 def update_restaurant_page(restaurant_id):
@@ -41,6 +41,10 @@ def delete_restaurant_page(restaurant_id):
         return render_template("/restaurant/delete_restaurant.html", data = names)
     else:
         delete_restaurant(restaurant_id)
+
+def stock_page(restaurant_id):
+    stock = stock_by_id(restaurant_id)
+    return render_template("/restaurant/rest_details.html", stock=stock)
 
 
 
