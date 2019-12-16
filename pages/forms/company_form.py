@@ -76,7 +76,8 @@ class CompanyForm(FlaskForm):
 def get_usernames():
   data = list()
   for i in select_users():
-    data.append( ( i['id'], i['username'] ) )
+    if i['membershiptype'] is 1:
+      data.append( ( i['id'], i['username'] ) )
   return data
 
 class Founder(FlaskForm):

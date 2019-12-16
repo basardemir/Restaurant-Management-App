@@ -5,16 +5,70 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-12 row">
-      <div class="col-6">
-        <h1 class="display-4">Order Details</h1>
-        <hr >
-       
-      </div>
-      <div class="col-6">
-        <h1 class="display-4 ">Comments</h1>
-        <hr >
+    <div class="col-8">
+      <h1 class="display-4">Meal Details</h1>
+      <hr >
+      <table class="table table-light table-hover">
+        <thead>
+          <th>Food Name</th>
+          <th>Brand Name</th>
+          <th>Amount</th>
+          <th>Price by food</th>
+        </thead>
+        <tbody>
+        {% for i in order %}
+          <tr>
+            <td>{{ i['food_name'] }}</td>
+            <td>{{ i['brand_name'] }}</td>
+            <td>{{ i['amount'] }}</td>
+            <td>{{ i['price'] }}</td>
+          </tr>
+        {% endfor%}
+        </tbody>
+      </table>
     </div>
+    <div class="col-4">
+      <h1 class="display-4">Order Details</h1>
+      <hr >
+      {% if order_detail %}
+      <div class="row">
+        
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Note: {{ order_detail['note'] }}</li>
+          <li class="list-group-item">Total Price: {{ order_detail['price'] }}</li>
+          <li class="list-group-item">Payment Type: {{ order_detail['payment_type'] }}</li>
+          <li class="list-group-item">Order Date: {{ order_detail['created_at'] }}</li>
+          <li class="list-group-item">Delivery Date: {{ order_detail['end_at'] }}</li>
+          <li class="list-group-item">Restaurant Manager: {{ order_detail['manager'] }}</li>
+          <li class="list-group-item">Ordered by {{ order_detail['person_name'] }} </li>
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  <div class="row">
+    <h1 class="display-4 ">Comments</h1>
+    <hr >
+    <table class="table table-light table-hover">
+      <thead>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Person Info</th>
+        <th>Speed</th>
+        <th>Taste</th>
+      </thead>
+      <tbody>
+      {% for i in comments %}
+        <tr>
+          <td>{{ i['title'] }}</td>
+          <td>{{ i['description'] }}</td>
+          <td>{{ i['person_name'] }}</td>
+          <td>{{ i['speed'] }}</td>
+          <td>{{ i['taste'] }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
   </div>
 </div>
 

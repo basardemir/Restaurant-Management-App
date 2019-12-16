@@ -55,7 +55,7 @@ def payment_page(meals):
       for i in range(0, len(ar)):
         connect_order_and_food( (order_key, meals_list[i][0], ar[i]) )
       
-      return redirect(url_for("home_page")) ## will go details...
+      return redirect(url_for("my_orders_page"))
     
     return render_template(
       "/orders/payment.html",
@@ -92,7 +92,7 @@ def order_update_page(order_key):
         order_key
       )
 
-      order_key = update_order(order_info)
+      update_order(order_info)
       
       return redirect(url_for("order_details_page", order_key = order_key))
 
@@ -112,13 +112,18 @@ def order_details_page(order_key):
   if session and session["logged_in"] == False:
     return redirect(url_for('signin_page'))
   else:
-    order = get_detailed_order(order_key, "order")
+    order = get_detailed_order_food(order_key, "order")
+    comment = get_order_related_comments(order_key)
+    order_details = get_order_details(order_key)
+    print(order_details)
     
     if(order is None):
       abort(404)
     return render_template(
       "/orders/details.html",
-      order = order
+      order = order,
+      comments = comment,
+      order_detail = order_details
     )
 
 def my_orders_page():

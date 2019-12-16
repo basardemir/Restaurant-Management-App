@@ -32,12 +32,9 @@
           <td>{{ i['created_at'] }}</td>
           <td>{{ i['end_at'] }}</td>
           <td>
-            {% if i['end_at'] < date_now %}
-              <a href="{{ url_for('comment_order_page', order_key = i['order_id']) }}" class="btn btn-outline-dark">Make Comment </a>
-            {% else %}
-              <a href="{{ url_for('order_update_page', order_key = i['order_id']) }}" class="btn btn-outline-warning">Update Order </a>
-              <a href="{{ url_for('order_cancel_page', order_key = i['order_id']) }}" class="btn btn-outline-danger">Cancel Order </a>
-            {% endif %}
+            <a href="{{ url_for('comment_order_page', order_key = i['order_id'] ) }}" class="btn btn-outline-dark">Make Comment </a>
+            <a href="{{ url_for('order_update_page', order_key = i['order_id']) }}" class="btn btn-outline-warning">Update Order </a>
+            <a href="{{ url_for('order_cancel_page', order_key = i['order_id']) }}" class="btn btn-outline-danger">Cancel Order </a>
             <a href="{{ url_for('order_details_page', order_key = i['order_id']) }}" class="btn btn-outline-info">Details </a>
           </td>
         </tr>
