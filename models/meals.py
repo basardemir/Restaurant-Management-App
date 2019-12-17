@@ -25,7 +25,6 @@ def get_food_value(food_id):
 def insert_meal(meal_info, photo_path):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor() as cursor:
-            print(photo_path)
             statement = "insert into FOOD (nutrition_id, photo_id, food_name, brand_name, price, isVegan, type) VALUES (%(nutrition_id)s, %(photo_id)s, %(food_name)s, %(brand_name)s, %(price)s, %(vegan)s, %(meal_option)s) RETURNING food_id;"
             statement2 = "insert into nutritional_value (protein, fat, carbohydrates, cholesterol, calories) values (%(protein)s, %(fat)s, %(carbohydrates)s, %(cholesterol)s, %(calories)s) RETURNING nutritional_value_id;"  
             statement3 = "insert into photo (path) values (%(path)s) returning id;"
@@ -58,13 +57,11 @@ def update_meal(new_props, food_id):
             cursor.execute(statement, {'food_name': new_props['meal_name'], 'brand_name': new_props['restaurant'], 'price':new_props['price'], 'isVegan':vegan, 'type':new_props['meal_type'], 'food_id':food_id})
             
             
-            print(new_props)
             statement2 = "select nutrition_id from food where food_id = %(food_id)s"
             cursor.execute(statement2, {'food_id': food_id})
             nutrition_id = cursor.fetchone()[0]
 
             statement3 = "update nutritional_value set protein=%(protein)s, fat=%(fat)s, carbohydrates=%(carbohydrates)s, cholesterol=%(cholesterol)s, calories=%(calories)s where nutritional_value_id = %(nutrition_id)s;"
-            print(new_props)
             cursor.execute(statement3, {'nutrition_id': nutrition_id, 'calories':  new_props['calories'], 'carbohydrates': new_props['carbohydrates'], 'fat': new_props['fat'], 'protein': new_props['protein'], 'cholesterol': new_props['cholesterol']})
 
             connection.commit()
@@ -132,18 +129,15 @@ def get_brands():
 def update_stock(food_id):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor() as cursor:
-            print(food_id)
             statement1 = "select iff.ingredient_id, restaurant_id, stock_left, amount from ingredients_for_food iff join stock s on s.ingredient_id=iff.ingredient_id where iff.food_id = %(id)s;"
             cursor.execute(statement1, {'id': food_id})
             order = cursor.fetchall()
-            print(order)
             updated_dict = []
             for item in order:
                 if item[2] < item[3]:
                     return False
                 else:
                     updated_dict.append((item[0], item[1], item[2]-item[3]))
-            print(updated_dict)
             statement2 = "update stock set stock_left = %(stock)s where ingredient_id = %(ing_id)s and restaurant_id = %(rest_id)s;"
             for item in updated_dict:
                 cursor.execute(statement2, {'stock': item[2], 'ing_id': item[0], 'rest_id': item[1]})

@@ -16,5 +16,4 @@ if __name__ == "__main__":
     tz = cursor.execute("select * from timezone")
     tz = cursor.fetchall()
     cursor.close() 
-    print(str(tz[0][0]) + " " +str(tz[0][1]))
 

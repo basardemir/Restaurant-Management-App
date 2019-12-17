@@ -8,9 +8,7 @@ from models.users import insert_contactinfo, update_contactinfo, select_a_user_a
 
 def province_page():
     if request.method == "POST":
-        print("Posted")
         for i in request.form.getlist("province_keys"):
-            print(i)
             delete_province(i)
 
     province = get_all_province()
@@ -59,7 +57,6 @@ def province_update_page(province_key):
         province_key = update_province(province, province_key, _province['prop_id'])
         return redirect(url_for('province_read_page', province_key=province_key))
     
-    print(_province)
 
     province.province["Country"].data               =_province['country']
     province.province["name"].data                  =_province['province_name']

@@ -7,7 +7,6 @@ def add_ingredient_page():
     if request.method == "GET":
         return render_template("/ingredients/add_ingd.html", form = _form)
     else:
-        print(request.form)
         photo_path = "./static/" + request.files["photo-photo"].filename
         data = {"ingredient_name" : request.form['ingredient-ingred_name'], "ingredient_type": request.form['ingredient-ingred_type'], "unit_weight": request.form['ingredient-unit_weight'], "volume": request.form['ingredient-volume'], "ideal_temp": request.form['ingredient-ideal_temp'], "protein": request.form['nutrition-protein'], "carbohydrates": request.form['nutrition-carbohydrates'], "fat": request.form["nutrition-fat"], "cholesterol": request.form['nutrition-cholesterol'], "calories": request.form['nutrition-calories'], "photo_path": photo_path, "rest_id": request.form['restaurant-restaurant'], 'stock': request.form['restaurant-stock'], 'expire_date': request.form['restaurant-expire_date']}
         add_ingredient(data)

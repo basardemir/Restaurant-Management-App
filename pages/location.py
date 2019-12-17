@@ -12,7 +12,6 @@ def location_page():
             delete_location(i)
 
     location = get_all_location()
-    print(location)
     return render_template("/location/index.html", list = location)
 
 def location_add_page():

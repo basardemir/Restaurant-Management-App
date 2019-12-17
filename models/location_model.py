@@ -75,10 +75,7 @@ def add_location(location, coord):
     
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor() as cursor:
-            print(location)
-            print(coord)
             query = """INSERT INTO COORDINATES (LONGITUDE, LATITUDE) VALUES (%s,%s) RETURNING COORD_ID"""
-            #print(query % (coord[0], coord[1]))
             cursor.execute(query,(coord[0], coord[1]))
             retCoord = cursor.fetchone()[0]
             query = """INSERT INTO LOCATION 
@@ -90,14 +87,12 @@ def add_location(location, coord):
             zipcode,
             description
             ) VALUES (%s,%s,%s,%s,%s,%s,%s) RETURNING LOCATION_ID"""
-            #print(query % (location[0],"coord",location[1],location[2],location[3],location[4],location[5]))
             cursor.execute(query, (location[0],retCoord,location[1],location[2],location[3],location[4],location[5]))
             retLoc = cursor.fetchone()[0]
     return retLoc
 
 def get_location_all(location_key):
     result = None
-    print(location_key)
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor() as cursor:
             query = """select 

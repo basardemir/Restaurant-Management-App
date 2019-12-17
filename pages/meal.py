@@ -11,10 +11,8 @@ DB_URL = "postgres://ivpallnyfezioy:075baf8e129b0d52dbd6d87dd3c774363b0b10b49992
 def meal_page():
     food_table = get_all_meals()
     if request.method == "GET":
-        print(food_table)
         return render_template("/meals/meals.html", userType=session['membershiptype'], f_table = food_table)
     else:
-        print(request.form)
         orders = []
         for item in request.form:
             orders.append(item)
@@ -33,10 +31,8 @@ def add_meal_page():
         rest_dict = {}
         for item in reversed(rests):
             rest_dict[item[0]] = "Name:"+str(item[1])+", Manager:"+str(item[2])
-        print(rest_dict)
         return render_template("/meals/add_meal.html", ingreds = ingredients, food_props="", nutr_props="", restaurant=rest_dict, form = photo_form, add=1)
     else:
-        print(request.files)
         photo_path = "./static/" + request.files["photo"].filename
         insert_meal(request.form, photo_path)
         request.files["photo"].save("./static/" + request.files["photo"].filename)

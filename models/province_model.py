@@ -69,8 +69,6 @@ def add_province(province, prop):
     province_id = -1
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor() as cursor:
-            print(province)
-            print(prop)
             query = """INSERT INTO PROPERTIES (AREA, GDP, POPULATION) VALUES (%s,%s,%s) RETURNING PROP_ID"""
             cursor.execute(query, (int(prop[0]), float(int(prop[1])*int(prop[2])), float(int(prop[3])*int(prop[4]))))
             prop_id = cursor.fetchall()[0][0]

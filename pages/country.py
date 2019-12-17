@@ -30,7 +30,6 @@ def country_add_page():
 	country = CountryForm()
 
 	if country.validate_on_submit():
-		print("Validated")
 		country_info = (
 			country.data["name"],
 			country.data["short_code"],
@@ -87,7 +86,6 @@ def country_update_page(country_key):
 		return redirect(url_for("country_read_page", country_key = country_key ))
 
 	for key,name,pop,area,gdp,tz,ls,ll,cc,dl,cc2,lat,lon,tz_id,cr_id,pr_id in _country:
-		print(key,name,pop,area,gdp,tz,ls,ll,cc,dl,cc2,lat,lon)
 		form.name.data = name
 		form.short_code.data = cc
 		form.lane.data = dl

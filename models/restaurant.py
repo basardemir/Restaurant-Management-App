@@ -24,7 +24,6 @@ def get_restaurant_by_id(restaurant_id):
             statement = "select company_belongs, contact_id, score, capacity, opening_date, manager, total_earning from restaurant where restaurant_id = %(id)s;"
             cursor.execute(statement, {'id': restaurant_id})
             restaurant = cursor.fetchall()[0]
-            print(restaurant)
             connection.commit()
             return restaurant
 

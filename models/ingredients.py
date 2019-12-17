@@ -19,7 +19,6 @@ def add_ingredient(data):
             statement_ing = "insert into ingredient (nutrition_id, photo_id, ingredient_name, ingredient_type, unit_weight, ingredient_volume, temperature_for_stowing) values (%(nutrition_id)s, %(photo_id)s, %(ingredient_name)s, %(ingredient_type)s, %(unit_weight)s, %(ingredient_volume)s, %(temperature_for_stowing)s) returning ingredient_id;"
             cursor.execute(statement_ing, {'nutrition_id': nutrition_id, "photo_id": photo_id, 'ingredient_name': data['ingredient_name'], 'ingredient_type': data['ingredient_type'], 'unit_weight': data['unit_weight'], "ingredient_volume": data['volume'], "temperature_for_stowing": data['ideal_temp']})
             ingredient_id = cursor.fetchone()[0]
-            print(data['expire_date'])
             statement_stock = "insert into stock (ingredient_id, restaurant_id, expire_date, stock_left) values (%(ing_id)s, %(rest_id)s, %(date)s, %(stock)s);"
             cursor.execute(statement_stock, {'ing_id': ingredient_id, 'rest_id': data['rest_id'], 'stock': data['stock'], 'date': data['expire_date']})
             connection.commit()
@@ -79,7 +78,6 @@ def delete_ingred(ingred_id):
 def update_ingred(new_props, ingred_id):
     with dbapi2.connect(DB_URL) as connection:
         with connection.cursor() as cursor:
-            print(new_props['ingredient-ingred_name'])
             statement = "update ingredient set ingredient_name=%(ingred_name)s, ingredient_type=%(ingred_type)s, unit_weight=%(weight)s, ingredient_volume=%(volume)s, temperature_for_stowing=%(temp)s where ingredient_id = %(ingred_id)s;"
             cursor.execute(statement, {'ingred_name': new_props['ingredient-ingred_name'], 'ingred_type':new_props['ingredient-ingred_type'], 'weight':new_props['ingredient-unit_weight'], 'volume':new_props['ingredient-volume'], 'temp':new_props['ingredient-ideal_temp'], 'ingred_id': ingred_id})
             connection.commit()

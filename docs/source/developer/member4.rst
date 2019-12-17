@@ -144,10 +144,7 @@ Once the submission is validated two tuples, locations and coordinates, are fill
         def add_location(location, coord):  
             with dbapi2.connect(DB_URL) as connection:
                 with connection.cursor() as cursor:
-                    print(location)
-                    print(coord)
                     query = """INSERT INTO COORDINATES (LONGITUDE, LATITUDE) VALUES (%s,%s) RETURNING COORD_ID"""
-                    #print(query % (coord[0], coord[1]))
                     cursor.execute(query,(coord[0], coord[1]))
                     retCoord = cursor.fetchone()[0]
                     query = """INSERT INTO LOCATION 

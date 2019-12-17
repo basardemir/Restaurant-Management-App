@@ -18,7 +18,6 @@ def get_all_countries_with_dict():
             cursor.execute(query)
             connection.commit()
             res = cursor.fetchall()
-            print(res)
             return res
 
 def get_all_countries():
@@ -72,8 +71,6 @@ def add_country(country):
             cursor.execute(query, (int(country[6]), float(country[7]*int(country[8])), float(country[9]*int(country[10]))))
             prop_id = cursor.fetchall()[0][0]
             connection.commit()
-            #print(query % (int(country[6]), float(country[7]*int(country[8])), float(country[9]*int(country[10]))))
-            #print(prop_id[0][0]) Prop_id is [(8,0)] a array of tuples with key at first value
             query = """INSERT INTO COORDINATES (LONGITUDE, LATITUDE) VALUES (%s,%s) RETURNING COORD_ID"""
             cursor.execute(query,(float(country[11]),float(country[12])))
             coord_id = cursor.fetchall()[0][0]
@@ -89,7 +86,6 @@ def add_country(country):
             language_long,
             language_short) 
             values (%s,%s,%s,%s,%s,%s,%s,%s,%s) RETURNING country_id"""
-            #print(query % (22,prop_id,coord_id,country[0],country[1],country[2],country[3],country[4],country[5]))
             cursor.execute(query,(int(country[13]),prop_id,coord_id,country[0],country[1],country[2],country[3],country[4],country[5]))
             country_id = cursor.fetchall()[0][0]
             connection.commit()
@@ -117,7 +113,6 @@ def update_country(country):
             language_short=%s 
             where country_id = %s"""
             cursor.execute(query, (country[16],country[2],country[1],country[3],country[4],country[5],country[6],country[7],country[8], country[0]))
-            #print(query % (country[16],country[2],country[1],country[3],country[4],country[5],country[6],country[7],country[8], country[0]))
 
 def delete_country(country_key):
     with dbapi2.connect(DB_URL) as connection:

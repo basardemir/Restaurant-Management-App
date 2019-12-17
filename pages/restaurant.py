@@ -8,7 +8,6 @@ def add_restaurant_page():
     if request.method == "GET":
         return render_template("/restaurant/add_restaurant.html", form = _form)
     else:
-        print(request.form)
         rest_info = {"score": request.form['restaurant-score'], "capacity": request.form['restaurant-capacity'], "opening-date": request.form['restaurant-opening_date'], "manager": request.form['restaurant-manager'], "total_earning": request.form['restaurant-total_earning'], "company": request.form['company-company'], "contact": request.form['contact_info-contact']}
         add_restaurant(rest_info)
         return redirect(url_for('add_restaurant_page'))
@@ -16,7 +15,6 @@ def add_restaurant_page():
 
 def show_restaurant_page():
     restaurants = get_all_restaurants()
-    print(restaurants)
     return render_template("restaurant/read_restaurant.html", restaurants=restaurants, userType = session['membershiptype'])
 
 
@@ -24,7 +22,6 @@ def update_restaurant_page(restaurant_id):
     _form = Restaurant_Page()
     if request.method == "GET":
         restaurant = get_restaurant_by_id(restaurant_id)
-        print(restaurant[0])
         _form.restaurant['score'].data = restaurant[2]
         _form.restaurant['capacity'].data = restaurant[3]
         _form.restaurant['opening_date'].data = restaurant[4]

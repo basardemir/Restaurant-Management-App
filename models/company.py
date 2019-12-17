@@ -63,9 +63,6 @@ def get_contact_of_company(contact_id):
         res = dict(zip(desc, contact ))
   return res
 
-def search_company_by_columns(company_key):
-  print("index page search")
-
 def add_company(company):
   company_id = -1
   with dbapi2.connect(DB_URL) as connection:
