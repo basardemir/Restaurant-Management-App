@@ -130,3 +130,7 @@ Every restaurant has a stock which includes different kinds of ingredients, and 
 
     Restaurant's Stock Page
 
+Update & Delete Restaurant Page
+=================================
+Manager can modify restaurants by updating or deleting them. During update, manager can change score, change opening date, capacity, and total earning of the restaurant. Manager also can modify its contact info by selecting new one from all existing and can link the restaurant to another existing company.
+Delete operation is same with all other pages. It asks whether manager is sure to delete, if so it deletes the restaurant, makes manager not a manager anymore. Also during deletion, it deletes the stock of that specific restaurant too. 
