@@ -37,7 +37,7 @@ Structure
 For every main table the code structure is almost similar. Every table does the same  operations (CRUD), that is why they are similar. There will be structure for ingredient table. 
 
 Read operations
-================
+-------------------
 Read Operation returns every ingredient in database. It presented in html by using tables. Code block for redirecting to meal page;
 
 .. code-block:: python
@@ -59,10 +59,11 @@ The Code Block for retrieving all ingredients from database;
                     return ingred_table
 
 Add operations
-===============
+-------------------
 In add operation, wtforms library was used. The library consists of different fields for input and equivalent for <input> tag. The ingredient form consisted of these items;
 
 .. code-block:: python
+
         class Ingredient_Form(FlaskForm):
             ingred_name = StringField("Name", validators=[DataRequired(message=msg), Length(min=3, max=50, message="Name lenght must be between 4-30!")], render_kw={'placeholder': "Ingredient Name (eg. Potato)",  "class" : "form-control"})
             ingred_type = StringField("Type", validators=[DataRequired(message=msg), ], render_kw={"placeholder":"Ingredient Type (eg. Vegetable)",  "class" : "form-control"})
@@ -73,6 +74,7 @@ In add operation, wtforms library was used. The library consists of different fi
 The view function to add an ingredient;
 
 .. code-block:: python
+
         def add_ingredient_page():
             _form = Ingredient_Page()
             if request.method == "GET":
@@ -88,6 +90,7 @@ The view function to add an ingredient;
 And the SQL statement for inserting ingredient;
 
 .. code-block:: python
+
         def add_ingredient(data):
             with dbapi2.connect(DB_URL) as connection:
                 with connection.cursor() as cursor:
@@ -110,13 +113,14 @@ And the SQL statement for inserting ingredient;
                     connection.commit()
 
 Update & Delete operations
-===========================
+-------------------
 Update and Delete operations are used in different pages. For update, a similar page to add ingredient page has been used. For delete, a page where asks user if user wants to delete an item, is used. In delete operation, the cascade operation made explicitly.
 
 Here are the codes for update and delete ingredient;
 Update:
 
 .. code-block:: python
+
         def update_ingred(new_props, ingred_id):
             with dbapi2.connect(DB_URL) as connection:
                 with connection.cursor() as cursor:
@@ -124,10 +128,11 @@ Update:
                     statement = "update ingredient set ingredient_name=%(ingred_name)s, ingredient_type=%(ingred_type)s, unit_weight=%(weight)s, ingredient_volume=%(volume)s, temperature_for_stowing=%(temp)s where ingredient_id = %(ingred_id)s;"
                     cursor.execute(statement, {'ingred_name': new_props['ingredient-ingred_name'], 'ingred_type':new_props['ingredient-ingred_type'], 'weight':new_props['ingredient-unit_weight'], 'volume':new_props['ingredient-volume'], 'temp':new_props['ingredient-ideal_temp'], 'ingred_id': ingred_id})
                     connection.commit()
-                    
+
 Delete:
 
 .. code-block:: python
+
         def delete_ingred(ingred_id):
             with dbapi2.connect(DB_URL) as connection:
                 with connection.cursor() as cursor:
