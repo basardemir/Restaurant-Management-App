@@ -1,4 +1,4 @@
-Welcome to itucsdbNN's documentation!
+Welcome to itucsdb51's documentation!
 =====================================
 
 :Team: ITUCSDB1951
@@ -7,7 +7,7 @@ Welcome to itucsdbNN's documentation!
 
    * İbrahim Berat Kaya
    * Metehan Seyran
-   * Member 3
+   * Mehmet Can Gün
    * Member 4
    * Member 5
 

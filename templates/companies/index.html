@@ -8,7 +8,6 @@
   <hr>
 </div>
 <div class="container mt-2">
-  <form action="" method="POST" name="company_list">
     <div class="row">
       <div class="column mr-4">
         <a href="{{ url_for('company_add_page') }}" class="btn btn-primary" title="Add Company">Add Company</a>
@@ -50,12 +49,12 @@
         {% endfor %}
       </tbody>
     </table>
+    {% endif %}
     <div class="row">
       <div class="column mr-4">
         <a href="{{ url_for('company_add_page') }}" class="btn btn-primary" title="Add Company">Add Company</a>
       </div>
     </div>
-  </form>
 </div>
-  {% endif %}
+  
 {% endblock %}

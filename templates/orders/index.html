@@ -7,7 +7,6 @@
   <hr>
 </div>
 <div class="container mt-2">
-  <form action="{{ request.path }}" method="POST">
     {% if orders %}
     <table class="table table-light table-hover">
       <thead>
@@ -41,7 +40,6 @@
         {% endfor %}
       </tbody>
     </table>
-  </form>
 </div>
   {% endif %}
 {% endblock %}
