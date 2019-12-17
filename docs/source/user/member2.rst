@@ -39,7 +39,7 @@ The user can be able to see the nutritional information such as calorie value, c
 
     Nutritional information
 
-Update&Delete Meal Page
+Update & Delete Meal Page
 ===============
 User can modify any meal by updating it. He or she can update the name, restaurant, price, type and even nutritional values of the meal. At the delete page, website will ask whether the user wants to delete that specific meal. If so it deletes the meal
 
@@ -83,7 +83,7 @@ Nutritional Value Page
 ==================
 All kinds of users are able to check the nutritional value of the specific ingredient. The page provides, calorie value, carbohydrate value, fat value, cholesterol value and protein value for that specific ingredient.
 
-Update&Delete Page
+Update & Delete Page
 ==================
 Users with type boss and admin are able to update and delete ingredients. In update section, they are able to update the ingredients' name, type, unit weight, volume and temperature for storing the ingredient.
 
@@ -97,3 +97,36 @@ In delete page, it checks one more time whether user wants to delete that specif
 
 Restaurants
 ----------------
+
+Restaurant Page
+==================
+Restaurant page contains information about restaurant, its score, which company it belongs to, the capacity of it, opening date, the manager's name and total earning of it. Customer can check the score of the restaurant, manager of the restaurant, and opening date of the restaurant. User which is type of boss is able to see stock of that restaurant, modify the restaurant, delete the restaurant, and add a restaurant. Restaurants are important because without them, user won't be able to add an ingredient and meal.
+
+.. figure:: restaurant.png
+    :scale: 50 %
+    :alt: Restaurant Page
+
+    Restaurant Page
+
+Add Restaurant Page
+=====================
+During adding the restaurant, the manager or which we call the user with type boss is able to add a new restaurant with spesified company. He or she can add a score, but that person should not add the score value. It could be fixed in future releases. The manager also can add capacity of that restaurant. It shows that how many person that restaurant can handle in a given amount of time. Higher capacity will be prioritized by customers. Manager can add opening date of the restaurant, the name of himself or herself and total earning of that restaurant.
+Manager can select a company and link the company with restaurant by selecting from option menu. If the company does not exist, manager can add new company to link. To give a discrete example, suppose McDonalds company exists. McDonalds can have multiple restaurants. However, all of their names will be the company name, McDonalds. This is why company linking is important. There cannot be a restaurant without a company.
+Restaurants can also have a contact info which includes their phone number, email, etc.. Manager can choose from existing contact informations. After that manager is able to add restaurant to website.
+
+.. figure:: addrestaurant.png
+    :scale: 50 %
+    :alt: Add Restaurant Page
+
+    Add Restaurant Page
+
+Stock Page
+=============
+Every restaurant has a stock which includes different kinds of ingredients, and for each ingredient they have an amount and an expiration date. Restaurant can supply meals only if there is enough ingredients in stock. Manager can check current stock from this page. 
+
+.. figure:: stock.png
+    :scale: 50 %
+    :alt: Stock Page
+
+    Restaurant's Stock Page
+

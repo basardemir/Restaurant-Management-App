@@ -16,8 +16,10 @@
                     <th>Capacity</th>
                     <th>Opening Date</th>
                     <th>Manager</th>
+                    {% if userType == 'Boss' %}
                     <th>Total Earning</th>
                     <th>Actions</th>
+                    {% endif %}
                 </tr>
             </thead>
             <tbody>
@@ -29,16 +31,16 @@
                     <td>{{capacity}}</td>
                     <td>{{opening_date}}</td>
                     <td>{{manager}}</td> 
+                    {% if userType == 'Boss' %}
                     <td>{{total}}</td> 
                     <td>                            
                         <nav class="nav">
                             <a class="nav-link" href="{{url_for('stock_page', restaurant_id = id)}}">Stock</a>
-                            {% if userType == 'Boss' %}
                             <a class="nav-link text-success " href="{{url_for('update_restaurant_page', restaurant_id = id)}}" >Update</a>
                             <a class="nav-link text-danger " href="{{url_for('delete_restaurant_page', restaurant_id = id)}}" >Delete</a>
-                            {% endif %}
                         </nav>                          
                     </td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </tbody>
