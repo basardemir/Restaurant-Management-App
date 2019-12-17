@@ -88,6 +88,7 @@ The HTML table;
 The Code Block for retrieving all ingredients from database;
 
 .. code-block:: python
+
         def show_all_ingredients():
             with dbapi2.connect(DB_URL) as connection:
                 with connection.cursor() as cursor:
