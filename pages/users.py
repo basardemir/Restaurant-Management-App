@@ -171,6 +171,7 @@ def editperson_page():
     form = CallPerson()
     if request.method == "POST" and form.validate_on_submit():
         persondata = form.data["person"]
+        print(persondata)
         update_person(persondata, session["userid"])
         return redirect(url_for("profile_page"))
     elif request.method == "POST" and not form.validate_on_submit():

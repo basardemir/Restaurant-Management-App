@@ -86,7 +86,7 @@ In location.py in pages, we create an instance of the flask form we designed and
 In the location/create.html we have the following format for rendering the form.
        
 .. code-block:: html
-
+    :emphasize-lines: 2,3,5,6,7,8,9,10,11,14,17,19
         <div class="container">
         <form method="post" action="{{ request.path }}" >
             {{ form.csrf_token }}
