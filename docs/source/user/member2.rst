@@ -5,7 +5,7 @@ Meal Page
 
 This page shows all meals added by different restaurants. If a user logins as a boss, this person can modify meals and add a new one. If user logins as a customer, this person will only be able to see the nutritional value page for the specific meal. That customer can also order meals by selecting the checkbox near Add to Cart label. By selecting meals and pressing order, customer will be directed to order page to confirm his/her order. 
 
-..figure:: mealpage.png
+.. figure:: mealpage.png
     :scale: 50 %
     :alt: Meal Page
 
@@ -20,7 +20,7 @@ The last field containts options for meals, which will show this specific meal t
 Although the photo part is optional, a user can insert a photo of a meal, in order for customer see what does that meal look like.
 After filling the necessary forms, we are good to go. The meal is ready to be added to the meals page.
 
-..figure:: addmeal.png
+.. figure:: addmeal.png
     :scale 50 %
     :alt: Add Meal Page 
 
@@ -30,7 +30,7 @@ Nutritional information
 --------------------------
 The user can be able to see the nutritional information such as calorie value, carbohydrate value, fat value, protein value and cholesterol value of that specific meal. The user can also get a table of ingredient list that meal is made of and amount of each ingredient.
 
-..figure: nutr_info.png
+.. figure:: nutr_info.png
     :scale 50 %
     :alt: Nutrition Page
 
