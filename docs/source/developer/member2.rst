@@ -46,6 +46,45 @@ Read Operation returns every ingredient in database. It presented in html by usi
             ing_table = show_all_ingredients()
             return render_template("/ingredients/read_ingd.html", ing_table = ing_table, userType = session['membershiptype'])
 
+The HTML table;
+
+.. code-block:: html
+
+    <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Picture</th>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Unit Weight</th>
+                        <th>Volume</th>
+                        <th>Temperature</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ingred_id, path, name, type, weight, vol, tempr in ing_table %}
+                    <tr>
+                        <td><img style="max-height:65px; max-width:65px; overflow: hidden" src="{{path}}" class="rounded float-left" alt="Ingredient"></td>
+                        <td>{{name}}</td>
+                        <td>{{type}}</td>
+                        <td>{{weight}}</td>
+                        <td>{{vol}}</td>
+                        <td>{{tempr}}</td> 
+                        <td>                            
+                            <nav class="nav">
+                                <a class="nav-link" href="{{url_for('ingredient_nutr_values', ingred_id = ingred_id)}}">Nutrition Values</a>
+                                {% if userType == 'Boss' or userType == 'Admin' %}
+                                <a class="nav-link text-success " href="{{url_for('update_ingredient_page', ingred_id = ingred_id)}}" >Update</a>
+                                <a class="nav-link text-danger " href="{{url_for('delete_ingredient_page', ingred_id = ingred_id)}}" >Delete</a>
+                                {% endif %}
+                            </nav>                          
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
 The Code Block for retrieving all ingredients from database;
 
 .. code-block:: python
