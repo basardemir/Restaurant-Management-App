@@ -3,6 +3,8 @@ DB_URL = os.getenv("DATABASE_URL")
 
 import psycopg2 as dbapi2
 
+from models.meals import update_stock
+
 def get_all_orders():
   orders = []
   with dbapi2.connect(DB_URL) as connection:
@@ -77,7 +79,6 @@ def get_order_related_comments(key):
         orders.append( res )
   return orders
 
-
 def add_order(order):
   order_id = -1
   with dbapi2.connect(DB_URL) as connection:
@@ -108,6 +109,23 @@ def update_order(order):
       query = "update orders set price = %s, note = %s, type = %s, rate = %s, end_at = %s where order_id = %s;"
       cursor.execute(query, order)
       connection.commit()
+
+def update_order_delivered(order_id):
+  with dbapi2.connect(DB_URL) as connection:
+    with connection.cursor() as cursor:
+      query = "update orders set is_delivered = 1 where order_id = %s;"
+      cursor.execute(query, (order_id, ))
+      connection.commit()
+
+def update_stock_by_order_key(order_id):
+  food_list = []
+  with dbapi2.connect(DB_URL) as connection:
+    with connection.cursor() as cursor:
+      query = "select food_id, amount from order_food where order_id = %s;"
+      cursor.execute(query, (order_id, ))
+      for id, amount in cursor:
+        for i in range(amount):
+          update_stock(id)
 
 def delete_order(order_key):
   with dbapi2.connect(DB_URL) as connection:

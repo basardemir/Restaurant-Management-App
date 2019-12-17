@@ -1,13 +1,12 @@
 {% extends "layout.html" %}
 {% block title %}Myorders{% endblock %}
 {% block content%}
-  
 <div class="container">
   <h1 class="display-4">My <small class="text-muted font-italic">orders</small></h1>
   <hr>
 </div>
+
 <div class="container mt-2">
-  <form action="{{ request.path }}" method="POST">
     {% if myorders %}
     <table class="table table-light table-hover">
       <thead>
@@ -33,7 +32,14 @@
           <td>{{ i['end_at'] }}</td>
           <td>
             {% if i['end_at'] < date_now %}
-              <a href="{{ url_for('comment_order_page', order_key = i['order_id']) }}" class="btn btn-outline-dark">Make Comment </a>
+              {% if i['is_delivered'] == 0 %}
+              <form action="{{ url_for('order_delivered_page') }}" method="POST">
+                <input type="hidden" name="order_key" value="{{ i['order_id'] }}">
+                <button type="submit" class="btn btn-outline-dark">Deliver</button>
+              </form>
+              {% else %}
+                <a href="{{ url_for('comment_order_page', order_key = i['order_id']) }}" class="btn btn-outline-dark">Make Comment </a>
+              {% endif %}
             {% else %}
               <a href="{{ url_for('order_update_page', order_key = i['order_id']) }}" class="btn btn-outline-warning">Update Order </a>
               <a href="{{ url_for('order_cancel_page', order_key = i['order_id']) }}" class="btn btn-outline-danger">Cancel Order </a>
@@ -44,7 +50,6 @@
         {% endfor %}
       </tbody>
     </table>
-  </form>
+    {% endif %}
 </div>
-  {% endif %}
 {% endblock %}

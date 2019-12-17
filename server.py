@@ -41,6 +41,7 @@ app.add_url_rule("/payment/<list:meals>", view_func = views.payment_page, method
 app.add_url_rule("/orders/<int:order_key>/details", view_func = views.order_details_page, methods=["GET", "POST"])
 app.add_url_rule("/orders/<int:order_key>/edit", view_func = views.order_update_page, methods=["GET", "POST"])
 app.add_url_rule("/orders/<int:order_key>/cancel", view_func = views.order_cancel_page, methods=["GET", "POST"])
+app.add_url_rule("/orders/delivered", view_func = views.order_delivered_page, methods=["POST"])
 
 ## Comment to Order
 app.add_url_rule("/orders/<int:order_key>/comment", view_func = views.comment_order_page, methods=["GET", "POST"])
