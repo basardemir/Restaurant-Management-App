@@ -6,7 +6,7 @@ Welcome to itucsdbNN's documentation!
 :Members:
 
    * İbrahim Berat Kaya
-   * Member 2
+   * Metehan Seyran
    * Member 3
    * Member 4
    * Member 5
