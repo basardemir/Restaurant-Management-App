@@ -1,6 +1,6 @@
 import psycopg2 as dbapi2
 import os
-DB_URL = "postgres://ivpallnyfezioy:075baf8e129b0d52dbd6d87dd3c774363b0b10b499921f821378ed7084bfc744@ec2-46-137-187-23.eu-west-1.compute.amazonaws.com:5432/dagmb1jla3rmdp"
+DB_URL = os.getenv("DATABASE_URL")
 
 def get_all_meals():
     with dbapi2.connect(DB_URL) as connection:
