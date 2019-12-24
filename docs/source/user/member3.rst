@@ -64,7 +64,7 @@ For example, restaurant is connected to company, then restaurant which is relate
     Delete Company
 
 Show Company Details
-===============
+=====================
 
 You can see details about company information, contact details and founder data.
 
@@ -132,7 +132,7 @@ Delete card related to user. This is just remove the card.
     Delete Page
 
 Show Card Details
-===============
+==================
 
 Show your card details about customer info and company info.
 
@@ -206,7 +206,7 @@ Between starting time and expected deliver time, you will cancel your order.
     Cancel Order
 
 Show Order Details
-===============
+===================
 
 This page shows order details like what you are ordered, or which person gives that order in which company.
 Also, this page shows the **comments** about order.
@@ -218,7 +218,7 @@ Also, this page shows the **comments** about order.
     Order Details
 
 Delivered Order
-===============
+================
 
 After the time end, this button will be active to end your delivered status perfectly. This is accepted to pay the order. Then stock size reduced for related foods.
 

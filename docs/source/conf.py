@@ -151,7 +151,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     (master_doc, 'ITUCSDB1951', 'ITUCSDB1951 Documentation',
-     author, 'ITUCSDB1951', 'One line description of project.',
+     author, 'ITUCSDB1951', 'RestMang is a Restaurant Management App that lets the user organize your company and restaurants, or lets the user give orders from restaurants.',
      'Miscellaneous'),
 ]
 
