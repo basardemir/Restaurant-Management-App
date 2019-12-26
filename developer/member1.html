@@ -1,0 +1,454 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Parts Implemented by İbrahim Berat Kaya &mdash; ITUCSDB1951  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Parts Implemented by Metehan Seyran" href="member2.html" />
+    <link rel="prev" title="Developer Guide" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ITUCSDB1951
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#database-design">Database Design</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#code">Code</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Parts Implemented by İbrahim Berat Kaya</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#useraccount-table">Useraccount Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#person-table">Person Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#contactinfo-table">Contactinfo Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#socialmedia-table">Socialmedia Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#photo-table">Photo Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#membership-table">Membership Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#login">Login</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#signup">Signup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#profile">Profile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#editing">Editing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="member2.html">Parts Implemented by Metehan Seyran</a></li>
+<li class="toctree-l3"><a class="reference internal" href="member3.html">Parts Implemented by Mehmet Can Gün</a></li>
+<li class="toctree-l3"><a class="reference internal" href="member4.html">Parts Implemented by Uğur Demir</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ITUCSDB1951</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Developer Guide</a> &raquo;</li>
+        
+      <li>Parts Implemented by İbrahim Berat Kaya</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/developer/member1.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="parts-implemented-by-ibrahim-berat-kaya">
+<h1>Parts Implemented by İbrahim Berat Kaya<a class="headerlink" href="#parts-implemented-by-ibrahim-berat-kaya" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="useraccount-table">
+<h2>Useraccount Table<a class="headerlink" href="#useraccount-table" title="Permalink to this headline">¶</a></h2>
+<p>The Useraccount Table consists of 5 non-key fields about the account information of the user such as a username, a password, a joined date, a last entry date, and a security question answer. The Useraccount Table has a foreign key to the Membership Table to store the membership type of the user, and a foreign key to the Person Table to store personal information of the user.</p>
+</div>
+<div class="section" id="person-table">
+<h2>Person Table<a class="headerlink" href="#person-table" title="Permalink to this headline">¶</a></h2>
+<p>The Person Table consists of 5 non-key fields. The fields are the name of the user, the surname of the user, birthday of the user, education level of the user, and gender of the user. The Person Table has a foreign key to the Photo Table to store the path of the user profile image, and a foreign key to the Contactinfo Table to store contact information.</p>
+</div>
+<div class="section" id="contactinfo-table">
+<h2>Contactinfo Table<a class="headerlink" href="#contactinfo-table" title="Permalink to this headline">¶</a></h2>
+<p>The Contactinfo Table consists of 5 non-key fields. The fields are the phone number of the user, the email of the user, fax of the user, home phone number of the user, and work mail of the user. The Contactinfo Table has a foreign key to the Location Table to store the location information of the user, and a foreign key to the Socialmedia Table to store the social media links of the user.</p>
+</div>
+<div class="section" id="socialmedia-table">
+<h2>Socialmedia Table<a class="headerlink" href="#socialmedia-table" title="Permalink to this headline">¶</a></h2>
+<p>The Socialmedia Table consists of 6 non-key fields. The fields are the Facebook link of the user, Twitter link of the user, Instagram link of the user, Discord link of the user, YouTube link of the user, LinkedIn link of the user.</p>
+</div>
+<div class="section" id="photo-table">
+<h2>Photo Table<a class="headerlink" href="#photo-table" title="Permalink to this headline">¶</a></h2>
+<p>The Photo Table consists of a 1 non-key field. The Photo Table stores the path of the image uploaded to the server.</p>
+</div>
+<div class="section" id="membership-table">
+<h2>Membership Table<a class="headerlink" href="#membership-table" title="Permalink to this headline">¶</a></h2>
+<p>The Membership Table consists of a 1 non-key field. The Membership Table stores the membership type of the user where the values can be an admin, a customer, or a boss.</p>
+</div>
+<div class="section" id="login">
+<h2>Login<a class="headerlink" href="#login" title="Permalink to this headline">¶</a></h2>
+<p>The user who has an account may sign in from this page using the username and password of the user. Once the user enters the account information, a request to the server will be made.
+If the user sends a valid form, the values of the form will be checked from the database. If a user exists, a session will be created for the user and the user will be logged in.</p>
+<p>SQL Query:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">select_users</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">DB_URL</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">(</span><span class="n">cursor_factory</span><span class="o">=</span><span class="n">psycopg2</span><span class="o">.</span><span class="n">extras</span><span class="o">.</span><span class="n">RealDictCursor</span><span class="p">)</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+            <span class="n">statement</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM USERACCOUNT&quot;</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement</span><span class="p">)</span>
+            <span class="n">connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">data</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>HTML Form:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">form</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;form&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container-fluid w-75&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;{{url_for(&#39;add_user_page&#39;)}}&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;text-center&quot;</span><span class="p">&gt;</span>Login<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;field-group&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">label</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;font-weight: bold; margin-top: 0.75rem;&quot;</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;username&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;label&quot;</span><span class="p">&gt;</span>Username<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;username&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-control&quot;</span> <span class="na">required</span><span class="o">=</span><span class="s">&quot;required&quot;</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">label</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;font-weight: bold; margin-top: 0.75rem;&quot;</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;password&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;label&quot;</span><span class="p">&gt;</span>Password<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;password&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;password&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-control&quot;</span> <span class="na">required</span><span class="o">=</span><span class="s">&quot;required&quot;</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;buttondiv&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;field is-grouped text-center&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;margin-top: 1rem;&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;control&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">button</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-outline-info&quot;</span><span class="p">&gt;</span>Sign in<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>Python Code:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">],</span> <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s2">&quot;password&quot;</span><span class="p">],</span> <span class="s2">&quot;lastEntry&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()}</span>
+<span class="n">userlist</span> <span class="o">=</span> <span class="n">select_users</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">userlist</span> <span class="p">:</span>
+    <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;username&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;username&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">hasher</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;password&quot;</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;password&quot;</span><span class="p">]):</span>
+        <span class="n">session</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;username&quot;</span><span class="p">]</span>
+        <span class="n">session</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;password&quot;</span><span class="p">]</span>
+        <span class="n">session</span><span class="p">[</span><span class="s1">&#39;userid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+        <span class="n">session</span><span class="p">[</span><span class="s1">&#39;logged_in&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">session</span><span class="p">[</span><span class="s1">&#39;membershiptype&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Boss&#39;</span> <span class="k">if</span> <span class="n">select_a_user</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;userid&#39;</span><span class="p">])[</span><span class="s1">&#39;membershiptype&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s1">&#39;Customer&#39;</span>
+        <span class="n">update_user_lastentry</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">session</span><span class="p">[</span><span class="s2">&quot;userid&quot;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;home_page&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="signup">
+<h2>Signup<a class="headerlink" href="#signup" title="Permalink to this headline">¶</a></h2>
+<p>The user who would like to join this application may create an account by entering the required information. Once the user enters the account information, they should click the sign up button.
+If the user enters a valid username that currently does not exists, they will join RestMang, and they will be redirected to the homepage. If the username is already taken, they will be alerted that the username is already taken.</p>
+<p>SQL Query:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_user</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">DB_URL</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">check_if_user_exists</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="n">photoid</span> <span class="o">=</span> <span class="n">insert_photo</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1">#Each insert function is an insert query</span>
+                <span class="nb">id</span> <span class="o">=</span> <span class="n">insert_socialmedia</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                <span class="nb">id</span> <span class="o">=</span> <span class="n">insert_contactinfo</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
+                <span class="nb">id</span> <span class="o">=</span> <span class="n">insert_person</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">photoid</span><span class="p">)</span>
+                <span class="nb">id</span> <span class="o">=</span> <span class="n">insert_useraccount</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
+                <span class="n">connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+                <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="nb">id</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Insert function:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">insert_socialmedia</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">DB_URL</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+            <span class="n">statement</span> <span class="o">=</span> <span class="s2">&quot;INSERT INTO SOCIALMEDIA (facebook, twitter, instagram, discord, youtube, linkedin) VALUES (</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">) RETURNING id;&quot;</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement</span><span class="p">,</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;facebook&quot;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;twitter&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;instagram&quot;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;discord&quot;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;youtube&quot;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;linkedin&quot;</span><span class="p">]))</span>
+            <span class="n">connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="nb">id</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">return</span> <span class="nb">id</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>WTForm:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Combine</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
+    <span class="n">person</span> <span class="o">=</span> <span class="n">FormField</span><span class="p">(</span><span class="n">PersonForm</span><span class="p">)</span>
+    <span class="n">useraccount</span> <span class="o">=</span> <span class="n">FormField</span><span class="p">(</span><span class="n">UserAccountForm</span><span class="p">)</span>
+    <span class="n">contactinfo</span> <span class="o">=</span> <span class="n">FormField</span><span class="p">(</span><span class="n">ContactInfoForm</span><span class="p">)</span>
+    <span class="n">socialmedia</span> <span class="o">=</span> <span class="n">FormField</span><span class="p">(</span><span class="n">SocialMedia</span><span class="p">)</span>
+    <span class="n">photo</span> <span class="o">=</span> <span class="n">FormField</span><span class="p">(</span><span class="n">PhotoForm</span><span class="p">)</span>
+    <span class="n">submit</span> <span class="o">=</span> <span class="n">SubmitField</span><span class="p">(</span><span class="s2">&quot;Sign Up&quot;</span><span class="p">,</span> <span class="n">render_kw</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;btn btn-outline-info&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Python Code:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">create_user</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+    <span class="n">request</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="s2">&quot;photo-photo&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;./static/&quot;</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="s2">&quot;photo-photo&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+    <span class="n">session</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;username&quot;</span><span class="p">]</span>
+    <span class="n">session</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;password&quot;</span><span class="p">]</span>
+    <span class="n">session</span><span class="p">[</span><span class="s1">&#39;membershiptype&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Boss&#39;</span> <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;membership&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s1">&#39;Customer&#39;</span>
+    <span class="n">session</span><span class="p">[</span><span class="s1">&#39;userid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">session</span><span class="p">[</span><span class="s1">&#39;logged_in&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;users_page&quot;</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">errs</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&quot;Username is already taken&quot;</span><span class="p">]]</span>
+    <span class="n">errjson</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">errs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;/users/create.html&quot;</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">useraccount</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="n">errjson</span><span class="p">,</span> <span class="n">locations</span><span class="o">=</span><span class="n">locations</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="profile">
+<h2>Profile<a class="headerlink" href="#profile" title="Permalink to this headline">¶</a></h2>
+<p>The user who has an existing user account may access information from their user account once they view the profile page while logged in. Once the user goes to the profile page, the information about the user will be retrieved from the database. The information will then be shown to the user.</p>
+<p>SQL Query:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">select_a_user_and_info</span><span class="p">(</span><span class="n">userid</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">DB_URL</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">(</span><span class="n">cursor_factory</span><span class="o">=</span><span class="n">psycopg2</span><span class="o">.</span><span class="n">extras</span><span class="o">.</span><span class="n">RealDictCursor</span><span class="p">)</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+            <span class="n">statement</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT * FROM (select location_id,country.country_id,country.name as country_name,province.province_id,province.province_name,county,neighborhood,street,zipcode, description from</span>
+<span class="s2">            ((location join province on (location.province = province.province_id))</span>
+<span class="s2">            join country on (province.country = country.country_id))) AS T6 JOIN (SELECT * FROM SOCIALMEDIA JOIN</span>
+<span class="s2">            (SELECT * FROM CONTACTINFO JOIN (SELECT * FROM (SELECT PERSON.id, contactinfo, name, surname, birthday, educationLevel, gender, path FROM PERSON JOIN PHOTO ON PHOTO.id = PERSON.photo) AS PER JOIN</span>
+<span class="s2">            ((SELECT * FROM USERACCOUNT WHERE id = </span><span class="si">%s</span><span class="s2">) AS T JOIN MEMBERSHIP ON T.membershiptype = MEMBERSHIP.id) AS T2 ON PER.id = T2.person) AS T3 ON CONTACTINFO.id = T3.contactinfo) AS T4 ON T4.socialmedia = SOCIALMEDIA.id)</span>
+<span class="s2">            AS T5 ON T5.location=T6.location_id;&quot;&quot;&quot;</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement</span><span class="p">,</span> <span class="p">(</span><span class="n">userid</span><span class="p">,</span> <span class="p">))</span>
+            <span class="n">connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="n">userlist</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">userlist</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Python Code:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;GET&quot;</span><span class="p">:</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">select_a_user_and_info</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;userid&#39;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;/users/profile.html&quot;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="editing">
+<h2>Editing<a class="headerlink" href="#editing" title="Permalink to this headline">¶</a></h2>
+<p>The user may edit the current information about their account, personal information, contact information, and social media information. The user is redirected to the form of the table they desire to edit. The user may change the desired field they would like to change. Once the form is submitted, the data sent will be used to update the database of the updated table.</p>
+<p>SQL Query:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">select_a_user</span><span class="p">(</span><span class="n">userid</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">DB_URL</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">(</span><span class="n">cursor_factory</span><span class="o">=</span><span class="n">dbapi2</span><span class="o">.</span><span class="n">extras</span><span class="o">.</span><span class="n">RealDictCursor</span><span class="p">)</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+            <span class="n">statement</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM USERACCOUNT WHERE id=</span><span class="si">%s</span><span class="s2">;&quot;</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement</span><span class="p">,</span> <span class="p">(</span><span class="n">userid</span><span class="p">,</span> <span class="p">))</span>
+            <span class="n">connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>WTForm:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">UserEditAccountForm</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s2">&quot;Username&quot;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">DataRequired</span><span class="p">(</span><span class="n">message</span> <span class="o">=</span> <span class="n">msg</span><span class="p">),</span><span class="n">Length</span><span class="p">(</span><span class="nb">max</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Username cannot be longer than 25 characters&quot;</span><span class="p">)],</span> <span class="n">render_kw</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;form-control&quot;</span><span class="p">})</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">PasswordField</span><span class="p">(</span><span class="s2">&quot;Password&quot;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">DataRequired</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">msg</span><span class="p">),</span> <span class="n">Length</span><span class="p">(</span><span class="nb">max</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Password cannot be longer than 25 characters&quot;</span><span class="p">)],</span> <span class="n">render_kw</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;form-control&quot;</span><span class="p">})</span>
+    <span class="n">securityAnswer</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s2">&quot;Security Answer&quot;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">Length</span><span class="p">(</span><span class="nb">max</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Security answer cannot be longer than 30 characters&quot;</span><span class="p">)],</span> <span class="n">render_kw</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;form-control&quot;</span><span class="p">,</span> <span class="s2">&quot;placeholder&quot;</span><span class="p">:</span> <span class="s2">&quot;What is your mother&#39;s maiden name?&quot;</span><span class="p">})</span>
+
+<span class="k">class</span> <span class="nc">CallUserAccount</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">FormField</span><span class="p">(</span><span class="n">UserEditAccountForm</span><span class="p">)</span>
+    <span class="n">submit</span> <span class="o">=</span> <span class="n">SubmitField</span><span class="p">(</span><span class="s2">&quot;Update&quot;</span><span class="p">,</span> <span class="n">render_kw</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;btn btn-outline-info&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Python Code:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#One of the editing pages</span>
+<span class="k">def</span> <span class="nf">edituser_page</span><span class="p">():</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">select_a_user</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;userid&#39;</span><span class="p">])</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">CallUserAccount</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;POST&quot;</span> <span class="ow">and</span> <span class="n">form</span><span class="o">.</span><span class="n">validate_on_submit</span><span class="p">():</span>
+        <span class="n">userdata</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;user&quot;</span><span class="p">]</span>
+        <span class="n">update_user</span><span class="p">(</span><span class="n">userdata</span><span class="p">,</span> <span class="n">session</span><span class="p">[</span><span class="s2">&quot;userid&quot;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;profile_page&quot;</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;POST&quot;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">form</span><span class="o">.</span><span class="n">validate_on_submit</span><span class="p">():</span>
+        <span class="n">errs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">fieldName</span><span class="p">,</span> <span class="n">errorMessages</span> <span class="ow">in</span> <span class="n">form</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">errs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">errorMessages</span><span class="p">)</span>
+        <span class="n">errjson</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">errs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;/users/edituseraccount.html&quot;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">session</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="n">errjson</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;username&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">form</span><span class="o">.</span><span class="n">user</span><span class="p">[</span><span class="s2">&quot;username&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;username&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;securityanswer&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">form</span><span class="o">.</span><span class="n">user</span><span class="p">[</span><span class="s2">&quot;securityAnswer&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;securityanswer&quot;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;/users/edituseraccount.html&quot;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">session</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="member2.html" class="btn btn-neutral float-right" title="Parts Implemented by Metehan Seyran" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Developer Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, ITUCSDB1951
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

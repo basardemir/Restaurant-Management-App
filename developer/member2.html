@@ -1,0 +1,400 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Parts Implemented by Metehan Seyran &mdash; ITUCSDB1951  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Parts Implemented by Mehmet Can Gün" href="member3.html" />
+    <link rel="prev" title="Parts Implemented by İbrahim Berat Kaya" href="member1.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ITUCSDB1951
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#database-design">Database Design</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#code">Code</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="member1.html">Parts Implemented by İbrahim Berat Kaya</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Parts Implemented by Metehan Seyran</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#food-table">Food Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ingredient-table">Ingredient Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#restaurant-table">Restaurant Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nutritional-value-table">Nutritional_value Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ingredient-for-food-table">Ingredient_for_food table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#stock-table">Stock table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#structure">Structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#read-operations">Read operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-operations">Add operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#update-delete-operations">Update &amp; Delete operations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="member3.html">Parts Implemented by Mehmet Can Gün</a></li>
+<li class="toctree-l3"><a class="reference internal" href="member4.html">Parts Implemented by Uğur Demir</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ITUCSDB1951</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Developer Guide</a> &raquo;</li>
+        
+      <li>Parts Implemented by Metehan Seyran</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/developer/member2.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="parts-implemented-by-metehan-seyran">
+<h1>Parts Implemented by Metehan Seyran<a class="headerlink" href="#parts-implemented-by-metehan-seyran" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="food-table">
+<h2>Food Table<a class="headerlink" href="#food-table" title="Permalink to this headline">¶</a></h2>
+<p>Food table stores the information about every meal added to the website. Table consist of 2 foregin and 5 non-foreign keys. Foreign keys reference from photo table, which holds photos of the items, and nutritional_value table, which holds nutritional value for that specific meal.</p>
+</div>
+<div class="section" id="ingredient-table">
+<h2>Ingredient Table<a class="headerlink" href="#ingredient-table" title="Permalink to this headline">¶</a></h2>
+<p>Ingredient table stores information about every ingredient that has been added to the website. The table has 2 foreign keys and 5 non key columns. Foreign keys are referencing to photos, which holds the photo path, and nutritional_value, which holds nutritional values such as carbohydrates, calories, etc. for every ingredient.</p>
+</div>
+<div class="section" id="restaurant-table">
+<h2>Restaurant Table<a class="headerlink" href="#restaurant-table" title="Permalink to this headline">¶</a></h2>
+<p>Restaurant table holds information about restaurant. It has 2 foreign keys and 5 non key columns. Foreign key references to company table, which holds companies. The second one references to table contactinfo, which holds contact information such as phone number, email, address, etc..</p>
+</div>
+<div class="section" id="nutritional-value-table">
+<h2>Nutritional_value Table<a class="headerlink" href="#nutritional-value-table" title="Permalink to this headline">¶</a></h2>
+<p>Nutritional value table holds nutritional values for ingredients or meals, depends on who is referencing to. It has 1 primary key and 5 non key columns.</p>
+</div>
+<div class="section" id="ingredient-for-food-table">
+<h2>Ingredient_for_food table<a class="headerlink" href="#ingredient-for-food-table" title="Permalink to this headline">¶</a></h2>
+<p>Ingredient_for_food table holds ingredients for every meal and amount of each ingredient. It has 2 primary keys and 1 non key column which holds amount of ingredient. This table is used as an array, because each meal have different ingredients and to check whether we can supply a meal or not, we should check stock table whether we have enough ingrediets to prepare that meal.</p>
+</div>
+<div class="section" id="stock-table">
+<h2>Stock table<a class="headerlink" href="#stock-table" title="Permalink to this headline">¶</a></h2>
+<p>Stock table holds stock value for every restaurant. It has 2 primary keys and 2 non key columns which hold expire date for ingredients and how many of ingredients left in stock. This table is also used as an array. Since every restaurant needs a ingredient stock to keep its ingredients safe and close in case of a delivery. Every restaurant have different ingredients, so for every restaurant id, there will be different ingredients ids , expire dates and how many are left.</p>
+</div>
+<div class="section" id="structure">
+<h2>Structure<a class="headerlink" href="#structure" title="Permalink to this headline">¶</a></h2>
+<p>For every main table the code structure is almost similar. Every table does the same  operations (CRUD), that is why they are similar. There will be structure for ingredient table.</p>
+</div>
+<div class="section" id="read-operations">
+<h2>Read operations<a class="headerlink" href="#read-operations" title="Permalink to this headline">¶</a></h2>
+<p>Read Operation returns every ingredient in database. It presented in html by using tables. Code block for redirecting to meal page;</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">show_ingredients</span><span class="p">():</span>
+    <span class="n">ing_table</span> <span class="o">=</span> <span class="n">show_all_ingredients</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;/ingredients/read_ingd.html&quot;</span><span class="p">,</span> <span class="n">ing_table</span> <span class="o">=</span> <span class="n">ing_table</span><span class="p">,</span> <span class="n">userType</span> <span class="o">=</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;membershiptype&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The HTML table;</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">table</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;table table-striped&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">thead</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Picture<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Name<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Type<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Unit Weight<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Volume<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Temperature<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Actions<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+                <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">thead</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">tbody</span><span class="p">&gt;</span>
+                {% for ingred_id, path, name, type, weight, vol, tempr in ing_table %}
+                <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;&lt;</span><span class="nt">img</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;max-height:65px; max-width:65px; overflow: hidden&quot;</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;{{path}}&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;rounded float-left&quot;</span> <span class="na">alt</span><span class="o">=</span><span class="s">&quot;Ingredient&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{name}}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{type}}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{weight}}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{vol}}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{tempr}}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>
+                        <span class="p">&lt;</span><span class="nt">nav</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav&quot;</span><span class="p">&gt;</span>
+                            <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav-link&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{url_for(&#39;ingredient_nutr_values&#39;, ingred_id = ingred_id)}}&quot;</span><span class="p">&gt;</span>Nutrition Values<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+                            {% if userType == &#39;Boss&#39; or userType == &#39;Admin&#39; %}
+                            <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav-link text-success &quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{url_for(&#39;update_ingredient_page&#39;, ingred_id = ingred_id)}}&quot;</span> <span class="p">&gt;</span>Update<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+                            <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav-link text-danger &quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{url_for(&#39;delete_ingredient_page&#39;, ingred_id = ingred_id)}}&quot;</span> <span class="p">&gt;</span>Delete<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+                            {% endif %}
+                        <span class="p">&lt;/</span><span class="nt">nav</span><span class="p">&gt;</span>
+                    <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+                {% endfor %}
+            <span class="p">&lt;/</span><span class="nt">tbody</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>The Code Block for retrieving all ingredients from database;</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">show_all_ingredients</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">DB_URL</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+            <span class="n">statement</span> <span class="o">=</span> <span class="s2">&quot;select ingredient_id, path, ingredient_name, ingredient_type, unit_weight, ingredient_volume, temperature_for_stowing from (photo inner join ingredient on photo_id = id);&quot;</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement</span><span class="p">)</span>
+            <span class="n">ingred_table</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+            <span class="n">connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">ingred_table</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-operations">
+<h2>Add operations<a class="headerlink" href="#add-operations" title="Permalink to this headline">¶</a></h2>
+<p>In add operation, wtforms library was used. The library consists of different fields for input and equivalent for &lt;input&gt; tag. The ingredient form consisted of these items;</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Ingredient_Form</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
+    <span class="n">ingred_name</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">DataRequired</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">msg</span><span class="p">),</span> <span class="n">Length</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Name lenght must be between 4-30!&quot;</span><span class="p">)],</span> <span class="n">render_kw</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;placeholder&#39;</span><span class="p">:</span> <span class="s2">&quot;Ingredient Name (eg. Potato)&quot;</span><span class="p">,</span>  <span class="s2">&quot;class&quot;</span> <span class="p">:</span> <span class="s2">&quot;form-control&quot;</span><span class="p">})</span>
+    <span class="n">ingred_type</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s2">&quot;Type&quot;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">DataRequired</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">msg</span><span class="p">),</span> <span class="p">],</span> <span class="n">render_kw</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;placeholder&quot;</span><span class="p">:</span><span class="s2">&quot;Ingredient Type (eg. Vegetable)&quot;</span><span class="p">,</span>  <span class="s2">&quot;class&quot;</span> <span class="p">:</span> <span class="s2">&quot;form-control&quot;</span><span class="p">})</span>
+    <span class="n">unit_weight</span> <span class="o">=</span> <span class="n">FloatField</span><span class="p">(</span><span class="s2">&quot;Unit Weight&quot;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">DataRequired</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">msg</span><span class="p">),</span> <span class="n">NumberRange</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">)],</span> <span class="n">render_kw</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;placeholder&#39;</span><span class="p">:</span> <span class="s2">&quot;Unit Weight (g)&quot;</span><span class="p">,</span>  <span class="s2">&quot;class&quot;</span> <span class="p">:</span> <span class="s2">&quot;form-control&quot;</span><span class="p">})</span>
+    <span class="n">volume</span> <span class="o">=</span> <span class="n">FloatField</span><span class="p">(</span><span class="s2">&quot;Volume&quot;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">DataRequired</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">msg</span><span class="p">),</span> <span class="n">NumberRange</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">)],</span> <span class="n">render_kw</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;placeholder&#39;</span><span class="p">:</span> <span class="s2">&quot;Volume&quot;</span><span class="p">,</span>  <span class="s2">&quot;class&quot;</span> <span class="p">:</span> <span class="s2">&quot;form-control&quot;</span><span class="p">})</span>
+    <span class="n">ideal_temp</span> <span class="o">=</span> <span class="n">FloatField</span><span class="p">(</span><span class="s2">&quot;Ideal Temperature&quot;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">NumberRange</span><span class="p">(</span><span class="nb">min</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">50</span><span class="p">),</span> <span class="n">DataRequired</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">msg</span><span class="p">)],</span> <span class="n">render_kw</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;placeholder&#39;</span><span class="p">:</span> <span class="s2">&quot;Ideal Temperature (in Celcius)&quot;</span><span class="p">,</span>  <span class="s2">&quot;class&quot;</span> <span class="p">:</span> <span class="s2">&quot;form-control&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>The view function to add an ingredient;</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_ingredient_page</span><span class="p">():</span>
+    <span class="n">_form</span> <span class="o">=</span> <span class="n">Ingredient_Page</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;GET&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;/ingredients/add_ingd.html&quot;</span><span class="p">,</span> <span class="n">form</span> <span class="o">=</span> <span class="n">_form</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">photo_path</span> <span class="o">=</span> <span class="s2">&quot;./static/&quot;</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="s2">&quot;photo-photo&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">filename</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ingredient_name&quot;</span> <span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;ingredient-ingred_name&#39;</span><span class="p">],</span> <span class="s2">&quot;ingredient_type&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;ingredient-ingred_type&#39;</span><span class="p">],</span> <span class="s2">&quot;unit_weight&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;ingredient-unit_weight&#39;</span><span class="p">],</span> <span class="s2">&quot;volume&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;ingredient-volume&#39;</span><span class="p">],</span> <span class="s2">&quot;ideal_temp&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;ingredient-ideal_temp&#39;</span><span class="p">],</span> <span class="s2">&quot;protein&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;nutrition-protein&#39;</span><span class="p">],</span> <span class="s2">&quot;carbohydrates&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;nutrition-carbohydrates&#39;</span><span class="p">],</span> <span class="s2">&quot;fat&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s2">&quot;nutrition-fat&quot;</span><span class="p">],</span> <span class="s2">&quot;cholesterol&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;nutrition-cholesterol&#39;</span><span class="p">],</span> <span class="s2">&quot;calories&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;nutrition-calories&#39;</span><span class="p">],</span> <span class="s2">&quot;photo_path&quot;</span><span class="p">:</span> <span class="n">photo_path</span><span class="p">,</span> <span class="s2">&quot;rest_id&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;restaurant-restaurant&#39;</span><span class="p">],</span> <span class="s1">&#39;stock&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;restaurant-stock&#39;</span><span class="p">],</span> <span class="s1">&#39;expire_date&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;restaurant-expire_date&#39;</span><span class="p">]}</span>
+        <span class="n">add_ingredient</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="s2">&quot;photo-photo&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;./static/&quot;</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="s2">&quot;photo-photo&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;show_ingredients&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>And the SQL statement for inserting ingredient;</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_ingredient</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">DB_URL</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+            <span class="n">statement_photo</span> <span class="o">=</span> <span class="s2">&quot;insert into photo (path) values (</span><span class="si">%(img_path)s</span><span class="s2">) returning id;&quot;</span>
+
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement_photo</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;img_path&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;photo_path&#39;</span><span class="p">]})</span>
+
+            <span class="n">photo_id</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">statement_nutr</span> <span class="o">=</span> <span class="s2">&quot;insert into nutritional_value (protein, fat, carbohydrates, cholesterol, calories) values (</span><span class="si">%(protein)s</span><span class="s2">, </span><span class="si">%(fat)s</span><span class="s2">, </span><span class="si">%(carbohydrates)s</span><span class="s2">, </span><span class="si">%(cholesterol)s</span><span class="s2">, </span><span class="si">%(calories)s</span><span class="s2">) RETURNING nutritional_value_id;&quot;</span>
+
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement_nutr</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;protein&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;protein&#39;</span><span class="p">],</span> <span class="s1">&#39;fat&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;fat&#39;</span><span class="p">],</span> <span class="s1">&#39;carbohydrates&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;carbohydrates&#39;</span><span class="p">],</span> <span class="s1">&#39;cholesterol&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;cholesterol&#39;</span><span class="p">],</span> <span class="s1">&#39;calories&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;calories&#39;</span><span class="p">]})</span>
+            <span class="n">nutrition_id</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="n">statement_ing</span> <span class="o">=</span> <span class="s2">&quot;insert into ingredient (nutrition_id, photo_id, ingredient_name, ingredient_type, unit_weight, ingredient_volume, temperature_for_stowing) values (</span><span class="si">%(nutrition_id)s</span><span class="s2">, </span><span class="si">%(photo_id)s</span><span class="s2">, </span><span class="si">%(ingredient_name)s</span><span class="s2">, </span><span class="si">%(ingredient_type)s</span><span class="s2">, </span><span class="si">%(unit_weight)s</span><span class="s2">, </span><span class="si">%(ingredient_volume)s</span><span class="s2">, </span><span class="si">%(temperature_for_stowing)s</span><span class="s2">) returning ingredient_id;&quot;</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement_ing</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;nutrition_id&#39;</span><span class="p">:</span> <span class="n">nutrition_id</span><span class="p">,</span> <span class="s2">&quot;photo_id&quot;</span><span class="p">:</span> <span class="n">photo_id</span><span class="p">,</span> <span class="s1">&#39;ingredient_name&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;ingredient_name&#39;</span><span class="p">],</span> <span class="s1">&#39;ingredient_type&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;ingredient_type&#39;</span><span class="p">],</span> <span class="s1">&#39;unit_weight&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;unit_weight&#39;</span><span class="p">],</span> <span class="s2">&quot;ingredient_volume&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;volume&#39;</span><span class="p">],</span> <span class="s2">&quot;temperature_for_stowing&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;ideal_temp&#39;</span><span class="p">]})</span>
+            <span class="n">ingredient_id</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">statement_stock</span> <span class="o">=</span> <span class="s2">&quot;insert into stock (ingredient_id, restaurant_id, expire_date, stock_left) values (</span><span class="si">%(ing_id)s</span><span class="s2">, </span><span class="si">%(rest_id)s</span><span class="s2">, </span><span class="si">%(date)s</span><span class="s2">, </span><span class="si">%(stock)s</span><span class="s2">);&quot;</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement_stock</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;ing_id&#39;</span><span class="p">:</span> <span class="n">ingredient_id</span><span class="p">,</span> <span class="s1">&#39;rest_id&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;rest_id&#39;</span><span class="p">],</span> <span class="s1">&#39;stock&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;stock&#39;</span><span class="p">],</span> <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;expire_date&#39;</span><span class="p">]})</span>
+            <span class="n">connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="update-delete-operations">
+<h2>Update &amp; Delete operations<a class="headerlink" href="#update-delete-operations" title="Permalink to this headline">¶</a></h2>
+<p>Update and Delete operations are used in different pages. For update, a similar page to add ingredient page has been used. For delete, a page where asks user if user wants to delete an item, is used. In delete operation, the cascade operation made explicitly.</p>
+<p>Here are the codes for update and delete ingredient;
+Update:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">update_ingred</span><span class="p">(</span><span class="n">new_props</span><span class="p">,</span> <span class="n">ingred_id</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">DB_URL</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+            <span class="n">statement</span> <span class="o">=</span> <span class="s2">&quot;update ingredient set ingredient_name=</span><span class="si">%(ingred_name)s</span><span class="s2">, ingredient_type=</span><span class="si">%(ingred_type)s</span><span class="s2">, unit_weight=</span><span class="si">%(weight)s</span><span class="s2">, ingredient_volume=</span><span class="si">%(volume)s</span><span class="s2">, temperature_for_stowing=</span><span class="si">%(temp)s</span><span class="s2"> where ingredient_id = </span><span class="si">%(ingred_id)s</span><span class="s2">;&quot;</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;ingred_name&#39;</span><span class="p">:</span> <span class="n">new_props</span><span class="p">[</span><span class="s1">&#39;ingredient-ingred_name&#39;</span><span class="p">],</span> <span class="s1">&#39;ingred_type&#39;</span><span class="p">:</span><span class="n">new_props</span><span class="p">[</span><span class="s1">&#39;ingredient-ingred_type&#39;</span><span class="p">],</span> <span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="n">new_props</span><span class="p">[</span><span class="s1">&#39;ingredient-unit_weight&#39;</span><span class="p">],</span> <span class="s1">&#39;volume&#39;</span><span class="p">:</span><span class="n">new_props</span><span class="p">[</span><span class="s1">&#39;ingredient-volume&#39;</span><span class="p">],</span> <span class="s1">&#39;temp&#39;</span><span class="p">:</span><span class="n">new_props</span><span class="p">[</span><span class="s1">&#39;ingredient-ideal_temp&#39;</span><span class="p">],</span> <span class="s1">&#39;ingred_id&#39;</span><span class="p">:</span> <span class="n">ingred_id</span><span class="p">})</span>
+            <span class="n">connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Delete:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">delete_ingred</span><span class="p">(</span><span class="n">ingred_id</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">DB_URL</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+            <span class="n">statement</span> <span class="o">=</span> <span class="s2">&quot;select photo_id, nutrition_id from ingredient where (ingredient_id = </span><span class="si">%(ingred_id)s</span><span class="s2">);&quot;</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;ingred_id&#39;</span><span class="p">:</span> <span class="n">ingred_id</span><span class="p">})</span>
+
+            <span class="n">photo_id</span><span class="p">,</span> <span class="n">nutrition_id</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+
+            <span class="n">statement5</span> <span class="o">=</span> <span class="s2">&quot;delete from stock where ingredient_id = </span><span class="si">%(id)s</span><span class="s2">;&quot;</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement5</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">ingred_id</span><span class="p">})</span>
+
+            <span class="n">statementt6</span> <span class="o">=</span> <span class="s2">&quot;delete from ingredients_for_food where ingredient_id = </span><span class="si">%(id)s</span><span class="s2">;&quot;</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statementt6</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">ingred_id</span><span class="p">})</span>
+
+            <span class="n">statement4</span> <span class="o">=</span> <span class="s2">&quot;delete from ingredient where ingredient_id=</span><span class="si">%(id)s</span><span class="s2">;&quot;</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement4</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">ingred_id</span><span class="p">})</span>
+
+            <span class="n">statement2</span> <span class="o">=</span> <span class="s2">&quot;delete from photo where id = </span><span class="si">%(photo_id)s</span><span class="s2">;&quot;</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement2</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;photo_id&#39;</span><span class="p">:</span> <span class="n">photo_id</span><span class="p">})</span>
+
+            <span class="n">statement3</span> <span class="o">=</span> <span class="s2">&quot;delete from nutritional_value where(nutritional_value_id = </span><span class="si">%(nutr_id)s</span><span class="s2">);&quot;</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement3</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;nutr_id&#39;</span><span class="p">:</span> <span class="n">nutrition_id</span><span class="p">})</span>
+
+            <span class="n">connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="member3.html" class="btn btn-neutral float-right" title="Parts Implemented by Mehmet Can Gün" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="member1.html" class="btn btn-neutral float-left" title="Parts Implemented by İbrahim Berat Kaya" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, ITUCSDB1951
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

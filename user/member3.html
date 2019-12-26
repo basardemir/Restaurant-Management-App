@@ -1,0 +1,427 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Parts Implemented by Mehmet Can Gün &mdash; ITUCSDB1951  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Parts Implemented by Uğur Demir" href="member4.html" />
+    <link rel="prev" title="Parts Implemented by Metehan Seyran" href="member2.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ITUCSDB1951
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="member1.html">Parts Implemented by Ibrahim Berat Kaya</a></li>
+<li class="toctree-l2"><a class="reference internal" href="member2.html">Parts Implemented by Metehan Seyran</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Parts Implemented by Mehmet Can Gün</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#company">Company</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#index-company">Index Company</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#create-company">Create Company</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#update-company">Update Company</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#delete-company">Delete Company</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#show-company-details">Show Company Details</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#set-founder">Set Founder</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#card">Card</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#index-card">Index Card</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#create-card">Create Card</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#update-card">Update Card</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#delete-card">Delete Card</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#show-card-details">Show Card Details</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#my-card">My Card</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#order">Order</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#order-index">Order Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#payment">Payment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#update-order">Update Order</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cancel-order">Cancel Order</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#show-order-details">Show Order Details</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#delivered-order">Delivered Order</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#my-orders">My orders</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#comment">Comment</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="member4.html">Parts Implemented by Uğur Demir</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/index.html">Developer Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ITUCSDB1951</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">User Guide</a> &raquo;</li>
+        
+      <li>Parts Implemented by Mehmet Can Gün</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/user/member3.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="parts-implemented-by-mehmet-can-gun">
+<h1>Parts Implemented by Mehmet Can Gün<a class="headerlink" href="#parts-implemented-by-mehmet-can-gun" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="company">
+<h2>Company<a class="headerlink" href="#company" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="index-company">
+<h3>Index Company<a class="headerlink" href="#index-company" title="Permalink to this headline">¶</a></h3>
+<p>You will see all companies and see details about it.</p>
+<div class="figure align-default" id="id1">
+<a class="reference internal image-reference" href="../_images/index_company.png"><img alt="Company Page" src="../_images/index_company.png" style="width: 683.0px; height: 384.0px;" /></a>
+<p class="caption"><span class="caption-text">Company Page</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="create-company">
+<h3>Create Company<a class="headerlink" href="#create-company" title="Permalink to this headline">¶</a></h3>
+<p>Do you wanna create your own restaurant business? Sign up as a boss and Login!
+First, you need to give us basic information about name, vision, mission, contact details etc.
+Then, we will create your business in our management system.</p>
+<div class="figure align-default" id="id2">
+<a class="reference internal image-reference" href="../_images/create_company.png"><img alt="Create Company" src="../_images/create_company.png" style="width: 683.0px; height: 384.0px;" /></a>
+<p class="caption"><span class="caption-text">Create Company</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id3">
+<a class="reference internal image-reference" href="../_images/create_company_contact.png"><img alt="Create contact" src="../_images/create_company_contact.png" style="width: 683.0px; height: 384.0px;" /></a>
+<p class="caption"><span class="caption-text">Create contact</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="update-company">
+<h3>Update Company<a class="headerlink" href="#update-company" title="Permalink to this headline">¶</a></h3>
+<p>Just log in as a boss, you can change your company information like name, vision, mission etc.</p>
+<div class="figure align-default" id="id4">
+<a class="reference internal image-reference" href="../_images/update_company.png"><img alt="Update Company" src="../_images/update_company.png" style="width: 683.0px; height: 384.0px;" /></a>
+<p class="caption"><span class="caption-text">Update Company</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id5">
+<a class="reference internal image-reference" href="../_images/update_company_contact.png"><img alt="Update contact" src="../_images/update_company_contact.png" style="width: 683.0px; height: 384.0px;" /></a>
+<p class="caption"><span class="caption-text">Update contact</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="delete-company">
+<h3>Delete Company<a class="headerlink" href="#delete-company" title="Permalink to this headline">¶</a></h3>
+<p>Just log in as a boss, if you will delete your company, all data about your company will deleted.
+For example, restaurant is connected to company, then restaurant which is related to be candidate company for delete operation will be deleted.</p>
+<div class="figure align-default" id="id6">
+<a class="reference internal image-reference" href="../_images/delete_company.png"><img alt="Delete Company" src="../_images/delete_company.png" style="width: 683.0px; height: 187.0px;" /></a>
+<p class="caption"><span class="caption-text">Delete Company</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="show-company-details">
+<h3>Show Company Details<a class="headerlink" href="#show-company-details" title="Permalink to this headline">¶</a></h3>
+<p>You can see details about company information, contact details and founder data.</p>
+<div class="figure align-default" id="id7">
+<a class="reference internal image-reference" href="../_images/details_about_company.png"><img alt="Company Details" src="../_images/details_about_company.png" style="width: 683.0px; height: 384.0px;" /></a>
+<p class="caption"><span class="caption-text">Company Details</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="set-founder">
+<h3>Set Founder<a class="headerlink" href="#set-founder" title="Permalink to this headline">¶</a></h3>
+<p>If company founder is resignation from company and the candidate company founder needs to be own it, then send mail admin to make you founder about company.</p>
+</div>
+</div>
+<div class="section" id="card">
+<h2>Card<a class="headerlink" href="#card" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="index-card">
+<h3>Index Card<a class="headerlink" href="#index-card" title="Permalink to this headline">¶</a></h3>
+<p>This page shows cards includes person information.</p>
+<div class="figure align-default" id="id8">
+<a class="reference internal image-reference" href="../_images/index_card.png"><img alt="Card Page" src="../_images/index_card.png" style="width: 683.0px; height: 384.0px;" /></a>
+<p class="caption"><span class="caption-text">Card Page</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="create-card">
+<h3>Create Card<a class="headerlink" href="#create-card" title="Permalink to this headline">¶</a></h3>
+<p>You need enter to the system as a company owner to create card for your customer.
+Enter customer username and give starting points, status and color etc.</p>
+<div class="figure align-default" id="id9">
+<a class="reference internal image-reference" href="../_images/create_card.png"><img alt="Create Card" src="../_images/create_card.png" style="width: 683.0px; height: 384.0px;" /></a>
+<p class="caption"><span class="caption-text">Create Card</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="update-card">
+<h3>Update Card<a class="headerlink" href="#update-card" title="Permalink to this headline">¶</a></h3>
+<p>You need enter to the system as a company owner,
+Update the fields related to card such as color, active status and expire date.</p>
+<div class="figure align-default" id="id10">
+<a class="reference internal image-reference" href="../_images/update_card.png"><img alt="Update Page" src="../_images/update_card.png" style="width: 683.0px; height: 384.0px;" /></a>
+<p class="caption"><span class="caption-text">Update Page</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="delete-card">
+<h3>Delete Card<a class="headerlink" href="#delete-card" title="Permalink to this headline">¶</a></h3>
+<p>You need enter to the system as a company owner,
+Delete card related to user. This is just remove the card.</p>
+<div class="figure align-default" id="id11">
+<a class="reference internal image-reference" href="../_images/delete_card.png"><img alt="Delete Page" src="../_images/delete_card.png" style="width: 682.0px; height: 196.0px;" /></a>
+<p class="caption"><span class="caption-text">Delete Page</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="show-card-details">
+<h3>Show Card Details<a class="headerlink" href="#show-card-details" title="Permalink to this headline">¶</a></h3>
+<p>Show your card details about customer info and company info.</p>
+<div class="figure align-default" id="id12">
+<a class="reference internal image-reference" href="../_images/card_details.png"><img alt="Card Details" src="../_images/card_details.png" style="width: 683.0px; height: 384.0px;" /></a>
+<p class="caption"><span class="caption-text">Card Details</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="my-card">
+<h3>My Card<a class="headerlink" href="#my-card" title="Permalink to this headline">¶</a></h3>
+<p>Login as a customer, if the company owner create card for you, it will be shown in front page.
+Then, customer will be learn card details about customer info and company info</p>
+</div>
+</div>
+<div class="section" id="order">
+<h2>Order<a class="headerlink" href="#order" title="Permalink to this headline">¶</a></h2>
+<p>Enter meal page, then select meal and click the order button to join payment page.</p>
+<div class="figure align-default" id="id13">
+<a class="reference internal image-reference" href="../_images/order_meal_to_payment.png"><img alt="Order Page" src="../_images/order_meal_to_payment.png" style="width: 683.0px; height: 384.0px;" /></a>
+<p class="caption"><span class="caption-text">Order Page</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="order-index">
+<h3>Order Index<a class="headerlink" href="#order-index" title="Permalink to this headline">¶</a></h3>
+<p>This pages shows orders.</p>
+<div class="figure align-default" id="id14">
+<a class="reference internal image-reference" href="../_images/index_order.png"><img alt="Order Page" src="../_images/index_order.png" style="width: 683.0px; height: 384.0px;" /></a>
+<p class="caption"><span class="caption-text">Order Page</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="payment">
+<h3>Payment<a class="headerlink" href="#payment" title="Permalink to this headline">¶</a></h3>
+<p>After getting user meal from meal page, the amount of each food will be selected and order details such as note etc. need to enter, then the order will successfully created.</p>
+<div class="figure align-default" id="id15">
+<a class="reference internal image-reference" href="../_images/payment_page.png"><img alt="Payment Page" src="../_images/payment_page.png" style="width: 683.0px; height: 384.0px;" /></a>
+<p class="caption"><span class="caption-text">Payment Page</span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="update-order">
+<h3>Update Order<a class="headerlink" href="#update-order" title="Permalink to this headline">¶</a></h3>
+<p>Between starting time and expected deliver time, you will update your order status like note etc.</p>
+<div class="figure align-default" id="id16">
+<a class="reference internal image-reference" href="../_images/update_order.png"><img alt="Update Order" src="../_images/update_order.png" style="width: 683.0px; height: 384.0px;" /></a>
+<p class="caption"><span class="caption-text">Update Order</span><a class="headerlink" href="#id16" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="cancel-order">
+<h3>Cancel Order<a class="headerlink" href="#cancel-order" title="Permalink to this headline">¶</a></h3>
+<p>Between starting time and expected deliver time, you will cancel your order.</p>
+<div class="figure align-default" id="id17">
+<a class="reference internal image-reference" href="../_images/cancel_order.png"><img alt="Cancel Order" src="../_images/cancel_order.png" style="width: 683.0px; height: 384.0px;" /></a>
+<p class="caption"><span class="caption-text">Cancel Order</span><a class="headerlink" href="#id17" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="show-order-details">
+<h3>Show Order Details<a class="headerlink" href="#show-order-details" title="Permalink to this headline">¶</a></h3>
+<p>This page shows order details like what you are ordered, or which person gives that order in which company.
+Also, this page shows the <strong>comments</strong> about order.</p>
+<div class="figure align-default" id="id18">
+<a class="reference internal image-reference" href="../_images/order_details.png"><img alt="Order Details" src="../_images/order_details.png" style="width: 683.0px; height: 384.0px;" /></a>
+<p class="caption"><span class="caption-text">Order Details</span><a class="headerlink" href="#id18" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="delivered-order">
+<h3>Delivered Order<a class="headerlink" href="#delivered-order" title="Permalink to this headline">¶</a></h3>
+<p>After the time end, this button will be active to end your delivered status perfectly. This is accepted to pay the order. Then stock size reduced for related foods.</p>
+</div>
+<div class="section" id="my-orders">
+<h3>My orders<a class="headerlink" href="#my-orders" title="Permalink to this headline">¶</a></h3>
+<p>Enter the system, then click the my orders button in header. This is shows the orders related about you.</p>
+</div>
+<div class="section" id="comment">
+<h3>Comment<a class="headerlink" href="#comment" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Create Comment</p></li>
+</ul>
+<div class="line-block">
+<div class="line">If the order is delivered correctly, then you will make comment with title, description, speed or taste status.</div>
+</div>
+<div class="figure align-default" id="id19">
+<a class="reference internal image-reference" href="../_images/comment_order.png"><img alt="Comment Order" src="../_images/comment_order.png" style="width: 683.0px; height: 384.0px;" /></a>
+<p class="caption"><span class="caption-text">Comment Order</span><a class="headerlink" href="#id19" title="Permalink to this image">¶</a></p>
+</div>
+<ul class="simple">
+<li><p>Show Comments</p></li>
+</ul>
+<div class="line-block">
+<div class="line">Enter the order detials page, then comments will be shown below the page.</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="member4.html" class="btn btn-neutral float-right" title="Parts Implemented by Uğur Demir" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="member2.html" class="btn btn-neutral float-left" title="Parts Implemented by Metehan Seyran" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, ITUCSDB1951
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

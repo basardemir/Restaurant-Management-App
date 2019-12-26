@@ -1,0 +1,465 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Parts Implemented by Uğur Demir &mdash; ITUCSDB1951  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Parts Implemented by Mehmet Can Gün" href="member3.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ITUCSDB1951
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#database-design">Database Design</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#code">Code</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="member1.html">Parts Implemented by İbrahim Berat Kaya</a></li>
+<li class="toctree-l3"><a class="reference internal" href="member2.html">Parts Implemented by Metehan Seyran</a></li>
+<li class="toctree-l3"><a class="reference internal" href="member3.html">Parts Implemented by Mehmet Can Gün</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Parts Implemented by Uğur Demir</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#location">Location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#structure">Structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#create-operation">Create Operation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#read-operation">Read Operation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#unfinished-problematic-features">Unfinished / Problematic Features</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ITUCSDB1951</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Developer Guide</a> &raquo;</li>
+        
+      <li>Parts Implemented by Uğur Demir</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/developer/member4.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="parts-implemented-by-ugur-demir">
+<h1>Parts Implemented by Uğur Demir<a class="headerlink" href="#parts-implemented-by-ugur-demir" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="location">
+<h2>Location<a class="headerlink" href="#location" title="Permalink to this headline">¶</a></h2>
+<p>Location table was initially implemented as table to hold location information of both users on consumer level
+and branches of bussinesses. It consists of 6 tables with 3 main tables and 3 side tables. These tables are highly connected
+to each other with a single table connecting the entire block to the rest of the system. Apart from their non-key columns
+main tables have foreign keys refrencing each other. One of the foreign keys of Location table references the main table Province
+and one of the Province’s foreign keys reference the other main table Country. The start of the development the system was planned as
+usable from different countries. Initialy location was suppose to be a side table however in order to provide everyone with three main
+tables we were forced to expand upon it leaving to this not so efficient way of generation location information of users.
+Entries to Provinces and Countries tables cannot be done by the normal users they have to be done by the admins. Normal users can generate
+locations using the provinces and countries already created and additionally entering their address details. In an ideal world, since
+the amount of countries and provinces withing them would not be changing too much, having these two tables filled with static information
+from a reliable and detailed enough source would have sufficed.</p>
+</div>
+<div class="section" id="structure">
+<h2>Structure<a class="headerlink" href="#structure" title="Permalink to this headline">¶</a></h2>
+<p>Each main table has it’s own CRUD pages. Inputs are controlled by flask-WTForms.</p>
+<div class="figure align-default">
+<img alt="../_images/file_order.png" src="../_images/file_order.png" />
+</div>
+<p>After the delete operation the user is redirected to the main
+index.html so there is no delete.html.</p>
+<p>The database operations are done in an another file called the {table_name}_model.py. Necessary queries are defined
+and executed using the functions within the model files.</p>
+</div>
+<div class="section" id="create-operation">
+<h2>Create Operation<a class="headerlink" href="#create-operation" title="Permalink to this headline">¶</a></h2>
+<p>The returning values from a query had to be formatted in most cases before being sent to html. I used two main methods format incoming data
+from the tables.Return value of get_results(cursor) is a 2d array which can be directly sent to html.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_results</span><span class="p">(</span><span class="n">cursor</span><span class="p">):</span>
+    <span class="n">desc</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">description</span>
+    <span class="n">column_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">]</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">column_names</span><span class="p">,</span><span class="n">row</span><span class="p">))</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()]</span> <span class="c1">#array of dict</span>
+    <span class="c1">#data[0].values() values of the first row</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="c1">#2d array</span>
+</pre></div>
+</div>
+<p>In this one the returning result is a dictionary with table’s column names as key values.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">desc</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">cursor</span><span class="o">.</span><span class="n">description</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span> <span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">cursor</span><span class="o">.</span><span class="n">description</span><span class="p">)))</span>
+<span class="n">table</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">())</span>
+<span class="n">result</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">desc</span><span class="p">,</span> <span class="n">table</span><span class="p">))</span>
+<span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p>Flask Form for location.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Location</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
+    <span class="n">country</span> <span class="o">=</span> <span class="n">SelectField</span><span class="p">(</span><span class="s2">&quot;Country&quot;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="p">[(</span><span class="nb">str</span><span class="p">(</span><span class="n">c_id</span><span class="p">),</span><span class="n">c_name</span><span class="p">)</span> <span class="k">for</span> <span class="n">c_id</span><span class="p">,</span> <span class="n">c_name</span> <span class="ow">in</span> <span class="n">country</span><span class="p">])</span>
+    <span class="n">province</span> <span class="o">=</span> <span class="n">SelectField</span><span class="p">(</span><span class="s2">&quot;Province&quot;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="p">[(</span><span class="nb">str</span><span class="p">(</span><span class="n">p_id</span><span class="p">),</span> <span class="n">p_name</span><span class="p">)</span> <span class="k">for</span> <span class="n">p_id</span><span class="p">,</span> <span class="n">p_name</span> <span class="ow">in</span> <span class="n">province_list</span><span class="p">])</span>
+    <span class="n">county</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s2">&quot;County&quot;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">DataRequired</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">msgRequired</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;County&quot;</span><span class="p">)),</span> <span class="n">Length</span><span class="p">(</span><span class="nb">max</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;County lenght has to be shorter than 40 characters&quot;</span><span class="p">)])</span>
+    <span class="n">neighborhood</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s2">&quot;Neighborhood&quot;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">DataRequired</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">msgRequired</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;Neighborhood&quot;</span><span class="p">)),</span><span class="n">Length</span><span class="p">(</span><span class="nb">max</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Neighborhood lenght has to be shorter than 40 characters&quot;</span><span class="p">)])</span>
+    <span class="n">street</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s2">&quot;Street&quot;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">DataRequired</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">msgRequired</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;Street&quot;</span><span class="p">)),</span><span class="n">Length</span><span class="p">(</span><span class="nb">max</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Neighborhood lenght has to be shorter than 40 characters&quot;</span><span class="p">)])</span>
+    <span class="n">zipcode</span> <span class="o">=</span> <span class="n">IntegerField</span><span class="p">(</span><span class="s2">&quot;Zipcode&quot;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">DataRequired</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">msgRequired</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;Zipcode&quot;</span><span class="p">)),</span> <span class="n">NumberRange</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">99999</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Invalid Zipcode&quot;</span><span class="p">)])</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">TextAreaField</span><span class="p">(</span><span class="s2">&quot;Description&quot;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">Length</span><span class="p">(</span><span class="nb">max</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Description cannot be longer than 200 characters&quot;</span> <span class="p">)])</span>
+
+<span class="k">class</span> <span class="nc">Coordinates</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
+    <span class="n">Longitude</span> <span class="o">=</span> <span class="n">FloatField</span><span class="p">(</span><span class="s2">&quot;Longitude&quot;</span><span class="p">,</span><span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">NumberRange</span><span class="p">(</span><span class="nb">min</span><span class="o">=-</span><span class="mi">180</span><span class="p">,</span> <span class="nb">max</span><span class="o">=+</span><span class="mi">180</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Longitude needs to be between -180 and 180.&quot;</span><span class="p">)])</span>
+    <span class="n">Latitude</span> <span class="o">=</span> <span class="n">FloatField</span><span class="p">(</span><span class="s2">&quot;Latitude&quot;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">NumberRange</span><span class="p">(</span><span class="nb">min</span><span class="o">=-</span><span class="mi">90</span><span class="p">,</span><span class="nb">max</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;Latitude needs to be between -90 and 90.&quot;</span><span class="p">)])</span>
+
+<span class="k">class</span> <span class="nc">LocationForm</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
+    <span class="n">location</span> <span class="o">=</span> <span class="n">FormField</span><span class="p">(</span><span class="n">Location</span><span class="p">)</span>
+    <span class="n">coord</span> <span class="o">=</span> <span class="n">FormField</span><span class="p">(</span><span class="n">Coordinates</span><span class="p">)</span>
+    <span class="n">submit</span> <span class="o">=</span> <span class="n">SubmitField</span><span class="p">(</span> <span class="n">render_kw</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;class&quot;</span> <span class="p">:</span> <span class="s2">&quot;btn btn-primary&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>In location.py in pages, we create an instance of the flask form we designed and sent it to html.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">location_add_page</span><span class="p">():</span>
+    <span class="n">location</span> <span class="o">=</span> <span class="n">LocationForm</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;/location/create.html&quot;</span><span class="p">,</span> <span class="n">form</span> <span class="o">=</span> <span class="n">location</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In the location/create.html we have the following format for rendering the form.</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
+<span class="hll">    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;{{ request.path }}&quot;</span> <span class="p">&gt;</span>
+</span><span class="hll">        {{ form.csrf_token }}
+</span>
+<span class="hll">        {% for field, msg in form.errors.items() %}
+</span><span class="hll">        {% for i in msg: %}
+</span><span class="hll">            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;alert alert-warning&quot;</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;alert&quot;</span><span class="p">&gt;</span>
+</span><span class="hll">            <span class="p">&lt;</span><span class="nt">strong</span><span class="p">&gt;</span>{{ msg[i][0] }}<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;</span>
+</span><span class="hll">            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span class="hll">        {% endfor %}
+</span><span class="hll">        {% endfor %}
+</span>        <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;display-4&quot;</span><span class="p">&gt;</span>Create <span class="p">&lt;</span><span class="nt">small</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;text-muted font-italic&quot;</span><span class="p">&gt;</span>Location<span class="p">&lt;/</span><span class="nt">small</span><span class="p">&gt;&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">hr</span><span class="p">&gt;</span>
+<span class="hll">        {{ form.location( class_ = &quot;mt-5 table table-hover&quot;) }}
+</span>        <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;display-4&quot;</span><span class="p">&gt;</span>Coordinates<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">hr</span><span class="p">&gt;</span>
+<span class="hll">        {{ form.coord( class_ = &quot;mt-5 table table-hover&quot;) }}
+</span>        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;text-center&quot;</span><span class="p">&gt;</span>
+<span class="hll">        {{ form.submit }}
+</span>        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;location_page&#39;) }}&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-secondary&quot;</span><span class="p">&gt;</span>Cancel<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>For validating submissions from html in python we use validate_on_submit() method</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">location_add_page</span><span class="p">():</span>
+<span class="n">location</span> <span class="o">=</span> <span class="n">LocationForm</span><span class="p">()</span>
+<span class="hll"><span class="k">if</span> <span class="n">location</span><span class="o">.</span><span class="n">validate_on_submit</span><span class="p">():</span>
+</span><span class="hll">   <span class="n">location_info</span> <span class="o">=</span> <span class="p">(</span>
+</span><span class="hll">       <span class="nb">int</span><span class="p">(</span><span class="n">location</span><span class="o">.</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;province&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">),</span>
+</span><span class="hll">       <span class="n">location</span><span class="o">.</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;county&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+</span><span class="hll">       <span class="n">location</span><span class="o">.</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;neighborhood&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+</span><span class="hll">       <span class="n">location</span><span class="o">.</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;street&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+</span><span class="hll">       <span class="n">location</span><span class="o">.</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;zipcode&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+</span><span class="hll">       <span class="n">location</span><span class="o">.</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+</span><span class="hll">   <span class="p">)</span>
+</span><span class="hll">   <span class="n">coord_info</span> <span class="o">=</span> <span class="p">(</span>
+</span><span class="hll">       <span class="nb">float</span><span class="p">(</span><span class="n">location</span><span class="o">.</span><span class="n">coord</span><span class="p">[</span><span class="s2">&quot;Longitude&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">),</span>
+</span><span class="hll">       <span class="nb">float</span><span class="p">(</span><span class="n">location</span><span class="o">.</span><span class="n">coord</span><span class="p">[</span><span class="s2">&quot;Latitude&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+</span><span class="hll">   <span class="p">)</span>
+</span><span class="hll">   <span class="n">location_id</span> <span class="o">=</span> <span class="n">add_location</span><span class="p">(</span><span class="n">location_info</span><span class="p">,</span> <span class="n">coord_info</span><span class="p">)</span>
+</span><span class="hll">   <span class="n">location</span> <span class="o">=</span> <span class="n">get_location</span><span class="p">(</span><span class="n">location_id</span><span class="p">)</span>
+</span>   <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;/location/details.html&quot;</span><span class="p">,</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">location</span><span class="p">)</span>
+
+<span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;/location/create.html&quot;</span><span class="p">,</span> <span class="n">form</span> <span class="o">=</span> <span class="n">location</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">Once the submission is validated two tuples, locations and coordinates, are filled with the submitted input. These tuples are then send to <em>location_model.py</em> to be inserted into a query and stored on the database.</div>
+<div class="line">location_model.py</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_location</span><span class="p">(</span><span class="n">location</span><span class="p">,</span> <span class="n">coord</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">DB_URL</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;INSERT INTO COORDINATES (LONGITUDE, LATITUDE) VALUES (</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">) RETURNING COORD_ID&quot;&quot;&quot;</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,(</span><span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+            <span class="n">retCoord</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;INSERT INTO LOCATION</span>
+<span class="s2">            (province,</span>
+<span class="s2">            coordinates,</span>
+<span class="s2">            county,</span>
+<span class="s2">            neighborhood,</span>
+<span class="s2">            street,</span>
+<span class="s2">            zipcode,</span>
+<span class="s2">            description</span>
+<span class="s2">            ) VALUES (</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">) RETURNING LOCATION_ID&quot;&quot;&quot;</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="p">(</span><span class="n">location</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">retCoord</span><span class="p">,</span><span class="n">location</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">location</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">location</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">location</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span><span class="n">location</span><span class="p">[</span><span class="mi">5</span><span class="p">]))</span>
+            <span class="n">retLoc</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">retLoc</span>
+</pre></div>
+</div>
+<p>For other province and country tables add operation is exactly the same with small query changes.</p>
+</div>
+<div class="section" id="read-operation">
+<h2>Read Operation<a class="headerlink" href="#read-operation" title="Permalink to this headline">¶</a></h2>
+<p>The index.html expects a 2d array and unpacks elements accordingly</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;column mr-4&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;location_add_page&#39;) }}&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary&quot;</span> <span class="na">target</span><span class="o">=</span><span class="s">&quot;_self&quot;</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;Add&quot;</span><span class="p">&gt;</span>Add Entry<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;display-4&quot;</span><span class="p">&gt;</span>Location: Displaying {{ count }} Entries<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+{% if list %}
+    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;location_list&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-danger&quot;</span><span class="p">&gt;</span>Delete Selected<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container-fluid&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">table</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;table table-striped&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">thead</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Province<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Country<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Description<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Zipcode<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+                <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">thead</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">tbody</span><span class="p">&gt;</span>
+                {% for Loc_id, C_key, C_name,P_key, P_name, county, neigh, street, zipcode, description in list %}
+                <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>
+                        <span class="p">&lt;</span><span class="nt">label</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;checkbox&quot;</span><span class="p">&gt;</span>
+                            <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;location_keys&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;{{ Loc_id }}&quot;</span><span class="p">&gt;</span>
+                        <span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+                    <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;province_read_page&#39;, province_key=P_key) }}&quot;</span><span class="p">&gt;</span>{{ P_name }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;country_read_page&#39;, country_key=C_key) }}&quot;</span><span class="p">&gt;</span>{{ C_name }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ county }}, {{ neigh }}, {{ street }} <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ description }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ zipcode }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">nav</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav&quot;</span><span class="p">&gt;</span>
+                        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav-link text-success &quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;location_update_page&#39;, location_key=P_key) }}&quot;</span> <span class="p">&gt;</span>Update<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+                        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav-link text-danger &quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;location_delete_page&#39;, location_key=P_key) }}&quot;</span> <span class="p">&gt;</span>Delete<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+                    <span class="p">&lt;/</span><span class="nt">nav</span><span class="p">&gt;</span>
+                    <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+                {% endfor %}
+            <span class="p">&lt;/</span><span class="nt">tbody</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+{% endif %}
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>The list is populated in location in pages through sql queries in location_model.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">location_page</span><span class="p">():</span>
+    <span class="n">location</span> <span class="o">=</span> <span class="n">get_all_location</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;/location/index.html&quot;</span><span class="p">,</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">location</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>get_all_location in location_model.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_all_location</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">DB_URL</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;select</span>
+<span class="s2">            location_id,</span>
+<span class="s2">            country.country_id,</span>
+<span class="s2">            country.name,</span>
+<span class="s2">            province.province_id,</span>
+<span class="s2">            province.province_name,</span>
+<span class="s2">            county,</span>
+<span class="s2">            neighborhood,</span>
+<span class="s2">            street,</span>
+<span class="s2">            zipcode,</span>
+<span class="s2">            description from</span>
+<span class="s2">            ((location join province on (location.province = province.province_id))</span>
+<span class="s2">            join country on (province.country = country.country_id))</span>
+<span class="s2">            &quot;&quot;&quot;</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">get_results</span><span class="p">(</span><span class="n">cursor</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For deleting with checkboxes selected in index.html we add the following to location.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">location_page</span><span class="p">():</span>
+<span class="hll">     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;POST&quot;</span><span class="p">:</span>
+</span><span class="hll">         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">getlist</span><span class="p">(</span><span class="s2">&quot;location_keys&quot;</span><span class="p">):</span>
+</span><span class="hll">             <span class="n">delete_location</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</span>     <span class="n">location</span> <span class="o">=</span> <span class="n">get_all_location</span><span class="p">()</span>
+     <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;/location/index.html&quot;</span><span class="p">,</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">location</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="unfinished-problematic-features">
+<h2>Unfinished / Problematic Features<a class="headerlink" href="#unfinished-problematic-features" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Only the create location page was suppose to be accessable by the users, however the lack of authentcation allows anyone with the url can access the main pages of these tables and do alterations.</p></li>
+<li><p>While creating a location absance of javascript to hide option according to selected country allows users to combine a country with any of the provinces. Plan was to filter the selectField options with java script once a country was selected but I was not able to built this feature.</p></li>
+<li><p>Updating operation on locations doesn’t work.</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="member3.html" class="btn btn-neutral float-left" title="Parts Implemented by Mehmet Can Gün" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, ITUCSDB1951
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
