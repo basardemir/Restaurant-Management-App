@@ -15,7 +15,7 @@ RestMang is a Restaurant Management App that lets the user organize your company
 Contents:
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 5
 
    user/index
    developer/index

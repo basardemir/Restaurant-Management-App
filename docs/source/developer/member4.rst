@@ -20,6 +20,7 @@ Structure
 Each main table has it's own CRUD pages. Inputs are controlled by flask-WTForms.
 
 .. figure:: file_order.png
+
 After the delete operation the user is redirected to the main 
 index.html so there is no delete.html.
 
@@ -27,7 +28,7 @@ The database operations are done in an another file called the {table_name}_mode
 and executed using the functions within the model files. 
 
 Create Operation
-=============
+=================
 The returning values from a query had to be formatted in most cases before being sent to html. I used two main methods format incoming data
 from the tables.Return value of get_results(cursor) is a 2d array which can be directly sent to html.
 
@@ -84,10 +85,11 @@ In location.py in pages, we create an instance of the flask form we designed and
             return render_template("/location/create.html", form = location)
 
 In the location/create.html we have the following format for rendering the form.
-       
+     
 .. code-block:: html
     :emphasize-lines: 2,3,5,6,7,8,9,10,11,14,17,19
-        <div class="container">
+
+    <div class="container">
         <form method="post" action="{{ request.path }}" >
             {{ form.csrf_token }}
 
@@ -109,12 +111,13 @@ In the location/create.html we have the following format for rendering the form.
             <a href="{{ url_for('location_page') }}" class="btn btn-secondary">Cancel</a>
             </div>
         </form>
-        </div>
+    </div>
 
 For validating submissions from html in python we use validate_on_submit() method
         
 .. code-block:: python
    :emphasize-lines: 3,4,5,6,7,8,9,10,11,12,13,14,15,16,17
+   
    def location_add_page():
    location = LocationForm()
    if location.validate_on_submit():
@@ -136,8 +139,8 @@ For validating submissions from html in python we use validate_on_submit() metho
 
    return render_template("/location/create.html", form = location)
 
-Once the submission is validated two tuples, locations and coordinates, are filled with the submitted input. These tuples are then send to *location_model.py* to be inserted into a query and stored on the database.
-|location_model.py
+| Once the submission is validated two tuples, locations and coordinates, are filled with the submitted input. These tuples are then send to *location_model.py* to be inserted into a query and stored on the database.
+| location_model.py
        
 .. code-block:: python
 
@@ -159,6 +162,7 @@ Once the submission is validated two tuples, locations and coordinates, are fill
                     cursor.execute(query, (location[0],retCoord,location[1],location[2],location[3],location[4],location[5]))
                     retLoc = cursor.fetchone()[0]
             return retLoc
+
 For other province and country tables add operation is exactly the same with small query changes.
 
 Read Operation
@@ -260,7 +264,7 @@ For deleting with checkboxes selected in index.html we add the following to loca
         return render_template("/location/index.html", list = location)                
                 
 Unfinished / Problematic Features
-==============
+====================================
 
 * Only the create location page was suppose to be accessable by the users, however the lack of authentcation allows anyone with the url can access the main pages of these tables and do alterations. 
 

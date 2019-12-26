@@ -615,7 +615,7 @@ Views
   :lines: 4-12
   :linenos:
   :language: html
-  :caption: The customer can cancel if the date between starting date and end date is not over,
+  :caption: The customer can cancel if the date between starting date and end date is not over.
 
 .. literalinclude:: ../../../templates/orders/details.html
   :lines: 4-75
@@ -730,8 +730,5 @@ Views
   :language: html
   :caption: Creating a comment page.
 
-
-REFERENCES
-============
 
 .. [util.py] https://exploreflask.com/en/latest/views.html#custom-converters

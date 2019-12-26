@@ -1,8 +1,8 @@
 Parts Implemented by İbrahim Berat Kaya
-================================
+========================================
 
 Useraccount Table
-------------
+------------------
 
 The Useraccount Table consists of 5 non-key fields about the account information of the user such as a username, a password, a joined date, a last entry date, and a security question answer. The Useraccount Table has a foreign key to the Membership Table to store the membership type of the user, and a foreign key to the Person Table to store personal information of the user. 
 
@@ -14,13 +14,13 @@ The Person Table consists of 5 non-key fields. The fields are the name of the us
 
 
 Contactinfo Table
--------------
+-------------------
 
 The Contactinfo Table consists of 5 non-key fields. The fields are the phone number of the user, the email of the user, fax of the user, home phone number of the user, and work mail of the user. The Contactinfo Table has a foreign key to the Location Table to store the location information of the user, and a foreign key to the Socialmedia Table to store the social media links of the user. 
 
 
 Socialmedia Table
--------------
+-------------------
 
 The Socialmedia Table consists of 6 non-key fields. The fields are the Facebook link of the user, Twitter link of the user, Instagram link of the user, Discord link of the user, YouTube link of the user, LinkedIn link of the user.
 
@@ -32,7 +32,7 @@ The Photo Table consists of a 1 non-key field. The Photo Table stores the path o
 
 
 Membership Table
-------------
+------------------
 
 The Membership Table consists of a 1 non-key field. The Membership Table stores the membership type of the user where the values can be an admin, a customer, or a boss.
 

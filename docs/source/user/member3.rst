@@ -230,8 +230,9 @@ Enter the system, then click the my orders button in header. This is shows the o
 Comment
 ===============
 
-- Create Comment
-If the order is delivered correctly, then you will make comment with title, description, speed or taste status.
+* Create Comment
+
+| If the order is delivered correctly, then you will make comment with title, description, speed or taste status.
 
 .. figure:: comment_order.png
     :scale: 50 %
@@ -239,5 +240,6 @@ If the order is delivered correctly, then you will make comment with title, desc
 
     Comment Order
 
-- Show Comments 
-Enter the order detials page, then comments will be shown below the page.
+* Show Comments 
+
+| Enter the order detials page, then comments will be shown below the page.

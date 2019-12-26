@@ -39,7 +39,7 @@ release = ''
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.githubpages',
+    'sphinx.ext.githubpages'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -110,7 +110,7 @@ htmlhelp_basename = 'ITUCSDB1951doc'
 latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
     #
-    # 'papersize': 'letterpaper',
+     'papersize': 'a4paper',
 
     # The font size ('10pt', '11pt' or '12pt').
     #
@@ -122,7 +122,8 @@ latex_elements = {
 
     # Latex figure (float) alignment
     #
-    # 'figure_align': 'htbp',
+    'figure_align': 'H',
+    'extraclassoptions': 'openany,oneside', # to remove the blank pages.
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
@@ -133,6 +134,7 @@ latex_documents = [
      'ITUCSDB1951', 'manual'),
 ]
 
+latex_toplevel_sectioning = 'part'
 
 # -- Options for manual page output ------------------------------------------
 

@@ -1,5 +1,6 @@
 Parts Implemented by Metehan Seyran
 ************************************
+
 Meals
 -----------
 
@@ -30,7 +31,7 @@ After filling the necessary forms, we are good to go. The meal is ready to be ad
     The meal adding page
 
 Nutritional information
-===============
+========================
 The user can be able to see the nutritional information such as calorie value, carbohydrate value, fat value, protein value and cholesterol value of that specific meal. The user can also get a table of ingredient list that meal is made of and amount of each ingredient.
 
 .. figure:: nutr_info.png
@@ -40,7 +41,7 @@ The user can be able to see the nutritional information such as calorie value, c
     Nutritional information
 
 Update & Delete Meal Page
-===============
+==========================
 User can modify any meal by updating it. He or she can update the name, restaurant, price, type and even nutritional values of the meal. At the delete page, website will ask whether the user wants to delete that specific meal. If so it deletes the meal
 
 
@@ -60,7 +61,7 @@ Only users which has membership type boss are able to add, modify and delete ing
     The Ingredient Page
 
 Add Ingredient Page
-=================
+=====================
 
 Add ingredient page has different types of input ares, and lets user to enter information about a new ingredient. User can enter its name, type, unit weight, volume, and ideal temperature which are directly related to ingredient. 
 User also able to enter nutritional values for that ingredient per 100g.
@@ -80,11 +81,11 @@ User can add photo of the ingredient if he or she might like. Also user can sele
     The Second half of Add Ingredient Page
 
 Nutritional Value Page
-==================
+========================
 All kinds of users are able to check the nutritional value of the specific ingredient. The page provides, calorie value, carbohydrate value, fat value, cholesterol value and protein value for that specific ingredient.
 
 Update & Delete Page
-==================
+=====================
 Users with type boss and admin are able to update and delete ingredients. In update section, they are able to update the ingredients' name, type, unit weight, volume and temperature for storing the ingredient.
 
 .. figure:: updateingred.png

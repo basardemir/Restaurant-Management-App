@@ -1,5 +1,5 @@
 Parts Implemented by Metehan Seyran
-================================
+====================================
 
 Food Table
 -------------
@@ -7,7 +7,7 @@ Food Table
 Food table stores the information about every meal added to the website. Table consist of 2 foregin and 5 non-foreign keys. Foreign keys reference from photo table, which holds photos of the items, and nutritional_value table, which holds nutritional value for that specific meal. 
 
 Ingredient Table
----------------
+------------------
 
 Ingredient table stores information about every ingredient that has been added to the website. The table has 2 foreign keys and 5 non key columns. Foreign keys are referencing to photos, which holds the photo path, and nutritional_value, which holds nutritional values such as carbohydrates, calories, etc. for every ingredient.
 
@@ -17,12 +17,12 @@ Restaurant Table
 Restaurant table holds information about restaurant. It has 2 foreign keys and 5 non key columns. Foreign key references to company table, which holds companies. The second one references to table contactinfo, which holds contact information such as phone number, email, address, etc.. 
 
 Nutritional_value Table
---------------------
+------------------------
 
 Nutritional value table holds nutritional values for ingredients or meals, depends on who is referencing to. It has 1 primary key and 5 non key columns. 
 
 Ingredient_for_food table
-----------------------
+---------------------------
 
 Ingredient_for_food table holds ingredients for every meal and amount of each ingredient. It has 2 primary keys and 1 non key column which holds amount of ingredient. This table is used as an array, because each meal have different ingredients and to check whether we can supply a meal or not, we should check stock table whether we have enough ingrediets to prepare that meal. 
 
@@ -151,7 +151,7 @@ And the SQL statement for inserting ingredient;
                     connection.commit()
 
 Update & Delete operations
--------------------
+---------------------------
 Update and Delete operations are used in different pages. For update, a similar page to add ingredient page has been used. For delete, a page where asks user if user wants to delete an item, is used. In delete operation, the cascade operation made explicitly.
 
 Here are the codes for update and delete ingredient;
