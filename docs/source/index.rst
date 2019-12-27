@@ -17,6 +17,7 @@ E&R Diagram
 .. figure:: son_hali.png
    :scale: 50%
    :alt: E&R Diagram
+   
    The E&R Diagram of the Database
 
 Contents:
